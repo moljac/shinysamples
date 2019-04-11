@@ -6,6 +6,8 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Samples.ShinySetup;
+using Shiny.Net.Http;
+using Shiny.Jobs;
 
 
 namespace Samples.iOS
@@ -26,7 +28,11 @@ namespace Samples.iOS
 
         // if you are using jobs, you need this
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
-            => iOSShinyHost.OnBackgroundFetch(completionHandler);
+            => JobManager.OnBackgroundFetch(completionHandler);
+
+
+        public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
+            => HttpTransferManager.SetCompletionHandler(sessionIdentifier, completionHandler);
 
 
         public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)

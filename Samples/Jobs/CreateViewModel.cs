@@ -77,8 +77,8 @@ namespace Samples.Jobs
                         () => this.RequiredInternetAccess = InternetAccess.Any.ToString()
                     )
                     .Add(
-                        InternetAccess.Direct.ToString(),
-                        () => this.RequiredInternetAccess = InternetAccess.Direct.ToString()
+                        InternetAccess.Unmetered.ToString(),
+                        () => this.RequiredInternetAccess = InternetAccess.Unmetered.ToString()
                     )
                     .SetCancel();
                 this.dialogs.ActionSheet(cfg);
