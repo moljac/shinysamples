@@ -6,6 +6,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Windows.Input;
+using Humanizer;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -72,6 +73,7 @@ namespace Samples.HttpTransfers
 
             this.httpTransfers
                 .WhenUpdated()
+                .WithMetrics()
                 .Buffer(TimeSpan.FromSeconds(1))
                 .Where(x => x.Count > 0)
                 .Synchronize()
@@ -79,9 +81,13 @@ namespace Samples.HttpTransfers
                 {
                     foreach (var transfer in transfers)
                     {
-                        var vm = this.Transfers.FirstOrDefault(x => x.Identifier == transfer.Identifier);
+                        var vm = this.Transfers.FirstOrDefault(x => x.Identifier == transfer.Transfer.Identifier);
                         if (vm != null)
-                            ToViewModel(vm, transfer);
+                        {
+                            ToViewModel(vm, transfer.Transfer);
+                            vm.TransferSpeed = transfer.BytesPerSecond.Bytes().Humanize();
+                            vm.EstimateMinsRemaining = transfer.EstimatedCompletionTime.Humanize();
+                        }
                     }
                 })
                 .DisposeWith(this.DeactivateWith);

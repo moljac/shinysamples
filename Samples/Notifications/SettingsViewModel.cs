@@ -17,7 +17,11 @@ namespace Samples.Notifications
             appSettings
                 .GetType()
                 .GetProperties()
-                .Where(x => x.CanRead && x.CanWrite && x.Name.StartsWith("UseNotifications"))
+                .Where(x =>
+                    x.Name.StartsWith("UseNotifications") &&
+                    x.CanRead &&
+                    x.PropertyType == typeof(bool)
+                )
                 .ToList()
                 .ForEach(x =>
                     this.SetValue(x.Name, appSettings.GetValue(x.Name))
