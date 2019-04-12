@@ -56,7 +56,7 @@ namespace Samples.Logging
         {
             var results = await this.conn
                 .Errors
-                .OrderBy(x => x.Timestamp)
+                .OrderByDescending(x => x.Timestamp)
                 .ToListAsync();
 
             return results.Select(x => new CommandItem
