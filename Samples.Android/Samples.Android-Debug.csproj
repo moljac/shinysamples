@@ -15,12 +15,13 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <BundleAssemblies>true</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-    <BundleAssemblies>true</BundleAssemblies>
     <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -44,9 +43,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <BundleAssemblies>true</BundleAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -101,9 +98,41 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Samples\Samples.csproj">
-      <Project>{1557DEFE-5801-4602-868B-C62B526D92EE}</Project>
-      <Name>Samples</Name>
+    <ProjectReference Include="..\Samples\Samples-Debug.csproj">
+      <Project>{82F5E401-C438-46B0-BC7C-733D3E017AD5}</Project>
+      <Name>Samples-Debug</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj">
+      <Project>{3A1FB5B6-8363-4B73-B0AE-7BE8D8FEB926}</Project>
+      <Name>Shiny.Beacons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj">
+      <Project>{B2EC69D7-C76F-4FFC-B2FB-2806E4CFC368}</Project>
+      <Name>Shiny.BluetoothLE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj">
+      <Project>{F704315D-7F4F-4090-B635-7FE634565187}</Project>
+      <Name>Shiny.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj">
+      <Project>{8D242035-644C-4939-B2D5-BE9EE77467DC}</Project>
+      <Name>Shiny.Locations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj">
+      <Project>{BCC73E34-B4C5-4F48-B84B-7C17DC489E89}</Project>
+      <Name>Shiny.Net.Http</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj">
+      <Project>{AF1473ED-6FC5-4B02-BB79-03E6C1B23BB8}</Project>
+      <Name>Shiny.Notifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj">
+      <Project>{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}</Project>
+      <Name>Shiny.Sensors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj">
+      <Project>{98934688-0A44-41A0-B74E-6C4996B63272}</Project>
+      <Name>Shiny.SpeechRecognition</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
