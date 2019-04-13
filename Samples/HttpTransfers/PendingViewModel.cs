@@ -6,6 +6,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using Humanizer;
 using Prism.Navigation;
 using ReactiveUI;
@@ -18,12 +19,15 @@ namespace Samples.HttpTransfers
     public class PendingViewModel : ViewModel
     {
         readonly IHttpTransferManager httpTransfers;
+        readonly IUserDialogs dialogs;
 
 
         public PendingViewModel(INavigationService navigation,
-                                IHttpTransferManager httpTransfers)
+                                IHttpTransferManager httpTransfers,
+                                IUserDialogs dialogs)
         {
             this.httpTransfers = httpTransfers;
+            this.dialogs = dialogs;
 
             this.Create = navigation.NavigateCommand("CreateTransfer");
 
@@ -36,8 +40,8 @@ namespace Samples.HttpTransfers
                         var vm = new HttpTransferViewModel
                         {
                             Identifier = transfer.Identifier,
-                            Uri = transfer.Request.Uri,
-                            IsUpload = transfer.Request.IsUpload,
+                            Uri = transfer.Uri,
+                            IsUpload = transfer.IsUpload,
 
                             Cancel = ReactiveCommand.CreateFromTask(async () =>
                             {
@@ -74,32 +78,34 @@ namespace Samples.HttpTransfers
             this.httpTransfers
                 .WhenUpdated()
                 .WithMetrics()
-                .Buffer(TimeSpan.FromSeconds(1))
-                .Where(x => x.Count > 0)
-                .Synchronize()
-                .Subscribe(transfers =>
-                {
-                    foreach (var transfer in transfers)
+                .SubOnMainThread(
+                    transfer =>
                     {
                         var vm = this.Transfers.FirstOrDefault(x => x.Identifier == transfer.Transfer.Identifier);
                         if (vm != null)
                         {
                             ToViewModel(vm, transfer.Transfer);
+                            Console.WriteLine($"b/s: {transfer.BytesPerSecond} - ETA: {transfer.EstimatedTimeRemaining.TotalSeconds}");
+
                             vm.TransferSpeed = transfer.BytesPerSecond.Bytes().Humanize();
-                            vm.EstimateMinsRemaining = transfer.EstimatedCompletionTime.Humanize();
+                            //vm.EstimateMinsRemaining = transfer.EstimatedCompletionTime.Humanize();
+                            vm.EstimateMinsRemaining = transfer.EstimatedTimeRemaining.TotalSeconds + " seconds left";
+                            Console.WriteLine($"VM b/s: {vm.TransferSpeed} - ETA: {vm.EstimateMinsRemaining}");
                         }
-                    }
-                })
+                    },
+                    ex => this.dialogs.Alert(ex.ToString())
+                )
                 .DisposeWith(this.DeactivateWith);
         }
 
 
-        static void ToViewModel(HttpTransferViewModel viewModel, IHttpTransfer transfer)
+        static void ToViewModel(HttpTransferViewModel viewModel, HttpTransfer transfer)
         {
             // => Math.Round(this.transfer.BytesPerSecond.Bytes().Kilobytes, 2) + " Kb/s";
             //public string EstimateMinsRemaining => Math.Round(this.transfer.EstimatedCompletionTime.TotalMinutes, 1) + " min(s)";
             //viewModel.EstimateMinsRemaining =
             viewModel.PercentComplete = transfer.PercentComplete;
+            viewModel.PercentCompleteText = $"{transfer.PercentComplete * 100}%";
             viewModel.Status = transfer.Status.ToString();
         }
     }

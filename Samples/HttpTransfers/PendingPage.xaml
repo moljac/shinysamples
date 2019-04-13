@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
 
             <ListView ItemsSource="{Binding Transfers}"
-                      RowHeight="130"
+                      RowHeight="150"
                       Grid.Row="0">
 
                 <ListView.ItemTemplate>
@@ -58,7 +58,7 @@
                                            Grid.Row="1"
                                            Grid.Column="3" />
 
-                                    <Label Text="{Binding PercentComplete, StringFormat='{0}%'}"
+                                    <Label Text="{Binding PercentCompleteText}"
                                            HorizontalOptions="Center"
                                            HorizontalTextAlignment="Center"
                                            Grid.Column="0"

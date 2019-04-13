@@ -138,22 +138,22 @@ namespace Samples.ShinySetup
         }
 
 
-        public async void OnError(IHttpTransfer transfer, Exception ex)
+        public async void OnError(HttpTransfer transfer, Exception ex)
             => await this.CreateHttpTransferEvent(transfer, "ERROR: " + ex);
 
 
-        public async void OnCompleted(IHttpTransfer transfer)
+        public async void OnCompleted(HttpTransfer transfer)
             => await this.CreateHttpTransferEvent(transfer, "COMPLETE");
 
 
-        async Task CreateHttpTransferEvent(IHttpTransfer transfer, string description)
+        async Task CreateHttpTransferEvent(HttpTransfer transfer, string description)
         {
             await this.conn.InsertAsync(new HttpEvent
             {
                 Identifier = transfer.Identifier,
-                IsUpload = transfer.Request.IsUpload,
+                IsUpload = transfer.IsUpload,
                 FileSize = transfer.FileSize,
-                Uri = transfer.Request.Uri,
+                Uri = transfer.Uri,
                 Description = description,
                 DateCreated = DateTime.Now
             });
