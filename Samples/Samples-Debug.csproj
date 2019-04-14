@@ -31,5 +31,6 @@
       <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
       <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
       <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
+      <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
     </ItemGroup>
 </Project>
