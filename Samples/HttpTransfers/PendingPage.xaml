@@ -70,7 +70,7 @@
                                            Grid.Column="1"
                                            Grid.Row="2" />
 
-                                    <Label Text="{Binding EstimateMinsRemaining}"
+                                    <Label Text="{Binding EstimateTimeRemaining}"
                                            HorizontalOptions="Center"
                                            HorizontalTextAlignment="Center"
                                            Grid.Column="2"
@@ -78,6 +78,7 @@
 
                                     <ProgressBar Progress="{Binding PercentComplete}"
                                                  HorizontalOptions="FillAndExpand"
+                                                 VerticalOptions="Center"
                                                  Grid.Column="0"
                                                  Grid.ColumnSpan="3"
                                                  Grid.Row="3" />

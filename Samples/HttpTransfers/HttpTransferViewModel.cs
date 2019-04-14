@@ -15,7 +15,7 @@ namespace Samples.HttpTransfers
         [Reactive] public string PercentCompleteText { get; set; }
         [Reactive] public double PercentComplete { get; set; }
         [Reactive] public string TransferSpeed { get; set; }
-        [Reactive] public string EstimateMinsRemaining { get; set; }
+        [Reactive] public string EstimateTimeRemaining { get; set; }
 
         public ICommand Cancel { get; set; }
     }

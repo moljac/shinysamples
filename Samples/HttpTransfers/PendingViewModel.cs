@@ -87,10 +87,11 @@ namespace Samples.HttpTransfers
                             ToViewModel(vm, transfer.Transfer);
                             Console.WriteLine($"b/s: {transfer.BytesPerSecond} - ETA: {transfer.EstimatedTimeRemaining.TotalSeconds}");
 
-                            vm.TransferSpeed = transfer.BytesPerSecond.Bytes().Humanize();
-                            //vm.EstimateMinsRemaining = transfer.EstimatedCompletionTime.Humanize();
-                            vm.EstimateMinsRemaining = transfer.EstimatedTimeRemaining.TotalSeconds + " seconds left";
-                            Console.WriteLine($"VM b/s: {vm.TransferSpeed} - ETA: {vm.EstimateMinsRemaining}");
+                            if (transfer.BytesPerSecond > 0)
+                                vm.TransferSpeed = Math.Round(transfer.BytesPerSecond.Bytes().Kilobytes, 2) + " Kb/s";
+
+                            if (transfer.EstimatedTimeRemaining.TotalMinutes > 0)
+                                vm.EstimateTimeRemaining = Math.Round(transfer.EstimatedTimeRemaining.TotalMinutes, 1) + " min(s)";
                         }
                     },
                     ex => this.dialogs.Alert(ex.ToString())
