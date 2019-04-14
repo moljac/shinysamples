@@ -9,35 +9,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples-Debug", "Samples\Samples-Debug.csproj", "{82F5E401-C438-46B0-BC7C-733D3E017AD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples-Debug", "Samples\Samples-Debug.csproj", "{82F5E401-C438-46B0-BC7C-733D3E017AD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Core", "..\shiny\src\Shiny.Core\Shiny.Core.csproj", "{F704315D-7F4F-4090-B635-7FE634565187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Core", "..\shiny\src\Shiny.Core\Shiny.Core.csproj", "{F704315D-7F4F-4090-B635-7FE634565187}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{662FBBF3-E4EF-4D94-9222-B1C020C98918}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Beacons", "..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj", "{3A1FB5B6-8363-4B73-B0AE-7BE8D8FEB926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Beacons", "..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj", "{3A1FB5B6-8363-4B73-B0AE-7BE8D8FEB926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.BluetoothLE", "..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj", "{B2EC69D7-C76F-4FFC-B2FB-2806E4CFC368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.BluetoothLE", "..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj", "{B2EC69D7-C76F-4FFC-B2FB-2806E4CFC368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Locations", "..\shiny\src\Shiny.Locations\Shiny.Locations.csproj", "{8D242035-644C-4939-B2D5-BE9EE77467DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Locations", "..\shiny\src\Shiny.Locations\Shiny.Locations.csproj", "{8D242035-644C-4939-B2D5-BE9EE77467DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Net.Http", "..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj", "{BCC73E34-B4C5-4F48-B84B-7C17DC489E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Net.Http", "..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj", "{BCC73E34-B4C5-4F48-B84B-7C17DC489E89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Notifications", "..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj", "{AF1473ED-6FC5-4B02-BB79-03E6C1B23BB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Notifications", "..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj", "{AF1473ED-6FC5-4B02-BB79-03E6C1B23BB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Sensors", "..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj", "{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Sensors", "..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj", "{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.SpeechRecognition", "..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj", "{98934688-0A44-41A0-B74E-6C4996B63272}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.SpeechRecognition", "..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj", "{98934688-0A44-41A0-B74E-6C4996B63272}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Android-Debug", "Samples.Android\Samples.Android-Debug.csproj", "{E780B778-C40F-4993-A62F-277486480A67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Api", "Samples.Api\Samples.Api.csproj", "{7F8002BB-B90B-4BD7-A8E6-5FDBCF287F4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Api", "Samples.Api\Samples.Api.csproj", "{7F8002BB-B90B-4BD7-A8E6-5FDBCF287F4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.SqliteGenerator", "Samples.SqliteGenerator\Samples.SqliteGenerator.csproj", "{DF24C99F-71D9-4576-8E3E-F3BF1E83464B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SqliteGenerator", "Samples.SqliteGenerator\Samples.SqliteGenerator.csproj", "{DF24C99F-71D9-4576-8E3E-F3BF1E83464B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.iOS-Debug", "Samples.iOS\Samples.iOS-Debug.csproj", "{227E1B5E-7678-4492-B100-B069186494E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{8F70D1FE-7FDB-4425-A4A8-4EEB90E3D382}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Testing", "..\shiny\src\Shiny.Testing\Shiny.Testing.csproj", "{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -525,6 +527,7 @@ Global
 		{E780B778-C40F-4993-A62F-277486480A67}.AppStore|x86.Build.0 = Debug|Any CPU
 		{E780B778-C40F-4993-A62F-277486480A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E780B778-C40F-4993-A62F-277486480A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E780B778-C40F-4993-A62F-277486480A67}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{E780B778-C40F-4993-A62F-277486480A67}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{E780B778-C40F-4993-A62F-277486480A67}.Debug|ARM.Build.0 = Debug|Any CPU
 		{E780B778-C40F-4993-A62F-277486480A67}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -691,12 +694,57 @@ Global
 		{227E1B5E-7678-4492-B100-B069186494E5}.Release|x64.Build.0 = Release|iPhoneSimulator
 		{227E1B5E-7678-4492-B100-B069186494E5}.Release|x86.ActiveCfg = Release|iPhoneSimulator
 		{227E1B5E-7678-4492-B100-B069186494E5}.Release|x86.Build.0 = Release|iPhoneSimulator
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|ARM.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|x64.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|x64.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|x86.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Ad-Hoc|x86.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|ARM.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|x64.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.AppStore|x86.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Debug|x86.Build.0 = Debug|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|ARM.Build.0 = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|iPhone.Build.0 = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|x64.ActiveCfg = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|x64.Build.0 = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {135D86AF-4EC4-4AA0-BD06-75C410F3EA08}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F704315D-7F4F-4090-B635-7FE634565187} = {662FBBF3-E4EF-4D94-9222-B1C020C98918}
@@ -709,5 +757,9 @@ Global
 		{98934688-0A44-41A0-B74E-6C4996B63272} = {662FBBF3-E4EF-4D94-9222-B1C020C98918}
 		{7F8002BB-B90B-4BD7-A8E6-5FDBCF287F4B} = {8F70D1FE-7FDB-4425-A4A8-4EEB90E3D382}
 		{DF24C99F-71D9-4576-8E3E-F3BF1E83464B} = {8F70D1FE-7FDB-4425-A4A8-4EEB90E3D382}
+		{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B} = {662FBBF3-E4EF-4D94-9222-B1C020C98918}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {135D86AF-4EC4-4AA0-BD06-75C410F3EA08}
 	EndGlobalSection
 EndGlobal

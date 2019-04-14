@@ -15,29 +15,29 @@
 
             <ScrollView Grid.Row="0">
                 <StackLayout>
-                    <Label Text="{Binding ErrorMessage}" TextColor="Red" />
+                    <Label Text="{Binding ErrorMessage}"
+                           TextColor="Red" />
 
                     <Label Text="Remote Url" />
                     <Entry Text="{Binding Url}" />
                     <Button Text="Reset to Default"
-                        HorizontalOptions="Center"
-                        Command="{Binding ResetUrl}" />
+                            HorizontalOptions="FillAndExpand"
+                            Command="{Binding ResetUrl}" />
 
                     <Label Text="Local File Name (Local Path Will Be Prepended)" />
                     <Entry Text="{Binding LocalFileName}" />
                     <Label Text="A Temporary File Will Created"
-                       HorizontalTextAlignment="Center"
-                       HorizontalOptions="CenterAndExpand"
-                       TextColor="DarkBlue"
-                       FontSize="Small"
-                       IsVisible="{Binding IsUpload}" />
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="DarkBlue"
+                           FontSize="Small"
+                           IsVisible="{Binding IsUpload}" />
 
                     <Label Text="Is Upload" />
                     <Switch IsToggled="{Binding IsUpload}" />
 
                     <Label Text="Allow Metered Connections" />
                     <Switch IsToggled="{Binding UseMeteredConnection}" />
-
 
                 </StackLayout>
             </ScrollView>
