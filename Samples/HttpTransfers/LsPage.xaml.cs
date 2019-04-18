@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace Samples-Debug.HttpTransfers
+
+namespace Samples.HttpTransfers
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class LsPage : ContentPage
-{
-    public LsPage()
+    public partial class LsPage : ContentPage
     {
-        InitializeComponent();
+        public LsPage()
+        {
+            this.InitializeComponent();
+        }
     }
-}
 }
