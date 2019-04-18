@@ -10,7 +10,8 @@ using Shiny.Net.Http;
 using Shiny.Notifications;
 using Samples.Models;
 using Samples.Settings;
-
+using System.IO;
+using SQLite;
 
 namespace Samples.ShinySetup
 {
@@ -143,7 +144,27 @@ namespace Samples.ShinySetup
 
 
         public async void OnCompleted(HttpTransfer transfer)
-            => await this.CreateHttpTransferEvent(transfer, "COMPLETE");
+        {
+            if (!transfer.IsUpload && Path.GetExtension(transfer.LocalFilePath) == "db")
+            {
+                try
+                {
+                    using (var conn = new SQLiteConnection(transfer.LocalFilePath))
+                    {
+                        var count = conn.Execute("SELECT * FROM sqlite_master WHERE type='table'");
+                        await this.CreateHttpTransferEvent(transfer, $"COMPLETE - SQLITE PASSED ({count} tables)");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await this.CreateHttpTransferEvent(transfer, $"COMPLETE - SQLITE FAILED - " + ex);
+                }
+            }
+            else
+            {
+                await this.CreateHttpTransferEvent(transfer, "COMPLETE");
+            }
+        }
 
 
         async Task CreateHttpTransferEvent(HttpTransfer transfer, string description)
