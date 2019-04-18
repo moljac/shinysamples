@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Xamarin;
 
 namespace Samples.UWP
 {
@@ -8,6 +8,7 @@ namespace Samples.UWP
         public MainPage()
         {
             this.InitializeComponent();
+            FormsMaps.Init("INSERT_AUTHENTICATION_TOKEN_HERE");
             this.LoadApplication(new Samples.App());
         }
     }

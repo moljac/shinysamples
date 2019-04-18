@@ -6,6 +6,7 @@
             Title="GPS">
     <TabbedPage.Children>
         <gps:GpsPage />
+        <gps:MapPage />
         <gps:LogsPage />
     </TabbedPage.Children>
 </TabbedPage>
