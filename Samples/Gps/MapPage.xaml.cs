@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using ReactiveUI;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -22,14 +23,18 @@ namespace Samples.Gps
             base.OnAppearing();
             this.gpsSub = this.ViewModel
                 .WhenAnyValue(x => x.Position)
+                .Where(x => x != null)
                 .Subscribe(x =>
                 {
+                    var p = new Position(x.Latitude, x.Longitude);
                     myMap.Pins.Clear();
                     myMap.Pins.Add(new Pin
                     {
                         Label = "YOU",
-                        Position = new Position(x.Latitude, x.Longitude)
+                        Position = p
                     });
+                    var mapSpan = MapSpan.FromCenterAndRadius(p, Distance.FromKilometers(3));
+                    myMap.MoveToRegion(mapSpan);
                 });
         }
 

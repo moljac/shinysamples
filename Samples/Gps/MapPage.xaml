@@ -13,6 +13,8 @@
 
             <maps:Map x:Name="myMap"
                       MapType="Street"
+                      HasZoomEnabled="true"
+                      HasScrollEnabled="true"
                       Grid.Row="0" />
 
             <Button Text="{Binding ListenerText}"
