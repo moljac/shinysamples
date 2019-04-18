@@ -161,7 +161,40 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.4</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="Shiny.Beacons">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.BluetoothLE">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Core">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Locations">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Net.Http">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Notifications">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Sensors">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.SpeechRecognition">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>3.6.0.344457</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Samples\Samples.csproj">
+      <Project>{22f3a2db-5b9d-4e62-9ef7-5b465e2db2d4}</Project>
+      <Name>Samples</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

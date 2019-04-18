@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Permission = Android.Content.PM.Permission;
@@ -29,6 +30,7 @@ namespace Samples.Droid
 
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
+            FormsMaps.Init(this, savedInstanceState);
             this.LoadApplication(new App());
         }
 

@@ -3,6 +3,7 @@ using Shiny;
 using Acr.UserDialogs;
 using Foundation;
 using UIKit;
+using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Samples.ShinySetup;
@@ -21,6 +22,7 @@ namespace Samples.iOS
             iOSShinyHost.Init(new SampleStartup());
 
             Forms.Init();
+            FormsMaps.Init();
             this.LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }

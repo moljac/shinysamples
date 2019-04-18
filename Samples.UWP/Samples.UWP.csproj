@@ -143,8 +143,35 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="Shiny.Beacons">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.BluetoothLE">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Core">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Locations">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Net.Http">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Notifications">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.Sensors">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Shiny.SpeechRecognition">
+      <Version>1.0.0.109</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.8" />
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>3.6.0.344457</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Samples\Samples.csproj">
