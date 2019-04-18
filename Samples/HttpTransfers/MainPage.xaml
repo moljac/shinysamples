@@ -8,7 +8,6 @@
 
     <TabbedPage.Children>
         <httptransfers:PendingPage Title="Pending" />
-        <httptransfers:LsPage Title="LS" />
         <httptransfers:LogPage Title="Logs" />
     </TabbedPage.Children>
 </TabbedPage>
