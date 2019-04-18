@@ -151,7 +151,7 @@ namespace Samples.ShinySetup
                 {
                     using (var conn = new SQLiteConnection(transfer.LocalFilePath))
                     {
-                        var count = conn.Execute("SELECT * FROM sqlite_master WHERE type='table'");
+                        var count = conn.Execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table'");
                         await this.CreateHttpTransferEvent(transfer, $"COMPLETE - SQLITE PASSED ({count} tables)");
                     }
                 }
