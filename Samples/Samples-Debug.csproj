@@ -37,8 +37,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Gps\MapPage.xaml">
+      <EmbeddedResource Update="Sensors\CompassPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
     </ItemGroup>
+
 </Project>

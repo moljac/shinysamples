@@ -60,8 +60,10 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Jobs.CreatePage>("CreateJob");
 
             containerRegistry.RegisterForNavigation<Notifications.MainPage>("Notifications");
-            containerRegistry.RegisterForNavigation<Sensors.MainPage>("Sensors");
             containerRegistry.RegisterForNavigation<Speech.MainPage>("SpeechRecognition");
+
+            containerRegistry.RegisterForNavigation<Sensors.MainPage>("Sensors");
+            containerRegistry.RegisterForNavigation<Sensors.CompassPage>("Compass");
 
             containerRegistry.RegisterForNavigation<Logging.LoggingPage>("Logs");
             containerRegistry.RegisterForNavigation<AccessPage>("Access");
