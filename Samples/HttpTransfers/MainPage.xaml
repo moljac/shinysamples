@@ -9,5 +9,6 @@
     <TabbedPage.Children>
         <httptransfers:PendingPage Title="Pending" />
         <httptransfers:LogPage Title="Logs" />
+        <httptransfers:LsPage Title="LS" />
     </TabbedPage.Children>
 </TabbedPage>
