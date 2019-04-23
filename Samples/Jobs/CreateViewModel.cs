@@ -45,7 +45,7 @@ namespace Samples.Jobs
                         DeviceCharging = this.DeviceCharging,
                         RequiredInternetAccess = (InternetAccess)Enum.Parse(typeof(InternetAccess), this.RequiredInternetAccess)
                     };
-                    job.SetValue("LoopCount", this.JobLoopCount);
+                    job.SetParameter("LoopCount", this.JobLoopCount);
                     await this.jobManager.Schedule(job);
                     await navigator.GoBack();
                 },

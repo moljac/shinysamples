@@ -24,7 +24,7 @@ namespace Samples.Notifications
                 )
                 .ToList()
                 .ForEach(x =>
-                    this.SetValue(x.Name, appSettings.GetValue(x.Name))
+                    this.ReflectSet(x.Name, appSettings.ReflectGet(x.Name))
                 );
 
             this.WhenAnyValue(x => x.ToggleAll)
@@ -45,7 +45,7 @@ namespace Samples.Notifications
             this.WhenAnyProperty()
                 .Skip(1)
                 .Where(x => x.Value != "ToggleAll")
-                .Subscribe(x => appSettings.SetValue(x.Value, this.GetValue(x.Value)))
+                .Subscribe(x => appSettings.ReflectSet(x.Value, this.ReflectGet(x.Value)))
                 .DisposeWith(this.DeactivateWith);
         }
 
