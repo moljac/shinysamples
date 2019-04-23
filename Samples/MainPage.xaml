@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   x:Class="Samples.MainPage"
@@ -12,6 +12,9 @@
         <ContentPage Title="Menu">
             <TableView Intent="Menu">
                 <TableRoot>
+                    <TableSection>
+                        <TextCell Text="Welcome" Command="{Binding Navigate}" CommandParameter="Nav/Welcome" />
+                    </TableSection>
                     <TableSection>
                         <TextCell Text="BluetoothLE Central" Command="{Binding Navigate}" CommandParameter="Nav/BleCentral" />
                         <TextCell Text="BluetoothLE Peripherals" Command="{Binding Navigate}" CommandParameter="Nav/BlePeripherals" />
