@@ -11,11 +11,11 @@
 
             <Image HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
+                   Rotation="{Binding Heading}"
                    Source="compass.png" />
 
             <Image HorizontalOptions="Center"
                    VerticalOptions="Center"
-                   Rotation="{Binding Heading}"
                    Source="arrow.png"
                    Margin="75" />
 
