@@ -18,16 +18,22 @@
                       IsVisible="{Binding HasLogs}"
                       IsRefreshing="{Binding IsBusy}"
                       RefreshCommand="{Binding Load}"
-                      RowHeight="100"
                       IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout>
-                                    <Label Text="{Binding Description}" FontSize="Medium" />
-                                    <Label Text="{Binding Uri}" FontSize="Micro" />
-                                    <Label Text="{Binding DateCreated, StringFormat='{0}'}" FontSize="Small" />
+                                    <Label Text="{Binding Description}"
+                                           FontSize="Medium"
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Label Text="{Binding Uri}"
+                                           FontSize="Micro"
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Label Text="{Binding DateCreated, StringFormat='{0}'}"
+                                           FontSize="Small" />
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
