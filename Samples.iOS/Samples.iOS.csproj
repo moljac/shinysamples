@@ -174,8 +174,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\logo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\Shiny_Logo.pdf" />
+    <ImageAsset Include="Assets.xcassets\logo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\Shiny_Logo.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -188,28 +192,25 @@
       <Version>7.0.4</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Beacons">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Shiny.BluetoothLE">
-      <Version>1.0.0.124</Version>
-    </PackageReference>
-    <PackageReference Include="Shiny.Core">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Locations">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Net.Http">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Notifications">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Sensors">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Shiny.SpeechRecognition">
-      <Version>1.0.0.124</Version>
+      <Version>1.0.0.129</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Xamarin.Forms.Maps">
@@ -222,8 +223,6 @@
       <Name>Samples</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets.xcassets\logo.imageset\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
