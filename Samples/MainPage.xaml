@@ -20,8 +20,11 @@
                         <TextCell Text="HTTP Transfers" Command="{Binding Navigate}" CommandParameter="Nav/HttpTransfers" />
                         <TextCell Text="Jobs" Command="{Binding Navigate}" CommandParameter="Nav/Jobs" />
                         <TextCell Text="Notifications" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />
-                        <TextCell Text="Sensors" Command="{Binding Navigate}" CommandParameter="Nav/Sensors" />
                         <TextCell Text="Speech Recognition" Command="{Binding Navigate}" CommandParameter="Nav/SpeechRecognition"  />
+                    </TableSection>
+                    <TableSection>
+                        <TextCell Text="All Sensors" Command="{Binding Navigate}" CommandParameter="Nav/Sensors" />
+                        <TextCell Text="Compass" Command="{Binding Navigate}" CommandParameter="Nav/Compass" />
                     </TableSection>
                     <TableSection>
                         <TextCell Text="Logging" Command="{Binding Navigate}" CommandParameter="Nav/Logs" />
