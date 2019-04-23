@@ -107,6 +107,30 @@
     <BundleResource Include="Resources\fontawesome.otf" />
   </ItemGroup>
   <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\arrow.imageset\arrow.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow.imageset\arrow@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow.imageset\arrow@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\compass.imageset\compass.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\compass.imageset\compass1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\compass.imageset\compass2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\compass.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\arrow.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
@@ -162,28 +186,28 @@
       <Version>7.0.4</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Beacons">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.BluetoothLE">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Core">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Locations">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Net.Http">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Notifications">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Sensors">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Shiny.SpeechRecognition">
-      <Version>1.0.0.121</Version>
+      <Version>1.0.0.124</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Xamarin.Forms.Maps">
