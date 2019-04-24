@@ -76,7 +76,7 @@ namespace Samples
         [Reactive] public bool IsBusy { get; protected set; }
         [Reactive] public string Title { get; protected set; }
 
-        protected void BindBusyCommand<T, U>(ReactiveCommand<T, U> reactiveCommand)
+        protected void BindBusyCommand(IReactiveCommand reactiveCommand)
             => reactiveCommand
                 .IsExecuting
                 .SubOnMainThread(
