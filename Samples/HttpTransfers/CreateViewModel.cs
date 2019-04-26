@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Input;
 using System.Reactive.Linq;
 using Prism.Navigation;
@@ -10,6 +10,7 @@ using Shiny;
 using Shiny.IO;
 using Shiny.Net.Http;
 using Samples.Settings;
+using Acr.UserDialogs;
 
 
 namespace Samples.HttpTransfers
@@ -21,17 +22,23 @@ namespace Samples.HttpTransfers
 
         public CreateViewModel(INavigationService navigationService,
                                IHttpTransferManager httpTransfers,
+                               IUserDialogs dialogs,
                                IFileSystem fileSystem,
                                AppSettings appSettings)
         {
             this.fileSystem = fileSystem;
             this.Url = appSettings.LastTransferUrl;
-            this.LocalFileName = Guid.NewGuid().ToString();
 
             this.WhenAnyValue(x => x.IsUpload)
                 .Subscribe(upload =>
-                    this.Title = upload ? "New Upload" : "New Download"
-                );
+                {
+                    if (!upload && this.FileName.IsEmpty())
+                        this.FileName = Guid.NewGuid().ToString();
+
+                    this.Title = upload ? "New Upload" : "New Download";
+                });
+
+            this.ManageUploads = navigationService.NavigateCommand("ManageUploads");
 
             this.ResetUrl = ReactiveCommand.Create(() =>
             {
@@ -39,13 +46,25 @@ namespace Samples.HttpTransfers
                 this.Url = appSettings.LastTransferUrl;
             });
 
+            this.SelectUpload = ReactiveCommand.Create(() =>
+            {
+                var files = fileSystem.AppData.GetFiles("upload.*", SearchOption.TopDirectoryOnly);
+                if (!files.Any())
+                    dialogs.Alert("There are not files to upload.  Use 'Manage Uploads' below to create them");
+                else
+                {
+                    var cfg = new ActionSheetConfig().SetCancel();
+                    foreach (var file in files)
+                        cfg.Add(file.Name, () => this.FileName = file.Name);
+
+                    dialogs.ActionSheet(cfg);
+                }
+            });
             this.Save = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    if (this.IsUpload)
-                        await this.GenerateUpload();
-
-                    var request = new HttpTransferRequest(this.Url, this.GetPath(), this.IsUpload)
+                    var path = Path.Combine(this.fileSystem.AppData.FullName, this.FileName);
+                    var request = new HttpTransferRequest(this.Url, path, this.IsUpload)
                     {
                         UseMeteredConnection = this.UseMeteredConnection
                     };
@@ -57,15 +76,15 @@ namespace Samples.HttpTransfers
                 (
                     x => x.IsUpload,
                     x => x.Url,
-                    x => x.LocalFileName,
-                    (upload, url, fn) =>
+                    x => x.FileName,
+                    (up, url, fn) =>
                     {
                         this.ErrorMessage = String.Empty;
                         if (!Uri.TryCreate(url.GetValue(), UriKind.Absolute, out _))
                             this.ErrorMessage = "Invalid URL";
 
-                        else if (upload.GetValue() && fn.GetValue().IsEmpty())
-                            this.ErrorMessage = "You must enter the file to upload";
+                        else if (up.GetValue() && fn.GetValue().IsEmpty())
+                            this.ErrorMessage = "You must select or enter a filename";
 
                         return this.ErrorMessage.IsEmpty();
                     }
@@ -76,33 +95,12 @@ namespace Samples.HttpTransfers
 
         public ICommand Save { get; }
         public ICommand ResetUrl { get; }
+        public ICommand SelectUpload { get; }
+        public ICommand ManageUploads { get; }
         [Reactive] public string ErrorMessage { get; private set; }
         [Reactive] public string Url { get; set; }
-        [Reactive] public string LocalFileName { get; set; }
         [Reactive] public bool UseMeteredConnection { get; set; }
         [Reactive] public bool IsUpload { get; set; }
-        [Reactive] public int SizeInMegabytes { get; set; } = 100;
-
-
-        Task GenerateUpload() => Task.Run(() =>
-        {
-            var byteSize = this.SizeInMegabytes * 1024 * 1024;
-            var path = this.GetPath();
-            var data = new byte[8192];
-            var rng = new Random();
-
-            using (var fs = File.OpenWrite(path))
-            {
-                while (fs.Length < byteSize)
-                {
-                    rng.NextBytes(data);
-                    fs.Write(data, 0, data.Length);
-                    fs.Flush();
-                }
-            }
-        });
-
-
-        string GetPath() => Path.Combine(this.fileSystem.AppData.FullName, this.LocalFileName);
+        [Reactive] public string FileName { get; set; }
     }
 }

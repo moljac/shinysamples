@@ -25,19 +25,31 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
-      <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
-      <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
+        <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Sensors\CompassPage.xaml">
+      <Compile Update="HttpTransfers\ManageUploadsPage.xaml.cs">
+        <DependentUpon>ManageUploadsPage.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="IO\PathsPage.xaml.cs">
+        <DependentUpon>PathsPage.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="IO\FileManagerPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="IO\MainPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
     </ItemGroup>

@@ -55,6 +55,7 @@ namespace Samples
 
             containerRegistry.RegisterForNavigation<HttpTransfers.MainPage>("HttpTransfers");
             containerRegistry.RegisterForNavigation<HttpTransfers.CreatePage>("CreateTransfer");
+            containerRegistry.RegisterForNavigation<HttpTransfers.ManageUploadsPage>("ManageUploads");
 
             containerRegistry.RegisterForNavigation<Jobs.MainPage>("Jobs");
             containerRegistry.RegisterForNavigation<Jobs.CreatePage>("CreateJob");
@@ -65,9 +66,10 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Sensors.MainPage>("Sensors");
             containerRegistry.RegisterForNavigation<Sensors.CompassPage>("Compass");
 
+            containerRegistry.RegisterForNavigation<IO.MainPage>("IO");
+
             containerRegistry.RegisterForNavigation<Logging.LoggingPage>("Logs");
             containerRegistry.RegisterForNavigation<AccessPage>("Access");
-            containerRegistry.RegisterForNavigation<FileSystemPage>("FileSystem");
             containerRegistry.RegisterForNavigation<EnvironmentPage>("Environment");
             containerRegistry.RegisterForNavigation<Settings.MainPage>("Settings");
         }

@@ -2,12 +2,12 @@
 using Shiny.IO;
 
 
-namespace Samples
+namespace Samples.IO
 {
-    public class FileSystemViewModel : ViewModel
+    public class PathsViewModel : ViewModel
     {
         readonly IFileSystem fileSystem;
-        public FileSystemViewModel(IFileSystem fileSystem) => this.fileSystem = fileSystem;
+        public PathsViewModel(IFileSystem fileSystem) => this.fileSystem = fileSystem;
 
 
         public string AppData => this.fileSystem.AppData.FullName;
