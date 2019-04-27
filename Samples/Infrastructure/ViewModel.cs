@@ -84,6 +84,6 @@ namespace Samples
                     _ => this.IsBusy = false,
                     () => this.IsBusy = false
                 )
-                .DisposeWith(this.DeactivateWith);
+                .DisposeWith(this.DestroyWith);
     }
 }

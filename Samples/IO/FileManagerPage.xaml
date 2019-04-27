@@ -15,9 +15,18 @@
             <Button Text="Back Directory"
                     Command="{Binding Back}"
                     IsVisible="{Binding ShowBack}"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Row="0" />
 
-            <ListView ItemsSource="{Binding Entries}">
+            <Label Text="No Entries Found"
+                   IsVisible="{Binding HasEntries, Converter={StaticResource Not}}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="1" />
+
+            <ListView ItemsSource="{Binding Entries}"
+                      IsVisible="{Binding HasEntries}"
+                      Grid.Row="1">
                 <ListView.Behaviors>
                     <infrastructure:ItemTappedCommandBehavior Command="{Binding Select}" />
                 </ListView.Behaviors>

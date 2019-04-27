@@ -1,7 +1,8 @@
-﻿using ReactiveUI.Fody.Helpers;
-using Shiny.Sensors;
-using System;
+﻿using System;
 using System.Reactive.Disposables;
+using ReactiveUI.Fody.Helpers;
+using Shiny.Sensors;
+
 
 namespace Samples.Sensors
 {

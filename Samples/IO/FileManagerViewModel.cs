@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using Humanizer;
@@ -17,26 +16,23 @@ namespace Samples.IO
 {
     public class FileEntryViewModel : ReactiveObject
     {
-        public FileInfo File { get; set; }
-        public DirectoryInfo Directory { get; set; }
-
-
-        public string Name => this.File?.Name ?? this.Directory?.Name;
+        public FileSystemInfo Entry { get; set; }
+        public string Name => this.Entry.Name;
         public string Size
         {
             get
             {
-                if (!this.IsDirectory)
+                if (this.IsDirectory)
                 {
-                    var dc = this.Directory.GetDirectories().Length;
-                    var fc = this.Directory.GetFiles().Length;
+                    var dc = Directory.GetDirectories(this.Entry.FullName).Length;
+                    var fc = Directory.GetFiles(this.Entry.FullName).Length;
                     return $"{dc} Dir(s) - {fc} File(s)";
                 }
-                return this.File.Length.Bytes().Megabytes + " MB";
+                return new FileInfo(this.Entry.FullName).Length.Bytes().Megabytes + " MB";
             }
         }
 
-        public bool IsDirectory => this.File == null;
+        public bool IsDirectory => this.Entry.Attributes.HasFlag(FileAttributes.Directory);
         public ICommand Actions { get; set; }
     }
 
@@ -59,21 +55,23 @@ namespace Samples.IO
 
                 if (entry.IsDirectory)
                 {
-                    cfg.Add("Enter", () => this.CurrentPath = entry.Directory.FullName);
-                    cfg.Add("Delete", () => Confirm("Delete " + entry.Name, entry.Directory.Delete));
+                    cfg.Add("Enter", () => this.CurrentPath = entry.Entry.FullName);
                 }
                 else
                 {
-                    cfg.Add("Delete", () => Confirm("Delete " + entry.Name, entry.File.Delete));
                     cfg.Add("Copy", () =>
                     {
                         var progress = dialogs.Progress(new ProgressDialogConfig
                         {
                             Title = "Copying File"
                         });
-                        var target = new FileInfo(Path.GetFileNameWithoutExtension(entry.File.FullName) + "_1" + Path.GetExtension(entry.File.Name));
-                        entry
-                            .File
+
+                        var fn = Path.GetFileNameWithoutExtension(entry.Entry.Name);
+                        var ext = Path.GetExtension(entry.Entry.Name);
+                        var newFn = ext.IsEmpty() ? $"fn_1" : $"{fn}_1.{ext}";
+                        var target = new FileInfo(newFn);
+                        var file = new FileInfo(entry.Entry.FullName);
+                        file
                             .CopyProgress(target, true)
                             .Subscribe(p =>
                             {
@@ -82,6 +80,7 @@ namespace Samples.IO
                             });
                     });
                 }
+                cfg.Add("Delete", () => Confirm("Delete " + entry.Name, entry.Entry.Delete));
                 dialogs.ActionSheet(cfg);
             });
 
@@ -91,16 +90,7 @@ namespace Samples.IO
 
             this.WhenAnyValue(x => x.CurrentPath)
                 .Skip(1)
-                .Subscribe(x =>
-                {
-                    this.Title = x;
-                    var dir = new DirectoryInfo(x);
-                    this.LoadEntries(dir);
-
-                    this.dirSub = dir
-                        .WhenChanged()
-                        .Subscribe(_ => this.LoadEntries(dir));
-                })
+                .Subscribe(_ => this.LoadEntries())
                 .DisposeWith(this.DestroyWith);
         }
 
@@ -120,6 +110,7 @@ namespace Samples.IO
 
         public ICommand Select { get; }
         public ICommand Back { get; }
+        [Reactive] public bool HasEntries { get; private set; }
         [Reactive] public string CurrentPath { get; private set; }
         public ObservableList<FileEntryViewModel> Entries { get; } = new ObservableList<FileEntryViewModel>();
 
@@ -135,19 +126,23 @@ namespace Samples.IO
         }
 
 
-        void LoadEntries(DirectoryInfo dir)
+        void LoadEntries()
         {
+            var dir = new DirectoryInfo(this.CurrentPath);
+            this.Title = Path.GetDirectoryName(this.CurrentPath);
+            //this.dirSub = dir
+            //    .WhenChanged()
+            //    .Subscribe(_ =>
+            //    {
+            //        Console.WriteLine("ran");
+            //    });
+
             this.Entries.ReplaceAll(
                 dir
-                    .GetDirectories()
-                    .Select(d => new FileEntryViewModel { Directory = d })
+                    .GetFileSystemInfos()
+                    .Select(x => new FileEntryViewModel { Entry = x })
             );
-
-            this.Entries.AddRange(
-                dir
-                    .GetFiles()
-                    .Select(f => new FileEntryViewModel { File = f })
-            );
+            this.HasEntries = this.Entries.Any();
         }
     }
 }
