@@ -13,6 +13,7 @@ namespace Samples.Sensors
             => this.compass = compass;
 
 
+        [Reactive] public double Rotation { get; private set; }
         [Reactive] public double Heading { get; private set; }
 
 
@@ -21,7 +22,11 @@ namespace Samples.Sensors
             base.OnAppearing();
             this.compass
                 .WhenReadingTaken()
-                .Subscribe(x => this.Heading = x.MagneticHeading)
+                .Subscribe(x =>
+                {
+                    this.Rotation = 360 - x.MagneticHeading;
+                    this.Heading = x.MagneticHeading;
+                })
                 .DisposeWith(this.DeactivateWith);
         }
     }

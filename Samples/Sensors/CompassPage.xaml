@@ -12,15 +12,15 @@
 
             <Image HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
-                   Rotation="{Binding Heading}"
-                   Source="compass.png" />
+                   Rotation="{Binding Rotation}"
+                   Source="compass" />
 
             <Image HorizontalOptions="Center"
                    VerticalOptions="Center"
-                   Source="arrow.png"
+                   Source="arrow"
                    Margin="75" />
 
-            <Label Text="{Binding Heading, StringFormat='Raw Heading: {0}'}" />
+            <Label Text="{Binding Heading, StringFormat='Heading: {0}'}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
