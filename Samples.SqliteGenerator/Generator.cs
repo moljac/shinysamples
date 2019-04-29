@@ -28,6 +28,7 @@ namespace Samples.SqliteGenerator
 
             var data = faker.Generate(customerCount);
             await conn.InsertAllAsync(data, true);
+            await conn.CloseAsync();
         }
     }
 }
