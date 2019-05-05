@@ -17,16 +17,16 @@ namespace Samples.Beacons
         readonly IBeaconManager beaconManager;
 
 
-        public MonitoringViewModel(INavigationService navigationService,
+        public MonitoringViewModel(INavigationService navigator,
                                    IUserDialogs dialogs,
                                    IBeaconManager beaconManager)
         {
             this.beaconManager = beaconManager;
 
-            this.Add = ReactiveCommand.CreateFromTask(() => navigationService.Navigate(
+            this.Add = navigator.NavigateCommand(
                 nameof(CreatePage),
-                ("Monitoring", true)
-            ));
+                p => p.Add("Monitoring", true)
+            );
 
             this.StopAllMonitoring = ReactiveCommand.CreateFromTask(async () =>
             {

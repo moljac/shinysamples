@@ -20,14 +20,12 @@ namespace Samples.BluetoothLE
 
 
         public AdapterViewModel(ICentralManager central,
-                                INavigationService navigationService,
+                                INavigationService navigator,
                                 IUserDialogs dialogs)
         {
-            this.SelectPeripheral = ReactiveCommand.CreateFromTask<ScanResultViewModel>(
-                x => navigationService.Navigate(
-                    "Peripheral",
-                    ("Peripheral", x.Peripheral)
-                )
+            this.SelectPeripheral = navigator.NavigateCommand<ScanResultViewModel>(
+                "Peripheral",
+                (x, p) => p.Add("Peripheral", x.Peripheral)
             );
 
             this.OpenSettings = ReactiveCommand.Create(() =>

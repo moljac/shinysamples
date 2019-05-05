@@ -18,7 +18,7 @@ namespace Samples.Beacons
         IDisposable scanner;
 
 
-        public RangingViewModel(INavigationService navigationService,
+        public RangingViewModel(INavigationService navigator,
                                 IUserDialogs dialogs,
                                 IBeaconManager beaconManager)
         {
@@ -26,11 +26,12 @@ namespace Samples.Beacons
             this.beaconManager = beaconManager;
 
             this.Clear = ReactiveCommand.Create(() => this.Beacons.Clear());
-            this.SetRegion = ReactiveCommand.CreateFromTask(_ => navigationService.Navigate(
+            this.SetRegion = navigator.NavigateCommand(
                 nameof(CreatePage),
-                (nameof(BeaconRegion), this.region),
-                ("IsRanging", true)
-            ));
+                p => p
+                    .Set(nameof(BeaconRegion), this.region)
+                    .Set("IsRanging", true)
+            );
             this.ScanToggle = ReactiveCommand.Create(() =>
             {
                 if (this.ScanText == "Scan")
