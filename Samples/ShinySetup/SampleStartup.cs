@@ -41,10 +41,14 @@ namespace Samples.ShinySetup
             // register all of the acr stuff you want to use
             builder.UseHttpTransfers<SampleAllDelegate>();
             //builder.UseBeacons<SampleAllDelegate>();
-            builder.UseBleCentral<SampleAllDelegate>();
+
+            builder.RegisterBleAdapterState<SampleAllDelegate>();
+            builder.RegisterBleStateRestore<SampleAllDelegate>();
+            builder.UseBleCentral();
             builder.UseBlePeripherals();
+
             builder.UseGeofencing<SampleAllDelegate>();
-            builder.UseGpsBackground<SampleAllDelegate>();
+            builder.UseGps<SampleAllDelegate>();
             builder.UseNotifications();
             builder.UseSpeechRecognition();
 

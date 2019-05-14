@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Shiny;
 using Shiny.Beacons;
+using Shiny.BluetoothLE;
 using Shiny.BluetoothLE.Central;
 using Shiny.Locations;
 using Shiny.Jobs;
@@ -13,6 +14,7 @@ using Samples.Settings;
 using System.IO;
 using SQLite;
 
+
 namespace Samples.ShinySetup
 {
     public class SampleAllDelegate : IGeofenceDelegate,
@@ -20,6 +22,7 @@ namespace Samples.ShinySetup
                                      IBeaconDelegate,
                                      IHttpTransferDelegate,
                                      IBleStateRestoreDelegate,
+                                     IBleAdapterDelegate,
                                      IJob
     {
         // notice you can inject anything you registered in your application here
@@ -38,9 +41,18 @@ namespace Samples.ShinySetup
         }
 
 
-        public void OnAdvertised(IScanResult result)
+        public void OnBleAdapterStateChanged(AccessState state)
         {
+            if (state != AccessState.Available && this.appSettings.UseNotificationsBle)
+            {
+                this.notifications.Send(new Notification
+                {
+                    Title = "BLE State",
+                    Message = "Turn on Bluetooth already"
+                });
+            }
         }
+
 
 
         public void OnConnected(IPeripheral peripheral)
