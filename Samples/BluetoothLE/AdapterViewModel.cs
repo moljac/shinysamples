@@ -96,11 +96,19 @@ namespace Samples.BluetoothLE
                                 ex => dialogs.Alert(ex.ToString(), "ERROR")
                             )
                             .DisposeWith(this.DeactivateWith);
+
+                        this.IsScanning = true;
                     }
                 }
             );
         }
 
+
+        public override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            this.IsScanning = false;
+        }
 
         public ICommand ScanToggle { get; }
         public ICommand OpenSettings { get; }
