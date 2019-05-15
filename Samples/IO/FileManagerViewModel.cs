@@ -130,12 +130,6 @@ namespace Samples.IO
         {
             var dir = new DirectoryInfo(this.CurrentPath);
             this.Title = Path.GetDirectoryName(this.CurrentPath);
-            this.dirSub = this.fileSystem
-                .Watch(this.CurrentPath)
-                .Subscribe(_ =>
-                {
-                    Console.WriteLine("ran");
-                });
 
             this.Entries.ReplaceAll(
                 dir
