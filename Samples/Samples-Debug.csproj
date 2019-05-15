@@ -6,7 +6,7 @@
         <RootNamespace>Samples</RootNamespace>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
         <DebugType>pdbonly</DebugType>
         <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
@@ -34,24 +34,6 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="HttpTransfers\ManageUploadsPage.xaml.cs">
-        <DependentUpon>ManageUploadsPage.xaml</DependentUpon>
-      </Compile>
-      <Compile Update="IO\PathsPage.xaml.cs">
-        <DependentUpon>PathsPage.xaml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Update="IO\FileManagerPage.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="IO\MainPage.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

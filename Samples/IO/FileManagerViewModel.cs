@@ -41,7 +41,6 @@ namespace Samples.IO
     {
         readonly IFileSystem fileSystem;
         readonly IUserDialogs dialogs;
-        IDisposable dirSub;
 
 
         public FileManagerViewModel(IUserDialogs dialogs, IFileSystem fileSystem)
@@ -98,13 +97,6 @@ namespace Samples.IO
         protected override void OnStart()
         {
             this.CurrentPath = this.fileSystem.AppData.FullName;
-        }
-
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            this.dirSub?.Dispose();
         }
 
 

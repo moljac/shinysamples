@@ -18,7 +18,7 @@ namespace Samples.ShinySetup
     {
         public override void ConfigureServices(IServiceCollection builder)
         {
-            Log.AddLogger(new DbLogger(), true, false);
+            Log.AddLogger(new DbLogger());
 #if DEBUG
             Log.UseConsole();
             Log.UseDebug();

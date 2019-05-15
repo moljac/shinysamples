@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using SQLite;
 using Shiny;
 using Shiny.Beacons;
 using Shiny.BluetoothLE;
@@ -11,8 +13,6 @@ using Shiny.Net.Http;
 using Shiny.Notifications;
 using Samples.Models;
 using Samples.Settings;
-using System.IO;
-using SQLite;
 
 
 namespace Samples.ShinySetup
@@ -41,18 +41,17 @@ namespace Samples.ShinySetup
         }
 
 
-        public void OnBleAdapterStateChanged(AccessState state)
+        public async void OnBleAdapterStateChanged(AccessState state)
         {
             if (state != AccessState.Available && this.appSettings.UseNotificationsBle)
             {
-                this.notifications.Send(new Notification
+                await this.notifications.Send(new Notification
                 {
                     Title = "BLE State",
                     Message = "Turn on Bluetooth already"
                 });
             }
         }
-
 
 
         public void OnConnected(IPeripheral peripheral)
