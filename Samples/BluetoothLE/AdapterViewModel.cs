@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Shiny;
 using Acr.UserDialogs;
-using Shiny.BluetoothLE.Central;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Shiny;
+using Shiny.BluetoothLE.Central;
 
 
 namespace Samples.BluetoothLE
@@ -23,7 +23,7 @@ namespace Samples.BluetoothLE
                                 INavigationService navigator,
                                 IUserDialogs dialogs)
         {
-            this.SelectPeripheral = navigator.NavigateCommand<ScanResultViewModel>(
+            this.SelectPeripheral = navigator.NavigateCommand<PeripheralItemViewModel>(
                 "Peripheral",
                 (x, p) => p.Add("Peripheral", x.Peripheral)
             );
@@ -60,6 +60,7 @@ namespace Samples.BluetoothLE
                 {
                     if (this.IsScanning)
                     {
+                        this.IsScanning = false;
                         this.scan?.Dispose();
                     }
                     else
@@ -73,20 +74,20 @@ namespace Samples.BluetoothLE
                             .SubOnMainThread(
                                 results =>
                                 {
-                                    var list = new List<ScanResultViewModel>();
+                                    var list = new List<PeripheralItemViewModel>();
                                     foreach (var result in results)
                                     {
-                                        var dev = this.Peripherals.FirstOrDefault(x => x.Uuid.Equals(result.Peripheral.Uuid));
+                                        var peripheral = this.Peripherals.FirstOrDefault(x => x.Equals(result.Peripheral));
+                                        if (peripheral == null)
+                                            peripheral = list.FirstOrDefault(x => x.Equals(result.Peripheral));
 
-                                        if (dev != null)
-                                        {
-                                            dev.TrySet(result);
-                                        }
+                                        if (peripheral != null)
+                                            peripheral.Update(result);
                                         else
                                         {
-                                            dev = new ScanResultViewModel();
-                                            dev.TrySet(result);
-                                            list.Add(dev);
+                                            peripheral = new PeripheralItemViewModel(result.Peripheral);
+                                            peripheral.Update(result);
+                                            list.Add(peripheral);
                                         }
                                     }
                                     if (list.Any())
@@ -101,17 +102,11 @@ namespace Samples.BluetoothLE
         }
 
 
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            this.IsScanning = false;
-        }
-
         public ICommand ScanToggle { get; }
         public ICommand OpenSettings { get; }
         public ICommand ToggleAdapterState { get; }
         public ICommand SelectPeripheral { get; }
-        public ObservableList<ScanResultViewModel> Peripherals { get; } = new ObservableList<ScanResultViewModel>();
+        public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
         [Reactive] public bool IsScanning { get; private set; }
     }
 }

@@ -43,18 +43,41 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" FontSize="15" />
-                                    <Label Text="{Binding Rssi, StringFormat='RSSI: {0}'}" Grid.Row="0" Grid.Column="1" TextColor="Red" />
-                                    <Label Text="{Binding Uuid, StringFormat='UUID: {0}'}" Grid.Row="1" Grid.ColumnSpan="2" FontAttributes="Italic" />
+                                    <Label Text="{Binding Name}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           FontAttributes="Bold"
+                                           FontSize="15" />
 
-                                    <Label Text="{Binding IsConnectable, StringFormat='Connectable: {0}'}" Grid.Row="2" Grid.Column="0" />
-                                    <Label Text="{Binding ServiceCount, StringFormat='{0} Services'}" Grid.Row="2" Grid.Column="1" />
+                                    <Label Text="{Binding Rssi, StringFormat='RSSI: {0}'}"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           TextColor="Red" />
 
-                                    <Label Text="{Binding ManufacturerData, StringFormat='Manufactuer Data: {0}'}" Grid.Row="3" Grid.ColumnSpan="2" />
+                                    <Label Text="{Binding Uuid, StringFormat='UUID: {0}'}"
+                                           Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           FontAttributes="Italic" />
 
-                                    <Label Text="{Binding LocalName, StringFormat='Local Name: {0}'}" Grid.Row="4" Grid.Column="0" />
+                                    <Label Text="{Binding IsConnectable, StringFormat='Connectable: {0}'}"
+                                           Grid.Row="2"
+                                           Grid.Column="0" />
 
-									<Label Text="Peripheral Connected" IsVisible="{Binding IsConnected}" BackgroundColor="Yellow" TextColor="Black"  HorizontalTextAlignment="Center" Grid.ColumnSpan="2" Grid.Row="4" />
+                                    <Label Text="{Binding ServiceCount, StringFormat='{0} Services'}"
+                                           Grid.Row="2"
+                                           Grid.Column="1" />
+
+                                    <Label Text="{Binding LocalName, StringFormat='Local Name: {0}'}"
+                                           Grid.Row="3"
+                                           Grid.Column="0" />
+
+									<Label Text="Peripheral Connected"
+                                           IsVisible="{Binding IsConnected}"
+                                           BackgroundColor="Yellow"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="Center"
+                                           Grid.ColumnSpan="2"
+                                           Grid.Row="4" />
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>

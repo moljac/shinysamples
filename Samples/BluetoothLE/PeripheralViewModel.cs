@@ -5,22 +5,25 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using Acr.UserDialogs;
-using Shiny.BluetoothLE;
-using Shiny.BluetoothLE.Central;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Shiny.BluetoothLE;
+using Shiny.BluetoothLE.Central;
 
 
 namespace Samples.BluetoothLE
 {
     public class PeripheralViewModel : ViewModel
     {
+        readonly IUserDialogs dialogs;
         IPeripheral peripheral;
 
 
         public PeripheralViewModel(ICentralManager centralManager, IUserDialogs dialogs)
         {
+            this.dialogs = dialogs;
+
             this.SelectCharacteristic = ReactiveCommand.Create<GattCharacteristicViewModel>(x => x.Select());
 
             this.ConnectionToggle = ReactiveCommand.Create(() =>
@@ -140,6 +143,7 @@ namespace Samples.BluetoothLE
                             }
                             catch (Exception ex)
                             {
+                                // eat this for now
                                 Console.WriteLine(ex);
                             }
 
@@ -150,9 +154,8 @@ namespace Samples.BluetoothLE
 
             this.peripheral
                 .WhenAnyCharacteristicDiscovered()
-                .SubOnMainThread(chs =>
-                {
-                    try
+                .SubOnMainThread(
+                    chs =>
                     {
                         var service = this.GattCharacteristics.FirstOrDefault(x => x.ShortName.Equals(chs.Service.Uuid.ToString()));
                         if (service == null)
@@ -164,14 +167,10 @@ namespace Samples.BluetoothLE
                             this.GattCharacteristics.Add(service);
                         }
 
-                        service.Add(new GattCharacteristicViewModel(chs));
-                    }
-                    catch (Exception ex)
-                    {
-                        // eat it
-                        Console.WriteLine(ex);
-                    }
-                })
+                        service.Add(new GattCharacteristicViewModel(chs, this.dialogs));
+                    },
+                    ex => this.dialogs.Alert(ex.ToString())
+                )
                 .DisposeWith(this.DeactivateWith);
         }
 

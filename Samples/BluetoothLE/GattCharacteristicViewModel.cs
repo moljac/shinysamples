@@ -14,12 +14,14 @@ namespace Samples.BluetoothLE
 {
     public class GattCharacteristicViewModel : ViewModel
     {
+        readonly IUserDialogs dialogs;
         IDisposable watcher;
 
 
-        public GattCharacteristicViewModel(IGattCharacteristic characteristic)
+        public GattCharacteristicViewModel(IGattCharacteristic characteristic, IUserDialogs dialogs)
         {
             this.Characteristic = characteristic;
+            this.dialogs = dialogs;
         }
 
 
@@ -60,20 +62,20 @@ namespace Samples.BluetoothLE
                 cfg.Add(txt, this.ToggleNotify);
             }
             if (cfg.Options.Any())
-                UserDialogs.Instance.ActionSheet(cfg.SetCancel());
+                this.dialogs.ActionSheet(cfg.SetCancel());
         }
 
 
         async void SendBlob()
         {
-            var useReliableWrite = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig()
+            var useReliableWrite = await this.dialogs.ConfirmAsync(new ConfirmConfig()
                 .UseYesNo()
                 .SetTitle("Confirm")
                 .SetMessage("Use reliable write transaction?")
             );
             var cts = new CancellationTokenSource();
             var bytes = Encoding.UTF8.GetBytes(RandomString(5000));
-            var dlg = UserDialogs.Instance.Loading("Sending Blob", () => cts.Cancel(), "Cancel");
+            var dlg = this.dialogs.Loading("Sending Blob", () => cts.Cancel(), "Cancel");
             var sw = new Stopwatch();
             sw.Start();
 
@@ -84,7 +86,7 @@ namespace Samples.BluetoothLE
                     ex =>
                     {
                         dlg.Dispose();
-                        UserDialogs.Instance.Toast("Failed writing blob - " + ex);
+                        this.dialogs.Toast("Failed writing blob - " + ex);
                         sw.Stop();
                     },
                     () =>
@@ -93,7 +95,7 @@ namespace Samples.BluetoothLE
                         sw.Stop();
 
                         var pre = useReliableWrite ? "reliable write" : "write";
-                        UserDialogs.Instance.Toast($"BLOB {pre} took " + sw.Elapsed);
+                        this.dialogs.Toast($"BLOB {pre} took " + sw.Elapsed);
                     }
                 );
 
@@ -103,8 +105,8 @@ namespace Samples.BluetoothLE
 
         async void DoWrite(bool withResponse)
         {
-            var utf8 = await UserDialogs.Instance.ConfirmAsync("Write value from UTF8 or HEX?", okText: "UTF8", cancelText: "HEX");
-            var result = await UserDialogs.Instance.PromptAsync("Please enter a write value", this.Description);
+            var utf8 = await this.dialogs.ConfirmAsync("Write value from UTF8 or HEX?", okText: "UTF8", cancelText: "HEX");
+            var result = await this.dialogs.PromptAsync("Please enter a write value", this.Description);
 
             if (result.Ok && !String.IsNullOrWhiteSpace(result.Text))
             {
@@ -116,8 +118,8 @@ namespace Samples.BluetoothLE
                         .Write(bytes)
                         .Timeout(TimeSpan.FromSeconds(2))
                         .Subscribe(
-                            x => UserDialogs.Instance.Toast("Write Complete"),
-                            ex => UserDialogs.Instance.Alert(ex.ToString())
+                            x => this.dialogs.Toast("Write Complete"),
+                            ex => this.dialogs.Alert(ex.ToString())
                         );
                 }
                 else
@@ -126,8 +128,8 @@ namespace Samples.BluetoothLE
                         .WriteWithoutResponse(bytes)
                         .Timeout(TimeSpan.FromSeconds(2))
                         .Subscribe(
-                            x => UserDialogs.Instance.Toast("Write Without Response Complete"),
-                            ex => UserDialogs.Instance.Alert(ex.ToString())
+                            x => this.dialogs.Toast("Write Without Response Complete"),
+                            ex => this.dialogs.Alert(ex.ToString())
                         );
                 }
             }
@@ -144,16 +146,16 @@ namespace Samples.BluetoothLE
             else
             {
                 this.IsNotifying = true;
-                var utf8 = await UserDialogs.Instance.ConfirmAsync(
+                var utf8 = await this.dialogs.ConfirmAsync(
                     "Display Value as UTF8 or HEX?",
                     okText: "UTF8",
                     cancelText: "HEX"
                 );
                 this.watcher = this.Characteristic
                     .RegisterAndNotify()
-                    .Subscribe(
+                    .SubOnMainThread(
                         x => this.SetReadValue(x, utf8),
-                        ex => UserDialogs.Instance.Alert(ex.ToString())
+                        ex => this.dialogs.Alert(ex.ToString())
                     );
             }
         }
@@ -161,7 +163,7 @@ namespace Samples.BluetoothLE
 
         async void DoRead()
         {
-            var utf8 = await UserDialogs.Instance.ConfirmAsync(
+            var utf8 = await this.dialogs.ConfirmAsync(
                 "Display Value as UTF8 or HEX?",
                 okText: "UTF8",
                 cancelText: "HEX"
@@ -171,7 +173,7 @@ namespace Samples.BluetoothLE
                 .Timeout(TimeSpan.FromSeconds(2))
                 .Subscribe(
                     x => this.SetReadValue(x, utf8),
-                    ex => UserDialogs.Instance.Alert(ex.ToString())
+                    ex => this.dialogs.Alert(ex.ToString())
                 );
         }
 
