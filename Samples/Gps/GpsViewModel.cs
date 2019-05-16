@@ -42,6 +42,15 @@ namespace Samples.Gps
             });
             this.BindBusyCommand(this.GetCurrentPosition);
 
+            this.SelectPriority = ReactiveCommand.Create(() => dialogs.ActionSheet(
+                new ActionSheetConfig()
+                    .SetTitle("Select Priority/Desired Accuracy")
+                    .Add("Highest", () => this.Priority = GpsPriority.Highest)
+                    .Add("Normal", () => this.Priority = GpsPriority.Normal)
+                    .Add("Low", () => this.Priority = GpsPriority.Low)
+                    .SetCancel()
+            ));
+
             this.ToggleUpdates = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
@@ -52,13 +61,17 @@ namespace Samples.Gps
                     }
                     else
                     {
-                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(true));
+                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(this.UseBackground));
                         if (!result)
+                        {
+                            dialogs.Alert("Insufficient permissions");
                             return;
+                        }
 
                         var request = new GpsRequest
                         {
-                            UseBackground = true
+                            UseBackground = this.UseBackground,
+                            Priority = this.Priority
                         };
                         var meters = ToDeferred(this.DeferredMeters);
                         if (meters > 0)
@@ -121,14 +134,17 @@ namespace Samples.Gps
         }
 
 
-        public ReactiveCommand<Unit, Unit> GetCurrentPosition { get; }
-        public ReactiveCommand<Unit, Unit> ToggleUpdates { get; }
-        public ReactiveCommand<Unit, Unit> RequestAccess { get; }
+        public IReactiveCommand SelectPriority { get; }
+        public IReactiveCommand GetCurrentPosition { get; }
+        public IReactiveCommand ToggleUpdates { get; }
+        public IReactiveCommand RequestAccess { get; }
 
 
         readonly ObservableAsPropertyHelper<string> listenerText;
         public string ListenerText => this.listenerText.Value;
 
+        [Reactive] public bool UseBackground { get; set; } = true;
+        [Reactive] public GpsPriority Priority { get; set; } = GpsPriority.Normal;
         [Reactive] public string DeferredMeters { get; set; }
         [Reactive] public string DeferredSeconds { get; set; }
         [Reactive] public string Access { get; private set; }

@@ -12,18 +12,20 @@
 
             <ActivityIndicator IsRunning="{Binding IsBusy}" Grid.Row="0" />
 
-            <TableView Grid.Row="1">
+            <TableView Grid.Row="1" Intent="Form">
                 <TableRoot>
                     <TableSection>
                         <TextCell Text="Access" Detail="{Binding Access}" Command="{Binding RequestAccess}" />
                         <TextCell Text="Get Current Position" Command="{Binding GetCurrentPosition}" />
                     </TableSection>
+
                     <TableSection>
                         <TextCell Text="Latitude" Detail="{Binding Latitude}" />
                         <TextCell Text="Longitude" Detail="{Binding Longitude}" />
                         <TextCell Text="Altitude" Detail="{Binding Altitude}" />
                         <TextCell Text="Accuracy" Detail="{Binding PositionAccuracy}" />
                     </TableSection>
+
                     <TableSection>
                         <TextCell Text="Speed (m/s)" Detail="{Binding Speed}" />
                         <TextCell Text="Heading" Detail="{Binding Heading}" />
@@ -31,6 +33,13 @@
                     </TableSection>
 
                     <TableSection Title="Listening">
+                        <SwitchCell Text="Background"
+                                    On="{Binding UseBackground}" />
+
+                        <TextCell Text="Priority/Accuracy"
+                                  Detail="{Binding Priority}"
+                                  Command="{Binding SelectPriority}"/>
+
                         <EntryCell Label="Deferred Distance (meters)"
                                    Text="{Binding DeferredMeters}"
                                    Keyboard="Numeric" />
