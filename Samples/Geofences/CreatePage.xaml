@@ -14,20 +14,20 @@
             <TableView Intent="Form" Grid.Row="0">
                 <TableSection>
                     <EntryCell Label="Identifier"
-                           Text="{Binding Identifier}"
-                           Keyboard="Text" />
+                               Text="{Binding Identifier}"
+                               Keyboard="Numeric" />
 
                     <EntryCell Label="Latitude"
-                           Text="{Binding CenterLatitude}"
-                           Keyboard="Numeric" />
+                               Text="{Binding CenterLatitude}"
+                               Keyboard="Numeric" />
 
                     <EntryCell Label="Longitude"
-                           Text="{Binding CenterLongitude}"
-                           Keyboard="Numeric" />
+                               Text="{Binding CenterLongitude}"
+                               Keyboard="Numeric" />
 
                     <EntryCell Label="Radius (meters)"
-                           Text="{Binding RadiusMeters}"
-                           Keyboard="Numeric" />
+                               Text="{Binding RadiusMeters}"
+                               Keyboard="Numeric" />
                 </TableSection>
 
                 <TableSection>
