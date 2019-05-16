@@ -7,7 +7,7 @@ using Shiny.Locations;
 using Acr.UserDialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-
+using Shiny;
 
 namespace Samples.Gps
 {
@@ -42,26 +42,48 @@ namespace Samples.Gps
             });
             this.BindBusyCommand(this.GetCurrentPosition);
 
-            this.ToggleUpdates = ReactiveCommand.CreateFromTask(async () =>
-            {
-                if (this.manager.IsListening)
+            this.ToggleUpdates = ReactiveCommand.CreateFromTask(
+                async () =>
                 {
-                    await this.manager.StopListener();
-                    this.gpsListener?.Dispose();
-                }
-                else
-                {
-                    var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(true));
-                    if (!result)
-                        return;
-
-                    await this.manager.StartListener(new GpsRequest
+                    if (this.manager.IsListening)
                     {
-                        UseBackground = true
-                    });
-                }
-                this.IsUpdating = this.manager.IsListening;
-            });
+                        await this.manager.StopListener();
+                        this.gpsListener?.Dispose();
+                    }
+                    else
+                    {
+                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(true));
+                        if (!result)
+                            return;
+
+                        var request = new GpsRequest
+                        {
+                            UseBackground = true
+                        };
+                        var meters = ToDeferred(this.DeferredMeters);
+                        if (meters > 0)
+                            request.DeferredDistance = Distance.FromMeters(meters);
+
+                        var secs = ToDeferred(this.DeferredSeconds);
+                        if (secs > 0)
+                            request.DeferredTime = TimeSpan.FromSeconds(secs);
+
+                        await this.manager.StartListener(request);
+                    }
+                    this.IsUpdating = this.manager.IsListening;
+                },
+                this.WhenAny(
+                    x => x.IsUpdating,
+                    x => x.DeferredMeters,
+                    x => x.DeferredSeconds,
+                    (u, m, s) =>
+                        u.GetValue() ||
+                        (
+                            ToDeferred(m.GetValue()) >= 0 &&
+                            ToDeferred(s.GetValue()) >= 0
+                        )
+                )
+            );
 
             this.RequestAccess = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -107,6 +129,8 @@ namespace Samples.Gps
         readonly ObservableAsPropertyHelper<string> listenerText;
         public string ListenerText => this.listenerText.Value;
 
+        [Reactive] public string DeferredMeters { get; set; }
+        [Reactive] public string DeferredSeconds { get; set; }
         [Reactive] public string Access { get; private set; }
         [Reactive] public bool IsUpdating { get; private set; }
         [Reactive] public double Latitude { get; private set; }
@@ -116,5 +140,17 @@ namespace Samples.Gps
         [Reactive] public double Heading { get; private set; }
         [Reactive] public double HeadingAccuracy { get; private set; }
         [Reactive] public double Speed { get; private set; }
+
+
+        static int ToDeferred(string value)
+        {
+            if (value.IsEmpty())
+                return 0;
+
+            if (Int32.TryParse(value, out int r))
+                return r;
+
+            return -1;
+        }
     }
 }
