@@ -16,6 +16,7 @@
                         <TextCell Text="Welcome" Command="{Binding Navigate}" CommandParameter="Nav/Welcome" />
                     </TableSection>
                     <TableSection>
+                        <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
                         <TextCell Text="BluetoothLE Central" Command="{Binding Navigate}" CommandParameter="Nav/BleCentral" />
                         <TextCell Text="BluetoothLE Peripherals" Command="{Binding Navigate}" CommandParameter="Nav/BlePeripherals" />
                         <TextCell Text="GPS" Command="{Binding Navigate}" CommandParameter="Nav/Gps"  />

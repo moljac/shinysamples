@@ -34,7 +34,7 @@ namespace Samples
                 this.Append("Speech", AccessState.Unknown, () => speech.RequestAccess().ToTask(CancellationToken.None));
 
             if (gps != null)
-                this.Append("GPS", gps.Status, () => gps.RequestAccess(true));
+                this.Append("GPS (Background)", gps.GetCurrentStatus(true), () => gps.RequestAccess(true));
 
             if (geofences != null)
                 this.Append("Geofences", geofences.Status, () => geofences.RequestAccess());
@@ -43,7 +43,7 @@ namespace Samples
                 this.Append("BluetoothLE Central", bluetooth.Status, () => bluetooth.RequestAccess().ToTask(CancellationToken.None));
 
             if (beacons != null)
-                this.Append("iBeacons", beacons.Status, () => beacons.RequestAccess(true));
+                this.Append("iBeacons (Monitoring)", beacons.GetCurrentStatus(true), () => beacons.RequestAccess(true));
         }
 
 

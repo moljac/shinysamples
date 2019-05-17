@@ -1,5 +1,6 @@
 ﻿using System;
 using Shiny;
+using Shiny.Beacons;
 using Shiny.BluetoothLE;
 using Shiny.Logging;
 using Shiny.Locations;
@@ -40,7 +41,7 @@ namespace Samples.ShinySetup
 
             // register all of the acr stuff you want to use
             builder.UseHttpTransfers<SampleAllDelegate>();
-            //builder.UseBeacons<SampleAllDelegate>();
+            builder.UseBeacons<SampleAllDelegate>();
 
             builder.RegisterBleAdapterState<SampleAllDelegate>();
             builder.RegisterBleStateRestore<SampleAllDelegate>();
