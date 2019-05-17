@@ -21,7 +21,9 @@
                     <DataTemplate>
                         <TextCell Text="{Binding Text}" Detail="{Binding Detail}">
                             <TextCell.ContextActions>
-                                <MenuItem Text="Remove" Command="{Binding PrimaryCommand}" />
+                                <MenuItem Text="Remove"
+                                          Command="{Binding PrimaryCommand}"
+                                          IsDestructive="True" />
                             </TextCell.ContextActions>
                         </TextCell>
                     </DataTemplate>

@@ -50,9 +50,9 @@ namespace Samples.Geofences
             });
             this.BindBusyCommand(this.SetCurrentLocation);
 
-            this.RequestAccess = ReactiveCommand.CreateFromTask(() =>
-                geofenceManager.RequestAccess()
-            );
+            //this.RequestAccess = ReactiveCommand.CreateFromTask(
+            //    async () => await geofenceManager.RequestAccess()
+            //);
 
             this.AddCnTower = ReactiveCommand.CreateFromTask(
                 _ => this.AddGeofence(
@@ -83,17 +83,18 @@ namespace Samples.Geofences
                     this.RadiusMeters
                 ),
                 this.WhenAny(
-                    x => x.AccessStatus,
+                    //x => x.AccessStatus,
                     x => x.Identifier,
                     x => x.RadiusMeters,
                     x => x.CenterLatitude,
                     x => x.CenterLongitude,
                     x => x.NotifyOnEntry,
                     x => x.NotifyOnExit,
-                    (access, id, rad, lat, lng, entry, exit) =>
+                    //(access, id, rad, lat, lng, entry, exit) =>
+                    (id, rad, lat, lng, entry, exit) =>
                     {
-                        if (access.GetValue() != AccessState.Available)
-                            return false;
+                        //if (access.GetValue() != AccessState.Available)
+                        //    return false;
 
                         if (id.GetValue().IsEmpty())
                             return false;

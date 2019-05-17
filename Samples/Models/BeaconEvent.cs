@@ -10,7 +10,7 @@ namespace Samples.Models
         [AutoIncrement]
         public int Id { get; set; }
         public string Identifier { get; set; }
-        public Guid Uuid { get; set; }
+        public string Uuid { get; set; }
         public int? Major { get; set; }
         public int? Minor { get; set; }
         public bool Entered { get; set; }

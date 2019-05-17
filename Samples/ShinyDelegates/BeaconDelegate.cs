@@ -16,11 +16,11 @@ namespace Samples.ShinyDelegates
             await this.services.Connection.InsertAsync(new BeaconEvent
             {
                 Identifier = region.Identifier,
-                Uuid = region.Uuid,
+                Uuid = region.Uuid.ToString(),
                 Major = region.Major,
                 Minor = region.Minor,
                 Entered = newStatus == BeaconRegionState.Entered,
-                Date = DateTime.UtcNow
+                Date = DateTime.Now
             });
             var notify = newStatus == BeaconRegionState.Entered
                 ? this.services.AppSettings.UseNotificationsBeaconRegionEntry
@@ -29,7 +29,7 @@ namespace Samples.ShinyDelegates
             if (notify)
             {
                 await this.services.SendNotification(
-                   "Beacon Region {newStatus}",
+                    $"Beacon Region {newStatus}",
                     $"{region.Identifier} - {region.Uuid}/{region.Major}/{region.Minor}"
                 );
             }

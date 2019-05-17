@@ -35,14 +35,26 @@ namespace Samples.Beacons
                         GetNumberAddress(this.Major),
                         GetNumberAddress(this.Minor)
                     )
+                    {
+                        NotifyOnEntry = this.NotifyOnEntry,
+                        NotifyOnExit = this.NotifyOnExit
+                    }
                 )),
                 this.WhenAny(
                     x => x.Identifier,
                     x => x.Uuid,
                     x => x.Major,
                     x => x.Minor,
-                    (idValue, uuidValue, majorValue, minorValue) =>
+                    x => x.NotifyOnEntry,
+                    x => x.NotifyOnExit,
+                    (idValue, uuidValue, majorValue, minorValue, entry, exit) =>
                     {
+                        if (this.ForMonitoring)
+                        {
+                            var atLeast1Notification = entry.GetValue() || exit.GetValue();
+                            if (!atLeast1Notification)
+                                return false;
+                        }
                         if (String.IsNullOrWhiteSpace(idValue.GetValue()))
                             return false;
 
@@ -67,8 +79,8 @@ namespace Samples.Beacons
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
-            var forMonitoring = parameters.GetValue<bool>("Monitoring");
-            this.Title = forMonitoring
+            this.ForMonitoring = parameters.GetValue<bool>("Monitoring");
+            this.Title = this.ForMonitoring
                 ? "Create Monitoring Region"
                 : "Create Ranging Region";
 
@@ -91,6 +103,9 @@ namespace Samples.Beacons
         [Reactive] public string Uuid { get; set; }
         [Reactive] public string Major { get; set; }
         [Reactive] public string Minor { get; set; }
+        [Reactive] public bool ForMonitoring { get; private set; }
+        [Reactive] public bool NotifyOnEntry { get; set; } = true;
+        [Reactive] public bool NotifyOnExit { get; set; } = true;
 
 
         static bool ValidateNumberAddress(string value)

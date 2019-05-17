@@ -32,7 +32,7 @@
                                                 <Span Text=" - " />
                                                 <Span Text="{Binding Identifier}" />
                                                 <Span Text=" @ " />
-                                                <Span Text="{Binding CreatedOn, StringFormat='{0:ddd MMM d, h:m:ss tt}'}" />
+                                                <Span Text="{Binding Date, StringFormat='{0:ddd MMM d, h:m:ss tt}'}" />
                                             </FormattedString.Spans>
                                         </FormattedString>
                                     </Label.FormattedText>
