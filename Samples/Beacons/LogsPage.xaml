@@ -18,8 +18,7 @@
                       RefreshCommand="{Binding Load}"
                       IsRefreshing="{Binding IsBusy}"
                       IsVisible="{Binding HasLogs}"
-                      IsPullToRefreshEnabled="True"
-                      RowHeight="200">
+                      IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
