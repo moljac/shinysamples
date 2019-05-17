@@ -7,7 +7,7 @@ using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
 using Shiny;
 using Shiny.Jobs;
-using Samples.ShinySetup;
+using Samples.ShinyDelegates;
 
 
 namespace Samples.Jobs
@@ -39,7 +39,7 @@ namespace Samples.Jobs
                     var job = new JobInfo
                     {
                         Identifier = this.JobName.Trim(),
-                        Type = typeof(SampleAllDelegate),
+                        Type = typeof(SampleJob),
                         Repeat = this.Repeat,
                         BatteryNotLow = this.BatteryNotLow,
                         DeviceCharging = this.DeviceCharging,

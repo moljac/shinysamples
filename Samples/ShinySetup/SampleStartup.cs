@@ -11,6 +11,7 @@ using Shiny.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Samples.Settings;
 using Samples.Logging;
+using Samples.ShinyDelegates;
 
 
 namespace Samples.ShinySetup
@@ -30,6 +31,7 @@ namespace Samples.ShinySetup
             // create your infrastructures
             // jobs, connectivity, power, filesystem, are installed automatically
             builder.AddSingleton<SampleSqliteConnection>();
+            builder.AddSingleton<CoreDelegateServices>();
 
             // startup tasks
             builder.RegisterStartupTask<StartupTask1>();
@@ -37,19 +39,19 @@ namespace Samples.ShinySetup
             builder.RegisterStartupTask<JobLoggerTask>();
 
             // configuration
-            builder.RegisterSettings<AppSettings>("AppSettings");
+            builder.RegisterSettings<IAppSettings, AppSettings>("AppSettings");
 
-            // register all of the acr stuff you want to use
-            builder.UseHttpTransfers<SampleAllDelegate>();
-            builder.UseBeacons<SampleAllDelegate>();
+            // register all of the shiny stuff you want to use
+            builder.UseHttpTransfers<HttpTransferDelegate>();
+            builder.UseBeacons<BeaconDelegate>();
 
-            builder.RegisterBleAdapterState<SampleAllDelegate>();
-            builder.RegisterBleStateRestore<SampleAllDelegate>();
+            builder.RegisterBleAdapterState<BleDelegates>();
+            builder.RegisterBleStateRestore<BleDelegates>();
             builder.UseBleCentral();
             builder.UseBlePeripherals();
 
-            builder.UseGeofencing<SampleAllDelegate>();
-            builder.UseGps<SampleAllDelegate>();
+            builder.UseGeofencing<LocationDelegates>();
+            builder.UseGps<LocationDelegates>();
             builder.UseNotifications();
             builder.UseSpeechRecognition();
 
