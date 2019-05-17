@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
-using Shiny;
-using Shiny.Beacons;
-using Acr.UserDialogs;
+using System.Reactive.Linq;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Acr.UserDialogs;
+using Shiny;
+using Shiny.Beacons;
 
 
 namespace Samples.Beacons
@@ -25,7 +27,18 @@ namespace Samples.Beacons
             this.dialogs = dialogs;
             this.beaconManager = beaconManager;
 
-            this.Clear = ReactiveCommand.Create(() => this.Beacons.Clear());
+            this.WhenAnyValue(x => x.Uuid)
+                .Select(x => !x.IsEmpty())
+                .ToPropertyEx(this, x => x.IsRegionSet);
+
+            this.WhenAnyValue(x => x.Major)
+                .Select(x => !x.IsEmpty())
+                .ToPropertyEx(this, x => x.IsMajorSet);
+
+            this.WhenAnyValue(x => x.Minor)
+                .Select(x => !x.IsEmpty())
+                .ToPropertyEx(this, x => x.IsMinorSet);
+
             this.SetRegion = navigator.NavigateCommand(
                 "CreateBeacon",
                 p => p
@@ -34,7 +47,7 @@ namespace Samples.Beacons
             );
             this.ScanToggle = ReactiveCommand.Create(() =>
             {
-                if (this.ScanText == "Scan")
+                if (this.scanner == null)
                     this.StartScan();
                 else
                     this.StopScan();
@@ -48,24 +61,12 @@ namespace Samples.Beacons
             if (currentRegion != null)
             {
                 this.region = currentRegion;
+                this.Uuid = currentRegion.Uuid.ToString();
+                this.Major = currentRegion.Major?.ToString();
+                this.Minor = currentRegion.Minor?.ToString();
 
-                var txt = "Scanning " + this.region.Uuid;
-                if (this.region.Minor != null)
-                    txt += $" (M: {this.region.Major}), m: {this.region.Minor})";
-
-                else if (this.region.Major != null)
-                    txt += $" (M: {this.region.Major})";
-
-                this.RegionText = txt;
-            }
-        }
-
-
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-            if (this.region != null)
                 this.StartScan();
+            }
         }
 
 
@@ -78,10 +79,14 @@ namespace Samples.Beacons
 
         public ICommand ScanToggle { get; }
         public ICommand SetRegion { get; }
-        public ICommand Clear { get; }
-
         public ObservableList<BeaconViewModel> Beacons { get; } = new ObservableList<BeaconViewModel>();
-        [Reactive] public string RegionText { get; private set; } = "Set Beacon Region";
+
+        public bool IsRegionSet { [ObservableAsProperty] get; }
+        public bool IsMajorSet { [ObservableAsProperty] get; }
+        public bool IsMinorSet { [ObservableAsProperty] get; }
+        [Reactive] public string Uuid { get; private set; }
+        [Reactive] public string Major { get; private set; }
+        [Reactive] public string Minor { get; private set; }
         [Reactive] public string ScanText { get; private set; } = "Scan";
 
 
@@ -90,32 +95,20 @@ namespace Samples.Beacons
             this.ScanText = "Stop Scan";
             this.Beacons.Clear();
 
-            // TODO
-            //this.beaconManager
-            //    .RequestAccess()
-            //    .Subscribe(result =>
-            //    {
-            //        if (!result)
-            //        {
-            //            this.dialogs.Alert("Permission denied");
-            //            return;
-            //        }
-            //        this.scanner = this.beaconManager
-            //            .WhenBeaconRanged(this.region)
-            //            .ObserveOn(RxApp.MainThreadScheduler)
-            //            .Subscribe(
-            //                x =>
-            //                {
-            //                    var beacon = this.Beacons.FirstOrDefault(y => x == y.Beacon);
-            //                    if (beacon == null)
-            //                        this.Beacons.Add(new BeaconViewModel(x));
-            //                    else
-            //                        beacon.Proximity = x.Proximity;
-            //                },
-            //                ex => this.dialogs.Alert(ex.ToString(), "Beacon Scan Error")
-            //            );
-            //    });
-
+            this.scanner = this.beaconManager
+                .WhenBeaconRanged(this.region)
+                .Synchronize()
+                .SubOnMainThread(
+                    x =>
+                    {
+                        var beacon = this.Beacons.FirstOrDefault(y => x.Equals(y.Beacon));
+                        if (beacon == null)
+                            this.Beacons.Add(new BeaconViewModel(x));
+                        else
+                            beacon.Proximity = x.Proximity;
+                    },
+                    ex => this.dialogs.Alert(ex.ToString(), "Beacon Scan Error")
+                );
         }
 
 
