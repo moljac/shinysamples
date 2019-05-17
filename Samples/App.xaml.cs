@@ -46,6 +46,7 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Gps.MainPage>("Gps");
 
             containerRegistry.RegisterForNavigation<Beacons.MainPage>("Beacons");
+            containerRegistry.RegisterForNavigation<Beacons.CreatePage>("CreateBeacon");
             containerRegistry.RegisterForNavigation<BluetoothLE.AdapterPage>("BleCentral");
             containerRegistry.RegisterForNavigation<BluetoothLE.PeripheralPage>("Peripheral");
             containerRegistry.RegisterForNavigation<BlePeripherals.MainPage>("BlePeripherals");

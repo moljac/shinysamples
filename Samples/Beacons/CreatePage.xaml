@@ -4,29 +4,26 @@
              x:Class="Samples.Beacons.CreatePage"
              Style="{StaticResource ContentPage}"
              Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Create" Command="{Binding Create}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <TableView Intent="Form" Grid.Row="0">
+            <TableSection>
+                <EntryCell Label="Identifier" Text="{Binding Identifier}" />
+                <EntryCell Label="Uuid" Text="{Binding Uuid}" Keyboard="Text" />
+                <EntryCell Label="Major" Text="{Binding Major}" Keyboard="Numeric" />
+                <EntryCell Label="Minor"
+                            Text="{Binding Minor}"
+                            Keyboard="Numeric"
+                            IsEnabled="{Binding IsMajorSet}" />
+            </TableSection>
 
-            <TableView Intent="Form" Grid.Row="0">
-                <TableSection>
-                    <EntryCell Label="Identifier" Text="{Binding Identifier}" />
-                    <EntryCell Label="Uuid" Text="{Binding Uuid}" Keyboard="Text" />
-                    <EntryCell Label="Major" Text="{Binding Major}" Keyboard="Numeric" />
-                    <EntryCell Label="Minor" Text="{Binding Minor}" Keyboard="Numeric" />
-                </TableSection>
-
-                <TableSection>
-                    <TextCell Text="Estimote Defaults" Command="{Binding EstimoteDefaults}" />
-                </TableSection>
-            </TableView>
-
-            <Button Text="Create"
-                    Command="{Binding Create}"
-                    Grid.Row="1" />
-        </Grid>
+            <TableSection>
+                <TextCell Text="Estimote Defaults" Command="{Binding EstimoteDefaults}" />
+            </TableSection>
+        </TableView>
     </ContentPage.Content>
 </ContentPage>

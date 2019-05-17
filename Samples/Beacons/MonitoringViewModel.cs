@@ -24,7 +24,7 @@ namespace Samples.Beacons
             this.beaconManager = beaconManager;
 
             this.Add = navigator.NavigateCommand(
-                nameof(CreatePage),
+                "CreateBeacon",
                 p => p.Add("Monitoring", true)
             );
 

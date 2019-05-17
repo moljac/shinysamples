@@ -27,7 +27,7 @@ namespace Samples.Beacons
 
             this.Clear = ReactiveCommand.Create(() => this.Beacons.Clear());
             this.SetRegion = navigator.NavigateCommand(
-                nameof(CreatePage),
+                "CreateBeacon",
                 p => p
                     .Set(nameof(BeaconRegion), this.region)
                     .Set("IsRanging", true)
