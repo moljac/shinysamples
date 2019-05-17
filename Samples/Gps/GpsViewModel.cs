@@ -21,7 +21,9 @@ namespace Samples.Gps
         {
             this.manager = manager;
             this.IsUpdating = this.manager.IsListening;
-            this.Access = this.manager.Status.ToString();
+
+            this.WhenAnyValue(x => x.UseBackground)
+                .Subscribe(x => this.Access = this.manager.GetCurrentStatus(this.UseBackground).ToString());
 
             this.listenerText = this
                 .WhenAnyValue(x => x.IsUpdating)
@@ -100,7 +102,7 @@ namespace Samples.Gps
 
             this.RequestAccess = ReactiveCommand.CreateFromTask(async () =>
             {
-                var access = await this.manager.RequestAccess(true);
+                var access = await this.manager.RequestAccess(this.UseBackground);
                 this.Access = access.ToString();
             });
             this.BindBusyCommand(this.RequestAccess);
