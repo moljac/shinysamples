@@ -24,10 +24,9 @@ namespace Samples.Gps
             this.WhenAnyValue(x => x.UseBackground)
                 .Subscribe(x => this.Access = this.manager.GetCurrentStatus(this.UseBackground).ToString());
 
-            this.listenerText = this
-                .WhenAnyValue(x => x.IsUpdating)
+            this.WhenAnyValue(x => x.IsUpdating)
                 .Select(x => x ? "Stop Listening" : "Start Updating")
-                .ToProperty(this, x => x.ListenerText);
+                .ToPropertyEx(this, x => x.ListenerText);
 
             this.GetCurrentPosition = ReactiveCommand.CreateFromTask(async _ =>
             {
@@ -141,8 +140,7 @@ namespace Samples.Gps
         public IReactiveCommand RequestAccess { get; }
 
 
-        readonly ObservableAsPropertyHelper<string> listenerText;
-        public string ListenerText => this.listenerText.Value;
+        public string ListenerText { [ObservableAsProperty] get; }
 
         [Reactive] public bool UseBackground { get; set; } = true;
         [Reactive] public GpsPriority Priority { get; set; } = GpsPriority.Normal;

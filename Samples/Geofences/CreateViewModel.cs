@@ -6,9 +6,9 @@ using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
-using Shiny.Locations;
-using Shiny;
 using Acr.UserDialogs;
+using Shiny;
+using Shiny.Locations;
 
 
 namespace Samples.Geofences
@@ -38,6 +38,10 @@ namespace Samples.Geofences
                 (entry, exit) => entry.GetValue() || exit.GetValue()
             );
 
+            geofenceManager
+                .WhenAccessStatusChanged()
+                .ToPropertyEx(this, x => x.AccessStatus);
+
             this.SetCurrentLocation = ReactiveCommand.CreateFromTask(async ct =>
             {
                 var loc = await this.gpsManager.GetLastReading().ToTask(ct);
@@ -45,6 +49,10 @@ namespace Samples.Geofences
                 this.CenterLongitude = loc?.Position?.Longitude ?? 0;
             });
             this.BindBusyCommand(this.SetCurrentLocation);
+
+            this.RequestAccess = ReactiveCommand.CreateFromTask(() =>
+                geofenceManager.RequestAccess()
+            );
 
             this.AddCnTower = ReactiveCommand.CreateFromTask(
                 _ => this.AddGeofence(
@@ -75,15 +83,19 @@ namespace Samples.Geofences
                     this.RadiusMeters
                 ),
                 this.WhenAny(
+                    x => x.AccessStatus,
                     x => x.Identifier,
                     x => x.RadiusMeters,
                     x => x.CenterLatitude,
                     x => x.CenterLongitude,
                     x => x.NotifyOnEntry,
                     x => x.NotifyOnExit,
-                    (id, rad, lat, lng, entry, exit) =>
+                    (access, id, rad, lat, lng, entry, exit) =>
                     {
-                        if (String.IsNullOrWhiteSpace(id.GetValue()))
+                        if (access.GetValue() != AccessState.Available)
+                            return false;
+
+                        if (id.GetValue().IsEmpty())
                             return false;
 
                         var radius = rad.GetValue();
@@ -108,11 +120,13 @@ namespace Samples.Geofences
         }
 
 
+        public ICommand RequestAccess { get; }
         public ICommand CreateGeofence { get; }
         public ReactiveCommand<Unit, Unit> SetCurrentLocation { get; }
         public ICommand AddCnTower { get; }
         public ICommand AddAppleHQ { get; }
 
+        public AccessState AccessStatus { [ObservableAsProperty] get; }
         [Reactive] public string Identifier { get; set; }
         [Reactive] public double CenterLatitude { get; set; }
         [Reactive] public double CenterLongitude { get; set; }
@@ -120,7 +134,6 @@ namespace Samples.Geofences
         [Reactive] public bool SingleUse { get; set; }
         [Reactive] public bool NotifyOnEntry { get; set; } = true;
         [Reactive] public bool NotifyOnExit { get; set; } = true;
-
 
 
         async Task AddGeofence(string id, double lat, double lng, double distance)

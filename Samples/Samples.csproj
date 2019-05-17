@@ -16,13 +16,13 @@
         <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.0.0" />
         <PackageReference Include="Prism.Autofac.Forms" Version="7.1.0.431" />
         <PackageReference Include="ReactiveUI.Fody" Version="9.15.1" />
-        <PackageReference Include="Shiny.Beacons" Version="1.0.0.168" />
-        <PackageReference Include="Shiny.BluetoothLE" Version="1.0.0.168" />
-        <PackageReference Include="Shiny.Locations" Version="1.0.0.168" />
-        <PackageReference Include="Shiny.Net.Http" Version="1.0.0.168" />
-        <PackageReference Include="Shiny.Notifications" Version="1.0.0.168" />
-        <PackageReference Include="Shiny.Sensors" Version="1.0.0.168" />
-        <PackageReference Include="Shiny.SpeechRecognition" Version="1.0.0.168" />
+        <PackageReference Include="Shiny.Beacons" Version="1.0.0.169" />
+        <PackageReference Include="Shiny.BluetoothLE" Version="1.0.0.169" />
+        <PackageReference Include="Shiny.Locations" Version="1.0.0.169" />
+        <PackageReference Include="Shiny.Net.Http" Version="1.0.0.169" />
+        <PackageReference Include="Shiny.Notifications" Version="1.0.0.169" />
+        <PackageReference Include="Shiny.Sensors" Version="1.0.0.169" />
+        <PackageReference Include="Shiny.SpeechRecognition" Version="1.0.0.169" />
         <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
         <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
         <PackageReference Include="Acr.UserDialogs" Version="7.0.4" />
