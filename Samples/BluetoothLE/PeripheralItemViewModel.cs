@@ -21,7 +21,7 @@ namespace Samples.BluetoothLE
         [Reactive] public string Name { get; private set; }
         [Reactive] public bool IsConnected { get; private set; }
         [Reactive] public int Rssi { get; private set; }
-        [Reactive] public bool IsConnectable { get; private set; }
+        [Reactive] public string Connectable { get; private set; }
         [Reactive] public int ServiceCount { get; private set; }
         //[Reactive] public string ManufacturerData { get; private set; }
         [Reactive] public string LocalName { get; private set; }
@@ -37,7 +37,7 @@ namespace Samples.BluetoothLE
 
                 var ad = result.AdvertisementData;
                 this.ServiceCount = ad.ServiceUuids?.Length ?? 0;
-                this.IsConnectable = ad.IsConnectable;
+                this.Connectable = ad?.IsConnectable?.ToString() ?? "Unknown";
                 this.LocalName = ad.LocalName;
                 this.TxPower = ad.TxPower;
                 //this.ManufacturerData = ad.ManufacturerData == null
