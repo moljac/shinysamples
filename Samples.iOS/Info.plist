@@ -26,6 +26,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>fontawesome.otf</string>
+		<string>material.ttf</string>
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>9.0</string>

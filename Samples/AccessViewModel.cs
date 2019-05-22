@@ -31,7 +31,7 @@ namespace Samples
                 this.Append("Notifications", AccessState.Unknown, () => notifications.RequestAccess());
 
             if (speech != null)
-                this.Append("Speech", AccessState.Unknown, () => speech.RequestAccess().ToTask(CancellationToken.None));
+                this.Append("Speech", AccessState.Unknown, () => speech.RequestAccess());
 
             if (gps != null)
                 this.Append("GPS (Background)", gps.GetCurrentStatus(true), () => gps.RequestAccess(true));

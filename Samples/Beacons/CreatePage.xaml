@@ -7,6 +7,12 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Create" Command="{Binding Create}" />
+        <!--<ToolbarItem Command="{Binding Create}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="\\ue3ba"
+                                 FontFamily="{StaticResource MaterialIcons}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>-->
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

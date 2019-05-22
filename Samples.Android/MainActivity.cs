@@ -26,7 +26,7 @@ namespace Samples.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            UserDialogs.Init(() => (Activity)Forms.Context);
+            UserDialogs.Init(() => this);
 
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);

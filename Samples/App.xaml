@@ -27,6 +27,12 @@
                 <On Platform="UWP" Value="/Assets/fontawesome.otf#Font Awesome 5 Free" />
             </OnPlatform>
 
+            <OnPlatform x:TypeArguments="x:String" x:Key="MaterialIcons">
+                <On Platform="Android" Value="material.ttf#Regular" />
+                <On Platform="iOS" Value="Material Icons-Regular" />
+                <On Platform="UWP" Value="/Assets/material.ttf#Font Awesome 5 Free" />
+            </OnPlatform>
+
             <Style x:Key="ContentPage" TargetType="ContentPage">
                 <Setter Property="ios:Page.UseSafeArea" Value="True"/>
                 <Setter Property="ios:Page.LargeTitleDisplay" Value="Always" />

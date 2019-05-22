@@ -7,7 +7,7 @@ using ReactiveUI;
 using Acr.UserDialogs;
 using Shiny;
 using Shiny.Logging;
-using System.Reactive;
+
 
 namespace Samples
 {
