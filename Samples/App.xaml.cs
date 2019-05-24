@@ -96,12 +96,6 @@ namespace Samples
         //            .As(serviceType)
         //            .SingleInstance()
         //    );
-        //    builder
-        //        .RegisterType<GlobalExceptionHandler>()
-        //        .As<IStartable>()
-        //        .AutoActivate()
-        //        .SingleInstance();
-
         //    return new AutofacContainerExtension(builder);
         }
     }

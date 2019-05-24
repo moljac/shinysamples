@@ -13,7 +13,8 @@ using Samples.Settings;
 using Samples.Logging;
 using Samples.ShinyDelegates;
 using Acr.UserDialogs.Forms;
-using Prism.DryIoc;
+//using Prism.DryIoc;
+
 
 namespace Samples.ShinySetup
 {
