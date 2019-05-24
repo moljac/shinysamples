@@ -67,26 +67,29 @@ namespace Samples.Beacons
         [Reactive] public IList<CommandItem> Regions { get; private set; }
 
 
-        public override void OnAppearing()
+        public override void Initialize(INavigationParameters parameters)
         {
-            base.OnAppearing();
+            base.Initialize(parameters);
             this.Load.Execute(null);
         }
 
 
-        public override void Initialize(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            base.Initialize(parameters);
+            base.OnNavigatedTo(parameters);
             try
             {
                 var newRegion = parameters.GetValue<BeaconRegion>(nameof(BeaconRegion));
                 if (newRegion != null)
-                    this.beaconManager.StartMonitoring(newRegion);
+                {
+                    await this.beaconManager.StartMonitoring(newRegion);
+                    this.Load.Execute(null);
+                }
             }
             catch (Exception ex)
             {
                 Log.Write(ex);
-                this.dialogs.Alert(ex.ToString());
+                await this.dialogs.Alert(ex.ToString());
             }
         }
     }

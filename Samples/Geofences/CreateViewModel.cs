@@ -140,7 +140,11 @@ namespace Samples.Geofences
         async Task AddGeofence(string id, double lat, double lng, double distance)
         {
             var access = await this.dialogs.RequestAccess(this.geofenceManager.RequestAccess);
-            if (access)
+            if (!access)
+            {
+                await this.dialogs.Alert("Invalid access " + access);
+            }
+            else
             {
                 await this.geofenceManager.StartMonitoring(new GeofenceRegion(
                     id,

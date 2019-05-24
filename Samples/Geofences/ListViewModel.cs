@@ -61,6 +61,7 @@ namespace Samples.Geofences
             await this.LoadRegions();
         }
 
+
         async Task LoadRegions()
         {
             var geofences = await this.geofenceManager.GetMonitorRegions();
@@ -90,7 +91,7 @@ namespace Samples.Geofences
                         if (status != null)
                         {
                             await Task.Delay(2000);
-                            this.dialogs.Alert($"{region.Identifier} status is {status}");
+                            await this.dialogs.Alert($"{region.Identifier} status is {status}");
                         }
                     })
                 })

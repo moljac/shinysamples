@@ -55,7 +55,7 @@ namespace Samples.Beacons
         }
 
 
-        public override void Initialize(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
             var currentRegion = parameters.GetValue<BeaconRegion>(nameof(BeaconRegion));
