@@ -3,6 +3,7 @@ using Shiny;
 using Android.App;
 using Android.Runtime;
 using Samples.ShinySetup;
+using Plugin.CurrentActivity;
 
 
 namespace Samples.Droid
@@ -20,6 +21,7 @@ namespace Samples.Droid
         {
             base.OnCreate();
             AndroidShinyHost.Init(this, new SampleStartup());
+            CrossCurrentActivity.Current.Init(this);
         }
     }
 }

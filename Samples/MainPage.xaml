@@ -27,6 +27,7 @@
                         <TextCell Text="Speech Recognition" Command="{Binding Navigate}" CommandParameter="Nav/SpeechRecognition"  />
                     </TableSection>
                     <TableSection>
+                        <TextCell Text="Camera" Command="{Binding Navigate}" CommandParameter="Nav/CameraPage" />
                         <TextCell Text="All Sensors" Command="{Binding Navigate}" CommandParameter="Nav/Sensors" />
                         <TextCell Text="Compass" Command="{Binding Navigate}" CommandParameter="Nav/Compass" />
                     </TableSection>

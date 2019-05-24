@@ -35,6 +35,8 @@ namespace Samples
 #if DEBUG
             Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
 #endif
+            containerRegistry.RegisterForNavigation<Integration.CameraPage>();
+
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<MainPage>("Main");
             containerRegistry.RegisterForNavigation<WelcomePage>("Welcome");

@@ -42,6 +42,9 @@ namespace Samples.Droid
 
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-            => AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        {
+            AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
