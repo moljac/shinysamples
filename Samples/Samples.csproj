@@ -11,7 +11,6 @@
 
     <ItemGroup>
         <PackageReference Include="Acr.UserDialogs.Forms" Version="1.0.0.7-beta" />
-        <PackageReference Include="Autofac" Version="4.9.2" />
         <PackageReference Include="Humanizer" Version="2.6.2" />
         <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.0.0" />
         <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.0.0" />
