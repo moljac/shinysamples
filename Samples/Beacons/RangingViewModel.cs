@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Shiny;
 using Shiny.Beacons;
 
@@ -55,8 +55,9 @@ namespace Samples.Beacons
         }
 
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
+            base.OnNavigatedTo(parameters);
             var currentRegion = parameters.GetValue<BeaconRegion>(nameof(BeaconRegion));
             if (currentRegion != null)
             {

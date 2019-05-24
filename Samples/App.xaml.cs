@@ -1,14 +1,14 @@
 ﻿using System;
 using Shiny;
 using Acr.UserDialogs;
-using Autofac;
 using Prism;
-using Prism.Autofac;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Samples.Infrastructure;
+using Prism.DryIoc;
+using DryIoc;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -17,10 +17,6 @@ namespace Samples
 {
     public partial class App : PrismApplication
     {
-        public App() : base(null) => this.InitializeComponent();
-        public App(IPlatformInitializer initializer) : base(initializer) { }
-
-
         protected override async void OnInitialized()
         {
             this.InitializeComponent();
@@ -39,7 +35,6 @@ namespace Samples
 #if DEBUG
             Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
 #endif
-            containerRegistry.RegisterInstance<IUserDialogs>(UserDialogs.Instance);
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<MainPage>("Main");
             containerRegistry.RegisterForNavigation<WelcomePage>("Welcome");
@@ -76,22 +71,38 @@ namespace Samples
         }
 
 
+
         protected override IContainerExtension CreateContainerExtension()
         {
-            var builder = new ContainerBuilder();
-            ShinyHost.Populate((serviceType, func, lifetime) =>
-                builder
-                    .Register(_ => func())
-                    .As(serviceType)
-                    .SingleInstance()
+            var container = new Container(Rules
+                .Default
+                .WithAutoConcreteTypeResolution()
+                .With(Made.Of(FactoryMethod.ConstructorWithResolvableArguments))
+                .WithoutThrowOnRegisteringDisposableTransient()
+                .WithDefaultIfAlreadyRegistered(IfAlreadyRegistered.Replace)
             );
-            builder
-                .RegisterType<GlobalExceptionHandler>()
-                .As<IStartable>()
-                .AutoActivate()
-                .SingleInstance();
+            ShinyHost.Populate((serviceType, func, lifetime) =>
+                container.RegisterDelegate(
+                    serviceType,
+                    _ => func(),
+                    Reuse.Singleton // HACK: I know everything is singleton
+                )
+            );
+            return new DryIocContainerExtension(container);
+        //    var builder = new ContainerBuilder();
+        //    ShinyHost.Populate((serviceType, func, lifetime) =>
+        //        builder
+        //            .Register(_ => func())
+        //            .As(serviceType)
+        //            .SingleInstance()
+        //    );
+        //    builder
+        //        .RegisterType<GlobalExceptionHandler>()
+        //        .As<IStartable>()
+        //        .AutoActivate()
+        //        .SingleInstance();
 
-            return new AutofacContainerExtension(builder);
+        //    return new AutofacContainerExtension(builder);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.SqliteGenerator;

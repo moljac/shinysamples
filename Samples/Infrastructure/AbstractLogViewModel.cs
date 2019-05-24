@@ -4,7 +4,8 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
+using Prism.Navigation;
 using ReactiveUI;
 using Shiny;
 
@@ -42,9 +43,9 @@ namespace Samples.Infrastructure
         public bool HasLogs => this.hasLogs.Value;
 
 
-        protected override async void OnStart()
+        public override async void Initialize(INavigationParameters parameters)
         {
-            base.OnStart();
+            base.Initialize(parameters);
             await this.Load.Execute();
         }
 
@@ -58,7 +59,7 @@ namespace Samples.Infrastructure
 
         protected virtual async Task DoClear()
         {
-            var confirm = await this.Dialogs.ConfirmAsync("Clear Logs?");
+            var confirm = await this.Dialogs.Confirm("Clear Logs?");
             if (confirm)
             {
                 await this.ClearLogs();

@@ -12,7 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Samples.Settings;
 using Samples.Logging;
 using Samples.ShinyDelegates;
-
+using Acr.UserDialogs.Forms;
+using Prism.DryIoc;
 
 namespace Samples.ShinySetup
 {
@@ -32,6 +33,8 @@ namespace Samples.ShinySetup
             // jobs, connectivity, power, filesystem, are installed automatically
             builder.AddSingleton<SampleSqliteConnection>();
             builder.AddSingleton<CoreDelegateServices>();
+            builder.RegisterStartupTask<GlobalExceptionHandler>();
+            builder.AddSingleton<IUserDialogs, UserDialogs>();
 
             // startup tasks
             builder.RegisterStartupTask<StartupTask1>();
@@ -63,5 +66,9 @@ namespace Samples.ShinySetup
             builder.UsePedometer();
             builder.UseProximitySensor();
         }
+
+
+        //public override IServiceProvider CreateServiceProvider(IServiceCollection services)
+        //    => PrismContainerExtension.Current.CreateServiceProvider(services);
     }
 }

@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using Shiny;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Shiny.BluetoothLE.Central;
 using ReactiveUI.Fody.Helpers;
 
@@ -42,7 +42,7 @@ namespace Samples.BluetoothLE
         {
             var cfg = new ActionSheetConfig()
                 .SetTitle($"{this.Description} - {this.Uuid}")
-                .SetCancel();
+                .AddCancel();
 
             if (this.Characteristic.CanWriteWithResponse())
                 cfg.Add("Write With Response", () => this.DoWrite(true));
@@ -61,37 +61,39 @@ namespace Samples.BluetoothLE
                 var txt = this.Characteristic.IsNotifying ? "Stop Notifying" : "Notify";
                 cfg.Add(txt, this.ToggleNotify);
             }
-            if (cfg.Options.Any())
-                this.dialogs.ActionSheet(cfg.SetCancel());
+            if (cfg.Items.Any())
+                this.dialogs.ActionSheet(cfg.AddCancel());
         }
 
 
         async void SendBlob()
         {
-            var useReliableWrite = await this.dialogs.ConfirmAsync(new ConfirmConfig()
+            var useReliableWrite = await this.dialogs.Confirm(new ConfirmConfig
+                {
+                    Title = "Confirm",
+                    Message = "Use reliable write transaction?"
+                }
                 .UseYesNo()
-                .SetTitle("Confirm")
-                .SetMessage("Use reliable write transaction?")
             );
             var cts = new CancellationTokenSource();
             var bytes = Encoding.UTF8.GetBytes(RandomString(5000));
-            var dlg = this.dialogs.Loading("Sending Blob", () => cts.Cancel(), "Cancel");
+            //var dlg = this.dialogs.Loading("Sending Blob", () => cts.Cancel(), "Cancel");
             var sw = new Stopwatch();
             sw.Start();
 
             var sub = this.Characteristic
                 .BlobWrite(bytes, useReliableWrite)
                 .Subscribe(
-                    s => dlg.Title = $"Sending Blob - Sent {s.Position} of {s.TotalLength} bytes",
+                    //s => dlg.Title = $"Sending Blob - Sent {s.Position} of {s.TotalLength} bytes",
                     ex =>
                     {
-                        dlg.Dispose();
+                        //dlg.Dispose();
                         this.dialogs.Toast("Failed writing blob - " + ex);
                         sw.Stop();
                     },
                     () =>
                     {
-                        dlg.Dispose();
+                        //dlg.Dispose();
                         sw.Stop();
 
                         var pre = useReliableWrite ? "reliable write" : "write";
@@ -105,13 +107,12 @@ namespace Samples.BluetoothLE
 
         async void DoWrite(bool withResponse)
         {
-            var utf8 = await this.dialogs.ConfirmAsync("Write value from UTF8 or HEX?", okText: "UTF8", cancelText: "HEX");
-            var result = await this.dialogs.PromptAsync("Please enter a write value", this.Description);
+            var utf8 = await this.dialogs.Confirm("Write value from UTF8 or HEX?", okText: "UTF8", cancelText: "HEX");
+            var result = await this.dialogs.Prompt("Please enter a write value", this.Description);
 
-            if (result.Ok && !String.IsNullOrWhiteSpace(result.Text))
+            if (result.Ok && !String.IsNullOrWhiteSpace(result.Value))
             {
-                var v = result.Text.Trim();
-                var bytes = utf8 ? Encoding.UTF8.GetBytes(v) : v.FromHex();
+                var bytes = utf8 ? Encoding.UTF8.GetBytes(result.Value) : result.Value.FromHex();
                 if (withResponse)
                 {
                     this.Characteristic
@@ -146,7 +147,7 @@ namespace Samples.BluetoothLE
             else
             {
                 this.IsNotifying = true;
-                var utf8 = await this.dialogs.ConfirmAsync(
+                var utf8 = await this.dialogs.Confirm(
                     "Display Value as UTF8 or HEX?",
                     okText: "UTF8",
                     cancelText: "HEX"
@@ -163,7 +164,7 @@ namespace Samples.BluetoothLE
 
         async void DoRead()
         {
-            var utf8 = await this.dialogs.ConfirmAsync(
+            var utf8 = await this.dialogs.Confirm(
                 "Display Value as UTF8 or HEX?",
                 okText: "UTF8",
                 cancelText: "HEX"

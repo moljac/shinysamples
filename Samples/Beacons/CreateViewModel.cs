@@ -77,7 +77,7 @@ namespace Samples.Beacons
         }
 
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             this.ForMonitoring = parameters.GetValue<bool>("Monitoring");
             this.Title = this.ForMonitoring

@@ -6,7 +6,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Humanizer;
 using Prism.Navigation;
 using ReactiveUI;

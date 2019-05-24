@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Samples.Infrastructure;
 using Samples.Models;

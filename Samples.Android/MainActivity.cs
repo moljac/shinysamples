@@ -1,6 +1,5 @@
 ﻿using System;
 using Shiny;
-using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
@@ -26,11 +25,11 @@ namespace Samples.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            UserDialogs.Init(() => this);
 
             base.OnCreate(savedInstanceState);
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             this.LoadApplication(new App());
         }
 

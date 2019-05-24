@@ -3,14 +3,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Samples.Models;
 using Samples.Infrastructure;
 using Shiny;
 using Shiny.Jobs;
 using Shiny.Infrastructure;
-
+using Prism.Navigation;
 
 namespace Samples.Jobs
 {
@@ -32,9 +32,9 @@ namespace Samples.Jobs
         }
 
 
-        protected override void OnStart()
+        public override void Initialize(INavigationParameters parameters)
         {
-            base.OnStart();
+            base.Initialize(parameters);
             this.jobManager.JobStarted += this.OnJobStarted;
             this.jobManager.JobFinished += this.OnJobFinished;
         }

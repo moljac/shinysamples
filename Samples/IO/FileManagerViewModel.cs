@@ -4,8 +4,9 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Humanizer;
+using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
@@ -50,7 +51,7 @@ namespace Samples.IO
 
             this.Select = ReactiveCommand.Create<FileEntryViewModel>(entry =>
             {
-                var cfg = new ActionSheetConfig().SetCancel();
+                var cfg = new ActionSheetConfig().AddCancel();
 
                 if (entry.IsDirectory)
                 {
@@ -60,10 +61,10 @@ namespace Samples.IO
                 {
                     cfg.Add("Copy", () =>
                     {
-                        var progress = dialogs.Progress(new ProgressDialogConfig
-                        {
-                            Title = "Copying File"
-                        });
+                        //var progress = dialogs.Progress(new ProgressDialogConfig
+                        //{
+                        //    Title = "Copying File"
+                        //});
 
                         var fn = Path.GetFileNameWithoutExtension(entry.Entry.Name);
                         var ext = Path.GetExtension(entry.Entry.Name);
@@ -74,8 +75,8 @@ namespace Samples.IO
                             .CopyProgress(target, true)
                             .Subscribe(p =>
                             {
-                                progress.Title = "Copying File - Seconds Left: " + p.TimeRemaining.TotalSeconds;
-                                progress.PercentComplete = p.PercentComplete;
+                                //progress.Title = "Copying File - Seconds Left: " + p.TimeRemaining.TotalSeconds;
+                                //progress.PercentComplete = p.PercentComplete;
                             });
                     });
                 }
@@ -94,8 +95,9 @@ namespace Samples.IO
         }
 
 
-        protected override void OnStart()
+        public override void Initialize(INavigationParameters parameters)
         {
+            base.Initialize(parameters);
             this.CurrentPath = this.fileSystem.AppData.FullName;
         }
 
@@ -112,7 +114,7 @@ namespace Samples.IO
 
         async void Confirm(string message, Action action)
         {
-            var result = await this.dialogs.ConfirmAsync(message, null, "Yes", "No");
+            var result = await this.dialogs.Confirm(message, null, "Yes", "No");
             if (result)
                 action();
         }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reactive.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -51,7 +51,7 @@ namespace Samples.Beacons
 
             this.StopAllMonitoring = ReactiveCommand.CreateFromTask(async () =>
             {
-                var result = await dialogs.ConfirmAsync("Are you sure you wish to stop all monitoring");
+                var result = await dialogs.Confirm("Are you sure you wish to stop all monitoring");
                 if (result)
                 {
                     await this.beaconManager.StopAllMonitoring();
@@ -74,8 +74,9 @@ namespace Samples.Beacons
         }
 
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
+            base.Initialize(parameters);
             try
             {
                 var newRegion = parameters.GetValue<BeaconRegion>(nameof(BeaconRegion));

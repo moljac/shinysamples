@@ -1,12 +1,13 @@
 ﻿using System;
-using Acr.UserDialogs;
-using Autofac;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
+using Shiny;
 using Shiny.Logging;
+
 
 namespace Samples
 {
-    public class GlobalExceptionHandler : IObserver<Exception>, IStartable
+    public class GlobalExceptionHandler : IObserver<Exception>, IStartupTask
     {
         readonly IUserDialogs dialogs;
         public GlobalExceptionHandler(IUserDialogs dialogs) => this.dialogs = dialogs;

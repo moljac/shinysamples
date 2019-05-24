@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
-using ReactiveUI;
+using Acr.UserDialogs.Forms;
 using Samples.Infrastructure;
 using Samples.Models;
 

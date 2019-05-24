@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -67,34 +67,35 @@ namespace Samples.BluetoothLE
                 {
                     if (!centralManager.Features.HasFlag(BleFeatures.MtuRequests))
                     {
-                        dialogs.Alert("MTU Request not supported on this platform");
+                        await dialogs.Alert("MTU Request not supported on this platform");
                     }
                     else
                     {
-                        var result = await dialogs.PromptAsync(new PromptConfig()
-                            .SetTitle("MTU Request")
-                            .SetMessage("Range 20-512")
-                            .SetInputMode(InputType.Number)
-                            .SetOnTextChanged(args =>
-                            {
-                                var len = args.Value?.Length ?? 0;
-                                if (len > 0)
-                                {
-                                    if (len > 3)
-                                    {
-                                        args.Value = args.Value.Substring(0, 3);
-                                    }
-                                    else
-                                    {
-                                        var value = Int32.Parse(args.Value);
-                                        args.IsValid = value >= 20 && value <= 512;
-                                    }
-                                }
-                            })
-                        );
+                        var result = await dialogs.Prompt("Range 20-512", "MTU Request");
+                            //.SetTitle("MTU Request")
+                            //.SetMessage("Range 20-512")
+                        //    .SetInputMode(InputType.Number)
+                        //    .SetOnTextChanged(args =>
+                        //    {
+                        //        var len = args.Value?.Length ?? 0;
+                        //        if (len > 0)
+                        //        {
+                        //            if (len > 3)
+                        //            {
+                        //                args.Value = args.Value.Substring(0, 3);
+                        //            }
+                        //            else
+                        //            {
+                        //                var value = Int32.Parse(args.Value);
+                        //                args.IsValid = value >= 20 && value <= 512;
+                        //            }
+                        //        }
+                        //    })
+                        //);
                         if (result.Ok)
                         {
-                            var actual = await this.peripheral.RequestMtu(Int32.Parse(result.Text));
+
+                            var actual = await this.peripheral.RequestMtu(Int32.Parse(result.Value));
                             dialogs.Toast("MTU Changed to " + actual);
                         }
                     }

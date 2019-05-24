@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Shiny.Locations;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
+using Shiny.Locations;
+
 
 namespace Samples.Gps
 {
@@ -36,20 +37,20 @@ namespace Samples.Gps
 
                 var reading = await this.manager.GetLastReading();
                 if (reading == null)
-                    dialogs.Alert("Could not getting GPS coordinates");
+                    await dialogs.Alert("Could not getting GPS coordinates");
                 else
                     this.SetValues(reading);
             });
             this.BindBusyCommand(this.GetCurrentPosition);
 
-            this.SelectPriority = ReactiveCommand.Create(() => dialogs.ActionSheet(
-                new ActionSheetConfig()
-                    .SetTitle("Select Priority/Desired Accuracy")
-                    .Add("Highest", () => this.Priority = GpsPriority.Highest)
-                    .Add("Normal", () => this.Priority = GpsPriority.Normal)
-                    .Add("Low", () => this.Priority = GpsPriority.Low)
-                    .SetCancel()
-            ));
+            //this.SelectPriority = ReactiveCommand.Create(() => dialogs.ActionSheet(
+            //    new ActionSheetConfig()
+            //        //.SetTitle("Select Priority/Desired Accuracy")
+            //        .Add("Highest", () => this.Priority = GpsPriority.Highest)
+            //        .Add("Normal", () => this.Priority = GpsPriority.Normal)
+            //        .Add("Low", () => this.Priority = GpsPriority.Low)
+            //        .SetCancel()
+            //));
 
             this.ToggleUpdates = ReactiveCommand.CreateFromTask(
                 async () =>

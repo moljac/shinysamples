@@ -6,7 +6,7 @@ using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Shiny;
 using Shiny.Locations;
 

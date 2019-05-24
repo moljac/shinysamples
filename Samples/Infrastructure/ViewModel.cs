@@ -10,7 +10,7 @@ using ReactiveUI.Fody.Helpers;
 namespace Samples
 {
     public abstract class ViewModel : ReactiveObject,
-                                      INavigatingAware,
+                                      IInitialize,
                                       INavigatedAware,
                                       IPageLifecycleAware,
                                       IDestructible,
@@ -31,6 +31,10 @@ namespace Samples
 
         public CompositeDisposable DestroyWith { get; set; } = new CompositeDisposable();
 
+        public virtual void Initialize(INavigationParameters parameters) { }
+        public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
+        public virtual void OnNavigatedTo(INavigationParameters parameters) { }
+
 
         public virtual void OnAppearing()
         {
@@ -43,26 +47,6 @@ namespace Samples
             this.deactivateWith = null;
         }
 
-
-        public virtual void OnNavigatingTo(INavigationParameters parameters)
-        {
-            if (parameters.GetNavigationMode() == NavigationMode.New)
-                this.OnStart();
-        }
-
-
-        protected virtual void OnStart()
-        {
-        }
-
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
-        {
-        }
-
-
-        public virtual void OnNavigatedTo(INavigationParameters parameters)
-        {
-        }
 
 
         public virtual void Destroy()

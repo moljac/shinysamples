@@ -10,7 +10,7 @@ using Shiny;
 using Shiny.IO;
 using Shiny.Net.Http;
 using Samples.Settings;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 
 
 namespace Samples.HttpTransfers
@@ -53,7 +53,7 @@ namespace Samples.HttpTransfers
                     dialogs.Alert("There are not files to upload.  Use 'Manage Uploads' below to create them");
                 else
                 {
-                    var cfg = new ActionSheetConfig().SetCancel();
+                    var cfg = new ActionSheetConfig().AddCancel();
                     foreach (var file in files)
                         cfg.Add(file.Name, () => this.FileName = file.Name);
 

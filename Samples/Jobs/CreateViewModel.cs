@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
@@ -67,21 +67,21 @@ namespace Samples.Jobs
 
             this.ChangeRequiredInternetAccess = ReactiveCommand.Create(() =>
             {
-                var cfg = new ActionSheetConfig()
-                    .Add(
-                        InternetAccess.None.ToString(),
-                        () => this.RequiredInternetAccess = InternetAccess.None.ToString()
-                    )
-                    .Add(
-                        InternetAccess.Any.ToString(),
-                        () => this.RequiredInternetAccess = InternetAccess.Any.ToString()
-                    )
-                    .Add(
-                        InternetAccess.Unmetered.ToString(),
-                        () => this.RequiredInternetAccess = InternetAccess.Unmetered.ToString()
-                    )
-                    .SetCancel();
-                this.dialogs.ActionSheet(cfg);
+                //var cfg = new ActionSheetConfig()
+                //    .Add(
+                //        InternetAccess.None.ToString(),
+                //        () => this.RequiredInternetAccess = InternetAccess.None.ToString()
+                //    )
+                //    .Add(
+                //        InternetAccess.Any.ToString(),
+                //        () => this.RequiredInternetAccess = InternetAccess.Any.ToString()
+                //    )
+                //    .Add(
+                //        InternetAccess.Unmetered.ToString(),
+                //        () => this.RequiredInternetAccess = InternetAccess.Unmetered.ToString()
+                //    )
+                //    .SetCancel();
+                //this.dialogs.ActionSheet(cfg);
             });
         }
 

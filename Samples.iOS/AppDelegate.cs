@@ -1,14 +1,14 @@
 ﻿using System;
-using Shiny;
-using Acr.UserDialogs;
 using Foundation;
 using UIKit;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Samples.ShinySetup;
+using Shiny;
 using Shiny.Net.Http;
 using Shiny.Jobs;
+using Acr.UserDialogs.Forms;
 
 
 namespace Samples.iOS
@@ -23,6 +23,7 @@ namespace Samples.iOS
 
             Forms.Init();
             FormsMaps.Init();
+            Rg.Plugins.Popup.Popup.Init();
             this.LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
@@ -38,6 +39,6 @@ namespace Samples.iOS
 
 
         public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
-            => UserDialogs.Instance.Alert(notification.AlertBody, "Notification - " + notification.AlertTitle);
+            => ShinyHost.Resolve<IUserDialogs>().Alert(notification.AlertBody, "Notification - " + notification.AlertTitle);
     }
 }

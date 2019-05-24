@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Shiny.Notifications;
 using ReactiveUI;
 

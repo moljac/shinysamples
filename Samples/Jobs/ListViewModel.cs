@@ -5,7 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
@@ -46,12 +46,12 @@ namespace Samples.Jobs
                         {
                             try
                             {
-                                using (dialogs.Loading("Running Job " + x.Identifier))
+                                //using (dialogs.Loading("Running Job " + x.Identifier))
                                     await jobManager.Run(x.Identifier);
                             }
                             catch (Exception ex)
                             {
-                                dialogs.Alert(ex.ToString());
+                                await dialogs.Alert(ex.ToString());
                             }
                         }),
                         SecondaryCommand = ReactiveCommand.CreateFromTask(() =>
@@ -81,7 +81,7 @@ namespace Samples.Jobs
                 if (!await this.AssertJobs())
                     return;
 
-                var confirm = await dialogs.ConfirmAsync("Are you sure you wish to cancel all jobs?");
+                var confirm = await dialogs.Confirm("Are you sure you wish to cancel all jobs?");
                 if (confirm)
                 {
                     await this.jobManager.CancelAll();

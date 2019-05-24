@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Shiny.SpeechRecognition;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;

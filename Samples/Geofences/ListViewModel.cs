@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
-using Samples.Geofencing;
-using Samples.Models;
 using Prism.Navigation;
 using Shiny.Locations;
+using Samples.Geofencing;
+using Samples.Models;
 
 
 namespace Samples.Geofences
@@ -31,7 +31,7 @@ namespace Samples.Geofences
             this.DropAllFences = ReactiveCommand.CreateFromTask(
                 async _ =>
                 {
-                    var confirm = await this.dialogs.ConfirmAsync("Are you sure you wish to drop all geofences?");
+                    var confirm = await this.dialogs.Confirm("Are you sure you wish to drop all geofences?");
                     if (confirm)
                     {
                         await this.geofenceManager.StopAllMonitoring();
@@ -71,7 +71,7 @@ namespace Samples.Geofences
                     Region = region,
                     Remove = ReactiveCommand.CreateFromTask(async _ =>
                     {
-                        var confirm = await this.dialogs.ConfirmAsync("Are you sure you wish to remove geofence - " + region.Identifier);
+                        var confirm = await this.dialogs.Confirm("Are you sure you wish to remove geofence - " + region.Identifier);
                         if (confirm)
                         {
                             await this.geofenceManager.StopMonitoring(region);
@@ -83,7 +83,7 @@ namespace Samples.Geofences
                         GeofenceState? status = null;
                         using (var cancelSrc = new CancellationTokenSource())
                         {
-                            using (this.dialogs.Loading("Requesting State for " + region.Identifier, cancelSrc.Cancel))
+                            //using (this.dialogs.Loading("Requesting State for " + region.Identifier, cancelSrc.Cancel))
                                 status = await this.geofenceManager.RequestState(region, cancelSrc.Token);
                         }
 

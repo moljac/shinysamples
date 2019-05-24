@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Navigation;
 using ReactiveUI;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using Shiny;
 using Shiny.Logging;
 
@@ -28,11 +28,11 @@ namespace Samples
                     return true;
 
                 case AccessState.Restricted:
-                    await dialogs.AlertAsync("WARNING: Access is restricted");
+                    await dialogs.Alert("WARNING: Access is restricted");
                     return true;
 
                 default:
-                    await dialogs.AlertAsync("Invalid Access State: " + access);
+                    await dialogs.Alert("Invalid Access State: " + access);
                     return false;
             }
         }

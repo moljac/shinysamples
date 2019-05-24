@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Acr.UserDialogs;
+using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Humanizer;
 using Shiny.Locations;
 using Samples.Models;
 using Samples.Infrastructure;
-
+using Prism.Navigation;
 
 namespace Samples.Gps
 {
@@ -30,9 +30,10 @@ namespace Samples.Gps
         }
 
 
-        protected override void OnStart()
+
+        public override void Initialize(INavigationParameters parameters)
         {
-            base.OnStart();
+            base.Initialize(parameters);
             this.manager
                 .WhenReading()
                 .Select(x => new CommandItem
