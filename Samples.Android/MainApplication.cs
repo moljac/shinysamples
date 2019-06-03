@@ -7,7 +7,11 @@ using Samples.ShinySetup;
 
 namespace Samples.Droid
 {
-    [Application]
+#if DEBUG
+    [Application(Debuggable = true)]
+#else
+    [Application(Debuggable = false)]
+#endif
     public class MainApplication : Application
     {
         public MainApplication() : base() { }
