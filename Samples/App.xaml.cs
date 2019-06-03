@@ -1,7 +1,5 @@
 ﻿using System;
 using Shiny;
-using Acr.UserDialogs;
-using Prism;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Xamarin.Forms;
@@ -71,7 +69,6 @@ namespace Samples
         }
 
 
-
         protected override IContainerExtension CreateContainerExtension()
         {
             var container = new Container(Rules
@@ -79,6 +76,7 @@ namespace Samples
                 .WithAutoConcreteTypeResolution()
                 .With(Made.Of(FactoryMethod.ConstructorWithResolvableArguments))
                 .WithoutThrowOnRegisteringDisposableTransient()
+                .WithoutFastExpressionCompiler()
                 .WithDefaultIfAlreadyRegistered(IfAlreadyRegistered.Replace)
             );
             ShinyHost.Populate((serviceType, func, lifetime) =>
@@ -89,14 +87,6 @@ namespace Samples
                 )
             );
             return new DryIocContainerExtension(container);
-        //    var builder = new ContainerBuilder();
-        //    ShinyHost.Populate((serviceType, func, lifetime) =>
-        //        builder
-        //            .Register(_ => func())
-        //            .As(serviceType)
-        //            .SingleInstance()
-        //    );
-        //    return new AutofacContainerExtension(builder);
         }
     }
 }
