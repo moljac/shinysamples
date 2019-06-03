@@ -10,14 +10,16 @@ using ReactiveUI.Fody.Helpers;
 namespace Samples
 {
     public abstract class ViewModel : ReactiveObject,
+                                      IAutoInitialize,
                                       IInitialize,
+                                      IInitializeAsync,
                                       INavigatedAware,
                                       IPageLifecycleAware,
                                       IDestructible,
                                       IConfirmNavigationAsync
     {
         CompositeDisposable deactivateWith;
-        public CompositeDisposable DeactivateWith
+        protected CompositeDisposable DeactivateWith
         {
             get
             {
@@ -26,48 +28,35 @@ namespace Samples
 
                 return this.deactivateWith;
             }
-            set => this.deactivateWith = value;
         }
 
-        public CompositeDisposable DestroyWith { get; set; } = new CompositeDisposable();
-
-        public virtual void Initialize(INavigationParameters parameters) { }
-        public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
-        public virtual void OnNavigatedTo(INavigationParameters parameters) { }
+        protected CompositeDisposable DestroyWith { get; } = new CompositeDisposable();
 
 
-        public virtual void OnAppearing()
-        {
-        }
-
-
-        public virtual void OnDisappearing()
+        public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
             this.deactivateWith?.Dispose();
             this.deactivateWith = null;
         }
 
-
-
-        public virtual void Destroy()
-        {
-            this.deactivateWith?.Dispose();
-            this.DestroyWith?.Dispose();
-        }
-
-
+        public virtual void Initialize(INavigationParameters parameters) { }
+        public virtual Task InitializeAsync(INavigationParameters parameters) => Task.CompletedTask;
+        public virtual void OnNavigatedTo(INavigationParameters parameters) { }
+        public virtual void OnAppearing() { }
+        public virtual void OnDisappearing() { }
+        public virtual void Destroy() => this.DestroyWith?.Dispose();
         public virtual Task<bool> CanNavigateAsync(INavigationParameters parameters) => Task.FromResult(true);
+
         [Reactive] public bool IsBusy { get; protected set; }
         [Reactive] public string Title { get; protected set; }
 
-        protected void BindBusyCommand(IReactiveCommand reactiveCommand)
-            => reactiveCommand
-                .IsExecuting
-                .SubOnMainThread(
-                    x => this.IsBusy = x,
-                    _ => this.IsBusy = false,
-                    () => this.IsBusy = false
-                )
-                .DisposeWith(this.DestroyWith);
+
+        protected void BindBusyCommand(IReactiveCommand command) =>
+            command.IsExecuting.Subscribe(
+                x => this.IsBusy = x,
+                _ => this.IsBusy = false,
+                () => this.IsBusy = false
+            )
+            .DisposeWith(this.DestroyWith);
     }
 }
