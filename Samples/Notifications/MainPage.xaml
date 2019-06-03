@@ -5,6 +5,7 @@
              Title="Notifications">
     <TabbedPage.Children>
         <notifications:SetupPage Title="Setup" />
+        <notifications:PendingPage Title="Pending" />
         <notifications:SettingsPage Title="App Settings" />
     </TabbedPage.Children>
 </TabbedPage>

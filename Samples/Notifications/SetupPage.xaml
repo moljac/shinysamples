@@ -4,19 +4,21 @@
              x:Class="Samples.Notifications.SetupPage"
              Title="Setup">
     <ContentPage.Content>
-        <TableView Intent="Menu">
-            <TableRoot>
-                <TableSection>
-                    <TextCell Text="Request Permissions (iOS only)" Command="{Binding PermissionCheck}" />
-                    <TextCell Text="Send Test" Command="{Binding SendTest}" />
-                </TableSection>
-            </TableRoot>
-            <!--
-            <Label Text="Badge" />
-            <Entry Text="{Binding Badge}"
-                   Keyboard="Numeric"
-                   MaxLength="2" />
-            <Button Text="Vibrate" Command="{Binding Vibrate}" />-->
-        </TableView>
+        <StackLayout>
+            <Button Text="Request Permissions (iOS Only)"
+                    Command="{Binding PermissionCheck}" />
+
+            <Label Text="Date" />
+            <DatePicker Date="{Binding SelectedDate}" />
+
+            <Label Text="Time" />
+            <TimePicker Time="{Binding SelectedTime}" />
+
+            <Button Text="Send Scheduled Notification"
+                    Command="{Binding SendScheduled}" />
+
+            <Button Text="Send Immediate Notification"
+                    Command="{Binding SendImmediate}" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

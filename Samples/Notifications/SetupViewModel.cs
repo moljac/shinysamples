@@ -3,7 +3,8 @@ using System.Windows.Input;
 using Acr.UserDialogs.Forms;
 using Shiny.Notifications;
 using ReactiveUI;
-
+using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
 
 namespace Samples.Notifications
 {
@@ -11,11 +12,44 @@ namespace Samples.Notifications
     {
         public MainViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
         {
-            this.SendTest = ReactiveCommand.CreateFromTask(() => notificationManager.Send(new Notification
-            {
-                Title = "Hello",
-                Message = "This is a test message"
-            }));
+            this.WhenAnyValue
+            (
+                x => x.SelectedDate,
+                x => x.SelectedTime
+            )
+            .Select(x => new DateTime(
+                x.Item1.Year,
+                x.Item1.Month,
+                x.Item1.Day,
+                x.Item2.Hours,
+                x.Item2.Minutes,
+                x.Item2.Seconds)
+            )
+            .ToPropertyEx(this, x => x.ScheduledTime);
+
+            this.SelectedDate = DateTime.Now;
+
+            this.SendScheduled = ReactiveCommand.CreateFromTask(
+                () => notificationManager.Send(new Notification
+                {
+                    Title = "Scheduled",
+                    Message = "This is a test scheduled notification",
+                    Payload = "scheduled",
+                    ScheduleDate = this.ScheduledTime
+                }),
+                this.WhenAny(
+                    x => x.ScheduledTime,
+                    x => x.GetValue() > DateTime.Now
+                )
+            );
+            this.SendImmediate = ReactiveCommand.CreateFromTask(
+                () => notificationManager.Send(new Notification
+                {
+                    Title = "Immediate",
+                    Message = "This is a immediate test notification",
+                    Payload = "immediate"
+                })
+            );
             this.PermissionCheck = ReactiveCommand.CreateFromTask(async () =>
             {
                 var result = await notificationManager.RequestAccess();
@@ -24,7 +58,12 @@ namespace Samples.Notifications
         }
 
 
-        public ICommand SendTest { get; }
         public ICommand PermissionCheck { get; }
+        public ICommand SendImmediate { get; }
+
+        public ICommand SendScheduled { get; }
+        public DateTime ScheduledTime { [ObservableAsProperty] get; }
+        [Reactive] public DateTime SelectedDate { get; set; }
+        [Reactive] public TimeSpan SelectedTime { get; set; }
     }
 }
