@@ -13,7 +13,7 @@ namespace Samples.BlePeripherals
     {
         static readonly Guid ServiceUuid = Guid.Parse("A495FF20-C5B1-4B44-B512-1370F02D74DE");
         static readonly Guid NotifyCharacteristicUuid = Guid.Parse("A495FF21-C5B1-4B44-B512-1370F02D74DE");
-        static readonly Guid ReadWriteCharacteristicUuid = Guid.Parse("A495FF21-C5B1-4B44-B512-1370F02D74DE");
+        static readonly Guid ReadWriteCharacteristicUuid = Guid.Parse("A495FF22-C5B1-4B44-B512-1370F02D74DE");
 
         IGattCharacteristic notifications;
         IDisposable timer;
@@ -46,7 +46,7 @@ namespace Samples.BlePeripherals
                                 {
                                     var @event = cs.IsSubscribing ? "Subscribed" : "Unsubcribed";
                                     this.Write($"Device {cs.Peripheral.Uuid} {@event}");
-                                    //this.Write($"Charcteristic Subcribers: {characteristic.SubscribedDevices.Count}");
+                                    this.Write($"Charcteristic Subcribers: {cs.Characteristic.SubscribedCentrals.Count}");
                                 })
                             );
 
