@@ -28,7 +28,7 @@ namespace Samples.Notifications
             .ToPropertyEx(this, x => x.ScheduledTime);
 
             this.SelectedDate = DateTime.Now;
-            this.SelectedTime = DateTime.Now.TimeOfDay.Add(TimeSpan.FromMinutes(10))
+            this.SelectedTime = DateTime.Now.TimeOfDay.Add(TimeSpan.FromMinutes(10));
 
             this.SendScheduled = ReactiveCommand.CreateFromTask(
                 () => notificationManager.Send(new Notification
