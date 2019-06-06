@@ -107,32 +107,39 @@ namespace Samples.BluetoothLE
 
         async void DoWrite(bool withResponse)
         {
-            var utf8 = await this.dialogs.Confirm("Write value from UTF8 or HEX?", okText: "UTF8", cancelText: "HEX");
-            var result = await this.dialogs.Prompt("Please enter a write value", this.Description);
-
-            if (result.Ok && !String.IsNullOrWhiteSpace(result.Value))
+            try
             {
-                var bytes = utf8 ? Encoding.UTF8.GetBytes(result.Value) : result.Value.FromHex();
-                if (withResponse)
+                var utf8 = await this.dialogs.Confirm("Write value from UTF8 or HEX?", okText: "UTF8", cancelText: "HEX");
+                var result = await this.dialogs.Prompt("Please enter a write value", this.Description);
+
+                if (result.Ok && !String.IsNullOrWhiteSpace(result.Value))
                 {
-                    this.Characteristic
-                        .Write(bytes)
-                        .Timeout(TimeSpan.FromSeconds(2))
-                        .Subscribe(
-                            x => this.dialogs.Toast("Write Complete"),
-                            ex => this.dialogs.Alert(ex.ToString())
-                        );
+                    var bytes = utf8 ? Encoding.UTF8.GetBytes(result.Value) : result.Value.FromHex();
+                    if (withResponse)
+                    {
+                        this.Characteristic
+                            .Write(bytes)
+                            .Timeout(TimeSpan.FromSeconds(2))
+                            .Subscribe(
+                                x => this.dialogs.Toast("Write Complete"),
+                                ex => this.dialogs.Alert(ex.ToString())
+                            );
+                    }
+                    else
+                    {
+                        this.Characteristic
+                            .WriteWithoutResponse(bytes)
+                            .Timeout(TimeSpan.FromSeconds(2))
+                            .Subscribe(
+                                x => this.dialogs.Toast("Write Without Response Complete"),
+                                ex => this.dialogs.Alert(ex.ToString())
+                            );
+                    }
                 }
-                else
-                {
-                    this.Characteristic
-                        .WriteWithoutResponse(bytes)
-                        .Timeout(TimeSpan.FromSeconds(2))
-                        .Subscribe(
-                            x => this.dialogs.Toast("Write Without Response Complete"),
-                            ex => this.dialogs.Alert(ex.ToString())
-                        );
-                }
+            }
+            catch (Exception ex)
+            {
+                await this.dialogs.Alert(ex.ToString(), "ERROR");
             }
         }
 
