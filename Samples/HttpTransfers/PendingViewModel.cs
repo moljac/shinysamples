@@ -45,8 +45,12 @@ namespace Samples.HttpTransfers
 
                             Cancel = ReactiveCommand.CreateFromTask(async () =>
                             {
-                                await this.httpTransfers.Cancel(transfer.Identifier);
-                                await this.Load.Execute();
+                                var confirm = await dialogs.Confirm("Are you sure you want to cancel all transfers?", "Confirm", "Yes", "No");
+                                if (confirm)
+                                {
+                                    await this.httpTransfers.Cancel(transfer.Identifier);
+                                    await this.Load.Execute();
+                                }
                             })
                         };
 
@@ -85,7 +89,6 @@ namespace Samples.HttpTransfers
                         if (vm != null)
                         {
                             ToViewModel(vm, transfer.Transfer);
-                            //Console.WriteLine($"b/s: {transfer.BytesPerSecond} - ETA: {transfer.EstimatedTimeRemaining.TotalSeconds}");
                             vm.TransferSpeed = Math.Round(transfer.BytesPerSecond.Bytes().Kilobytes, 2) + " Kb/s";
                             vm.EstimateTimeRemaining = Math.Round(transfer.EstimatedTimeRemaining.TotalMinutes, 1) + " min(s)";
                         }
@@ -98,9 +101,6 @@ namespace Samples.HttpTransfers
 
         static void ToViewModel(HttpTransferViewModel viewModel, HttpTransfer transfer)
         {
-            // => Math.Round(this.transfer.BytesPerSecond.Bytes().Kilobytes, 2) + " Kb/s";
-            //public string EstimateMinsRemaining => Math.Round(this.transfer.EstimatedCompletionTime.TotalMinutes, 1) + " min(s)";
-            //viewModel.EstimateMinsRemaining =
             viewModel.PercentComplete = transfer.PercentComplete;
             viewModel.PercentCompleteText = $"{transfer.PercentComplete * 100}%";
             viewModel.Status = transfer.Status.ToString();

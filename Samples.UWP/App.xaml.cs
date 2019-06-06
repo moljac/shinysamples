@@ -29,8 +29,9 @@ namespace Samples.UWP
             {
                 rootFrame = new Frame();
                 rootFrame.NavigationFailed += this.OnNavigationFailed;
-                Forms.Init(e);
                 UwpShinyHost.Init(new SampleStartup());
+                Rg.Plugins.Popup.Popup.Init();
+                Forms.Init(e);
 
                 Window.Current.Content = rootFrame;
             }
