@@ -12,7 +12,7 @@ namespace Samples.Notifications
 {
     public class SettingsViewModel : ViewModel, IAppSettings
     {
-        public SettingsViewModel(AppSettings appSettings)
+        public SettingsViewModel(IAppSettings appSettings)
         {
             appSettings
                 .GetType()

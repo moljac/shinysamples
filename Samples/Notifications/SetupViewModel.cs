@@ -1,16 +1,17 @@
 using System;
 using System.Windows.Input;
+using System.Reactive.Linq;
 using Acr.UserDialogs.Forms;
-using Shiny.Notifications;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System.Reactive.Linq;
+using Shiny.Notifications;
+
 
 namespace Samples.Notifications
 {
-    public class MainViewModel : ViewModel
+    public class SetupViewModel : ViewModel
     {
-        public MainViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
+        public SetupViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
         {
             this.WhenAnyValue
             (
