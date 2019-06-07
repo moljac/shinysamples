@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
-using Shiny;
-using Acr.UserDialogs.Forms;
-using Shiny.BluetoothLE.Central;
 using ReactiveUI.Fody.Helpers;
+using Acr.UserDialogs.Forms;
+using Shiny;
+using Shiny.BluetoothLE.Central;
 
 
 namespace Samples.BluetoothLE
