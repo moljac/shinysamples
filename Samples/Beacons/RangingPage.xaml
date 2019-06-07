@@ -11,7 +11,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="{Binding ScanText}"
-                    Command="{Binding ScanToggle}" />
+                    Command="{Binding ScanToggle}"
+                    IsVisible="{Binding IsRegionSet}" />
 
             <StackLayout IsVisible="{Binding IsRegionSet}">
                 <Label Text="{Binding Uuid, StringFormat='UUID: {0}'}" />
