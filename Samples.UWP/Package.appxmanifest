@@ -26,9 +26,16 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" StartPage="Shiny.Jobs.JobBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Shiny.Support.Uwp.ShinyBackgroundTask">
           <BackgroundTasks>
+            <Task Type="systemEvent"/>
             <Task Type="location"/>
+            <Task Type="timer"/>
+            <Task Type="general"/>
+            <Task Type="deviceUse"/>
+            <Task Type="deviceServicing"/>
+            <Task Type="deviceConnectionChange"/>
+            <Task Type="bluetooth"/>
           </BackgroundTasks>
         </Extension>
       </Extensions>
