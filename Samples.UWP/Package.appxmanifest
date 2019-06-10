@@ -28,14 +28,14 @@
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="Shiny.Support.Uwp.ShinyBackgroundTask">
           <BackgroundTasks>
-            <Task Type="systemEvent"/>
-            <Task Type="location"/>
-            <Task Type="timer"/>
-            <Task Type="general"/>
-            <Task Type="deviceUse"/>
-            <Task Type="deviceServicing"/>
-            <Task Type="deviceConnectionChange"/>
             <Task Type="bluetooth"/>
+            <Task Type="deviceConnectionChange"/>
+            <Task Type="deviceServicing"/>
+            <Task Type="deviceUse"/>
+            <Task Type="general"/>
+            <Task Type="location"/>
+            <Task Type="systemEvent"/>
+            <Task Type="timer"/>
           </BackgroundTasks>
         </Extension>
       </Extensions>

@@ -18,6 +18,7 @@ namespace Samples.UWP
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            UwpShinyHost.Init(new SampleStartup());
         }
 
 
@@ -29,7 +30,6 @@ namespace Samples.UWP
             {
                 rootFrame = new Frame();
                 rootFrame.NavigationFailed += this.OnNavigationFailed;
-                UwpShinyHost.Init(new SampleStartup());
                 Rg.Plugins.Popup.Popup.Init();
                 Forms.Init(e);
 

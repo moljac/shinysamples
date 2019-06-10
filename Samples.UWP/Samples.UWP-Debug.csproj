@@ -185,7 +185,7 @@
       <Name>Shiny.SpeechRecognition</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Support.Uwp\Shiny.Support.Uwp.csproj">
-      <Project>{809041a5-0652-4fd7-982b-aecb8950aa6c}</Project>
+      <Project>{e1888c59-5c02-48f6-ae6e-7e6593597081}</Project>
       <Name>Shiny.Support.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
