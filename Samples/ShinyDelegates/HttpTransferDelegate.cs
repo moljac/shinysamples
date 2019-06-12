@@ -13,11 +13,11 @@ namespace Samples.ShinyDelegates
         public HttpTransferDelegate(CoreDelegateServices services) => this.services = services;
 
 
-        public async void OnError(HttpTransfer transfer, Exception ex)
-            => await this.CreateHttpTransferEvent(transfer, "ERROR: " + ex);
+        public Task OnError(HttpTransfer transfer, Exception ex)
+            => this.CreateHttpTransferEvent(transfer, "ERROR: " + ex);
 
 
-        public async void OnCompleted(HttpTransfer transfer)
+        public async Task OnCompleted(HttpTransfer transfer)
         {
             if (!transfer.IsUpload && Path.GetExtension(transfer.LocalFilePath) == "db")
             {

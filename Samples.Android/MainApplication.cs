@@ -3,7 +3,9 @@ using Shiny;
 using Android.App;
 using Android.Runtime;
 using Samples.ShinySetup;
-
+#if DEBUG
+using Shiny.Integrations.CurrentActivityPlugin;
+#endif
 
 namespace Samples.Droid
 {
@@ -23,7 +25,16 @@ namespace Samples.Droid
         public override void OnCreate()
         {
             base.OnCreate();
-            AndroidShinyHost.Init(this, new SampleStartup());
+            AndroidShinyHost.Init(
+                this,
+                new SampleStartup()
+#if DEBUG
+                , services =>
+                {
+                    services.UseCurrentActivityIntegration(true);
+                }
+#endif
+            );
         }
     }
 }

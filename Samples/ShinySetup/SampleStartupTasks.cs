@@ -24,6 +24,8 @@ namespace Samples.ShinySetup
         {
 
         }
+
+
         public void Start()
         {
             Console.WriteLine("Hi From " + this.GetType().Name);

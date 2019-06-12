@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Samples.Models;
 using Shiny.Locations;
 
@@ -11,9 +12,8 @@ namespace Samples.ShinyDelegates
         public LocationDelegates(CoreDelegateServices services) => this.services = services;
 
 
-        public async void OnReading(IGpsReading reading)
-        {
-            await this.services.Connection.InsertAsync(new GpsEvent
+        public Task OnReading(IGpsReading reading)
+            => this.services.Connection.InsertAsync(new GpsEvent
             {
                 Latitude = reading.Position.Latitude,
                 Longitude = reading.Position.Longitude,
@@ -24,10 +24,9 @@ namespace Samples.ShinyDelegates
                 Speed = reading.Speed,
                 Date = reading.Timestamp.ToLocalTime()
             });
-        }
 
 
-        public async void OnStatusChanged(GeofenceState newStatus, GeofenceRegion region)
+        public async Task OnStatusChanged(GeofenceState newStatus, GeofenceRegion region)
         {
             await this.services.Connection.InsertAsync(new GeofenceEvent
             {

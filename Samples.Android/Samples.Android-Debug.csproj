@@ -90,6 +90,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.CurrentActivityPlugin\Shiny.Integrations.CurrentActivityPlugin.csproj">
+      <Project>{96cafc79-3d36-4ea3-b655-4a94979b3eb3}</Project>
+      <Name>Shiny.Integrations.CurrentActivityPlugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
       <Project>{82F5E401-C438-46B0-BC7C-733D3E017AD5}</Project>
       <Name>Samples-Debug</Name>
