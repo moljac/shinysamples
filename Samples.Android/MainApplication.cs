@@ -31,7 +31,7 @@ namespace Samples.Droid
 #if DEBUG
                 , services =>
                 {
-                    services.UseCurrentActivityIntegration(true);
+                    services.UseCurrentActivityPlugin();
                 }
 #endif
             );
