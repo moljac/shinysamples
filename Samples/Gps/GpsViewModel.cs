@@ -43,14 +43,14 @@ namespace Samples.Gps
             });
             this.BindBusyCommand(this.GetCurrentPosition);
 
-            //this.SelectPriority = ReactiveCommand.Create(() => dialogs.ActionSheet(
-            //    new ActionSheetConfig()
-            //        //.SetTitle("Select Priority/Desired Accuracy")
-            //        .Add("Highest", () => this.Priority = GpsPriority.Highest)
-            //        .Add("Normal", () => this.Priority = GpsPriority.Normal)
-            //        .Add("Low", () => this.Priority = GpsPriority.Low)
-            //        .SetCancel()
-            //));
+            this.SelectPriority = ReactiveCommand.Create(() => dialogs.ActionSheet(
+                new ActionSheetConfig()
+                    .SetTitle("Select Priority/Desired Accuracy")
+                    .Add("Highest", () => this.Priority = GpsPriority.Highest)
+                    .Add("Normal", () => this.Priority = GpsPriority.Normal)
+                    .Add("Low", () => this.Priority = GpsPriority.Low)
+                    .AddCancel()
+            ));
 
             this.ToggleUpdates = ReactiveCommand.CreateFromTask(
                 async () =>
@@ -65,22 +65,20 @@ namespace Samples.Gps
                         var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(this.UseBackground));
                         if (!result)
                         {
-                            dialogs.Alert("Insufficient permissions");
+                            await dialogs.Alert("Insufficient permissions");
                             return;
                         }
 
                         var request = new GpsRequest
                         {
                             UseBackground = this.UseBackground,
-                            Priority = this.Priority
+                            Priority = this.Priority,
                         };
-                        var meters = ToDeferred(this.DeferredMeters);
-                        if (meters > 0)
-                            request.DeferredDistance = Distance.FromMeters(meters);
+                        if (IsInterval(this.DesiredInterval))
+                            request.Interval = ToInterval(this.DesiredInterval);
 
-                        var secs = ToDeferred(this.DeferredSeconds);
-                        if (secs > 0)
-                            request.DeferredTime = TimeSpan.FromSeconds(secs);
+                        if (IsInterval(this.ThrottledInterval))
+                            request.ThrottledInterval = ToInterval(this.ThrottledInterval);
 
                         await this.manager.StartListener(request);
                     }
@@ -88,16 +86,35 @@ namespace Samples.Gps
                 },
                 this.WhenAny(
                     x => x.IsUpdating,
-                    x => x.DeferredMeters,
-                    x => x.DeferredSeconds,
-                    (u, m, s) =>
-                        u.GetValue() ||
-                        (
-                            ToDeferred(m.GetValue()) >= 0 &&
-                            ToDeferred(s.GetValue()) >= 0
-                        )
+                    x => x.DesiredInterval,
+                    x => x.ThrottledInterval,
+                    (u, i, t) =>
+                    {
+                        if (u.GetValue())
+                            return true;
+
+                        var isdesired = IsInterval(i.GetValue());
+                        var isthrottled = IsInterval(t.GetValue());
+
+                        if (isdesired && isthrottled)
+                        {
+                            var desired = ToInterval(i.GetValue());
+                            var throttle = ToInterval(t.GetValue());
+                            if (throttle.TotalSeconds >= desired.TotalSeconds)
+                                return false;
+                        }
+                        return true;
+                    }
                 )
             );
+
+            this.UseRealtime = ReactiveCommand.Create(() =>
+            {
+                var rt = GpsRequest.Realtime(false);
+                this.ThrottledInterval = String.Empty;
+                this.DesiredInterval = rt.Interval.TotalSeconds.ToString();
+                this.Priority = rt.Priority;
+            });
 
             this.RequestAccess = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -135,6 +152,7 @@ namespace Samples.Gps
         }
 
 
+        public IReactiveCommand UseRealtime { get; }
         public IReactiveCommand SelectPriority { get; }
         public IReactiveCommand GetCurrentPosition { get; }
         public IReactiveCommand ToggleUpdates { get; }
@@ -145,8 +163,8 @@ namespace Samples.Gps
 
         [Reactive] public bool UseBackground { get; set; } = true;
         [Reactive] public GpsPriority Priority { get; set; } = GpsPriority.Normal;
-        [Reactive] public string DeferredMeters { get; set; }
-        [Reactive] public string DeferredSeconds { get; set; }
+        [Reactive] public string DesiredInterval { get; set; }
+        [Reactive] public string ThrottledInterval { get; set; }
         [Reactive] public string Access { get; private set; }
         [Reactive] public bool IsUpdating { get; private set; }
         [Reactive] public double Latitude { get; private set; }
@@ -158,15 +176,23 @@ namespace Samples.Gps
         [Reactive] public double Speed { get; private set; }
 
 
-        static int ToDeferred(string value)
+        static bool IsInterval(string value)
         {
             if (value.IsEmpty())
-                return 0;
+                return false;
 
-            if (Int32.TryParse(value, out int r))
-                return r;
+            if (Int32.TryParse(value, out var r))
+                return r > 0;
 
-            return -1;
+            return false;
+        }
+
+
+        static TimeSpan ToInterval(string value)
+        {
+            var i = Int32.Parse(value);
+            var ts = TimeSpan.FromSeconds(i);
+            return ts;
         }
     }
 }

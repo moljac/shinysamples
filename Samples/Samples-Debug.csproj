@@ -38,10 +38,4 @@
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Update="Notifications\PendingPage.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-    </ItemGroup>
-
 </Project>

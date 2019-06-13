@@ -2,10 +2,10 @@
 using Shiny;
 using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.DryIoc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Samples.Infrastructure;
-using Prism.DryIoc;
 using DryIoc;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -71,14 +71,7 @@ namespace Samples
 
         protected override IContainerExtension CreateContainerExtension()
         {
-            var container = new Container(Rules
-                .Default
-                .WithAutoConcreteTypeResolution()
-                .With(Made.Of(FactoryMethod.ConstructorWithResolvableArguments))
-                .WithoutThrowOnRegisteringDisposableTransient()
-                .WithoutFastExpressionCompiler()
-                .WithDefaultIfAlreadyRegistered(IfAlreadyRegistered.Replace)
-            );
+            var container = new Container(this.CreateContainerRules());
             ShinyHost.Populate((serviceType, func, lifetime) =>
                 container.RegisterDelegate(
                     serviceType,

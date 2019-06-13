@@ -33,6 +33,9 @@
                     </TableSection>
 
                     <TableSection Title="Listening">
+                        <TextCell Text="Use Realtime Values"
+                                  Command="{Binding UseRealtime}" />
+
                         <SwitchCell Text="Background"
                                     On="{Binding UseBackground}" />
 
@@ -40,15 +43,19 @@
                                   Detail="{Binding Priority}"
                                   Command="{Binding SelectPriority}"/>
 
-                        <EntryCell Label="Deferred Distance (meters)"
-                                   Text="{Binding DeferredMeters}"
+                        <TextCell Text="The OS will try to provide values at this speed if available (but faster if it can)" />
+                        <EntryCell Label="Desired Interval (secs)"
+                                   Text="{Binding DesiredInterval}"
                                    Keyboard="Numeric" />
 
-                        <EntryCell Label="Deferred Time (secs)"
-                                   Text="{Binding DeferredSeconds}"
+                        <TextCell Text="The OS will not ping your delegate faster than this value" />
+                        <EntryCell Label="Throttled Interval (secs)"
+                                   Text="{Binding ThrottledInterval}"
                                    Keyboard="Numeric" />
 
-                        <TextCell Text="{Binding ListenerText}" Command="{Binding ToggleUpdates}" />
+                        <TextCell Text="{Binding ListenerText}"
+                                  Command="{Binding ToggleUpdates}" />
+
                     </TableSection>
                 </TableRoot>
             </TableView>
