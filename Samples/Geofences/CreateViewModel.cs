@@ -15,7 +15,7 @@ namespace Samples.Geofences
 {
     public class CreateViewModel : ViewModel
     {
-        const double DEFAULT_DISTANCE_METERS = 200;
+        const int DEFAULT_DISTANCE_METERS = 200;
         readonly IGeofenceManager geofenceManager;
         readonly IGpsManager gpsManager;
         readonly INavigationService navigator;
@@ -38,9 +38,10 @@ namespace Samples.Geofences
                 (entry, exit) => entry.GetValue() || exit.GetValue()
             );
 
-            geofenceManager
-                .WhenAccessStatusChanged()
-                .ToPropertyEx(this, x => x.AccessStatus);
+            //geofenceManager
+            //    .WhenAccessStatusChanged()
+            //    .ToPropertyEx(this, x => x.AccessStatus);
+            this.AccessStatus = geofenceManager.Status;
 
             this.SetCurrentLocation = ReactiveCommand.CreateFromTask(async ct =>
             {
@@ -50,9 +51,9 @@ namespace Samples.Geofences
             });
             this.BindBusyCommand(this.SetCurrentLocation);
 
-            //this.RequestAccess = ReactiveCommand.CreateFromTask(
-            //    async () => await geofenceManager.RequestAccess()
-            //);
+            this.RequestAccess = ReactiveCommand.CreateFromTask(
+                async () => this.AccessStatus = await geofenceManager.RequestAccess()
+            );
 
             this.AddCnTower = ReactiveCommand.CreateFromTask(
                 _ => this.AddGeofence(
@@ -78,23 +79,22 @@ namespace Samples.Geofences
                 _ => this.AddGeofence
                 (
                     this.Identifier,
-                    this.CenterLatitude,
-                    this.CenterLongitude,
+                    this.CenterLatitude.Value,
+                    this.CenterLongitude.Value,
                     this.RadiusMeters
                 ),
                 this.WhenAny(
-                    //x => x.AccessStatus,
+                    x => x.AccessStatus,
                     x => x.Identifier,
                     x => x.RadiusMeters,
                     x => x.CenterLatitude,
                     x => x.CenterLongitude,
                     x => x.NotifyOnEntry,
                     x => x.NotifyOnExit,
-                    //(access, id, rad, lat, lng, entry, exit) =>
-                    (id, rad, lat, lng, entry, exit) =>
+                    (access, id, rad, lat, lng, entry, exit) =>
                     {
-                        //if (access.GetValue() != AccessState.Available)
-                        //    return false;
+                        if (access.GetValue() != AccessState.Available)
+                            return false;
 
                         if (id.GetValue().IsEmpty())
                             return false;
@@ -104,11 +104,11 @@ namespace Samples.Geofences
                             return false;
 
                         var latv = lat.GetValue();
-                        if (latv >= 89.9 || latv <= -89.9)
+                        if (latv != null && (latv >= 89.9 || latv <= -89.9))
                             return false;
 
                         var lngv = lng.GetValue();
-                        if (lngv >= 179.9 || lngv <= -179.9)
+                        if (lngv != null && (lngv >= 179.9 || lngv <= -179.9))
                             return false;
 
                         if (!entry.GetValue() && !exit.GetValue())
@@ -127,11 +127,12 @@ namespace Samples.Geofences
         public ICommand AddCnTower { get; }
         public ICommand AddAppleHQ { get; }
 
-        public AccessState AccessStatus { [ObservableAsProperty] get; }
+        //public AccessState AccessStatus { [ObservableAsProperty] get; }
+        [Reactive] public AccessState AccessStatus { get; private set; }
         [Reactive] public string Identifier { get; set; }
-        [Reactive] public double CenterLatitude { get; set; }
-        [Reactive] public double CenterLongitude { get; set; }
-        [Reactive] public double RadiusMeters { get; set; } = DEFAULT_DISTANCE_METERS;
+        [Reactive] public double? CenterLatitude { get; set; }
+        [Reactive] public double? CenterLongitude { get; set; }
+        [Reactive] public int RadiusMeters { get; set; } = DEFAULT_DISTANCE_METERS;
         [Reactive] public bool SingleUse { get; set; }
         [Reactive] public bool NotifyOnEntry { get; set; } = true;
         [Reactive] public bool NotifyOnExit { get; set; } = true;

@@ -12,19 +12,19 @@
     <ContentPage.Content>
         <TableView Intent="Form">
             <TableSection>
-                <!--<TextCell Text="Access"
+                <TextCell Text="Access"
                           Detail="{Binding AccessStatus}"
-                          Command="{Binding RequestAccess}" />-->
+                          Command="{Binding RequestAccess}" />
 
                 <EntryCell Label="Identifier"
                            Text="{Binding Identifier}" />
 
                 <EntryCell Label="Latitude"
-                           Text="{Binding CenterLatitude}"
+                           Text="{Binding CenterLatitude, Converter={StaticResource Double}}"
                            Keyboard="Numeric" />
 
                 <EntryCell Label="Longitude"
-                           Text="{Binding CenterLongitude}"
+                           Text="{Binding CenterLongitude, Converter={StaticResource Double}}"
                            Keyboard="Numeric" />
 
                 <EntryCell Label="Radius (meters)"

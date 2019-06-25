@@ -98,6 +98,7 @@
             </Style>
 
             <sample:InverseBooleanConverter x:Key="Not" />
+            <sample:DoubleConverter x:Key="Double" />
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
 </prism:PrismApplication>

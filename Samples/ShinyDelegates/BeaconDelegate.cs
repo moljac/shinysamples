@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Samples.Models;
 using Shiny.Beacons;
 
@@ -11,7 +12,7 @@ namespace Samples.ShinyDelegates
         public BeaconDelegate(CoreDelegateServices services) => this.services = services;
 
 
-        public async void OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
+        public async Task OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
         {
             await this.services.Connection.InsertAsync(new BeaconEvent
             {
