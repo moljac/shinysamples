@@ -36,7 +36,7 @@ namespace Samples.ShinySetup
             builder.AddSingleton<CoreDelegateServices>();
             builder.RegisterStartupTask<GlobalExceptionHandler>();
             builder.AddSingleton<IUserDialogs, UserDialogs>();
-            builder.UseXamarinFormsDependencyService();
+            //builder.UseXamarinFormsDependencyService();
 
             // startup tasks
             builder.RegisterStartupTask<StartupTask1>();
