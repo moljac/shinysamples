@@ -55,7 +55,8 @@ namespace Samples.ShinySetup
             builder.UseBleCentral();
             builder.UseBlePeripherals();
 
-            builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));
+            //builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));
+            builder.UseGeofencing<LocationDelegates>();
             builder.UseGps<LocationDelegates>();
             builder.UseNotifications();
             builder.UseSpeechRecognition();

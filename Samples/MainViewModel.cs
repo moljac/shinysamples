@@ -3,8 +3,7 @@ using System.Windows.Input;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Shiny;
-using Xamarin.Forms;
+
 
 namespace Samples
 {
@@ -24,11 +23,11 @@ namespace Samples
         [Reactive] public bool IsPresented { get; set; }
 
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-            var env = DependencyService.Get<IEnvironment>();
-            Console.WriteLine($"ENV: {env?.ToString() ?? "NO"}");
-        }
+        //public override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    var env = DependencyService.Get<IEnvironment>();
+        //    Console.WriteLine($"ENV: {env?.ToString() ?? "NO"}");
+        //}
     }
 }
