@@ -22,12 +22,11 @@ namespace Samples.ShinySetup
     {
         public override void ConfigureServices(IServiceCollection builder)
         {
+            builder.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             Log.AddLogger(new DbLogger());
 #if DEBUG
             Log.UseConsole();
             Log.UseDebug();
-#else
-            Log.AddLogger(new AppCenterLogger(), true, true);
 #endif
 
             // create your infrastructures
