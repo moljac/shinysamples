@@ -3,7 +3,7 @@ using Shiny;
 using Android.App;
 using Android.Runtime;
 using Samples.ShinySetup;
-
+using Shiny.Jobs;
 
 namespace Samples.Droid
 {
@@ -23,6 +23,7 @@ namespace Samples.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+
             AndroidShinyHost.Init(
                 this,
                 new SampleStartup()
@@ -30,6 +31,7 @@ namespace Samples.Droid
                 , services =>
                 {
                     services.UseCurrentActivityPlugin();
+                    services.ConfigureJobService(TimeSpan.FromMinutes(1));
                 }
 #endif
             );
