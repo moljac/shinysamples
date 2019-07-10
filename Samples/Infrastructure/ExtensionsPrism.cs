@@ -95,11 +95,10 @@ namespace Samples
 
         static NavigationParameters ToNavParams(this (string Key, object Value)[] parameters)
         {
-            if (parameters?.Any() ?? true)
-                return null;
 
             var navParams = new NavigationParameters();
-            navParams.AddRange(parameters);
+            if (parameters != null && parameters.Any())
+                navParams.AddRange(parameters);
 
             return navParams;
         }
