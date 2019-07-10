@@ -4,7 +4,7 @@ using Shiny;
 
 namespace Samples.ShinySetup
 {
-    public class StartupTask1 : IStartupTask
+    public class StartupTask1 : IShinyStartupTask
     {
         public StartupTask1()
         {
@@ -18,7 +18,7 @@ namespace Samples.ShinySetup
     }
 
 
-    public class StartupTask2 : IStartupTask
+    public class StartupTask2 : IShinyStartupTask
     {
         public StartupTask2()
         {

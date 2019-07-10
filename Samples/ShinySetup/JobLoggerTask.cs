@@ -7,7 +7,7 @@ using Shiny.Infrastructure;
 
 namespace Samples.ShinySetup
 {
-    public class JobLoggerTask : IStartupTask
+    public class JobLoggerTask : IShinyStartupTask
     {
         readonly IJobManager jobManager;
         readonly SampleSqliteConnection conn;

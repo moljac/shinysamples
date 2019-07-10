@@ -18,7 +18,7 @@ using Acr.UserDialogs.Forms;
 
 namespace Samples.ShinySetup
 {
-    public class SampleStartup : Startup
+    public class SampleStartup : ShinyStartup
     {
         public override void ConfigureServices(IServiceCollection builder)
         {
@@ -28,6 +28,8 @@ namespace Samples.ShinySetup
             Log.UseConsole();
             Log.UseDebug();
 #endif
+
+            builder.AddService<IFullService, FullService>();
 
             // create your infrastructures
             // jobs, connectivity, power, filesystem, are installed automatically
