@@ -18,8 +18,10 @@ namespace Samples.Beacons
 
             this.EstimoteDefaults = ReactiveCommand.Create(() =>
             {
-                this.Identifier = "Estimote";
-                this.Uuid = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
+                this.Identifier = "XamDevSummit";
+                this.Uuid = "FDA50693-A4E2-4FB1-AFCF-C6EB07647825";
+                //this.Identifier = "Estimote";
+                //this.Uuid = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
             });
 
             this.WhenAnyValue(x => x.Major)

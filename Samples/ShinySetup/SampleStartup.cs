@@ -29,7 +29,7 @@ namespace Samples.ShinySetup
             Log.UseDebug();
 #endif
 
-            builder.AddService<IFullService, FullService>();
+            builder.AddSingleton<IFullService, FullService>();
 
             // create your infrastructures
             // jobs, connectivity, power, filesystem, are installed automatically

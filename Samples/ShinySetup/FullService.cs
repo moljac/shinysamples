@@ -1,8 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
+
 
 namespace Samples.ShinySetup
 {
