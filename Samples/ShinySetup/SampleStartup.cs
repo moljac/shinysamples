@@ -20,55 +20,52 @@ namespace Samples.ShinySetup
 {
     public class SampleStartup : ShinyStartup
     {
-        public override void ConfigureServices(IServiceCollection builder)
+        public override void ConfigureServices(IServiceCollection services)
         {
-            builder.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
+            services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             Log.AddLogger(new DbLogger());
 #if DEBUG
             Log.UseConsole();
             Log.UseDebug();
 #endif
-
-            builder.AddSingleton<IFullService, FullService>();
-
             // create your infrastructures
             // jobs, connectivity, power, filesystem, are installed automatically
-            builder.AddSingleton<SampleSqliteConnection>();
-            builder.AddSingleton<CoreDelegateServices>();
-            builder.RegisterStartupTask<GlobalExceptionHandler>();
-            builder.AddSingleton<IUserDialogs, UserDialogs>();
-            //builder.UseXamarinFormsDependencyService();
+            services.AddSingleton<SampleSqliteConnection>();
+            services.AddSingleton<CoreDelegateServices>();
+            services.RegisterStartupTask<GlobalExceptionHandler>();
+            services.AddSingleton<IUserDialogs, UserDialogs>();
 
             // startup tasks
-            builder.RegisterStartupTask<StartupTask1>();
-            builder.RegisterStartupTask<StartupTask2>();
-            builder.RegisterStartupTask<JobLoggerTask>();
+            services.AddSingleton<IFullService, FullService>();
+            services.RegisterStartupTask<StartupTask1>();
+            services.RegisterStartupTask<StartupTask2>();
+            services.RegisterStartupTask<JobLoggerTask>();
 
             // configuration
-            builder.RegisterSettings<IAppSettings, AppSettings>("AppSettings");
+            services.RegisterSettings<IAppSettings, AppSettings>("AppSettings");
 
             // register all of the shiny stuff you want to use
-            builder.UseHttpTransfers<HttpTransferDelegate>();
-            builder.UseBeacons<BeaconDelegate>();
+            services.UseHttpTransfers<HttpTransferDelegate>();
+            services.UseBeacons<BeaconDelegate>();
 
-            builder.RegisterBleAdapterState<BleDelegates>();
-            builder.RegisterBleStateRestore<BleDelegates>();
-            builder.UseBleCentral();
-            builder.UseBlePeripherals();
+            services.RegisterBleAdapterState<BleDelegates>();
+            services.RegisterBleStateRestore<BleDelegates>();
+            services.UseBleCentral();
+            services.UseBlePeripherals();
 
             //builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));
-            builder.UseGeofencing<LocationDelegates>();
-            builder.UseGps<LocationDelegates>();
-            builder.UseNotifications();
-            builder.UseSpeechRecognition();
+            services.UseGeofencing<LocationDelegates>();
+            services.UseGps<LocationDelegates>();
+            services.UseNotifications();
+            services.UseSpeechRecognition();
 
-            builder.UseAccelerometer();
-            builder.UseAmbientLightSensor();
-            builder.UseBarometer();
-            builder.UseCompass();
-            builder.UseMagnetometer();
-            builder.UsePedometer();
-            builder.UseProximitySensor();
+            services.UseAccelerometer();
+            services.UseAmbientLightSensor();
+            services.UseBarometer();
+            services.UseCompass();
+            services.UseMagnetometer();
+            services.UsePedometer();
+            services.UseProximitySensor();
         }
 
 
