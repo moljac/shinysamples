@@ -30,7 +30,7 @@ namespace Samples.Droid
 #if DEBUG
                 , services =>
                 {
-                    services.UseCurrentActivityPlugin();
+                    // TODO: make android great again - by running jobs faster for debugging purposes ;)
                     services.ConfigureJobService(TimeSpan.FromMinutes(1));
                 }
 #endif
