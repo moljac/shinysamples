@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.iOS", "Samples.iOS\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.UWP", "Samples.UWP\Samples.UWP.csproj", "{4718D281-A453-42A7-9381-0FD48DB8D801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Api", "Samples.Api\Samples.Api.csproj", "{96DFCEBC-E280-49D9-9295-663E78FA106B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Api", "Samples.Api\Samples.Api.csproj", "{96DFCEBC-E280-49D9-9295-663E78FA106B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.SqliteGenerator", "Samples.SqliteGenerator\Samples.SqliteGenerator.csproj", "{39309C91-92C1-4EB2-AC13-63EC78FA5072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SqliteGenerator", "Samples.SqliteGenerator\Samples.SqliteGenerator.csproj", "{39309C91-92C1-4EB2-AC13-63EC78FA5072}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

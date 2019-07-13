@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Shiny.Integrations.CurrentActivityPlugin">
-      <Version>1.0.0.261-beta</Version>
+      <Version>1.0.0.267-beta</Version>
     </PackageReference>
     <PackageReference Include="System.Threading.Tasks.Extensions">
       <Version>4.5.2</Version>

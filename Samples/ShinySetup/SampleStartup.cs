@@ -22,12 +22,14 @@ namespace Samples.ShinySetup
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
+            //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             Log.AddLogger(new DbLogger());
 #if DEBUG
             Log.UseConsole();
             Log.UseDebug();
 #endif
+            services.AddSingleton<IFullService, FullService>();
+
             // create your infrastructures
             // jobs, connectivity, power, filesystem, are installed automatically
             services.AddSingleton<SampleSqliteConnection>();
@@ -36,7 +38,6 @@ namespace Samples.ShinySetup
             services.AddSingleton<IUserDialogs, UserDialogs>();
 
             // startup tasks
-            services.AddSingleton<IFullService, FullService>();
             services.RegisterStartupTask<StartupTask1>();
             services.RegisterStartupTask<StartupTask2>();
             services.RegisterStartupTask<JobLoggerTask>();
