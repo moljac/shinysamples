@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reactive.Linq;
 using System.Windows.Input;
 using Acr.UserDialogs.Forms;
 using Shiny.SpeechRecognition;
@@ -16,8 +15,7 @@ namespace Samples.Speech
             IDisposable token = null;
             speech
                 .WhenListeningStatusChanged()
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Subscribe(x => this.ListenText = x
+                .SubOnMainThread(x => this.ListenText = x
                     ? "Stop Listening"
                     : "Start Dictation"
                 );
@@ -31,8 +29,7 @@ namespace Samples.Speech
                     {
                         token = speech
                             .ContinuousDictation()
-                            .ObserveOn(RxApp.MainThreadScheduler)
-                            .Subscribe(
+                            .SubOnMainThread(
                                 x => this.Text += " " + x,
                                 ex => dialogs.Alert(ex.ToString())
                             );
@@ -41,8 +38,7 @@ namespace Samples.Speech
                     {
                         token = speech
                             .ListenUntilPause()
-                            .ObserveOn(RxApp.MainThreadScheduler)
-                            .Subscribe(
+                            .SubOnMainThread(
                                 x => this.Text = x,
                                 ex => dialogs.Alert(ex.ToString())
                             );
