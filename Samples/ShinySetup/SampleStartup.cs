@@ -28,18 +28,17 @@ namespace Samples.ShinySetup
             Log.UseConsole();
             Log.UseDebug();
 #endif
-            services.AddSingleton<IFullService, FullService>();
 
             // create your infrastructures
             // jobs, connectivity, power, filesystem, are installed automatically
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
             services.RegisterStartupTask<GlobalExceptionHandler>();
+            services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<IUserDialogs, UserDialogs>();
 
             // startup tasks
-            services.RegisterStartupTask<StartupTask1>();
-            services.RegisterStartupTask<StartupTask2>();
+            services.AddSingleton<IFullService, FullService>();
             services.RegisterStartupTask<JobLoggerTask>();
 
             // configuration
@@ -67,6 +66,10 @@ namespace Samples.ShinySetup
             services.UseMagnetometer();
             services.UsePedometer();
             services.UseProximitySensor();
+
+            services.UseHeartRateMonitor();
+            services.UseTemperature();
+            services.UseHumidity();
         }
 
 

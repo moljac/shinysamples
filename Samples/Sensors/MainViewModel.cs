@@ -19,7 +19,10 @@ namespace Samples.Sensors
                              IAmbientLight ambientLight = null,
                              IBarometer barometer = null,
                              IPedometer pedometer = null,
-                             IProximity proximity = null)
+                             IProximity proximity = null,
+                             IHeartRateMonitor heartRate = null,
+                             IHumidity humidity = null,
+                             ITemperature temperature = null)
         {
 
             this.Sensors = new List<ISensorViewModel>();
@@ -31,6 +34,10 @@ namespace Samples.Sensors
             this.AddIf(barometer, "Pressure");
             this.AddIf(pedometer, "Steps");
             this.AddIf(proximity, "Near");
+
+            this.AddIf(heartRate, "Heart Rate (bpm)");
+            this.AddIf(humidity, "Humidity");
+            this.AddIf(temperature, "Temp");
         }
 
 
