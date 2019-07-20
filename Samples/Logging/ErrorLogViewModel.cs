@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Samples.Infrastructure;
-using Samples.Models;
 using Shiny;
 using Shiny.Infrastructure;
 using Shiny.Logging;
+using Shiny.Models;
 
 
 namespace Samples.Logging
 {
     public class ErrorLogViewModel : AbstractLogViewModel<CommandItem>
     {
-        readonly SampleSqliteConnection conn;
+        readonly ShinySqliteConnection conn;
         readonly ISerializer serializer;
 
 
-        public ErrorLogViewModel(SampleSqliteConnection conn,
-                                  ISerializer serializer,
-                                  IUserDialogs dialogs) : base(dialogs)
+        public ErrorLogViewModel(ShinySqliteConnection conn,
+                                 ISerializer serializer,
+                                 IUserDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
             this.serializer = serializer;
@@ -49,23 +49,24 @@ namespace Samples.Logging
         }
 
 
-        protected override Task ClearLogs() => this.conn.DeleteAllAsync<ErrorLog>();
+        protected override Task ClearLogs() => this.conn.DeleteAllAsync<LogStore>();
 
 
         protected override async Task<IEnumerable<CommandItem>> LoadLogs()
         {
             var results = await this.conn
-                .Errors
-                .OrderByDescending(x => x.Timestamp)
+                .Logs
+                .Where(x => x.IsError)
+                .OrderByDescending(x => x.TimestampUtc)
                 .ToListAsync();
 
             return results.Select(x => new CommandItem
             {
-                Text = x.Timestamp.ToString(),
+                Text = x.TimestampUtc.ToString(),
                 Detail = x.Description,
                 PrimaryCommand = ReactiveCommand.Create(() =>
                 {
-                    var s = $"{x.Timestamp}{Environment.NewLine}{x.Description}{Environment.NewLine}";
+                    var s = $"{x.TimestampUtc}{Environment.NewLine}{x.Description}{Environment.NewLine}";
                     if (!x.Parameters.IsEmpty())
                     {
                         var parameters = this.serializer.Deserialize<Tuple<string, string>[]>(x.Parameters);

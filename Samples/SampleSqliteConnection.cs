@@ -17,7 +17,6 @@ namespace Samples
             conn.CreateTable<JobLog>();
             conn.CreateTable<BleEvent>();
             conn.CreateTable<GpsEvent>();
-            conn.CreateTable<ErrorLog>();
             conn.CreateTable<HttpEvent>();
         }
 
@@ -28,6 +27,5 @@ namespace Samples
         public AsyncTableQuery<JobLog> JobLogs => this.Table<JobLog>();
         public AsyncTableQuery<GpsEvent> GpsEvents => this.Table<GpsEvent>();
         public AsyncTableQuery<HttpEvent> HttpEvents => this.Table<HttpEvent>();
-        public AsyncTableQuery<ErrorLog> Errors => this.Table<ErrorLog>();
     }
 }
