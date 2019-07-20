@@ -73,6 +73,10 @@ namespace Samples.ShinySetup
         }
 
 
+#if DEBUG
+        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
+            => services.BuildServiceProvider(true);
+#endif
         //public override IServiceProvider CreateServiceProvider(IServiceCollection services)
         //    => PrismContainerExtension.Current.CreateServiceProvider(services);
     }
