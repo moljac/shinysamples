@@ -17,7 +17,7 @@ namespace Samples.Models
 
         public string Text => this.Identifier;
         public string Detail => this.Entered
-            ? $"Entered on {this.Date:MMM d a\t h:mm tt}"
-            : $"Exited on {this.Date:MMM d a\t h:mm tt}";
+            ? $"Entered on {this.Date:MMM d 'at' h:mm tt}"
+            : $"Exited on {this.Date:MMM d 'at' h:mm tt}";
     }
 }
