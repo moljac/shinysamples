@@ -23,7 +23,7 @@ namespace Samples.ShinySetup
         public override void ConfigureServices(IServiceCollection services)
         {
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
-            services.UseSqliteLogging(true, true);
+            //services.UseSqliteLogging(true, true);
             //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
