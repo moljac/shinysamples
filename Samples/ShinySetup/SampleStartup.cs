@@ -10,7 +10,6 @@ using Shiny.SpeechRecognition;
 using Shiny.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Samples.Settings;
-using Samples.Logging;
 using Samples.ShinyDelegates;
 using Acr.UserDialogs.Forms;
 //using Prism.DryIoc;
