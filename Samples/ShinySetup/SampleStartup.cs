@@ -1,13 +1,6 @@
 ﻿using System;
 using Shiny;
-using Shiny.Beacons;
-using Shiny.BluetoothLE;
 using Shiny.Logging;
-using Shiny.Locations;
-using Shiny.Notifications;
-using Shiny.Sensors;
-using Shiny.SpeechRecognition;
-using Shiny.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Samples.Settings;
 using Samples.ShinyDelegates;
@@ -68,7 +61,6 @@ namespace Samples.ShinySetup
             services.UseMagnetometer();
             services.UsePedometer();
             services.UseProximitySensor();
-
             services.UseHeartRateMonitor();
             services.UseTemperature();
             services.UseHumidity();
