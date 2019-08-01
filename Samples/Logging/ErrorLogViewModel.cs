@@ -9,6 +9,7 @@ using ReactiveUI;
 using Samples.Infrastructure;
 using Shiny;
 using Shiny.Infrastructure;
+using Shiny.Integrations.Sqlite;
 using Shiny.Logging;
 using Shiny.Models;
 
