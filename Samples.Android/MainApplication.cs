@@ -1,9 +1,10 @@
 ﻿using System;
 using Shiny;
+using Shiny.Jobs;
 using Android.App;
 using Android.Runtime;
 using Samples.ShinySetup;
-using Shiny.Jobs;
+
 
 namespace Samples.Droid
 {
@@ -12,6 +13,7 @@ namespace Samples.Droid
 #else
     [Application(Debuggable = false)]
 #endif
+    //public class MainApplication : ShinyAndroidApplication<SampleStartup>
     public class MainApplication : Application
     {
         public MainApplication() : base() { }
