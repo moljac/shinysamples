@@ -44,7 +44,7 @@ namespace Samples.ShinySetup
             services.UseBeacons<BeaconDelegate>();
 
             services.RegisterBleAdapterState<BleDelegates>();
-            services.RegisterBleStateRestore<BleDelegates>();
+            services.RegisterBlePeripheralDelegate<BleDelegates>();
             services.UseBleCentral();
             services.UseBlePeripherals();
 

@@ -6,7 +6,7 @@ using Shiny.BluetoothLE.Central;
 
 namespace Samples.ShinyDelegates
 {
-    public class BleDelegates : IBleAdapterDelegate, IBleStateRestoreDelegate
+    public class BleDelegates : IBleAdapterDelegate, IBlePeripheralDelegate
     {
         readonly CoreDelegateServices services;
         public BleDelegates(CoreDelegateServices services) => this.services = services;
