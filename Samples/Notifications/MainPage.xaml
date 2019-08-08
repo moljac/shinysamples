@@ -7,5 +7,6 @@
         <notifications:SetupPage Title="Setup" />
         <notifications:PendingPage Title="Pending" />
         <notifications:SettingsPage Title="App Settings" />
+        <notifications:LogPage Title="Logs" />
     </TabbedPage.Children>
 </TabbedPage>

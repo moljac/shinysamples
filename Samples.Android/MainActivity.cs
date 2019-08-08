@@ -1,6 +1,7 @@
 ﻿using System;
 using Shiny;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -34,11 +35,11 @@ namespace Samples.Droid
         }
 
 
-        //protected override void OnNewIntent(Android.Content.Intent intent)
-        //{
-        //    base.OnNewIntent(intent);
-        //    Push.CheckLaunchedFromNotification(this, intent);
-        //}
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+            Shiny.Notifications.NotificationManager.TryProcessIntent(intent);
+        }
 
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
