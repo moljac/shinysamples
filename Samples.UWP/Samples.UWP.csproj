@@ -162,7 +162,7 @@
       <Version>1.0.0.329-beta</Version>
     </PackageReference>
     <PackageReference Include="Shiny.SpeechRecognition">
-      <Version>1.0.0.303-beta</Version>
+      <Version>1.0.0.329-beta</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Support.Uwp">
       <Version>1.0.0.329-beta</Version>
