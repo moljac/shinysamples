@@ -181,9 +181,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.618606" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>4.1.0.618606</Version>
+      <Version>4.1.0.673156</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
