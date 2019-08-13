@@ -10,9 +10,9 @@ using Shiny;
 
 namespace Samples.Notifications
 {
-    public class SetupViewModel : ViewModel
+    public class CreateViewModel : ViewModel
     {
-        public SetupViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
+        public CreateViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
         {
             this.WhenAnyValue
             (
