@@ -54,9 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Shiny.Integrations.CurrentActivityPlugin">
-      <Version>1.0.0.329-beta</Version>
-    </PackageReference>
     <PackageReference Include="System.Threading.Tasks.Extensions">
       <Version>4.5.3</Version>
     </PackageReference>
