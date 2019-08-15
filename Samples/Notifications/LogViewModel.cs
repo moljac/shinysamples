@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs.Forms;
+using ReactiveUI;
 using Samples.Infrastructure;
 using Samples.Models;
+using Shiny;
+using MsgBus = Shiny.IMessageBus;
 
 
 namespace Samples.Notifications
@@ -12,9 +17,18 @@ namespace Samples.Notifications
     public class LogViewModel : AbstractLogViewModel<CommandItem>
     {
         readonly SampleSqliteConnection conn;
-        public LogViewModel(SampleSqliteConnection conn, IUserDialogs dialogs) : base(dialogs)
+
+
+        public LogViewModel(SampleSqliteConnection conn,
+                            MsgBus messageBus,
+                            IUserDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
+            messageBus
+                .Listener<NotificationEvent>()
+                .Select(_ => Unit.Default)
+                .InvokeCommand(this.Load)
+                .DisposedBy(this.DestroyWith);
         }
 
 
