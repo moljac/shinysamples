@@ -32,6 +32,8 @@ namespace Samples.Droid
             FormsMaps.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             this.LoadApplication(new App());
+
+            Shiny.Notifications.NotificationManager.TryProcessIntent(this.Intent);
         }
 
 
