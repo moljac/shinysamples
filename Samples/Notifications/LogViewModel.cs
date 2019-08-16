@@ -17,6 +17,7 @@ namespace Samples.Notifications
     public class LogViewModel : AbstractLogViewModel<CommandItem>
     {
         readonly SampleSqliteConnection conn;
+        readonly MsgBus messageBus;
 
 
         public LogViewModel(SampleSqliteConnection conn,
@@ -24,13 +25,19 @@ namespace Samples.Notifications
                             IUserDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
-            messageBus
+            this.messageBus = messageBus;
+        }
+
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.messageBus
                 .Listener<NotificationEvent>()
                 .Select(_ => Unit.Default)
                 .InvokeCommand(this.Load)
-                .DisposedBy(this.DestroyWith);
+                .DisposedBy(this.DeactivateWith);
         }
-
 
         protected override Task ClearLogs() => this.conn.DeleteAllAsync<NotificationEvent>();
 
