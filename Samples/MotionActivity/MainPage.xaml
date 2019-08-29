@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="Samples.MotionActivity.MainPage"
+             Title="Motion Activity">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <DatePicker Date="{Binding Date}"
+                        MaximumDate="{x:Static sys:DateTime.Now}"
+                        HorizontalOptions="Center"
+                        FontSize="Large"
+                        Grid.Row="0" />
+
+            <StackLayout Orientation="Horizontal" Grid.Row="1">
+                <Label Text="{Binding CurrentActivity, StringFormat='Currently: {0}'}"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Grid.Row="1" />
+
+                <Label Text="{Binding EventCount, StringFormat='{0} Event(s)'}"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </StackLayout>
+
+            <ListView ItemsSource="{Binding Events}"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsBusy}"
+                      RefreshCommand="{Binding Load}"
+                      Grid.Row="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Text}"
+                                  Detail="{Binding Detail}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -48,9 +48,12 @@ namespace Samples.ShinySetup
             services.UseBleCentral();
             services.UseBlePeripherals();
 
+
             //builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));
             services.UseGeofencing<LocationDelegates>();
             services.UseGps<LocationDelegates>();
+            services.UseMotionActivity();
+
             services.UseNotifications<NotificationDelegate>(true);
             services.UseSpeechRecognition();
 
