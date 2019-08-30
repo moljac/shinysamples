@@ -36,8 +36,9 @@ namespace Samples.MotionActivity
                     return;
                 }
 
-                var activities = await motionActivity.Query(this.Date.Date, this.Date);
+                var activities = await motionActivity.QueryByDate(this.Date);
                 this.Events = activities
+                    .OrderByDescending(x => x.Timestamp)
                     .Select(x => new CommandItem
                     {
                         Text = $"({x.Confidence}) {x.Types}",
@@ -50,7 +51,6 @@ namespace Samples.MotionActivity
             this.BindBusyCommand(this.Load);
 
             this.WhenAnyValue(x => x.Date)
-                .Throttle(TimeSpan.FromMilliseconds(500))
                 .DistinctUntilChanged()
                 .Select(_ => Unit.Default)
                 .InvokeCommand((ICommand)this.Load)
