@@ -28,6 +28,8 @@ namespace Samples.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
