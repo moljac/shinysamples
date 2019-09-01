@@ -7,28 +7,11 @@ using Samples.ShinySetup;
 
 namespace Samples.Droid
 {
-#if DEBUG
-    [Application(Debuggable = true)]
-#else
-    [Application(Debuggable = false)]
-#endif
+    [Application]
     public class MainApplication : ShinyAndroidApplication<SampleStartup>
-    //public class MainApplication : Application
     {
-        //public MainApplication() : base() { }
         public MainApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
         {
         }
-
-
-        //public override void OnCreate()
-        //{
-        //    base.OnCreate();
-
-        //    AndroidShinyHost.Init(
-        //        this,
-        //        new SampleStartup()
-        //    );
-        //}
     }
 }
