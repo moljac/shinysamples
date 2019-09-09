@@ -43,8 +43,8 @@ namespace Samples.ShinySetup
             services.UseHttpTransfers<HttpTransferDelegate>();
             services.UseBeacons<BeaconDelegate>();
 
-            services.RegisterBleAdapterState<BleDelegates>();
-            services.RegisterBlePeripheralDelegate<BleDelegates>();
+            //services.RegisterBleAdapterState<BleDelegates>();
+            //services.RegisterBlePeripheralDelegate<BleDelegates>();
             services.UseBleCentral();
             services.UseBlePeripherals();
 

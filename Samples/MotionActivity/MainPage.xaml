@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:Samples.MotionActivity"
+             xmlns:samples="clr-namespace:Samples"
+             x:DataType="viewModel:MainViewModel"
              mc:Ignorable="d"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="Samples.MotionActivity.MainPage"
@@ -54,7 +57,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
+                        <StackLayout x:DataType="samples:CommandItem">
                             <Label Text="{Binding Text}" FontSize="Title" />
                             <Label Text="{Binding Detail}" FontSize="Subtitle" />
                             <BoxView HeightRequest="1"
