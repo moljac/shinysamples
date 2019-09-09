@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Samples.Settings;
 using Samples.ShinyDelegates;
 using Acr.UserDialogs.Forms;
-//using Prism.DryIoc;
 
 
 namespace Samples.ShinySetup
@@ -28,16 +27,17 @@ namespace Samples.ShinySetup
             // jobs, connectivity, power, filesystem, are installed automatically
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
-            services.RegisterStartupTask<GlobalExceptionHandler>();
+            services.AddSingleton<GlobalExceptionHandler>();
             services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<IUserDialogs, UserDialogs>();
 
             // startup tasks
             services.AddSingleton<IFullService, FullService>();
-            services.RegisterStartupTask<JobLoggerTask>();
+            services.AddSingleton<JobLoggerTask>();
 
             // configuration
-            services.RegisterSettings<IAppSettings, AppSettings>("AppSettings");
+            //services.RegisterSettings<IAppSettings, AppSettings>("AppSettings");
+            services.AddSingleton<IAppSettings, AppSettings>();
 
             // register all of the shiny stuff you want to use
             services.UseHttpTransfers<HttpTransferDelegate>();
@@ -47,7 +47,6 @@ namespace Samples.ShinySetup
             //services.RegisterBlePeripheralDelegate<BleDelegates>();
             services.UseBleCentral();
             services.UseBlePeripherals();
-
 
             //builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));
             services.UseGeofencing<LocationDelegates>();
@@ -74,7 +73,5 @@ namespace Samples.ShinySetup
         public override IServiceProvider CreateServiceProvider(IServiceCollection services)
             => services.BuildServiceProvider(true);
 #endif
-        //public override IServiceProvider CreateServiceProvider(IServiceCollection services)
-        //    => PrismContainerExtension.Current.CreateServiceProvider(services);
     }
 }
