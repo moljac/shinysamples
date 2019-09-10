@@ -36,16 +36,12 @@ namespace Samples.ShinySetup
             services.AddSingleton<JobLoggerTask>();
 
             // configuration
-            //services.RegisterSettings<IAppSettings, AppSettings>("AppSettings");
             services.AddSingleton<IAppSettings, AppSettings>();
 
             // register all of the shiny stuff you want to use
             services.UseHttpTransfers<HttpTransferDelegate>();
             services.UseBeacons<BeaconDelegate>();
-
-            //services.RegisterBleAdapterState<BleDelegates>();
-            //services.RegisterBlePeripheralDelegate<BleDelegates>();
-            services.UseBleCentral();
+            services.UseBleCentral<BleCentralDelegate>();
             services.UseBlePeripherals();
 
             //builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));

@@ -2,19 +2,18 @@
 using System.Threading.Tasks;
 using Samples.Models;
 using Shiny;
-using Shiny.BluetoothLE;
 using Shiny.BluetoothLE.Central;
 
 
 namespace Samples.ShinyDelegates
 {
-    public class BleDelegates : IBleAdapterDelegate, IBlePeripheralDelegate
+    public class BleCentralDelegate : IBleCentralDelegate
     {
         readonly CoreDelegateServices services;
-        public BleDelegates(CoreDelegateServices services) => this.services = services;
+        public BleCentralDelegate(CoreDelegateServices services) => this.services = services;
 
 
-        public async Task OnBleAdapterStateChanged(AccessState state)
+        public async Task OnAdapterStateChanged(AccessState state)
         {
             if (state != AccessState.Available && this.services.AppSettings.UseNotificationsBle)
                 await this.services.SendNotification("BLE State", "Turn on Bluetooth already");
