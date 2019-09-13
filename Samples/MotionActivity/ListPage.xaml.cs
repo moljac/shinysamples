@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Samples.MotionActivity
 {
-    public partial class MainPage : TabbedPage
+    public partial class ListPage : ContentPage
     {
-        public MainPage()
+        public ListPage()
         {
             this.InitializeComponent();
         }

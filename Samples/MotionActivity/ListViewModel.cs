@@ -13,12 +13,12 @@ using Shiny.Locations;
 
 namespace Samples.MotionActivity
 {
-    public class MainViewModel : ViewModel
+    public class ListViewModel : ViewModel
     {
         readonly IMotionActivity motionActivity;
 
 
-        public MainViewModel(IUserDialogs dialogs, IMotionActivity motionActivity = null)
+        public ListViewModel(IUserDialogs dialogs, IMotionActivity motionActivity = null)
         {
             this.motionActivity = motionActivity;
 
