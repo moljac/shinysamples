@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -27,9 +30,19 @@ namespace Samples.MotionActivity
             });
             this.BindBusyCommand(this.Load);
             this.WhenAnyValue(x => x.Date)
-                .InvokeCommand((ICommand)this.Load);
+                .Skip(1)
+                .DistinctUntilChanged()
+                .Select(_ => Unit.Default)
+                .InvokeCommand((ICommand)this.Load)
+                .DisposeWith(this.DestroyWith);
         }
 
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((ICommand)this.Load).Execute(null);
+        }
 
         public IReactiveCommand Load { get; }
         [Reactive] public DateTime Date { get; set; } = DateTime.Now;
