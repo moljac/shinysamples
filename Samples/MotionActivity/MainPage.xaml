@@ -9,6 +9,7 @@
         <samples:ListPage />
         <samples:TimeBlocksPage />
         <samples:TotalTimesPage />
+        <samples:OtherExtensionsPage />
     </TabbedPage.Children>
 
 </TabbedPage>
