@@ -25,6 +25,8 @@
             <TimePicker Time="{Binding SelectedTime}" />
 
             <Button Text="Send" Command="{Binding Send}" />
+
+            <Button Text="Send Test Now" Command="{Binding SendNow}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

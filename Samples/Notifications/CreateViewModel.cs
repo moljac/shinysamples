@@ -32,6 +32,9 @@ namespace Samples.Notifications
             this.SelectedDate = DateTime.Now;
             this.SelectedTime = DateTime.Now.TimeOfDay.Add(TimeSpan.FromMinutes(10));
 
+            this.SendNow = ReactiveCommand.CreateFromTask(() =>
+                notificationManager.Send("Test Now", "This is a test of the sendnow stuff")
+            );
             this.Send = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
@@ -67,6 +70,7 @@ namespace Samples.Notifications
 
         public ICommand PermissionCheck { get; }
         public ICommand Send { get; }
+        public ICommand SendNow { get; }
 
         [Reactive] public string NotificationTitle { get; set;} = "Test Title";
         [Reactive] public string NotificationMessage { get; set; } = "Test Message";
