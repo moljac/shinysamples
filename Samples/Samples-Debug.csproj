@@ -16,10 +16,10 @@
         <PackageReference Include="DryIoc.dll" Version="4.0.7" />
         <PackageReference Include="Humanizer" Version="2.7.2" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
-        <PackageReference Include="ReactiveUI.Fody" Version="10.1.6" />
-        <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-        <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
-        <PackageReference Include="Xamarin.Forms.Maps" Version="4.2.0.778463" />
+        <PackageReference Include="ReactiveUI.Fody" Version="10.2.2" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+        <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+        <PackageReference Include="Xamarin.Forms.Maps" Version="4.2.0.815419" />
     </ItemGroup>
 
     <ItemGroup>
