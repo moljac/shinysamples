@@ -16,7 +16,6 @@ namespace Samples.BluetoothLE
 {
     public class AdapterViewModel : ViewModel
     {
-        readonly ICentralManager centralManager;
         IDisposable scan;
 
 
@@ -24,8 +23,6 @@ namespace Samples.BluetoothLE
                                 INavigationService navigator,
                                 IUserDialogs dialogs)
         {
-            this.centralManager = central;
-
             this.SelectPeripheral = navigator.NavigateCommand<PeripheralItemViewModel>(
                 "Peripheral",
                 (x, p) => p.Add("Peripheral", x.Peripheral)
@@ -33,8 +30,16 @@ namespace Samples.BluetoothLE
 
             this.OpenSettings = ReactiveCommand.Create(() =>
             {
-                var settings = this.centralManager as ICanOpenAdapterSettings;
-                settings.OpenSettings();
+                switch (central.TryOpenSettings())
+                {
+                    case AccessState.Denied:
+                        dialogs.Alert("Could not open settings");
+                        break;
+
+                    case AccessState.NotSupported:
+                        dialogs.Alert("Not Supported on this OS");
+                        break;
+                }
             });
 
             this.ToggleAdapterState = ReactiveCommand.Create(
@@ -100,6 +105,7 @@ namespace Samples.BluetoothLE
             base.OnDisappearing();
             this.IsScanning = false;
         }
+
 
         public ICommand ScanToggle { get; }
         public ICommand OpenSettings { get; }
