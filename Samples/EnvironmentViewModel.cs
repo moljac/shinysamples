@@ -45,6 +45,7 @@ namespace Samples
         public string AppBuild => this.environment.AppBuild;
         public string Name => this.environment.MachineName;
         public string OS => this.environment.OperatingSystem;
+        public string OSVersion => this.environment.OperatingSystemVersion;
         public string Device => $"{this.environment.Manufacturer} {this.environment.Model}";
 
         readonly ObservableAsPropertyHelper<string> networkReach;

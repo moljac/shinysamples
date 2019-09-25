@@ -15,6 +15,7 @@
             <TableSection Title="Environment">
                 <TextCell Text="Name" Detail="{Binding Name}" />
                 <TextCell Text="OS" Detail="{Binding OS}" />
+                <TextCell Text="OS Version" Detail="{Binding OSVersion}" />
                 <TextCell Text="Device" Detail="{Binding Device}" />
             </TableSection>
 
