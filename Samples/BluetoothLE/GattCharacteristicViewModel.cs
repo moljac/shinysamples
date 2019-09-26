@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -8,7 +9,7 @@ using ReactiveUI.Fody.Helpers;
 using Acr.UserDialogs.Forms;
 using Shiny;
 using Shiny.BluetoothLE.Central;
-using System.IO;
+
 
 namespace Samples.BluetoothLE
 {
@@ -106,26 +107,14 @@ namespace Samples.BluetoothLE
                 if (result.Ok && !String.IsNullOrWhiteSpace(result.Value))
                 {
                     var bytes = utf8 ? Encoding.UTF8.GetBytes(result.Value) : result.Value.FromHex();
-                    if (withResponse)
-                    {
-                        this.Characteristic
-                            .Write(bytes)
-                            .Timeout(TimeSpan.FromSeconds(2))
-                            .Subscribe(
-                                x => this.dialogs.Toast("Write Complete"),
-                                ex => this.dialogs.Alert(ex.ToString())
-                            );
-                    }
-                    else
-                    {
-                        this.Characteristic
-                            .WriteWithoutResponse(bytes)
-                            .Timeout(TimeSpan.FromSeconds(2))
-                            .Subscribe(
-                                x => this.dialogs.Toast("Write Without Response Complete"),
-                                ex => this.dialogs.Alert(ex.ToString())
-                            );
-                    }
+                    var msg = withResponse ? "Write Complete" : "Write Without Response Complete";
+                    this.Characteristic
+                        .Write(bytes, withResponse)
+                        .Timeout(TimeSpan.FromSeconds(2))
+                        .Subscribe(
+                            x => this.dialogs.Toast(msg),
+                            ex => this.dialogs.Alert(ex.ToString())
+                        );
                 }
             }
             catch (Exception ex)
