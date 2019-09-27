@@ -18,6 +18,9 @@
             <Label Text="Payload" />
             <Entry Text="{Binding Payload}" />
 
+            <Label Text="Badge Count" />
+            <Entry Text="{Binding BadgeCount}" Keyboard="Numeric" />
+
             <Label Text="Date" />
             <DatePicker Date="{Binding SelectedDate}" />
 

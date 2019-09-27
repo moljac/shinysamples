@@ -43,6 +43,7 @@ namespace Samples.Notifications
                         Title = this.NotificationTitle,
                         Message = this.NotificationMessage,
                         Payload = this.Payload,
+                        BadgeCount = this.BadgeCount,
                         ScheduleDate = this.ScheduledTime
                     });
                     this.NotificationTitle = String.Empty;
@@ -77,6 +78,7 @@ namespace Samples.Notifications
         public DateTime ScheduledTime { [ObservableAsProperty] get; }
         [Reactive] public DateTime SelectedDate { get; set; }
         [Reactive] public TimeSpan SelectedTime { get; set; }
+        [Reactive] public int BadgeCount { get; set; }
         [Reactive] public string Payload { get; set; }
     }
 }
