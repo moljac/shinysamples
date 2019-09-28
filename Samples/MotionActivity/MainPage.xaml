@@ -7,8 +7,6 @@
 
     <TabbedPage.Children>
         <samples:ListPage />
-        <samples:TimeBlocksPage />
-        <samples:TotalTimesPage />
         <samples:OtherExtensionsPage />
     </TabbedPage.Children>
 

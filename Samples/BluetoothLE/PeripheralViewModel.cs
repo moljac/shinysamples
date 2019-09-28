@@ -45,7 +45,11 @@ namespace Samples.BluetoothLE
             {
                 var pair = this.centralManager as ICanPairPeripherals;
 
-                if (pair.PairingStatus == PairingState.Paired)
+                if (pair == null)
+                {
+                    dialogs.Alert("Pairing is not supported on this platform");
+                }
+                else if (pair.PairingStatus == PairingState.Paired)
                 {
                     dialogs.Toast("Peripheral is already paired");
                 }
@@ -66,12 +70,19 @@ namespace Samples.BluetoothLE
                 async x =>
                 {
                     var mtu = this.centralManager as ICanRequestMtu;
-                    var result = await dialogs.Prompt("Range 20-512", "MTU Request");
-                    if (result.Ok)
+                    if (mtu == null)
                     {
+                        await dialogs.Alert("MTU requests are not supported on this platform");
+                    }
+                    else
+                    {
+                        var result = await dialogs.Prompt("Range 20-512", "MTU Request");
+                        if (result.Ok)
+                        {
 
-                        var actual = await mtu.RequestMtu(Int32.Parse(result.Value));
-                        dialogs.Toast("MTU Changed to " + actual);
+                            var actual = await mtu.RequestMtu(Int32.Parse(result.Value));
+                            dialogs.Toast("MTU Changed to " + actual);
+                        }
                     }
                 },
                 this.WhenAny(
