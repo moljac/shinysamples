@@ -176,13 +176,27 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\logo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\logo.pdf" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-1.pdf" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-2.pdf" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-3.pdf" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-4.pdf" />
-    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-5.pdf" />
+    <ImageAsset Include="Assets.xcassets\logo.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-1.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-2.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-3.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-4.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\logo.imageset\logo-5.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

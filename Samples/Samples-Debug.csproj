@@ -14,7 +14,7 @@
     <ItemGroup>
         <PackageReference Include="Acr.UserDialogs.Forms" Version="1.0.0.7-beta" />
         <PackageReference Include="DryIoc.dll" Version="4.0.7" />
-        <PackageReference Include="Humanizer" Version="2.7.2" />
+        <PackageReference Include="Humanizer" Version="2.7.9" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
         <PackageReference Include="ReactiveUI.Fody" Version="10.3.1" />
         <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
