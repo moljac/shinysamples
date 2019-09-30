@@ -27,11 +27,10 @@ namespace Samples.ShinySetup
             // jobs, connectivity, power, filesystem, are installed automatically
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
-            services.AddSingleton<GlobalExceptionHandler>();
-            services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<IUserDialogs, UserDialogs>();
 
             // startup tasks
+            services.AddSingleton<GlobalExceptionHandler>();
             services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<JobLoggerTask>();
 
@@ -65,9 +64,9 @@ namespace Samples.ShinySetup
         }
 
 
-#if DEBUG
-        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
-            => services.BuildServiceProvider(true);
-#endif
+//#if DEBUG
+//        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
+//            => services.BuildServiceProvider(true);
+//#endif
     }
 }
