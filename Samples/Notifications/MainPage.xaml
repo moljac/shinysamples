@@ -6,6 +6,7 @@
     <TabbedPage.Children>
         <notifications:CreatePage Title="Create" />
         <notifications:PendingPage Title="Pending" />
+        <notifications:BadgePage Title="Badges" />
         <notifications:SettingsPage Title="App Settings" />
         <notifications:LogPage Title="Logs" />
     </TabbedPage.Children>
