@@ -218,7 +218,7 @@
       <Name>Shiny.Locations</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj">
-      <Project>{F704315D-7F4F-4090-B635-7FE634565187}</Project>
+      <Project>{90C2F649-9648-4D5E-B30E-A88BC2CA8434}</Project>
       <Name>Shiny.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj">

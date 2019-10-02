@@ -15,28 +15,29 @@ namespace Samples.MotionActivity
 {
     public class ListViewModel : ViewModel
     {
-        readonly IMotionActivity motionActivity;
+        readonly IMotionActivityManager activityManager;
 
 
-        public ListViewModel(IUserDialogs dialogs, IMotionActivity motionActivity = null)
+        public ListViewModel(IUserDialogs dialogs, IMotionActivityManager activityManager = null)
         {
-            this.motionActivity = motionActivity;
+            this.activityManager = activityManager;
 
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
-                if (this.motionActivity == null)
+                if (this.activityManager == null)
                 {
                     await dialogs.Alert("MotionActivity is not supported on this platform");
                     return;
                 }
 
-                if (!this.motionActivity.IsSupported)
+                var result = await this.activityManager.RequestPermission();
+                if (result != Shiny.AccessState.Available)
                 {
-                    await dialogs.Alert("Motion Activity is not available");
+                    await dialogs.Alert("Motion Activity is not available - " + result);
                     return;
                 }
 
-                var activities = await motionActivity.QueryByDate(this.Date);
+                var activities = await activityManager.QueryByDate(this.Date);
                 this.Events = activities
                     .OrderByDescending(x => x.Timestamp)
                     .Select(x => new CommandItem
@@ -61,7 +62,7 @@ namespace Samples.MotionActivity
         public override void OnAppearing()
         {
             base.OnAppearing();
-            this.motionActivity?
+            this.activityManager?
                 .WhenActivityChanged()
                 .SubOnMainThread(x => this.CurrentActivity = $"({x.Confidence}) {x.Types}")
                 .DisposeWith(this.DeactivateWith);

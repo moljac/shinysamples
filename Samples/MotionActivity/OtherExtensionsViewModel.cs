@@ -10,11 +10,11 @@ namespace Samples.MotionActivity
 {
     public class OtherExtensionsViewModel : ViewModel
     {
-        readonly IMotionActivity activityManager;
+        readonly IMotionActivityManager activityManager;
         readonly IUserDialogs dialogs;
 
 
-        public OtherExtensionsViewModel(IMotionActivity activityManager, IUserDialogs dialogs)
+        public OtherExtensionsViewModel(IMotionActivityManager activityManager, IUserDialogs dialogs)
         {
             this.activityManager = activityManager;
             this.dialogs = dialogs;
