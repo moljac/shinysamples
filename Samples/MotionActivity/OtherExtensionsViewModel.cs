@@ -31,10 +31,19 @@ namespace Samples.MotionActivity
                     try
                     {
                         var current = await this.activityManager.GetCurrentActivity();
-                        this.CurrentText = $"{current.Types} ({current.Confidence})";
+                        if (current == null)
+                        {
+                            this.CurrentText = "No current activity found - this should not happen";
+                            this.IsCurrentAuto = false;
+                            this.IsCurrentStationary = false;
+                        }
+                        else
+                        {
+                            this.CurrentText = $"{current.Types} ({current.Confidence})";
 
-                        this.IsCurrentAuto = await this.activityManager.IsCurrentAutomotive();
-                        this.IsCurrentStationary = await this.activityManager.IsCurrentStationary();
+                            this.IsCurrentAuto = await this.activityManager.IsCurrentAutomotive();
+                            this.IsCurrentStationary = await this.activityManager.IsCurrentStationary();
+                        }
                     }
                     catch (Exception ex)
                     {
