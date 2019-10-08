@@ -43,6 +43,8 @@ namespace Samples
             containerRegistry.RegisterForNavigation<BluetoothLE.AdapterPage>("BleCentral");
             containerRegistry.RegisterForNavigation<BluetoothLE.PeripheralPage>("Peripheral");
             containerRegistry.RegisterForNavigation<BlePeripherals.MainPage>("BlePeripherals");
+            containerRegistry.RegisterForNavigation<BluetoothLE.CentralExtensionsPage>("BleExtensions");
+            containerRegistry.RegisterForNavigation<BluetoothLE.PerformancePage>("BlePerformance");
 
             containerRegistry.RegisterForNavigation<Geofences.MainPage>("Geofencing");
             containerRegistry.RegisterForNavigation<Geofences.CreatePage>("CreateGeofence");

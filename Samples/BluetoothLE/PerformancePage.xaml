@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Samples.BluetoothLE.PerformancePage"
+             Title="BLE Performance">
+
+    <ContentPage.Content>
+        <TableView>
+            <TableRoot>
+                <TableSection>
+                    <TextCell Text="Status"
+                              Detail="{Binding Status}" />
+                    <EntryCell Label="Device"
+                               Text="{Binding DeviceName}"
+                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
+                    <EntryCell Label="Service UUID"
+                               Text="{Binding ServiceUuid}"
+                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
+                    <EntryCell Label="Characteristic UUID"
+                               Text="{Binding CharacteristicUuid}"
+                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
+                </TableSection>
+
+                <TableSection>
+                    <TextCell Text="Write" Command="{Binding WriteTest}" />
+                    <TextCell Text="Write No Response" Command="{Binding WriteWithoutResponseTest}" />
+                    <TextCell Text="Read" Command="{Binding ReadTest}" />
+                </TableSection>
+
+                <TableSection>
+                    <TextCell Text="MTU" Detail="{Binding MTU}" /> 
+                    <TextCell Text="Speed" Command="{Binding Speed}" />
+                </TableSection>
+
+                <TableSection>
+                    <TextCell Text="Stop Test" Command="{Binding Stop}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

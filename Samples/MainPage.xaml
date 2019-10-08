@@ -17,8 +17,10 @@
                     </TableSection>
                     <TableSection Title="Bluetooth">
                         <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
-                        <TextCell Text="BluetoothLE Central" Command="{Binding Navigate}" CommandParameter="Nav/BleCentral" />
-                        <TextCell Text="BluetoothLE Peripherals" Command="{Binding Navigate}" CommandParameter="Nav/BlePeripherals" />
+                        <TextCell Text="Central" Command="{Binding Navigate}" CommandParameter="Nav/BleCentral" />
+                        <TextCell Text="Perf Tests" Command="{Binding Navigate}" CommandParameter="Nav/BlePerformance" />
+                        <TextCell Text="Extensions" Command="{Binding Navigate}" CommandParameter="Nav/BleExtensions" />
+                        <TextCell Text="Peripheral" Command="{Binding Navigate}" CommandParameter="Nav/BlePeripherals" />
                     </TableSection>
                     <TableSection Title="Locations">
                         <TextCell Text="GPS" Command="{Binding Navigate}" CommandParameter="Nav/Gps"  />
