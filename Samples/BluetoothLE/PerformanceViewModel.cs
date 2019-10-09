@@ -49,18 +49,9 @@ namespace Samples.BluetoothLE
                     }
                 });
 
-            this.WriteTest = this.DoWork("Write With Response", async (ch, ct) =>
-            {
-                var data = Enumerable.Repeat<byte>(0x01, this.MTU).ToArray();
-                await ch.Write(data, true).ToTask(ct);
-                return data.Length;
-            });
-            this.WriteWithoutResponseTest = this.DoWork("Write W/O Response", async (ch, ct) =>
-            {
-                var data = Enumerable.Repeat<byte>(0x01, this.MTU).ToArray();
-                await ch.Write(data, false).ToTask(ct);
-                return data.Length;
-            });
+            this.WriteTest = this.DoWrite(true);
+            this.WriteWithoutResponseTest = this.DoWrite(false);
+
             this.ReadTest = this.DoWork("Read", async (ch, ct) =>
             {
                 var read = await ch.Read().ToTask(ct);
@@ -106,7 +97,7 @@ namespace Samples.BluetoothLE
         public ICommand Stop { get; }
         public ICommand Permissions { get; }
 
-        [Reactive] public string DeviceName { get; set; } = "DABOMB";
+        [Reactive] public string DeviceName { get; set; } = "ESCAPEROOM";
         [Reactive] public bool IsConnected { get; private set; }
         [Reactive] public int MTU { get; private set; }
         [Reactive] public string Speed { get; private set; }
@@ -123,6 +114,16 @@ namespace Samples.BluetoothLE
             this.Permissions.Execute(null);
         }
 
+
+        ICommand DoWrite(bool withResponse) => this.DoWork(
+            withResponse ? "Write With Response" : "Write W/O Response",
+            async (ch, ct) =>
+            {
+                var data = Enumerable.Repeat<byte>(0x01, this.MTU).ToArray();
+                await ch.Write(data, withResponse).ToTask(ct);
+                return data.Length;
+            }
+        );
 
         CancellationTokenSource cancelSrc;
         ICommand DoWork(string testName, Func<IGattCharacteristic, CancellationToken, Task<int>> func) => ReactiveCommand
@@ -151,7 +152,7 @@ namespace Samples.BluetoothLE
             this.Info = "Searching for device..";
 
             var peripheral = await this.centralManager
-                .ScanUntilPeripheralFound(this.DeviceName)
+                .ScanUntilPeripheralFound(this.DeviceName.Trim())
                 .ToTask(cancelToken);
 
             this.Info = "Device Found - Connecting";
