@@ -19,6 +19,8 @@
                     <EntryCell Label="Characteristic UUID"
                                Text="{Binding CharacteristicUuid}"
                                IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
+
+                    <TextCell Text="{Binding Info}" />
                 </TableSection>
 
                 <TableSection>
@@ -29,7 +31,7 @@
 
                 <TableSection>
                     <TextCell Text="MTU" Detail="{Binding MTU}" /> 
-                    <TextCell Text="Speed" Command="{Binding Speed}" />
+                    <TextCell Text="Speed" Detail="{Binding Speed}" />
                 </TableSection>
 
                 <TableSection>

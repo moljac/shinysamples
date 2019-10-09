@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
@@ -22,6 +23,7 @@ namespace Samples.BluetoothLE
         int bytes;
         IDisposable notifySub;
         IDisposable speedSub;
+
 
         public PerformanceViewModel(ICentralManager centralManager)
         {
@@ -47,19 +49,19 @@ namespace Samples.BluetoothLE
                     }
                 });
 
-            this.WriteTest = this.DoWork(async (ch, ct) =>
+            this.WriteTest = this.DoWork("Write With Response", async (ch, ct) =>
             {
-                // need to send MTU size
-                await ch.Write(new byte[0x01], true).ToTask(ct);
-                return 1;
+                var data = Enumerable.Repeat<byte>(0x01, this.MTU).ToArray();
+                await ch.Write(data, true).ToTask(ct);
+                return data.Length;
             });
-            this.WriteWithoutResponseTest = this.DoWork(async (ch, ct) =>
+            this.WriteWithoutResponseTest = this.DoWork("Write W/O Response", async (ch, ct) =>
             {
-                // need to send MTU size
-                await ch.Write(new byte[0x01], false).ToTask(ct);
-                return 1;
+                var data = Enumerable.Repeat<byte>(0x01, this.MTU).ToArray();
+                await ch.Write(data, false).ToTask(ct);
+                return data.Length;
             });
-            this.ReadTest = this.DoWork(async (ch, ct) =>
+            this.ReadTest = this.DoWork("Read", async (ch, ct) =>
             {
                 var read = await ch.Read().ToTask(ct);
                 return read.Data.Length;
@@ -71,6 +73,7 @@ namespace Samples.BluetoothLE
                     {
                         this.IsRunning = true;
                         var characteristic = await this.SetupCharacteristic(this.cancelSrc.Token);
+                        this.Info = "Running Notify Test";
 
                         this.notifySub = characteristic
                             .RegisterAndNotify(true)
@@ -85,6 +88,7 @@ namespace Samples.BluetoothLE
                 () =>
                 {
                     this.IsRunning = false;
+                    this.Info = "Test Stopped";
                     this.cancelSrc?.Cancel();
                     this.notifySub?.Dispose();
                     this.notifySub = null;
@@ -109,32 +113,30 @@ namespace Samples.BluetoothLE
         [Reactive] public string ServiceUuid { get; set; } = DefaultServiceUuid;
         [Reactive] public string CharacteristicUuid { get; set; } = DefaultCharacteristicUuid;
         [Reactive] public bool IsRunning { get; private set; }
+        [Reactive] public string Info { get; private set; }
         [Reactive] public AccessState Status { get; private set; }
 
 
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.Permissions.Execute(null);
+        }
+
+
         CancellationTokenSource cancelSrc;
-        ICommand DoWork(Func<IGattCharacteristic, CancellationToken, Task<int>> func) => ReactiveCommand
+        ICommand DoWork(string testName, Func<IGattCharacteristic, CancellationToken, Task<int>> func) => ReactiveCommand
             .CreateFromTask(async () =>
             {
                 this.IsRunning = true;
-                try
-                {
-                    this.cancelSrc = new CancellationTokenSource();
-                    var characteristic = await this.SetupCharacteristic(this.cancelSrc.Token);
+                this.cancelSrc = new CancellationTokenSource();
+                var characteristic = await this.SetupCharacteristic(this.cancelSrc.Token);
+                this.Info = $"Running {testName} Test";
 
-                    while (!this.cancelSrc.IsCancellationRequested)
-                    {
-                        var length = await func(characteristic, this.cancelSrc.Token);
-                        Interlocked.Add(ref this.bytes, length);
-                    }
-                }
-                catch (Exception ex)
+                while (!this.cancelSrc.IsCancellationRequested)
                 {
-                    Console.WriteLine(ex);
-                }
-                finally
-                {
-                    this.IsRunning = false;
+                    var length = await func(characteristic, this.cancelSrc.Token);
+                    Interlocked.Add(ref this.bytes, length);
                 }
             },
             this.CanRun()
@@ -146,18 +148,28 @@ namespace Samples.BluetoothLE
             var suuid = Guid.Parse(this.ServiceUuid);
             var cuuid = Guid.Parse(this.CharacteristicUuid);
 
+            this.Info = "Searching for device..";
+
             var peripheral = await this.centralManager
                 .ScanUntilPeripheralFound(this.DeviceName)
                 .ToTask(cancelToken);
+
+            this.Info = "Device Found - Connecting";
 
             await peripheral
                 .ConnectWait()
                 .ToTask(cancelToken);
 
-            this.MTU = await peripheral
-                .RequestMtu(512)
-                .ToTask(cancelToken);
+            this.Info = "Connected - Requesting MTU Change";
 
+            if (peripheral is ICanRequestMtu mtu)
+                this.MTU = await mtu
+                    .RequestMtu(512)
+                    .ToTask(cancelToken);
+            else
+                this.MTU = peripheral.MtuSize;
+
+            this.Info = "Searching for characteristic";
             var characteristic = await peripheral
                 .GetKnownCharacteristics(
                     suuid,
@@ -165,6 +177,7 @@ namespace Samples.BluetoothLE
                 )
                 .ToTask(cancelToken);
 
+            this.Info = "Characteristic Found";
             return characteristic;
         }
 
