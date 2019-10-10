@@ -18,7 +18,17 @@
                                IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
                     <EntryCell Label="Characteristic UUID"
                                Text="{Binding CharacteristicUuid}"
-                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" /> 
+                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
+                </TableSection>
+
+                <TableSection Title="Android">
+                    <SwitchCell Text="Synchronize"
+                                On="{Binding AndroidUseInternalSyncQueue}"
+                                IsEnabled="{Binding IsAndroid}" />
+
+                    <SwitchCell Text="Main Thread"
+                                On="{Binding AndroidUseMainThread}"
+                                IsEnabled="{Binding IsAndroid}" />
                 </TableSection>
 
                 <TableSection Title="Tests">

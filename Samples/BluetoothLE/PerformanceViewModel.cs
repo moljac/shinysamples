@@ -25,14 +25,28 @@ namespace Samples.BluetoothLE
         IDisposable speedSub;
 
 
-        public PerformanceViewModel(ICentralManager centralManager)
+        public PerformanceViewModel(ICentralManager centralManager, BleCentralConfiguration configuration)
         {
             this.centralManager = centralManager;
+
+            if (this.IsAndroid)
+            {
+                this.AndroidUseInternalSyncQueue = configuration.AndroidUseInternalSyncQueue;
+                this.AndroidUseMainThread = configuration.AndroidShouldInvokeOnMainThread;
+
+                this.WhenAnyValue(x => x.AndroidUseMainThread)
+                    .Skip(1)
+                    .Subscribe(x => configuration.AndroidShouldInvokeOnMainThread = x);
+
+                this.WhenAnyValue(x => x.AndroidUseInternalSyncQueue)
+                    .Skip(1)
+                    .Subscribe(x => configuration.AndroidUseInternalSyncQueue = x);
+            }
 
             this.WhenAnyValue(x => x.IsRunning)
                 .Skip(1)
                 .Subscribe(x =>
-                {
+                {                    
                     if (!x)
                     {
                         this.speedSub?.Dispose();
@@ -103,6 +117,10 @@ namespace Samples.BluetoothLE
         public ICommand NotifyTest { get; }
         public ICommand Stop { get; }
         public ICommand Permissions { get; }
+
+        public bool IsAndroid => Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android;
+        [Reactive] public bool AndroidUseInternalSyncQueue { get; set; }
+        [Reactive] public bool AndroidUseMainThread { get; set; }
 
         [Reactive] public string DeviceName { get; set; } = "ESCAPEROOM";
         [Reactive] public bool IsConnected { get; private set; }
