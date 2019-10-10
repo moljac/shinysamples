@@ -41,7 +41,7 @@ namespace Samples.BluetoothLE
                     {
                         this.speedSub = Observable.Interval(TimeSpan.FromSeconds(2)).Subscribe(_ =>
                         {
-                            this.Speed = (this.bytes / 2).Bytes().Humanize();
+                            this.Speed = (this.bytes / 2).Bytes().Humanize("0.0");
                             Interlocked.Exchange(ref this.bytes, 0);
                         });
                     }
