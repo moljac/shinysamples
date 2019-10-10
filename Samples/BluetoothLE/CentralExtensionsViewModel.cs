@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
-using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
@@ -12,24 +12,30 @@ namespace Samples.BluetoothLE
 {
     public class CentralExtensionsViewModel : ViewModel
     {
-        public CentralExtensionsViewModel(ICentralManager centralManager, IUserDialogs dialogs)
+        public CentralExtensionsViewModel(ICentralManager centralManager)
         {
-            this.ScanForDevice = ReactiveCommand.CreateFromTask(
-                async () =>
-                {
-                    await centralManager.ScanUntilPeripheralFound(this.DeviceName).ToTask();
-                },
-                this.WhenAny(
-                    x => x.DeviceName,
-                    x => !x.GetValue().IsEmpty()
+            //centralManager.ScanInterval
+            //centralManager.ScanForUniquePeripherals
+
+            this.Tasks = new List<TaskViewModel>
+            {
+                new TaskViewModel(
+                    "Scan Find Peripheral",
+                    ct => centralManager
+                        .ScanUntilPeripheralFound(this.DeviceName)
+                        .ToTask(ct),
+
+                    this.WhenAny(
+                        x => x.DeviceName,
+                        x => !x.GetValue().IsEmpty()
+                    )
                 )
-            );
+            };
         }
-
-
-        [Reactive] public string DeviceName { get; set; }
         
-        public ICommand ScanForDevice { get; }
+
+        public List<TaskViewModel> Tasks { get; }
+        [Reactive] public string DeviceName { get; set; }
     }
 }
 

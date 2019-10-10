@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <TableView>
             <TableRoot>
-                <TableSection>
+                <TableSection Title="Setup">
                     <TextCell Text="Status"
                               Detail="{Binding Status}" />
                     <EntryCell Label="Device"
@@ -18,20 +18,21 @@
                                IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
                     <EntryCell Label="Characteristic UUID"
                                Text="{Binding CharacteristicUuid}"
-                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
-
-                    <TextCell Text="{Binding Info}" />
+                               IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" /> 
                 </TableSection>
 
-                <TableSection>
+                <TableSection Title="Tests">
                     <TextCell Text="Write" Command="{Binding WriteTest}" />
                     <TextCell Text="Write No Response" Command="{Binding WriteWithoutResponseTest}" />
                     <TextCell Text="Read" Command="{Binding ReadTest}" />
                 </TableSection>
 
-                <TableSection>
-                    <TextCell Text="MTU" Detail="{Binding MTU}" /> 
-                    <TextCell Text="Speed" Detail="{Binding Speed}" />
+                <TableSection Title="Status">
+                    <TextCell Text="{Binding Info}" />
+                    <TextCell Text="MTU" Detail="{Binding MTU}" />
+                    <TextCell Text="Packets" Detail="{Binding Packets}" />
+                    <TextCell Text="Errors" Detail="{Binding Errors}" />
+                    <TextCell Text="Speed (per second)" Detail="{Binding Speed}" />
                 </TableSection>
 
                 <TableSection>

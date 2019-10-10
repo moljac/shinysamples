@@ -5,13 +5,33 @@
              Title="BLE Extensions">
 
     <ContentPage.Content>
-        <TableView>
-            <TableRoot>
-                <TableSection Title="Scan Find">
-                    <EntryCell Label="Device Name" Text="{Binding DeviceName}" />
-                    <TextCell Text="Find It" Command="{Binding ScanForDevice}" />
-                </TableSection>
-            </TableRoot>
-        </TableView>
+        <ListView ItemsSource="{Binding Tasks}">
+            <ListView.Header>
+                <StackLayout>
+                    <Entry Placeholder="Device Name"
+                           Text="{Binding DeviceName}" />
+                </StackLayout>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Text}"
+                                   Grid.Column="0" />
+
+                            <Button Text="{Binding ButtonText}"
+                                    Command="{Binding Run}"
+                                    Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

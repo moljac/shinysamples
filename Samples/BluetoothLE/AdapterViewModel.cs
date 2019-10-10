@@ -23,24 +23,12 @@ namespace Samples.BluetoothLE
                                 INavigationService navigator,
                                 IUserDialogs dialogs)
         {
+            this.CanControlAdapterState = central.CanControlAdapterState();
+
             this.SelectPeripheral = navigator.NavigateCommand<PeripheralItemViewModel>(
                 "Peripheral",
                 (x, p) => p.Add("Peripheral", x.Peripheral)
             );
-
-            this.OpenSettings = ReactiveCommand.Create(() =>
-            {
-                switch (central.TryOpenSettings())
-                {
-                    case AccessState.Denied:
-                        dialogs.Alert("Could not open settings");
-                        break;
-
-                    case AccessState.NotSupported:
-                        dialogs.Alert("Not Supported on this OS");
-                        break;
-                }
-            });
 
             this.ToggleAdapterState = ReactiveCommand.Create(
                 () =>
@@ -108,9 +96,9 @@ namespace Samples.BluetoothLE
 
 
         public ICommand ScanToggle { get; }
-        public ICommand OpenSettings { get; }
         public ICommand ToggleAdapterState { get; }
         public ICommand SelectPeripheral { get; }
+        public bool CanControlAdapterState { get; }
         public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
         [Reactive] public bool IsScanning { get; private set; }
     }

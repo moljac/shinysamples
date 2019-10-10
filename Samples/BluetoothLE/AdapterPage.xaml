@@ -18,9 +18,6 @@
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
-            <Button Text="Open Settings"
-                    Command="{Binding OpenSettings}"
-                    IsVisible="{Binding CanOpenSettings}" />
 
             <Button Text="Toggle Adapter"
                     Command="{Binding ToggleAdapterState}"
