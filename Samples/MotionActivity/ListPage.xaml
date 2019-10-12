@@ -12,6 +12,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -41,8 +42,8 @@
                 Grid.Column="1" />
 
             <CollectionView ItemsSource="{Binding Events}"
-                        Grid.Row="2"
-                        Grid.ColumnSpan="2">
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2">
 
                 <CollectionView.EmptyView>
                     <Label Text="No Events Found"
@@ -63,6 +64,10 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <Button Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Text="Refresh"
+                    Command="{Binding Load}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
