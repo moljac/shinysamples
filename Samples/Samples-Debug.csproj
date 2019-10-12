@@ -16,7 +16,7 @@
         <PackageReference Include="DryIoc.dll" Version="4.0.7" />
         <PackageReference Include="Humanizer" Version="2.7.9" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
-        <PackageReference Include="ReactiveUI.Fody" Version="10.3.6" />
+        <PackageReference Include="ReactiveUI.Fody" Version="10.4.1" />
         <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
         <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
         <PackageReference Include="Xamarin.Forms.Maps" Version="4.2.0.848062" />

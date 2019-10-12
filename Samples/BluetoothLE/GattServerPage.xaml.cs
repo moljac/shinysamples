@@ -2,11 +2,11 @@
 using Xamarin.Forms;
 
 
-namespace Samples.BlePeripherals
+namespace Samples.BluetoothLE
 {
-    public partial class MainPage : ContentPage
+    public partial class GattServerPage : ContentPage
     {
-        public MainPage()
+        public GattServerPage()
         {
             this.InitializeComponent();
         }
