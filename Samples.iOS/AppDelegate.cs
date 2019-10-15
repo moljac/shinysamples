@@ -19,7 +19,8 @@ namespace Samples.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             // this needs to be loaded before EVERYTHING
-            iOSShinyHost.Init(new SampleStartup());
+            //iOSShinyHost.Init(new SampleStartup());
+            iOSShinyHost.Init(new AttributeShinyStartup(typeof(App).Assembly));
 
             Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Forms.Init();
