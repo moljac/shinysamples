@@ -20,9 +20,10 @@ namespace Samples.iOS
         {
             // this needs to be loaded before EVERYTHING
             //iOSShinyHost.Init(new SampleStartup());
-            iOSShinyHost.Init(new AttributeShinyStartup(typeof(App).Assembly));
+            //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
+            iOSShinyHost.Init(ShinyStartup.AutoRegister());
 
-            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            Forms.SetFlags("CollectionView_Experimental");
             Forms.Init();
             FormsMaps.Init();
             Rg.Plugins.Popup.Popup.Init();
