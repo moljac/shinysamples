@@ -1,11 +1,41 @@
-﻿using System;
+﻿#define STARTUP_ATTRIBUTES
+#define STARTUP_AUTO
+
+using System;
 using Shiny;
 using Shiny.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Samples;
 using Samples.Settings;
 using Samples.ShinyDelegates;
+using Samples.ShinySetup;
+using Shiny.Infrastructure;
 using Acr.UserDialogs.Forms;
 
+#if STARTUP_ATTRIBUTES
+//[assembly: ShinySqliteIntegration(true, true, true, true, true)]
+//[assembly: ShinyJob(typeof(SampleJob), "MyIdentifier", BatteryNotLow = true, DeviceCharging = false, RequiredInternetAccess = Shiny.Jobs.InternetAccess.Any)]
+[assembly: ShinyAppCenterIntegration(Constants.AppCenterTokens, true, true)]
+[assembly: ShinyService(typeof(SampleSqliteConnection))]
+[assembly: ShinyService(typeof(GlobalExceptionHandler))]
+[assembly: ShinyService(typeof(CoreDelegateServices))]
+[assembly: ShinyService(typeof(JobLoggerTask))]
+[assembly: ShinyService(typeof(IUserDialogs), typeof(UserDialogs))]
+[assembly: ShinyService(typeof(IFullService), typeof(FullService))]
+[assembly: ShinyService(typeof(IAppSettings), typeof(AppSettings))]
+
+#if !STARTUP_AUTO
+[assembly: ShinyNotifications(typeof(NotificationDelegate), true)]
+[assembly: ShinyBeacons(typeof(BeaconDelegate))]
+[assembly: ShinyBleCentral(typeof(BleCentralDelegate))]
+[assembly: ShinyGps(typeof(LocationDelegates))]
+[assembly: ShinyGeofences(typeof(LocationDelegates))]
+[assembly: ShinyMotionActivity]
+[assembly: ShinySensors]
+[assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
+[assembly: ShinySpeechRecognition]
+#endif
+#endif
 
 namespace Samples.ShinySetup
 {
@@ -13,29 +43,37 @@ namespace Samples.ShinySetup
     {
         public override void ConfigureServices(IServiceCollection services)
         {
+            Log.UseConsole();
+            Log.UseDebug();
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             //services.UseSqliteLogging(true, true);
             //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
-#if DEBUG
-            Log.UseConsole();
-            Log.UseDebug();
-#endif
 
-            // create your infrastructures
-            // jobs, connectivity, power, filesystem, are installed automatically
+#if STARTUP_ATTRIBUTES
+            services.RegisterModule(new AssemblyServiceModule());
+#if STARTUP_AUTO
+            services.RegisterModule(new AutoRegisterModule());
+#endif
+#else
+            UseAllServices(services);
+#endif
+        }
+
+
+        static void UseAllServices(IServiceCollection services)
+        {
+            // your infrastructure
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
             services.AddSingleton<IUserDialogs, UserDialogs>();
+            services.AddSingleton<IAppSettings, AppSettings>();
 
             // startup tasks
             services.AddSingleton<GlobalExceptionHandler>();
             services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<JobLoggerTask>();
-
-            // configuration
-            services.AddSingleton<IAppSettings, AppSettings>();
 
             // register all of the shiny stuff you want to use
             services.UseHttpTransfers<HttpTransferDelegate>();
@@ -51,22 +89,22 @@ namespace Samples.ShinySetup
             services.UseNotifications<NotificationDelegate>(true);
             services.UseSpeechRecognition();
 
-            services.UseAccelerometer();
-            services.UseAmbientLightSensor();
-            services.UseBarometer();
-            services.UseCompass();
-            services.UseMagnetometer();
-            services.UsePedometer();
-            services.UseProximitySensor();
-            services.UseHeartRateMonitor();
-            services.UseTemperature();
-            services.UseHumidity();
+            services.UseAllSensors();
+            //services.UseAccelerometer();
+            //services.UseAmbientLightSensor();
+            //services.UseBarometer();
+            //services.UseCompass();
+            //services.UseMagnetometer();
+            //services.UsePedometer();
+            //services.UseProximitySensor();
+            //services.UseHeartRateMonitor();
+            //services.UseTemperature();
+            //services.UseHumidity();
         }
 
-
-//#if DEBUG
-//        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
-//            => services.BuildServiceProvider(true);
-//#endif
+        //#if DEBUG
+        //        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
+        //            => services.BuildServiceProvider(true);
+        //#endif
     }
 }

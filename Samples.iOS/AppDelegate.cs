@@ -19,8 +19,8 @@ namespace Samples.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             // this needs to be loaded before EVERYTHING
-            //iOSShinyHost.Init(new SampleStartup());
-            iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
+            iOSShinyHost.Init(new SampleStartup());
+            //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
             //iOSShinyHost.Init(ShinyStartup.AutoRegister());
 
             Forms.SetFlags("CollectionView_Experimental");
