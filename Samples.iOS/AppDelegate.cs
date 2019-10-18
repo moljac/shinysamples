@@ -20,8 +20,8 @@ namespace Samples.iOS
         {
             // this needs to be loaded before EVERYTHING
             //iOSShinyHost.Init(new SampleStartup());
-            //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
-            iOSShinyHost.Init(ShinyStartup.AutoRegister());
+            iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
+            //iOSShinyHost.Init(ShinyStartup.AutoRegister());
 
             Forms.SetFlags("CollectionView_Experimental");
             Forms.Init();
