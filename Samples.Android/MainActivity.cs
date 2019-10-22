@@ -29,7 +29,6 @@ namespace Samples.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Forms.SetFlags("CollectionView_Experimental");
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);

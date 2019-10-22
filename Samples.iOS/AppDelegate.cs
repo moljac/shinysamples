@@ -23,7 +23,6 @@ namespace Samples.iOS
             //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
             //iOSShinyHost.Init(ShinyStartup.AutoRegister());
 
-            Forms.SetFlags("CollectionView_Experimental");
             Forms.Init();
             FormsMaps.Init();
             Rg.Plugins.Popup.Popup.Init();
