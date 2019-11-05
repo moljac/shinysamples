@@ -1,5 +1,5 @@
-﻿#define STARTUP_ATTRIBUTES
-#define STARTUP_AUTO
+﻿//#define STARTUP_ATTRIBUTES
+//#define STARTUP_AUTO
 
 using System;
 using Shiny;
@@ -11,6 +11,8 @@ using Samples.ShinyDelegates;
 using Samples.ShinySetup;
 using Shiny.Infrastructure;
 using Acr.UserDialogs.Forms;
+using Shiny.Notifications;
+using System.Collections.Generic;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -81,12 +83,47 @@ namespace Samples.ShinySetup
             services.UseBleCentral<BleCentralDelegate>();
             services.UseBlePeripherals();
 
-            //builder.UseGeofencing<LocationDelegates>(new GeofenceRegion("Test", new Position(1, 1), Distance.FromKilometers(1)));
             services.UseGeofencing<LocationDelegates>();
             services.UseGps<LocationDelegates>();
             services.UseMotionActivity();
 
-            services.UseNotifications<NotificationDelegate>(true);
+            Notification.DefaultCategory = "Test";
+            services.UseNotifications<NotificationDelegate>(
+                true,
+                null,
+                null,
+                new NotificationCategory
+                {
+                    Identifier = "Test",
+                    Actions = new List<NotificationAction>
+                    {
+                        new NotificationAction
+                        {
+                            Identifier = "Reply",
+                            Title = "Reply",
+                            ActionType = NotificationActionType.TextReply
+                        },
+                        new NotificationAction
+                        {
+                            Identifier = "Reply-All",
+                            Title = "Reply-All",
+                            ActionType = NotificationActionType.TextReply
+                        },
+                        new NotificationAction
+                        {
+                            Identifier = "Yes",
+                            Title = "Yes",
+                            ActionType = NotificationActionType.OpenApp
+                        },
+                        new NotificationAction
+                        {
+                            Identifier = "No",
+                            Title = "No",
+                            ActionType = NotificationActionType.Destructive
+                        }
+                    }
+                }
+            );
             services.UseSpeechRecognition();
 
             services.UseAllSensors();

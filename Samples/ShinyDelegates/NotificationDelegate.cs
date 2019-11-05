@@ -20,23 +20,30 @@ namespace Samples.ShinyDelegates
         }
 
 
-        public Task OnEntry(Notification notification)
-            => this.Store(notification, true);
-        public Task OnReceived(Notification notification)
-            => this.Store(notification, false);
-
-
-        async Task Store(Notification notification, bool isEntry)
+        public Task OnEntry(NotificationResponse response) => this.Store(new NotificationEvent
         {
-            var not = new NotificationEvent
-            {
-                NotificationId = notification.Id,
-                NotificationTitle = notification.Title ?? notification.Message,
-                IsEntry = isEntry,
-                Timestamp = DateTime.Now
-            };
-            await this.conn.InsertAsync(not);
-            this.messageBus.Publish(not);
+            NotificationId = response.Notification.Id,
+            NotificationTitle = response.Notification.Title ?? response.Notification.Message,
+            Action = response.ActionIdentifier,
+            ReplyText = response.Text,
+            IsEntry = true,
+            Timestamp = DateTime.Now
+        });
+
+
+        public Task OnReceived(Notification notification) => this.Store(new NotificationEvent
+        {
+            NotificationId = notification.Id,
+            NotificationTitle = notification.Title ?? notification.Message,
+            IsEntry = false,
+            Timestamp = DateTime.Now
+        });
+        
+
+        async Task Store(NotificationEvent @event)
+        {
+            await this.conn.InsertAsync(@event);
+            this.messageBus.Publish(@event);
         }
     }
 }

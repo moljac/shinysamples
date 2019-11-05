@@ -22,20 +22,19 @@ namespace Samples.Notifications
                 .Skip(1)
                 .Throttle(TimeSpan.FromMilliseconds(500))
                 .DistinctUntilChanged()
-                .Subscribe(async badge =>
-                    await notifications.SetBadge(badge)
-                )
+                .Subscribe(badge => notifications.Badge = badge)
                 .DisposeWith(this.DeactivateWith);
 
             this.Clear = ReactiveCommand.Create(() => this.Badge = 0);
         }
 
 
-        public override async void OnAppearing()
+        public override void OnAppearing()
         {
             base.OnAppearing();
-            this.Badge = await this.notifications.GetBadge();
+            this.Badge = this.notifications.Badge;
         }
+
 
         public ICommand Clear { get; }
         [Reactive] public int Badge { get; set; }

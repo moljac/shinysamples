@@ -68,7 +68,7 @@ namespace Samples.Jobs
                     return;
 
                 if (this.jobManager.IsRunning)
-                    dialogs.Alert("Job Manager is already running");
+                    await dialogs.Alert("Job Manager is already running");
                 else
                 {
                     dialogs.Toast("Job Batch Started");
@@ -127,7 +127,7 @@ namespace Samples.Jobs
             var jobs = await this.jobManager.GetJobs();
             if (!jobs.Any())
             {
-                this.dialogs.Alert("There are no jobs");
+                await this.dialogs.Alert("There are no jobs");
                 return false;
             }
 

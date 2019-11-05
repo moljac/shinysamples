@@ -33,7 +33,12 @@ namespace Samples.Notifications
             this.SelectedTime = DateTime.Now.TimeOfDay.Add(TimeSpan.FromMinutes(10));
 
             this.SendNow = ReactiveCommand.CreateFromTask(() =>
-                notificationManager.Send("Test Now", "This is a test of the sendnow stuff")
+                notificationManager.Send(new Notification
+                {
+                    Title = "Test Now",
+                    Message = "This is a test of the sendnow stuff",
+                    Payload = this.Payload
+                })
             );
             this.Send = ReactiveCommand.CreateFromTask(
                 async () =>
