@@ -27,18 +27,19 @@
                         <TextCell Text="Geofencing" Command="{Binding Navigate}" CommandParameter="Nav/Geofencing" />
                         <TextCell Text="Motion Activity" Command="{Binding Navigate}" CommandParameter="Nav/MotionActivity"  />
                     </TableSection>
+                    <TableSection>
+                        <TextCell Text="Notifications" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />
+                        <TextCell Text="HTTP Transfers" Command="{Binding Navigate}" CommandParameter="Nav/HttpTransfers" />
+                        <TextCell Text="Speech Recognition" Command="{Binding Navigate}" CommandParameter="Nav/SpeechRecognition"  />
+                    </TableSection>
                     <TableSection Title="Sensors">
                         <TextCell Text="All" Command="{Binding Navigate}" CommandParameter="Nav/Sensors" />
                         <TextCell Text="Compass" Command="{Binding Navigate}" CommandParameter="Nav/Compass" />
                     </TableSection>
-                    <TableSection>
-                        <TextCell Text="HTTP Transfers" Command="{Binding Navigate}" CommandParameter="Nav/HttpTransfers" />
-                        <TextCell Text="Notifications" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />
-                        <TextCell Text="Speech Recognition" Command="{Binding Navigate}" CommandParameter="Nav/SpeechRecognition"  />
-                    </TableSection>
                     <TableSection Title="Core">
                         <TextCell Text="Jobs" Command="{Binding Navigate}" CommandParameter="Nav/Jobs" />
                         <TextCell Text="IO" Command="{Binding Navigate}" CommandParameter="Nav/IO" />
+                        <TextCell Text="Caching" Command="{Binding Navigate}" CommandParameter="Nav/Cache" />
                         <TextCell Text="Logging" Command="{Binding Navigate}" CommandParameter="Nav/Logs" />
                         <TextCell Text="Access" Command="{Binding Navigate}" CommandParameter="Nav/Access" />
                         <TextCell Text="Environment" Command="{Binding Navigate}" CommandParameter="Nav/Environment" />

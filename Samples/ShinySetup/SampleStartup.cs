@@ -47,6 +47,7 @@ namespace Samples.ShinySetup
         {
             Log.UseConsole();
             Log.UseDebug();
+            services.UseMemoryCache();
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             //services.UseSqliteLogging(true, true);
             //services.UseSqliteCache();
