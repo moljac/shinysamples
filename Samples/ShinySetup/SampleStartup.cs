@@ -93,37 +93,13 @@ namespace Samples.ShinySetup
                 true,
                 null,
                 null,
-                new NotificationCategory
-                {
-                    Identifier = "Test",
-                    Actions = new List<NotificationAction>
-                    {
-                        new NotificationAction
-                        {
-                            Identifier = "Reply",
-                            Title = "Reply",
-                            ActionType = NotificationActionType.TextReply
-                        },
-                        new NotificationAction
-                        {
-                            Identifier = "Reply-All",
-                            Title = "Reply-All",
-                            ActionType = NotificationActionType.TextReply
-                        },
-                        new NotificationAction
-                        {
-                            Identifier = "Yes",
-                            Title = "Yes",
-                            ActionType = NotificationActionType.OpenApp
-                        },
-                        new NotificationAction
-                        {
-                            Identifier = "No",
-                            Title = "No",
-                            ActionType = NotificationActionType.Destructive
-                        }
-                    }
-                }
+                new NotificationCategory(
+                    "Test",
+                    new NotificationAction("Reply", "Reply", NotificationActionType.TextReply),
+                    new NotificationAction("Reply-All", "Replay All", NotificationActionType.TextReply),
+                    new NotificationAction("Yes", "Yes", NotificationActionType.OpenApp),
+                    new NotificationAction("No", "No", NotificationActionType.Destructive)
+                )
             );
             services.UseSpeechRecognition();
 

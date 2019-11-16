@@ -4,6 +4,8 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Samples</AssemblyName>
         <RootNamespace>Samples</RootNamespace>
+        <LangVersion>8.0</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -18,8 +20,8 @@
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
         <PackageReference Include="ReactiveUI.Fody" Version="10.5.7" />
         <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-        <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
-        <PackageReference Include="Xamarin.Forms.Maps" Version="4.3.0.947036" />
+        <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
+        <PackageReference Include="Xamarin.Forms.Maps" Version="4.3.0.991211" />
     </ItemGroup>
 
     <ItemGroup>

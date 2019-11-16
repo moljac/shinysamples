@@ -36,10 +36,8 @@ namespace Samples.Jobs
             this.CreateJob = ReactiveCommand.CreateFromTask(
                 async _ =>
                 {
-                    var job = new JobInfo
+                    var job = new JobInfo(typeof(SampleJob), this.JobName.Trim())
                     {
-                        Identifier = this.JobName.Trim(),
-                        Type = typeof(SampleJob),
                         Repeat = this.Repeat,
                         BatteryNotLow = this.BatteryNotLow,
                         DeviceCharging = this.DeviceCharging,
