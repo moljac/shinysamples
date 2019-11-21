@@ -8,11 +8,11 @@ using Samples.Settings;
 using Shiny;
 
 
-namespace Samples.Notifications
+namespace Samples
 {
-    public class SettingsViewModel : ViewModel, IAppSettings
+    public class DelegateNotificationsViewModel : ViewModel, IAppSettings
     {
-        public SettingsViewModel(IAppSettings appSettings)
+        public DelegateNotificationsViewModel(IAppSettings appSettings)
         {
             appSettings
                 .GetType()
