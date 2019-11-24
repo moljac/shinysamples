@@ -14,9 +14,9 @@
                 <TableRoot>
                     <TableSection>
                         <TextCell Text="Welcome" Command="{Binding Navigate}" CommandParameter="Nav/Welcome" />
+                        <TextCell Text="Delegate Notifcations" Command="{Binding Navigate}" CommandParameter="Nav/DelegateNotifications" />
                     </TableSection>
                     <TableSection Title="Bluetooth">
-                        <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
                         <TextCell Text="Central" Command="{Binding Navigate}" CommandParameter="Nav/BleCentral" />
                         <TextCell Text="Perf Tests" Command="{Binding Navigate}" CommandParameter="Nav/BlePerformance" />
                         <TextCell Text="Extensions" Command="{Binding Navigate}" CommandParameter="Nav/BleExtensions" />
@@ -25,7 +25,8 @@
                     <TableSection Title="Locations">
                         <TextCell Text="GPS" Command="{Binding Navigate}" CommandParameter="Nav/Gps"  />
                         <TextCell Text="Geofencing" Command="{Binding Navigate}" CommandParameter="Nav/Geofencing" />
-                        <TextCell Text="Motion Activity" Command="{Binding Navigate}" CommandParameter="Nav/MotionActivity"  />
+                        <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
+                        <TextCell Text="Motion Activity" Command="{Binding Navigate}" CommandParameter="Nav/MotionActivity" />
                     </TableSection>
                     <TableSection>
                         <TextCell Text="Notifications" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />

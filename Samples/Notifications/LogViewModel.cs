@@ -49,10 +49,21 @@ namespace Samples.Notifications
                 .OrderByDescending(x => x.Timestamp)
                 .ToListAsync();
 
-            return events.Select(x => new CommandItem
+            return events.Select(x =>
             {
-                Text = $"({x.NotificationId}) {x.NotificationTitle}",
-                Detail = $"{x.IsEntry} {x.Timestamp}"
+                var mode = x.IsEntry ? "Entry" : "Received";
+                var detail = $"[{mode}] {x.Timestamp}";
+                if (!x.Action.IsEmpty())
+                    detail += $" - {x.Action}";
+
+                if (!x.ReplyText.IsEmpty())
+                    detail += $" - {x.ReplyText}";
+
+                return new CommandItem
+                {
+                    Text = $"({x.NotificationId}) {x.NotificationTitle}",
+                    Detail = detail
+                };
             });
         }
     }

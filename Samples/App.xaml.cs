@@ -33,23 +33,24 @@ namespace Samples
 #if DEBUG
             Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
 #endif
+            
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<MainPage>("Main");
             containerRegistry.RegisterForNavigation<WelcomePage>("Welcome");
-            containerRegistry.RegisterForNavigation<Gps.MainPage>("Gps");
+            containerRegistry.RegisterForNavigation<DelegateNotificationsPage>("DelegateNotifications");
 
+            containerRegistry.RegisterForNavigation<Gps.MainPage>("Gps");
+            containerRegistry.RegisterForNavigation<Geofences.MainPage>("Geofencing");
+            containerRegistry.RegisterForNavigation<Geofences.CreatePage>("CreateGeofence");
             containerRegistry.RegisterForNavigation<Beacons.MainPage>("Beacons");
             containerRegistry.RegisterForNavigation<Beacons.CreatePage>("CreateBeacon");
+            containerRegistry.RegisterForNavigation<MotionActivity.MainPage>("MotionActivity");
+
             containerRegistry.RegisterForNavigation<BluetoothLE.AdapterPage>("BleCentral");
             containerRegistry.RegisterForNavigation<BluetoothLE.PeripheralPage>("Peripheral");
             containerRegistry.RegisterForNavigation<BluetoothLE.GattServerPage>("GattServer");
             containerRegistry.RegisterForNavigation<BluetoothLE.CentralExtensionsPage>("BleExtensions");
             containerRegistry.RegisterForNavigation<BluetoothLE.PerformancePage>("BlePerformance");
-
-            containerRegistry.RegisterForNavigation<Geofences.MainPage>("Geofencing");
-            containerRegistry.RegisterForNavigation<Geofences.CreatePage>("CreateGeofence");
-
-            containerRegistry.RegisterForNavigation<MotionActivity.MainPage>("MotionActivity");
 
             containerRegistry.RegisterForNavigation<HttpTransfers.MainPage>("HttpTransfers");
             containerRegistry.RegisterForNavigation<HttpTransfers.CreatePage>("CreateTransfer");
