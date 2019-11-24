@@ -96,8 +96,7 @@ namespace Samples.ShinySetup
                 new NotificationCategory(
                     "Test",
                     new NotificationAction("Reply", "Reply", NotificationActionType.TextReply),
-                    new NotificationAction("Reply-All", "Reply All", NotificationActionType.TextReply),
-                    new NotificationAction("Yes", "Yes", NotificationActionType.OpenApp),
+                    new NotificationAction("Yes", "Yes", NotificationActionType.None),
                     new NotificationAction("No", "No", NotificationActionType.Destructive)
                 )
             );
