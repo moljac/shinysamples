@@ -34,7 +34,6 @@
     <AndroidUseAapt2>false</AndroidUseAapt2>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <AndroidDexTool>dx</AndroidDexTool>
-    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -99,6 +98,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
+      <Project>{4efa31bb-7616-4075-8698-11978cfeb592}</Project>
+      <Name>Shiny.Push</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
       <Project>{82F5E401-C438-46B0-BC7C-733D3E017AD5}</Project>
       <Name>Samples-Debug</Name>
