@@ -26,16 +26,7 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Shiny.Core.Uwp.ShinyBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="deviceUse"/>
-            <Task Type="general"/>
-            <Task Type="location"/>
-            <Task Type="systemEvent"/>
-            <Task Type="timer"/>
-          </BackgroundTasks>
-        </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Shiny.Support.Uwp.ShinyBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Shiny.ShinyBackgroundTask">
           <BackgroundTasks>
             <Task Type="bluetooth"/>
             <Task Type="deviceConnectionChange"/>
@@ -46,19 +37,7 @@
             <Task Type="systemEvent"/>
             <Task Type="timer"/>
           </BackgroundTasks>
-        </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Shiny.Support.Uwp.ShinyBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="bluetooth"/>
-            <Task Type="deviceConnectionChange"/>
-            <Task Type="deviceServicing"/>
-            <Task Type="deviceUse"/>
-            <Task Type="general"/>
-            <Task Type="location"/>
-            <Task Type="systemEvent"/>
-            <Task Type="timer"/>
-          </BackgroundTasks>
-        </Extension>                
+        </Extension>             
       </Extensions>
     </Application>
   </Applications>
