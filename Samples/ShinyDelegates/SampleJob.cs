@@ -20,7 +20,7 @@ namespace Samples.ShinyDelegates
                 $"{jobInfo.Identifier} Started",
                 x => x.UseNotificationsJobStart
             );
-            var seconds = jobInfo.Parameters.Get("Seconds", 10);
+            var seconds = jobInfo.Parameters.Get("SecondsToRun", 10);
             await Task.Delay(TimeSpan.FromSeconds(seconds), cancelToken);
 
             await this.services.SendNotification(

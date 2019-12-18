@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:jobs="clr-namespace:Samples.Jobs"
+             xmlns:samples="clr-namespace:Samples"
+             x:DataType="jobs:ListViewModel"
              x:Class="Samples.Jobs.ListPage"
              Title="Jobs">
 
@@ -9,45 +12,65 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="No Job Logs"
-                   Style="{StaticResource NoDataLabel}"
-                   IsVisible="{Binding HasJobs, Converter={StaticResource Not}}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <Grid IsVisible="{Binding HasJobs}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <RefreshView IsRefreshing="{Binding IsBusy}"
+                            Command="{Binding LoadJobs}">
+                <CollectionView ItemsSource="{Binding Jobs}"
+                                Grid.Row="0">
 
-                <ListView ItemsSource="{Binding Jobs}"
-                      IsPullToRefreshEnabled="true"
-                      IsRefreshing="{Binding IsBusy}"
-                      RefreshCommand="{Binding LoadJobs}"
-                      Grid.Row="0">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Text}"
-                                  Detail="{Binding Detail}"
-                                  Command="{Binding PrimaryCommand}">
-                                <TextCell.ContextActions>
-                                    <MenuItem Text="Cancel" Command="{Binding SecondaryCommand}" IsDestructive="true" />
-                                    <MenuItem Text="Run" Command="{Binding PrimaryCommand}" />
-                                </TextCell.ContextActions>
-                            </TextCell>
+                    <CollectionView.EmptyView>
+                        <Label Text="No Job Logs"
+                               Style="{StaticResource NoDataLabel}" />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="samples:CommandItem">
+                            <SwipeView>
+                                
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Reveal">
+                                        <SwipeItem Text="Cancel"
+                                                   Command="{Binding SecondaryCommand}"
+                                                   BackgroundColor="Red"                                               
+                                                   IsDestructive="true" />
+                                        <SwipeItem Text="Run"
+                                                   BackgroundColor="DodgerBlue"
+                                                   Command="{Binding PrimaryCommand}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <StackLayout>
+                                    <Label Text="{Binding Text}"
+                                           FontSize="Body"
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Label Text="{Binding Detail}"
+                                           FontSize="Caption"
+                                           LineBreakMode="TailTruncation" />
+
+                                    <BoxView HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="Center"
+                                             BackgroundColor="Gainsboro"
+                                             HeightRequest="1" />
+                                </StackLayout>
+                            </SwipeView>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+                
+            <Button Text="Cancel All Jobs"
+                Command="{Binding CancelAllJobs}"
+                Grid.Row="1" />
 
-                <Button Text="Cancel All Jobs"
-                    Command="{Binding CancelAllJobs}"
-                    Grid.Row="1" />
-
-                <Button Text="Run All Jobs"
-                    Command="{Binding RunAllJobs}"
-                    Grid.Row="2" />
-            </Grid>
-        </StackLayout>
+            <Button Text="Run All Jobs"
+                Command="{Binding RunAllJobs}"
+                Grid.Row="2" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

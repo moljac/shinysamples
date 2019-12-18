@@ -23,6 +23,7 @@ namespace Samples.iOS
             iOSShinyHost.Init(new SampleStartup());
             //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
             //iOSShinyHost.Init(ShinyStartup.AutoRegister());
+            Forms.SetFlags("SwipeView_Experimental");
 
             Forms.Init();
             FormsMaps.Init();
