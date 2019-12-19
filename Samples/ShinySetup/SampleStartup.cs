@@ -88,7 +88,6 @@ namespace Samples.ShinySetup
             services.UseGps<LocationDelegates>();
             services.UseMotionActivity();
 
-            Notification.DefaultCategory = "Test";
             services.UseNotifications<NotificationDelegate>(
                 true,
                 null,
