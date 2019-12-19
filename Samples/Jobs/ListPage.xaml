@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:jobs="clr-namespace:Samples.Jobs"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              xmlns:samples="clr-namespace:Samples"
+             xmlns:jobs="clr-namespace:Samples.Jobs"
              x:DataType="jobs:ListViewModel"
              x:Class="Samples.Jobs.ListPage"
              Title="Jobs">
@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <RefreshView IsRefreshing="{Binding IsBusy}"
-                            Command="{Binding LoadJobs}">
+                         Command="{Binding LoadJobs}">
                 <CollectionView ItemsSource="{Binding Jobs}"
                                 Grid.Row="0">
 
