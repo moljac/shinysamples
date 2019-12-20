@@ -9,7 +9,7 @@ using Samples.ShinySetup;
 using Shiny;
 using Shiny.Net.Http;
 using Shiny.Jobs;
-using Shiny.Push;
+//using Shiny.Push;
 
 
 namespace Samples.iOS
@@ -32,12 +32,12 @@ namespace Samples.iOS
         }
 
 
-        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-            => PushNotificationManager.RegisteredForRemoteNotifications(deviceToken);
+        //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        //    => PushNotificationManager.RegisteredForRemoteNotifications(deviceToken);
 
 
-        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-            => PushNotificationManager.FailedToRegisterForRemoteNotifications(error);
+        //public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        //    => PushNotificationManager.FailedToRegisterForRemoteNotifications(error);
 
 
         // if you are using jobs, you need this
