@@ -28,10 +28,6 @@ namespace Samples.Jobs
             this.jobManager = jobManager;
             this.dialogs = dialogs;
 
-            this.hasJobs = this.WhenAnyValue(x => x.Jobs)
-                .Select(x => (x?.Count ?? 0) > 0)
-                .ToProperty(this, x => x.HasJobs);
-
             this.Create = navigator.NavigateCommand("CreateJob");
 
             this.LoadJobs = ReactiveCommand.CreateFromTask(async () =>
@@ -44,7 +40,11 @@ namespace Samples.Jobs
                         Text = x.Identifier,
                         Detail = x.LastRunUtc?.ToLocalTime().ToString("G") ?? "Never Run",
                         PrimaryCommand = ReactiveCommand.CreateFromTask(() => jobManager.Run(x.Identifier)),
-                        SecondaryCommand = ReactiveCommand.CreateFromTask(() => jobManager.Cancel(x.Identifier))
+                        SecondaryCommand = ReactiveCommand.CreateFromTask(async () =>
+                        {
+                            await jobManager.Cancel(x.Identifier);
+                            this.LoadJobs.Execute();
+                        })
                     })
                     .ToList();
             });
@@ -59,8 +59,8 @@ namespace Samples.Jobs
                     await dialogs.Alert("Job Manager is already running");
                 else
                 {
-                    dialogs.Toast("Job Batch Started");
                     await this.jobManager.RunAll();
+                    dialogs.Toast("Job Batch Started");
                 }
             });
 
@@ -83,11 +83,7 @@ namespace Samples.Jobs
         public ReactiveCommand<Unit, Unit> CancelAllJobs { get; }
         public ReactiveCommand<Unit, Unit> RunAllJobs { get; }
         public ICommand Create { get; }
-
         [Reactive] public List<CommandItem> Jobs { get; private set; }
-
-        readonly ObservableAsPropertyHelper<bool> hasJobs;
-        public bool HasJobs => this.hasJobs.Value;
 
 
         public override void OnAppearing()

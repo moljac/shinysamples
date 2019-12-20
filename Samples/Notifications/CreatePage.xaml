@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.Notifications.CreatePage"
+             xmlns:notifications="clr-namespace:Samples.Notifications"
+             x:DataType="notifications:CreateViewModel"
              Title="Create">
     <ContentPage.Content>
         <ScrollView>
@@ -27,6 +29,9 @@
 
                 <Label Text="Time" />
                 <TimePicker Time="{Binding SelectedTime}" />
+
+                <Label Text="Use Actions" />
+                <CheckBox IsChecked="{Binding UseActions}" />
 
                 <Button Text="Send" Command="{Binding Send}" />
 

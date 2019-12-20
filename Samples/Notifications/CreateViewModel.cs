@@ -49,9 +49,9 @@ namespace Samples.Notifications
                         Message = this.NotificationMessage,
                         Payload = this.Payload,
                         BadgeCount = this.BadgeCount,
-                        ScheduleDate = this.ScheduledTime
-                    };
-                    notification.Android.Priority = 10;
+                        ScheduleDate = this.ScheduledTime,
+                        Category = this.UseActions ? "Test" : null
+                    };                    
 
                     await notificationManager.Send(notification);
                     this.NotificationTitle = String.Empty;
@@ -84,6 +84,7 @@ namespace Samples.Notifications
         [Reactive] public string NotificationTitle { get; set;} = "Test Title";
         [Reactive] public string NotificationMessage { get; set; } = "Test Message";
         public DateTime ScheduledTime { [ObservableAsProperty] get; }
+        [Reactive] public bool UseActions { get; set; } = true;
         [Reactive] public DateTime SelectedDate { get; set; }
         [Reactive] public TimeSpan SelectedTime { get; set; }
         [Reactive] public int BadgeCount { get; set; }

@@ -49,7 +49,7 @@ namespace Samples.ShinySetup
             Log.UseDebug();
             services.UseMemoryCache();
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
-            //services.UseSqliteLogging(true, true);
+            services.UseSqliteLogging(true, true);
             //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
@@ -88,7 +88,6 @@ namespace Samples.ShinySetup
             services.UseGps<LocationDelegates>();
             services.UseMotionActivity();
 
-            Notification.DefaultCategory = "Test";
             services.UseNotifications<NotificationDelegate>(
                 true,
                 null,

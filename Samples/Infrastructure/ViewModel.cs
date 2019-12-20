@@ -47,7 +47,7 @@ namespace Samples
         public virtual void Destroy() => this.DestroyWith?.Dispose();
         public virtual Task<bool> CanNavigateAsync(INavigationParameters parameters) => Task.FromResult(true);
 
-        [Reactive] public bool IsBusy { get; protected set; }
+        [Reactive] public bool IsBusy { get; set; }
         [Reactive] public string Title { get; protected set; }
 
 
