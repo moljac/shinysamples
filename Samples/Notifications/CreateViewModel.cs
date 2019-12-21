@@ -37,7 +37,9 @@ namespace Samples.Notifications
                 {
                     Title = "Test Now",
                     Message = "This is a test of the sendnow stuff",
-                    Payload = this.Payload
+                    Payload = this.Payload,
+                    BadgeCount = this.BadgeCount,
+                    Category = this.UseActions ? "Test" : null
                 })
             );
             this.Send = ReactiveCommand.CreateFromTask(
@@ -51,7 +53,7 @@ namespace Samples.Notifications
                         BadgeCount = this.BadgeCount,
                         ScheduleDate = this.ScheduledTime,
                         Category = this.UseActions ? "Test" : null
-                    };                    
+                    };
 
                     await notificationManager.Send(notification);
                     this.NotificationTitle = String.Empty;

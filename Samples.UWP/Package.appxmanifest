@@ -36,6 +36,7 @@
             <Task Type="location"/>
             <Task Type="systemEvent"/>
             <Task Type="timer"/>
+            <Task Type="pushNotification"/>
           </BackgroundTasks>
         </Extension>             
       </Extensions>

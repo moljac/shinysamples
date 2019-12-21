@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
-using Shiny;
 using Xamarin.Forms;
 using Application = Windows.UI.Xaml.Application;
 using Frame = Windows.UI.Xaml.Controls.Frame;
+
+using Shiny;
 using Samples.ShinySetup;
+
 
 
 namespace Samples.UWP
@@ -18,6 +22,11 @@ namespace Samples.UWP
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            //BackgroundTaskRegistration
+            //    .AllTasks
+            //    .ToList()
+            //    .ForEach(x => x.Value.Unregister(true));
+
             UwpShinyHost.Init(new SampleStartup());
         }
 
