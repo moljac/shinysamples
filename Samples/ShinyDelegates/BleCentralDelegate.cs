@@ -15,7 +15,7 @@ namespace Samples.ShinyDelegates
 
         public async Task OnAdapterStateChanged(AccessState state)
         {
-            if (state != AccessState.Available && this.services.AppSettings.UseNotificationsBle)
+            if (state == AccessState.Disabled && this.services.AppSettings.UseNotificationsBle)
                 await this.services.SendNotification("BLE State", "Turn on Bluetooth already");
         }
 
