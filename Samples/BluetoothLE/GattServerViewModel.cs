@@ -2,7 +2,6 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
 using Shiny.BluetoothLE.Peripherals;
@@ -12,6 +11,7 @@ namespace Samples.BluetoothLE
 {
     public class GattServerViewModel : ViewModel
     {
+        const string LocalName = "ShinyTest";
         static readonly Guid ServiceUuid = Guid.Parse("A495FF20-C5B1-4B44-B512-1370F02D74DE");
         static readonly Guid Characteristic1Uuid = Guid.Parse("A495FF21-C5B1-4B44-B512-1370F02D74DE");
         static readonly Guid Characteristic2Uuid = Guid.Parse("A495FF22-C5B1-4B44-B512-1370F02D74DE");
@@ -97,7 +97,7 @@ namespace Samples.BluetoothLE
 
             await this.peripheralManager.StartAdvertising(new AdvertisementData
             {
-                LocalName = "My GATT"
+                LocalName = LocalName
             });
 
             // TODO: simple push of datetime
@@ -122,7 +122,9 @@ namespace Samples.BluetoothLE
 
         async Task Send()
         {
-            var data = BitConverter.GetBytes(DateTime.Now.Ticks);
+            var ticks = DateTime.Now.Ticks;
+            var data = BitConverter.GetBytes(ticks);
+            this.SubscriberLastValue = ticks.ToString();
             await this.simplePush.Notify(data);
         }
     }

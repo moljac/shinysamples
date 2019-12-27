@@ -21,8 +21,8 @@ namespace Samples.BluetoothLE
 
         readonly ICentralManager centralManager;
         int bytes;
-        IDisposable notifySub;
-        IDisposable speedSub;
+        IDisposable? notifySub;
+        IDisposable? speedSub;
 
 
         public PerformanceViewModel(ICentralManager centralManager, BleCentralConfiguration configuration)
@@ -69,7 +69,7 @@ namespace Samples.BluetoothLE
             this.ReadTest = this.DoWork("Read", async (ch, ct) =>
             {
                 var read = await ch.Read().ToTask(ct);
-                return read.Data.Length;
+                return read.Data?.Length ?? 0;
             });
 
             this.NotifyTest = ReactiveCommand.CreateFromTask(
@@ -87,7 +87,7 @@ namespace Samples.BluetoothLE
                         .Where(x => x.Type == CharacteristicResultType.Notification)
                         .Subscribe(x =>
                         {
-                            Interlocked.Add(ref this.bytes, x.Data.Length);
+                            Interlocked.Add(ref this.bytes, x.Data?.Length ?? 0);
                             this.Packets++;
                         });
                 },
@@ -123,14 +123,14 @@ namespace Samples.BluetoothLE
         [Reactive] public bool AndroidUseInternalSyncQueue { get; set; }
         [Reactive] public bool AndroidUseMainThread { get; set; }
 
-        [Reactive] public string DeviceName { get; set; } = "ESCAPEROOM";
+        [Reactive] public string? PeripheralName { get; set; } = "ShinyTest";
         [Reactive] public bool IsConnected { get; private set; }
         [Reactive] public int MTU { get; private set; }
-        [Reactive] public string Speed { get; private set; }
-        [Reactive] public string ServiceUuid { get; set; } = DefaultServiceUuid;
-        [Reactive] public string CharacteristicUuid { get; set; } = DefaultCharacteristicUuid;
+        [Reactive] public string? Speed { get; private set; }
+        [Reactive] public string? ServiceUuid { get; set; } = DefaultServiceUuid;
+        [Reactive] public string? CharacteristicUuid { get; set; } = DefaultCharacteristicUuid;
         [Reactive] public bool IsRunning { get; private set; }
-        [Reactive] public string Info { get; private set; }
+        [Reactive] public string? Info { get; private set; }
         [Reactive] public int Packets { get; private set; }
         [Reactive] public int Errors { get; private set; }
         [Reactive] public AccessState Status { get; private set; }
@@ -154,7 +154,7 @@ namespace Samples.BluetoothLE
         );
 
 
-        CancellationTokenSource cancelSrc;
+        CancellationTokenSource? cancelSrc;
         ICommand DoWork(string testName, Func<IGattCharacteristic, CancellationToken, Task<int>> func) => ReactiveCommand
             .CreateFromTask(async () =>
             {
@@ -184,49 +184,61 @@ namespace Samples.BluetoothLE
         );
 
 
-        IPeripheral peripheral;
+        IPeripheral? peripheral;
         async Task<IGattCharacteristic> SetupCharacteristic(CancellationToken cancelToken)
         {
-            var suuid = Guid.Parse(this.ServiceUuid);
-            var cuuid = Guid.Parse(this.CharacteristicUuid);
+            try
+            {
+                var suuid = Guid.Parse(this.ServiceUuid);
+                var cuuid = Guid.Parse(this.CharacteristicUuid);
 
-            this.Info = "Searching for device..";
+                this.Info = "Searching for peripheral..";
 
-            this.peripheral = await this.centralManager
-                .ScanUntilPeripheralFound(this.DeviceName.Trim())
-                .ToTask(cancelToken);
-
-            this.Info = "Device Found - Connecting";
-
-            await this.peripheral
-                .ConnectWait()
-                .ToTask(cancelToken);
-
-            this.Info = "Connected - Requesting MTU Change";
-
-            if (this.peripheral is ICanRequestMtu mtu)
-                this.MTU = await mtu
-                    .RequestMtu(512)
+                this.peripheral = await this.centralManager
+                    .ScanUntilPeripheralFound(this.PeripheralName.Trim())
+                    .Timeout(TimeSpan.FromSeconds(5))
                     .ToTask(cancelToken);
-            else
-                this.MTU = this.peripheral.MtuSize;
 
-            this.Info = "Searching for characteristic";
-            var characteristic = await this.peripheral
-                .GetKnownCharacteristics(
-                    suuid,
-                    cuuid
-                )
-                .ToTask(cancelToken);
+                this.Info = "Peripheral Found - Connecting";
 
-            this.Info = "Characteristic Found";
-            return characteristic;
+                await this.peripheral
+                    .ConnectWait()
+                    .Timeout(TimeSpan.FromSeconds(5))
+                    .ToTask(cancelToken);
+
+                this.Info = "Connected - Requesting MTU Change";
+
+                if (this.peripheral is ICanRequestMtu mtu)
+                    this.MTU = await mtu
+                        .RequestMtu(512)
+                        .ToTask(cancelToken);
+                else
+                    this.MTU = this.peripheral.MtuSize;
+
+                this.Info = "Searching for characteristic";
+                var characteristic = await this.peripheral
+                    .GetKnownCharacteristics(
+                        suuid,
+                        cuuid
+                    )
+                    .Timeout(TimeSpan.FromSeconds(5))
+                    .ToTask(cancelToken);
+
+                this.Info = "Characteristic Found";
+                return characteristic;
+            }
+            catch
+            {
+                this.Info = "ERROR";
+                this.IsRunning = false;
+                throw;
+            }
         }
 
 
         IObservable<bool> CanRun() => this.WhenAny(
             x => x.Status,
-            x => x.DeviceName,
+            x => x.PeripheralName,
             x => x.ServiceUuid,
             x => x.CharacteristicUuid,
             x => x.IsRunning,

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Acr.UserDialogs.Forms;
 using Prism.Navigation;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Shiny;
 
 
@@ -14,15 +15,19 @@ namespace Samples.Infrastructure
 {
     public abstract class AbstractLogViewModel<TItem> : ViewModel
     {
+        readonly object syncLock = new object();
+
+
         protected AbstractLogViewModel(IUserDialogs dialogs)
         {
             this.Dialogs = dialogs;
 
             this.Logs = new ObservableList<TItem>();
-            this.hasLogs = this.Logs
+            this.Logs
                 .WhenCollectionChanged()
+                .Synchronize(this.syncLock)
                 .Select(_ => this.Logs.Any())
-                .ToProperty(this, x => x.HasLogs);
+                .ToPropertyEx(this, x => x.HasLogs);
 
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -38,9 +43,7 @@ namespace Samples.Infrastructure
         public ObservableList<TItem> Logs { get; }
         public ReactiveCommand<Unit, Unit> Load { get; }
         public ReactiveCommand<Unit, Unit> Clear { get; }
-
-        readonly ObservableAsPropertyHelper<bool> hasLogs;
-        public bool HasLogs => this.hasLogs.Value;
+        public bool HasLogs { [ObservableAsProperty] get; }
 
 
         public override async void Initialize(INavigationParameters parameters)
@@ -52,10 +55,12 @@ namespace Samples.Infrastructure
 
         protected abstract Task<IEnumerable<TItem>> LoadLogs();
         protected abstract Task ClearLogs();
-
-
         protected virtual void InsertItem(TItem item)
-            => this.Logs.Insert(0, item);
+        {
+            lock (this.syncLock)
+                this.Logs.Insert(0, item);
+        }
+
 
         protected virtual async Task DoClear()
         {
@@ -65,6 +70,13 @@ namespace Samples.Infrastructure
                 await this.ClearLogs();
                 await this.Load.Execute();
             }
+        }
+
+
+        void SetLogs(IEnumerable<TItem> items)
+        {
+            lock (this.syncLock)
+                this.Logs.ReplaceAll(items);
         }
     }
 }

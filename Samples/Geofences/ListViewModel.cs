@@ -8,7 +8,6 @@ using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Prism.Navigation;
 using Shiny.Locations;
-using Samples.Geofencing;
 using Samples.Models;
 
 
