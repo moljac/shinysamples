@@ -30,7 +30,7 @@ namespace Samples.Geofences
 
             return events.Select(x => new CommandItem
             {
-                Text = x.Text,
+                Text = $"[{x.Date.ToLocalTime()}] {x.Text}",
                 Detail = x.Detail
             });
         }

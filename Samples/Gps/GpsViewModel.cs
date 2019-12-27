@@ -142,7 +142,7 @@ namespace Samples.Gps
             {
                 this.Latitude = reading.Position.Latitude;
                 this.Longitude = reading.Position.Longitude;
-                this.Altitutde = reading.Altitude;
+                this.Altitude = reading.Altitude;
                 this.PositionAccuracy = reading.PositionAccuracy;
 
                 this.Heading = reading.Heading;
@@ -169,7 +169,7 @@ namespace Samples.Gps
         [Reactive] public bool IsUpdating { get; private set; }
         [Reactive] public double Latitude { get; private set; }
         [Reactive] public double Longitude { get; private set; }
-        [Reactive] public double Altitutde { get; private set; }
+        [Reactive] public double Altitude { get; private set; }
         [Reactive] public double PositionAccuracy { get; private set; }
         [Reactive] public double Heading { get; private set; }
         [Reactive] public double HeadingAccuracy { get; private set; }

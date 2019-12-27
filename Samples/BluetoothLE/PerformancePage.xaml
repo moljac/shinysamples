@@ -10,8 +10,8 @@
                 <TableSection Title="Setup">
                     <TextCell Text="Status"
                               Detail="{Binding Status}" />
-                    <EntryCell Label="Device"
-                               Text="{Binding DeviceName}"
+                    <EntryCell Label="Peripheral Name"
+                               Text="{Binding PeripheralName}"
                                IsEnabled="{Binding IsRunning, Converter={StaticResource Not}}" />
                     <EntryCell Label="Service UUID"
                                Text="{Binding ServiceUuid}"

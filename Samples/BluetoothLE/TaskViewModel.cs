@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ReactiveUI;
@@ -10,10 +9,10 @@ namespace Samples.BluetoothLE
 {
     public class TaskViewModel : ViewModel
     {
-        CancellationTokenSource cancelSrc;
+        CancellationTokenSource? cancelSrc;
 
 
-        public TaskViewModel(string text, Func<CancellationToken, Task> run, IObservable<bool> whenAny = null)
+        public TaskViewModel(string text, Func<CancellationToken, Task> run, IObservable<bool>? whenAny = null)
         {
             this.Text = text;
 

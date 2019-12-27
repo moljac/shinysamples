@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Shiny.Locations;
 
 
-namespace Samples.Geofencing
+namespace Samples.Geofences
 {
     public class GeofenceRegionViewModel
     {

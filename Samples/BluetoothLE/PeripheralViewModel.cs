@@ -43,7 +43,7 @@ namespace Samples.BluetoothLE
 
             this.PairToDevice = ReactiveCommand.Create(() =>
             {
-                var pair = this.centralManager as ICanPairPeripherals;
+                var pair = this.peripheral as ICanPairPeripherals;
 
                 if (pair == null)
                 {
@@ -69,7 +69,7 @@ namespace Samples.BluetoothLE
             this.RequestMtu = ReactiveCommand.CreateFromTask(
                 async x =>
                 {
-                    var mtu = this.centralManager as ICanRequestMtu;
+                    var mtu = this.peripheral as ICanRequestMtu;
                     if (mtu == null)
                     {
                         await dialogs.Alert("MTU requests are not supported on this platform");
@@ -100,7 +100,12 @@ namespace Samples.BluetoothLE
             this.peripheral = parameters.GetValue<IPeripheral>("Peripheral");
             this.Name = this.peripheral.Name;
             this.Uuid = this.peripheral.Uuid;
+
+            this.IsMtuVisible = this.peripheral.IsMtuRequestsAvailable();
+            this.IsPairingVisible = this.peripheral.IsPairingRequestsAvailable();
+
             this.PairingText = this.peripheral.TryGetPairingStatus() == PairingState.Paired ? "Peripheral Paired" : "Pair Peripheral";
+
 
             this.peripheral
                 .WhenReadRssiContinuously(TimeSpan.FromSeconds(3))
@@ -174,8 +179,7 @@ namespace Samples.BluetoothLE
         [Reactive] public string ConnectText { get; private set; } = "Connect";
         [Reactive] public int Rssi { get; private set; }
 
-        // TODO
-        //public bool IsMtuVisible => this.peripheral?.IsMtuRequestsAvailable() ?? false;
-        //public bool IsPairingVisible => this.centralManager.IsPairingRequestsAvailable();
+        [Reactive] public bool IsMtuVisible { get; private set; }
+        [Reactive] public bool IsPairingVisible { get; private set; }
     }
 }

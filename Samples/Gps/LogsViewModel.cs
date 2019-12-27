@@ -71,7 +71,7 @@ namespace Samples.Gps
 
             return list.Select(x => new CommandItem
             {
-                Text = $"{x.Date}",
+                Text = $"{x.Date.ToLocalTime()}",
                 Detail = $"{x.Latitude} / {x.Longitude}",
                 PrimaryCommand = ReactiveCommand.Create(() =>
                 {
