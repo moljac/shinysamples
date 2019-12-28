@@ -25,10 +25,10 @@ namespace Samples.BluetoothLE
         {
             this.CanControlAdapterState = central.CanControlAdapterState();
 
-            this.SelectPeripheral = navigator.NavigateCommand<PeripheralItemViewModel>(
-                "Peripheral",
-                (x, p) => p.Add("Peripheral", x.Peripheral)
-            );
+            this.WhenAnyValue(x => x.SelectedPeripheral)
+                .Skip(1)
+                .Where(x => x != null)
+                .SubOnMainThread(x => navigator.Navigate("Peripheral", ("Peripheral", x.Peripheral)));
 
             this.ToggleAdapterState = ReactiveCommand.Create(
                 () =>
@@ -66,9 +66,11 @@ namespace Samples.BluetoothLE
                                             peripheral = list.FirstOrDefault(x => x.Equals(result.Peripheral));
 
                                         if (peripheral != null)
-                                            peripheral.Update(result);
-                                        else
                                         {
+                                            peripheral.Update(result);
+                                        }
+                                        else 
+                                        { 
                                             peripheral = new PeripheralItemViewModel(result.Peripheral);
                                             peripheral.Update(result);
                                             list.Add(peripheral);
@@ -97,9 +99,9 @@ namespace Samples.BluetoothLE
 
         public ICommand ScanToggle { get; }
         public ICommand ToggleAdapterState { get; }
-        public ICommand SelectPeripheral { get; }
         public bool CanControlAdapterState { get; }
         public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
+        [Reactive] public PeripheralItemViewModel SelectedPeripheral { get; set; }
         [Reactive] public bool IsScanning { get; private set; }
     }
 }
