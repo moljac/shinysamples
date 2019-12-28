@@ -83,10 +83,11 @@ namespace Samples.ShinySetup
             services.UseBeacons<BeaconDelegate>();
             services.UseBleCentral<BleCentralDelegate>();
             services.UseBlePeripherals();
-
             services.UseGeofencing<LocationDelegates>();
             services.UseGps<LocationDelegates>();
             services.UseMotionActivity();
+            services.UseSpeechRecognition();
+            services.UseAllSensors();
 
             services.UseNotifications<NotificationDelegate>(
                 true,
@@ -99,24 +100,7 @@ namespace Samples.ShinySetup
                     new NotificationAction("No", "No", NotificationActionType.Destructive)
                 )
             );
-            services.UseSpeechRecognition();
 
-            services.UseAllSensors();
-            //services.UseAccelerometer();
-            //services.UseAmbientLightSensor();
-            //services.UseBarometer();
-            //services.UseCompass();
-            //services.UseMagnetometer();
-            //services.UsePedometer();
-            //services.UseProximitySensor();
-            //services.UseHeartRateMonitor();
-            //services.UseTemperature();
-            //services.UseHumidity();
         }
-
-        //#if DEBUG
-        //        public override IServiceProvider CreateServiceProvider(IServiceCollection services)
-        //            => services.BuildServiceProvider(true);
-        //#endif
     }
 }

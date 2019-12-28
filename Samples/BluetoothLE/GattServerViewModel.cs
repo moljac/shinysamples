@@ -57,7 +57,7 @@ namespace Samples.BluetoothLE
                     .SetWrite(request =>
                     {
                         this.LastWriteValue = Encoding.UTF8.GetString(request.Data, 0, request.Data.Length);
-                        this.LastWriteTime = DateTime.Now.ToString();                        
+                        this.LastWriteTime = DateTime.Now.ToString();
                         return GattState.Success;
                     })
                     .SetRead(request =>
@@ -71,6 +71,7 @@ namespace Samples.BluetoothLE
                 );
 
                 this.simplePush = sb.AddCharacteristic(Characteristic2Uuid, cb => cb.SetNotification(cs =>
+                    // main thread
                     this.SubscribersSimple = cs.Characteristic.SubscribedCentrals.Count
                 ));
 
