@@ -9,7 +9,7 @@ namespace Samples.Nfc
         readonly INfcManager nfcManager;
 
 
-        public NfcViewModel(INfcManager nfcManager = null)
+        public NfcViewModel(SampleSqliteConnection conn, INfcManager nfcManager = null)
         {
             this.nfcManager = nfcManager;
         }
