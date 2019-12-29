@@ -28,8 +28,10 @@
                         <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
                         <TextCell Text="Motion Activity" Command="{Binding Navigate}" CommandParameter="Nav/MotionActivity" />
                     </TableSection>
-                    <TableSection>
+                    <TableSection Title="Others">
                         <TextCell Text="Notifications" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />
+                        <TextCell Text="Push Notifications" Command="{Binding Navigate}" CommandParameter="Nav/PushNotifications" />
+                        <TextCell Text="NFC" Command="{Binding Navigate}" CommandParameter="Nav/Nfc" />
                         <TextCell Text="HTTP Transfers" Command="{Binding Navigate}" CommandParameter="Nav/HttpTransfers" />
                         <TextCell Text="Speech Recognition" Command="{Binding Navigate}" CommandParameter="Nav/SpeechRecognition"  />
                     </TableSection>

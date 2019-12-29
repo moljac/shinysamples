@@ -56,6 +56,9 @@ namespace Samples
             containerRegistry.RegisterForNavigation<HttpTransfers.CreatePage>("CreateTransfer");
             containerRegistry.RegisterForNavigation<HttpTransfers.ManageUploadsPage>("ManageUploads");
 
+            containerRegistry.RegisterForNavigation<PushNotifications.PushNotificationPage>("PushNotifications");
+            containerRegistry.RegisterForNavigation<Nfc.NfcPage>("Nfc");
+
             containerRegistry.RegisterForNavigation<Jobs.MainPage>("Jobs");
             containerRegistry.RegisterForNavigation<Jobs.CreatePage>("CreateJob");
 
