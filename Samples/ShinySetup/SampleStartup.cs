@@ -12,7 +12,6 @@ using Samples.ShinySetup;
 using Shiny.Infrastructure;
 using Acr.UserDialogs.Forms;
 using Shiny.Notifications;
-using System.Collections.Generic;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -36,6 +35,8 @@ using System.Collections.Generic;
 [assembly: ShinySensors]
 [assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
 [assembly: ShinySpeechRecognition]
+[assembly: ShinyPushNotifications(typeof(PushNotificationDelegate))]
+[assembly: ShinyNfc(typeof(NfcDelegate))]
 #endif
 #endif
 
@@ -88,6 +89,8 @@ namespace Samples.ShinySetup
             services.UseMotionActivity();
             services.UseSpeechRecognition();
             services.UseAllSensors();
+            services.UseNfc<NfcDelegate>();
+            services.UsePushNotifications<PushNotificationDelegate>();
 
             services.UseNotifications<NotificationDelegate>(
                 true,

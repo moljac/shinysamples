@@ -105,6 +105,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
+      <Project>{fedc40be-5198-449d-969f-59694d30c2aa}</Project>
+      <Name>Shiny.Nfc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{4efa31bb-7616-4075-8698-11978cfeb592}</Project>
       <Name>Shiny.Push</Name>

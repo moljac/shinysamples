@@ -11,7 +11,8 @@ using Shiny.Locations;
 using Shiny.Notifications;
 using Shiny.SpeechRecognition;
 using ReactiveUI;
-
+using Shiny.Push;
+using Shiny.Nfc;
 
 namespace Samples
 {
@@ -23,7 +24,9 @@ namespace Samples
                                IGeofenceManager geofences = null,
                                IGpsManager gps = null,
                                ICentralManager bluetooth = null,
-                               IBeaconManager beacons = null)
+                               IBeaconManager beacons = null,
+                               IPushNotificationManager push = null,
+                               INfcManager nfc = null)
         {
             this.Append("Jobs", AccessState.Unknown, () => jobs.RequestAccess());
 
@@ -44,6 +47,16 @@ namespace Samples
 
             if (beacons != null)
                 this.Append("iBeacons (Monitoring)", beacons.GetCurrentStatus(true), () => beacons.RequestAccess(true));
+
+            if (push != null)
+                this.Append("Push Notifications", AccessState.Unknown, async () => 
+                {
+                    var status = await push.RequestAccess();
+                    return status.Status;
+                });
+
+            if (nfc != null)
+                this.Append("NFC", AccessState.Unknown, () => nfc.RequestAccess());
         }
 
 
