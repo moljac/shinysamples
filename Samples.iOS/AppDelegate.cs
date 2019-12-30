@@ -33,12 +33,12 @@ namespace Samples.iOS
         }
 
 
-        //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        //    => PushNotificationManager.RegisteredForRemoteNotifications(deviceToken);
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+            => PushManager.RegisteredForRemoteNotifications(deviceToken);
 
 
-        //public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-        //    => PushNotificationManager.FailedToRegisterForRemoteNotifications(error);
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+            => PushManager.FailedToRegisterForRemoteNotifications(error);
 
 
         // if you are using jobs, you need this
