@@ -40,4 +40,10 @@
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Push\PushPage.xaml.cs">
+        <DependentUpon>PushPage.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

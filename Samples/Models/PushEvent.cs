@@ -4,7 +4,7 @@ using System;
 
 namespace Samples.Models
 {
-    public class PushNotificationEvent
+    public class PushEvent
     {
         [PrimaryKey]
         [AutoIncrement]

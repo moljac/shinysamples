@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pushnotifications="clr-namespace:Samples.PushNotifications"
-             x:DataType="pushnotifications:PushNotificationViewModel"
+             xmlns:pushnotifications="clr-namespace:Samples.Push"
+             x:DataType="pushnotifications:PushViewModel"
              mc:Ignorable="d"
-             x:Class="Samples.PushNotifications.PushNotificationPage"
-             Title="Push Notifications">
+             x:Class="Samples.Push.PushPage"
+             Title="Push">
     <ContentPage.Content>
         <StackLayout>
         </StackLayout>

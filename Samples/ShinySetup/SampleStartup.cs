@@ -35,7 +35,7 @@ using Shiny.Notifications;
 [assembly: ShinySensors]
 [assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
 [assembly: ShinySpeechRecognition]
-[assembly: ShinyPushNotifications(typeof(PushNotificationDelegate))]
+[assembly: ShinyPush(typeof(PushDelegate))]
 [assembly: ShinyNfc(typeof(NfcDelegate))]
 #endif
 #endif
@@ -90,7 +90,7 @@ namespace Samples.ShinySetup
             services.UseSpeechRecognition();
             services.UseAllSensors();
             services.UseNfc<NfcDelegate>();
-            services.UsePushNotifications<PushNotificationDelegate>();
+            services.UsePush<PushDelegate>();
 
             services.UseNotifications<NotificationDelegate>(
                 true,

@@ -25,7 +25,7 @@ namespace Samples
                                IGpsManager gps = null,
                                ICentralManager bluetooth = null,
                                IBeaconManager beacons = null,
-                               IPushNotificationManager push = null,
+                               IPushManager push = null,
                                INfcManager nfc = null)
         {
             this.Append("Jobs", AccessState.Unknown, () => jobs.RequestAccess());
@@ -49,7 +49,7 @@ namespace Samples
                 this.Append("iBeacons (Monitoring)", beacons.GetCurrentStatus(true), () => beacons.RequestAccess(true));
 
             if (push != null)
-                this.Append("Push Notifications", AccessState.Unknown, async () => 
+                this.Append("Push", AccessState.Unknown, async () =>
                 {
                     var status = await push.RequestAccess();
                     return status.Status;

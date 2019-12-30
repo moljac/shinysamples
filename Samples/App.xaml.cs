@@ -33,7 +33,7 @@ namespace Samples
 #if DEBUG
             Xamarin.Forms.Internals.Log.Listeners.Add(new TraceLogListener());
 #endif
-            
+
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<MainPage>("Main");
             containerRegistry.RegisterForNavigation<WelcomePage>("Welcome");
@@ -56,7 +56,7 @@ namespace Samples
             containerRegistry.RegisterForNavigation<HttpTransfers.CreatePage>("CreateTransfer");
             containerRegistry.RegisterForNavigation<HttpTransfers.ManageUploadsPage>("ManageUploads");
 
-            containerRegistry.RegisterForNavigation<PushNotifications.PushNotificationPage>("PushNotifications");
+            containerRegistry.RegisterForNavigation<Push.PushPage>("Push");
             containerRegistry.RegisterForNavigation<Nfc.NfcPage>("Nfc");
 
             containerRegistry.RegisterForNavigation<Jobs.MainPage>("Jobs");
