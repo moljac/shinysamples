@@ -45,8 +45,10 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <uap3:Capability Name="backgroundMediaPlayback" />
+    <uap3:Capability Name="userNotificationListener"/>
     <DeviceCapability Name="bluetooth" />
     <DeviceCapability Name="microphone" />
     <DeviceCapability Name="location" />
+    <DeviceCapability Name="proximity"/>
   </Capabilities>
 </Package>
