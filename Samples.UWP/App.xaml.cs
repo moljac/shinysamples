@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Forms;
 using Application = Windows.UI.Xaml.Application;
 using Frame = Windows.UI.Xaml.Controls.Frame;
-
 using Shiny;
 using Samples.ShinySetup;
-
 
 
 namespace Samples.UWP
@@ -21,12 +17,7 @@ namespace Samples.UWP
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += this.OnSuspending;
-            //BackgroundTaskRegistration
-            //    .AllTasks
-            //    .ToList()
-            //    .ForEach(x => x.Value.Unregister(true));
-
+            //UwpShinyHost.ClearBackgroundTasks();
             UwpShinyHost.Init(new SampleStartup());
         }
 
@@ -40,6 +31,7 @@ namespace Samples.UWP
                 rootFrame = new Frame();
                 rootFrame.NavigationFailed += this.OnNavigationFailed;
                 Rg.Plugins.Popup.Popup.Init();
+                Forms.SetFlags("CollectionView_Experimental");
                 Forms.SetFlags("SwipeView_Experimental");
                 Forms.Init(e);
 
