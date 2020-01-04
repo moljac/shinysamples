@@ -18,27 +18,19 @@ namespace Samples
                                       IDestructible,
                                       IConfirmNavigationAsync
     {
-        CompositeDisposable deactivateWith;
-        protected CompositeDisposable DeactivateWith
-        {
-            get
-            {
-                if (this.deactivateWith == null)
-                    this.deactivateWith = new CompositeDisposable();
 
-                return this.deactivateWith;
-            }
-        }
-
+        CompositeDisposable? deactivateWith;
+        protected CompositeDisposable DeactivateWith => this.deactivateWith ??= new CompositeDisposable();
         protected CompositeDisposable DestroyWith { get; } = new CompositeDisposable();
 
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
+        protected virtual void Deactivate()
         {
             this.deactivateWith?.Dispose();
             this.deactivateWith = null;
         }
 
+        public virtual void OnNavigatedFrom(INavigationParameters parameters) => this.Deactivate();
         public virtual void Initialize(INavigationParameters parameters) { }
         public virtual Task InitializeAsync(INavigationParameters parameters) => Task.CompletedTask;
         public virtual void OnNavigatedTo(INavigationParameters parameters) { }
@@ -48,7 +40,7 @@ namespace Samples
         public virtual Task<bool> CanNavigateAsync(INavigationParameters parameters) => Task.FromResult(true);
 
         [Reactive] public bool IsBusy { get; set; }
-        [Reactive] public string Title { get; protected set; }
+        [Reactive] public string? Title { get; protected set; }
 
 
         protected void BindBusyCommand(IReactiveCommand command) =>

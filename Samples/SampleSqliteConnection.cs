@@ -20,7 +20,6 @@ namespace Samples
             conn.CreateTable<HttpEvent>();
             conn.CreateTable<NotificationEvent>();
             conn.CreateTable<PushEvent>();
-            conn.CreateTable<NfcEvent>();
         }
 
 
@@ -32,6 +31,5 @@ namespace Samples
         public AsyncTableQuery<HttpEvent> HttpEvents => this.Table<HttpEvent>();
         public AsyncTableQuery<NotificationEvent> NotificationEvents => this.Table<NotificationEvent>();
         public AsyncTableQuery<PushEvent> PushEvents => this.Table<PushEvent>();
-        public AsyncTableQuery<NfcEvent> NfcEvents => this.Table<NfcEvent>();
     }
 }

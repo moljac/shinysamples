@@ -9,7 +9,7 @@ using Samples.ShinySetup;
 using Shiny;
 using Shiny.Net.Http;
 using Shiny.Jobs;
-//using Shiny.Push;
+using Shiny.Push;
 
 
 namespace Samples.iOS

@@ -41,12 +41,12 @@
             </RefreshView>
                 
             <Button Text="Cancel All Jobs"
-                Command="{Binding CancelAllJobs}"
-                Grid.Row="1" />
+                    Command="{Binding CancelAllJobs}"
+                    Grid.Row="1" />
 
             <Button Text="Run All Jobs"
-                Command="{Binding RunAllJobs}"
-                Grid.Row="2" />
+                    Command="{Binding RunAllJobs}"
+                    Grid.Row="2" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
