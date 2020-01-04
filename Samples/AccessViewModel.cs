@@ -56,7 +56,7 @@ namespace Samples
                 });
 
             if (nfc != null)
-                this.Append("NFC", AccessState.Unknown, () => nfc.RequestAccess().ToTask());
+                this.Append("NFC", AccessState.Unknown, () => nfc.RequestAccess().ToTask(CancellationToken.None));
         }
 
 
