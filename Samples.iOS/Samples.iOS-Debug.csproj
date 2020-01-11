@@ -212,7 +212,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
-      <Project>{fedc40be-5198-449d-969f-59694d30c2aa}</Project>
+      <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
