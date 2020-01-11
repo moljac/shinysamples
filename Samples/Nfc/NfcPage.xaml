@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"             
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nfc="clr-namespace:Samples.Nfc"
              xmlns:nfc1="clr-namespace:Shiny.Nfc;assembly=Shiny.Nfc"
-             x:DataType="nfc:NfcViewModel"             
+             x:DataType="nfc:NfcViewModel"
              mc:Ignorable="d"
              x:Class="Samples.Nfc.NfcPage"
              Title="NFC">
@@ -35,7 +35,7 @@
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="nfc1:INDefRecord">
+                    <DataTemplate x:DataType="nfc1:NDefRecord">
                         <StackLayout>
                             <Label Text="{Binding Payload}" />
                             <Label Text="{Binding PayloadType}" />

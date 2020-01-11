@@ -61,7 +61,7 @@ namespace Samples.Nfc
         public ICommand Clear { get; }
         public ICommand Listen { get; }
         public ICommand CheckPermission { get; }
-        public List<INDefRecord> NDefRecords { get; } = new List<INDefRecord>();
+        public List<NDefRecord> NDefRecords { get; } = new List<NDefRecord>();
         [Reactive] public AccessState Access { get; private set; } = AccessState.Unknown;
         [Reactive] public bool IsListening { get; private set; }
     }
