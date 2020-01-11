@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="{Binding AccessStatus, StringFormat='Check Status: {0}'}" />
+            <Button Text="{Binding AccessStatus, StringFormat='Check Status: {0}'}" Command="{Binding CheckPermission}" />
             <Label Text="{Binding RegToken, StringFormat='Registration Token: {0}'}" />
 
             <RefreshView Command="{Binding Load}"
