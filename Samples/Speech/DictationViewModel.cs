@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
 using Acr.UserDialogs.Forms;
-using Shiny.SpeechRecognition;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Shiny;
+using Shiny.SpeechRecognition;
 
 
 namespace Samples.Speech
@@ -12,50 +13,48 @@ namespace Samples.Speech
     {
         public DictationViewModel(ISpeechRecognizer speech, IUserDialogs dialogs)
         {
-            IDisposable token = null;
             speech
                 .WhenListeningStatusChanged()
-                .SubOnMainThread(x => this.ListenText = x
-                    ? "Stop Listening"
-                    : "Start Dictation"
-                );
+                .SubOnMainThread(x => this.IsListening = x);
 
 
             this.ToggleListen = ReactiveCommand.Create(()  =>
             {
-                if (token == null)
+                if (this.IsListening)
                 {
+                    this.Deactivate();
+                }
+                else
+                { 
                     if (this.UseContinuous)
                     {
-                        token = speech
+                        speech
                             .ContinuousDictation()
                             .SubOnMainThread(
                                 x => this.Text += " " + x,
                                 ex => dialogs.Alert(ex.ToString())
-                            );
+                            )
+                            .DisposedBy(this.DeactivateWith);
                     }
                     else
                     {
-                        token = speech
+                        speech
                             .ListenUntilPause()
                             .SubOnMainThread(
                                 x => this.Text = x,
                                 ex => dialogs.Alert(ex.ToString())
-                            );
+                            )
+                            .DisposedBy(this.DeactivateWith);
                     }
-                }
-                else
-                {
-                    token.Dispose();
-                    token = null;
                 }
             });
         }
 
 
         public ICommand ToggleListen { get; }
+        [Reactive] public bool IsListening { get; private set; }
         [Reactive] public bool UseContinuous { get; set; } = true;
-        [Reactive] public string ListenText { get; private set; } = "Start Listening";
+        //[Reactive] public bool ListenInBackground { get; set; }
         [Reactive] public string Text { get; private set; }
     }
 }
