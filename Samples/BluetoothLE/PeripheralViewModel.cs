@@ -108,7 +108,7 @@ namespace Samples.BluetoothLE
 
 
             this.peripheral
-                .WhenReadRssiContinuously(TimeSpan.FromSeconds(3))
+                .ReadRssiContinuously(TimeSpan.FromSeconds(3))
                 .SubOnMainThread(x => this.Rssi = x)
                 .DisposeWith(this.DeactivateWith);
 

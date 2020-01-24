@@ -45,7 +45,6 @@ namespace Samples.iOS
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
             => JobManager.OnBackgroundFetch(completionHandler);
 
-
         public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
             => HttpTransferManager.SetCompletionHandler(sessionIdentifier, completionHandler);
 

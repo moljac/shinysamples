@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Samples</AssemblyName>
         <RootNamespace>Samples</RootNamespace>
-        <LangVersion>8.0</LangVersion>
+        <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
@@ -18,10 +18,10 @@
         <PackageReference Include="DryIoc.dll" Version="4.0.7" />
         <PackageReference Include="Humanizer" Version="2.7.9" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
-        <PackageReference Include="ReactiveUI.Fody" Version="11.1.6" />
+        <PackageReference Include="ReactiveUI.Fody" Version="11.1.12" />
         <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991477" />
-        <PackageReference Include="Xamarin.Forms.Maps" Version="4.4.0.991477" />
+        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
+        <PackageReference Include="Xamarin.Forms.Maps" Version="4.4.0.991537" />
     </ItemGroup>
 
     <ItemGroup>
@@ -39,11 +39,5 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Push\PushPage.xaml.cs">
-        <DependentUpon>PushPage.xaml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
+    
 </Project>

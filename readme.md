@@ -16,3 +16,7 @@ OS|Link
 --|----
 Android|[Link](https://install.appcenter.ms/orgs/shinyorg/apps/shiny/distribution_groups/all)
 iOS|[Link](https://install.appcenter.ms/orgs/shinyorg/apps/shiny-1/distribution_groups/all)
+
+
+## Compiling on iOS
+NFC & Push Notifications are enabled in the info.plist which means you need a custom provisioning profile (or you have to disable these before deploying to your device)
