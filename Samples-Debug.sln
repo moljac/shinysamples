@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nuget.config = nuget.config
 		readme.md = readme.md
 		..\shiny\ChangeLog.md = ..\shiny\ChangeLog.md
+		license.md = license.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples-Debug", "Samples\Samples-Debug.csproj", "{82F5E401-C438-46B0-BC7C-733D3E017AD5}"
