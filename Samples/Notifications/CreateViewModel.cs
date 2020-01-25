@@ -39,7 +39,8 @@ namespace Samples.Notifications
                     Message = "This is a test of the sendnow stuff",
                     Payload = this.Payload,
                     BadgeCount = this.BadgeCount,
-                    Category = this.UseActions ? "Test" : null
+                    Category = this.UseActions ? "Test" : null,
+                    Sound = this.GetSound()
                 })
             );
             this.Send = ReactiveCommand.CreateFromTask(
@@ -52,7 +53,8 @@ namespace Samples.Notifications
                         Payload = this.Payload,
                         BadgeCount = this.BadgeCount,
                         ScheduleDate = this.ScheduledTime,
-                        Category = this.UseActions ? "Test" : null
+                        Category = this.UseActions ? "Test" : null,
+                        Sound = this.GetSound()
                     };
 
                     await notificationManager.Send(notification);
@@ -79,6 +81,17 @@ namespace Samples.Notifications
         }
 
 
+        NotificationSound GetSound()
+        {
+            switch (this.SelectedSoundType)
+            {
+                case "None"     : return NotificationSound.None;
+                case "Default"  : return NotificationSound.DefaultSystem;
+                case "Priority" : return NotificationSound.DefaultPriority;
+                default         : throw new ArgumentException("Invalid Sound Type");
+            }
+        }
+
         public ICommand PermissionCheck { get; }
         public ICommand Send { get; }
         public ICommand SendNow { get; }
@@ -91,5 +104,13 @@ namespace Samples.Notifications
         [Reactive] public TimeSpan SelectedTime { get; set; }
         [Reactive] public int BadgeCount { get; set; }
         [Reactive] public string Payload { get; set; }
+
+        public string[] SoundTypes { get; } = new[]
+        {
+            "None",
+            "Default",
+            "Priority"
+        };
+        [Reactive] public string SelectedSoundType { get; set; } = "None";
     }
 }

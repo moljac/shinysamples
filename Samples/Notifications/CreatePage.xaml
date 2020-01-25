@@ -30,6 +30,10 @@
                 <Label Text="Time" />
                 <TimePicker Time="{Binding SelectedTime}" />
 
+                <Label Text="Sound" />
+                <Picker SelectedItem="{Binding SelectedSoundType}"
+                        ItemsSource="{Binding SoundTypes}"/>
+
                 <Label Text="Use Actions" />
                 <CheckBox IsChecked="{Binding UseActions}" />
 
