@@ -94,8 +94,6 @@ namespace Samples.ShinySetup
 
             services.UseNotifications<NotificationDelegate>(
                 true,
-                null,
-                null,
                 new NotificationCategory(
                     "Test",
                     new NotificationAction("Reply", "Reply", NotificationActionType.TextReply),
@@ -103,7 +101,6 @@ namespace Samples.ShinySetup
                     new NotificationAction("No", "No", NotificationActionType.Destructive)
                 )
             );
-
         }
     }
 }
