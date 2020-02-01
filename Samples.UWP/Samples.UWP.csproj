@@ -144,30 +144,30 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Shiny.Beacons">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217-beta</Version>
     </PackageReference>
     <PackageReference Include="Shiny.BluetoothLE">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217-beta</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Locations">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Net.Http">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Notifications">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217</Version>
     </PackageReference>
     <PackageReference Include="Shiny.Sensors">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217</Version>
     </PackageReference>
     <PackageReference Include="Shiny.SpeechRecognition">
-      <Version>1.0.0.545-beta</Version>
+      <Version>1.0.0.1217</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.187-pre2" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>4.4.0.991265</Version>
+      <Version>4.5.0.187-pre2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
