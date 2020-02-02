@@ -207,7 +207,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.187-pre2" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -254,6 +254,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj">
       <Project>{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}</Project>
       <Name>Shiny.Sensors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.XamarinForms\Shiny.Integrations.XamarinForms.csproj">
+      <Project>{16F6093B-8F8B-4A8E-B275-6E28C03EA5D1}</Project>
+      <Name>Shiny.Integrations.XamarinForms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

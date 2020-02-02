@@ -4,11 +4,8 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
 using Xamarin;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
-using Permission = Android.Content.PM.Permission;
 
 
 namespace Samples.Droid
@@ -20,7 +17,7 @@ namespace Samples.Droid
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
     )]
-    public class MainActivity : FormsAppCompatActivity
+    public class MainActivity : ShinyFormsActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -43,13 +40,6 @@ namespace Samples.Droid
         {
             base.OnNewIntent(intent);
             Shiny.Notifications.NotificationManager.TryProcessIntent(intent);
-        }
-
-
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-        {
-            AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

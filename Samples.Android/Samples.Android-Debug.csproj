@@ -66,13 +66,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.187-pre2" />
+<!--    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Maps" Version="71.1610.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Maps" Version="71.1610.0" />-->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -147,6 +147,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj">
       <Project>{98934688-0A44-41A0-B74E-6C4996B63272}</Project>
       <Name>Shiny.SpeechRecognition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.XamarinForms\Shiny.Integrations.XamarinForms.csproj">
+      <Project>{16F6093B-8F8B-4A8E-B275-6E28C03EA5D1}</Project>
+      <Name>Shiny.Integrations.XamarinForms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

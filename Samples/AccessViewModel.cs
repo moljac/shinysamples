@@ -19,14 +19,14 @@ namespace Samples
     public class AccessViewModel : ViewModel
     {
         public AccessViewModel(IJobManager jobs,
-                               INotificationManager notifications = null,
-                               ISpeechRecognizer speech = null,
-                               IGeofenceManager geofences = null,
-                               IGpsManager gps = null,
-                               ICentralManager bluetooth = null,
-                               IBeaconManager beacons = null,
-                               IPushManager push = null,
-                               INfcManager nfc = null)
+                               INotificationManager? notifications = null,
+                               ISpeechRecognizer? speech = null,
+                               IGeofenceManager? geofences = null,
+                               IGpsManager? gps = null,
+                               ICentralManager? bluetooth = null,
+                               IBeaconManager? beacons = null,
+                               IPushManager? push = null,
+                               INfcManager? nfc = null)
         {
             this.Append("Jobs", AccessState.Unknown, () => jobs.RequestAccess());
 
@@ -37,7 +37,10 @@ namespace Samples
                 this.Append("Speech", AccessState.Unknown, () => speech.RequestAccess());
 
             if (gps != null)
-                this.Append("GPS (Background)", gps.GetCurrentStatus(true), () => gps.RequestAccess(true));
+            {
+                var request = new GpsRequest { UseBackground = true };
+                this.Append("GPS (Background)", gps.GetCurrentStatus(request), () => gps.RequestAccess(request));
+            }
 
             if (geofences != null)
                 this.Append("Geofences", geofences.Status, () => geofences.RequestAccess());

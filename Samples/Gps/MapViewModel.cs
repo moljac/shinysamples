@@ -28,10 +28,12 @@ namespace Samples.Gps
             this.Toggle = ReactiveCommand.CreateFromTask(async () =>
             {
                 if (this.gpsManager.IsListening)
+                {
                     await this.gpsManager.StopListener();
+                }
                 else
                 {
-                    var access = await this.gpsManager.RequestAccess(false);
+                    var access = await this.gpsManager.RequestAccess(new GpsRequest());
                     if (access == AccessState.Available)
                         await this.gpsManager.StartListener(null);
                 }

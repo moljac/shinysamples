@@ -23,7 +23,9 @@ namespace Samples.Gps
             this.IsUpdating = this.manager.IsListening;
 
             this.WhenAnyValue(x => x.UseBackground)
-                .Subscribe(x => this.Access = this.manager.GetCurrentStatus(this.UseBackground).ToString());
+                .Subscribe(x => this.Access = this.manager.GetCurrentStatus(
+                    new GpsRequest { UseBackground = this.UseBackground }).ToString()
+                );
 
             this.WhenAnyValue(x => x.IsUpdating)
                 .Select(x => x ? "Stop Listening" : "Start Updating")
@@ -31,7 +33,7 @@ namespace Samples.Gps
 
             this.GetCurrentPosition = ReactiveCommand.CreateFromTask(async _ =>
             {
-                var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(true));
+                var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(new GpsRequest()));
                 if (!result)
                     return;
 
@@ -62,7 +64,7 @@ namespace Samples.Gps
                     }
                     else
                     {
-                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(this.UseBackground));
+                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(new GpsRequest { UseBackground = this.UseBackground }));
                         if (!result)
                         {
                             await dialogs.Alert("Insufficient permissions");
@@ -118,7 +120,7 @@ namespace Samples.Gps
 
             this.RequestAccess = ReactiveCommand.CreateFromTask(async () =>
             {
-                var access = await this.manager.RequestAccess(this.UseBackground);
+                var access = await this.manager.RequestAccess(new GpsRequest { UseBackground = this.UseBackground });
                 this.Access = access.ToString();
             });
             this.BindBusyCommand(this.RequestAccess);
