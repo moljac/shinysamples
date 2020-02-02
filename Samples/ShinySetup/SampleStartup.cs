@@ -78,6 +78,7 @@ namespace Samples.ShinySetup
             services.AddSingleton<GlobalExceptionHandler>();
             services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<JobLoggerTask>();
+            services.AddAppState<AppStateDelegate>();
 
             // register all of the shiny stuff you want to use
             services.UseHttpTransfers<HttpTransferDelegate>();
