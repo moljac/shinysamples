@@ -21,7 +21,7 @@ namespace Samples.ShinyDelegates
         void Store(string eventName) => this.conn.GetConnection().Insert(new AppStateEvent
         {
             Event = eventName,
-            Date = DateTime.UtcNow
+            Timestamp = DateTime.UtcNow
         });
     }
 }

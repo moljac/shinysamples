@@ -12,6 +12,7 @@ namespace Samples
         public SampleSqliteConnection(IFileSystem fileSystem) : base(Path.Combine(fileSystem.AppData.FullName, "sample.db"))
         {
             var conn = this.GetConnection();
+            conn.CreateTable<AppStateEvent>();
             conn.CreateTable<BeaconEvent>();
             conn.CreateTable<GeofenceEvent>();
             conn.CreateTable<JobLog>();
@@ -22,7 +23,7 @@ namespace Samples
             conn.CreateTable<PushEvent>();
         }
 
-
+        public AsyncTableQuery<AppStateEvent> AppStateEvents => this.Table<AppStateEvent>();
         public AsyncTableQuery<BeaconEvent> BeaconEvents => this.Table<BeaconEvent>();
         public AsyncTableQuery<BleEvent> BleEvents => this.Table<BleEvent>();
         public AsyncTableQuery<GeofenceEvent> GeofenceEvents => this.Table<GeofenceEvent>();

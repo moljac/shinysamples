@@ -1,13 +1,38 @@
 ﻿using System;
-using Xamarin.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Acr.UserDialogs.Forms;
+using Samples.Infrastructure;
+using Samples.Models;
 
 
 namespace Samples.AppState
 {
-    public class LogViewModel : ViewModel
+    public class LogViewModel : AbstractLogViewModel<CommandItem>
     {
-        public LogViewModel(S)
+        readonly SampleSqliteConnection conn;
+
+
+        public LogViewModel(SampleSqliteConnection conn, IUserDialogs dialogs) : base(dialogs)
         {
+            this.conn = conn;
+        }
+
+
+        protected override Task ClearLogs() => this.conn.DeleteAllAsync<AppStateEvent>();
+        protected override async Task<IEnumerable<CommandItem>> LoadLogs()
+        {
+            var events = await this.conn
+                .AppStateEvents
+                .OrderByDescending(x => x.Timestamp)
+                .ToListAsync();
+
+            return events.Select(x => new CommandItem
+            {
+                Text = x.Event,
+                Detail = x.Timestamp.ToLocalTime().ToString()
+            });
         }
     }
 }

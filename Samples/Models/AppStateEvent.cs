@@ -9,7 +9,7 @@ namespace Samples.Models
         [AutoIncrement]
         public int Id { get; set; }
         public string Event { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }
 

@@ -102,6 +102,7 @@ namespace Samples.ShinySetup
                     new NotificationAction("No", "No", NotificationActionType.Destructive)
                 )
             );
+            services.RegisterTerminationNotification("APP TERMINATED", "How are we supposed to track yo ass now!?");
         }
     }
 }
