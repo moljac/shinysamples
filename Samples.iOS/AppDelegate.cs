@@ -7,9 +7,6 @@ using Xamarin.Forms.Platform.iOS;
 using Acr.UserDialogs.Forms;
 using Samples.ShinySetup;
 using Shiny;
-using Shiny.Net.Http;
-using Shiny.Jobs;
-using Shiny.Push;
 
 
 namespace Samples.iOS
@@ -33,21 +30,26 @@ namespace Samples.iOS
         }
 
 
-        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-            => PushManager.RegisteredForRemoteNotifications(deviceToken);
+        public override void OnActivated(UIApplication application)
+            => iOSShinyHost.OnActivated();
 
+        public override void OnResignActivation(UIApplication uiApplication)
+            => iOSShinyHost.OnBackground();
+
+        public override void WillTerminate(UIApplication uiApplication)
+            => iOSShinyHost.OnTerminate();
+
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+            => iOSShinyHost.RegisteredForRemoteNotifications(deviceToken);
 
         public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-            => PushManager.FailedToRegisterForRemoteNotifications(error);
+            => iOSShinyHost.FailedToRegisterForRemoteNotifications(error);
 
-
-        // if you are using jobs, you need this
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
-            => JobManager.OnBackgroundFetch(completionHandler);
+            => iOSShinyHost.PerformFetch(completionHandler);
 
         public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
-            => HttpTransferManager.SetCompletionHandler(sessionIdentifier, completionHandler);
-
+            => iOSShinyHost.HandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
 
         public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
             => ShinyHost.Resolve<IUserDialogs>().Alert(notification.AlertBody, "Notification - " + notification.AlertTitle);
