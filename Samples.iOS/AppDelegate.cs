@@ -31,7 +31,7 @@ namespace Samples.iOS
 
 
         public override void OnActivated(UIApplication application)
-            => iOSShinyHost.OnActivated();
+            => iOSShinyHost.OnForeground();
 
         public override void OnResignActivation(UIApplication uiApplication)
             => iOSShinyHost.OnBackground();
