@@ -6,7 +6,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
-
+using Xamarin.Forms;
 
 namespace Samples.Notifications
 {
@@ -56,6 +56,18 @@ namespace Samples.Notifications
                         Category = this.UseActions ? "Test" : null,
                         Sound = this.GetSound()
                     };
+                    if (!this.AndroidChannel.IsEmpty())
+                    {
+                        notification.Android.ChannelId = this.AndroidChannel;
+                        notification.Android.Channel = this.AndroidChannel;
+                    }
+                    if (this.UseAndroidHighPriority)
+                    {                        
+                        notification.Android.Priority = 9;
+                        notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
+                    }                    
+                    notification.Android.Vibrate = this.UseAndroidVibrate;
+                    notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
 
                     await notificationManager.Send(notification);
                     this.NotificationTitle = String.Empty;
@@ -104,6 +116,11 @@ namespace Samples.Notifications
         [Reactive] public TimeSpan SelectedTime { get; set; }
         [Reactive] public int BadgeCount { get; set; }
         [Reactive] public string Payload { get; set; }
+        [Reactive] public string AndroidChannel { get; set; }
+        [Reactive] public bool UseAndroidVibrate { get; set; }
+        [Reactive] public bool UseAndroidBigTextStyle { get; set; }
+        [Reactive] public bool UseAndroidHighPriority { get; set; }
+        public bool IsAndroid => Device.RuntimePlatform == Device.Android;
 
         public string[] SoundTypes { get; } = new[]
         {

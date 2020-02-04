@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Samples.Notifications.CreatePage"
              xmlns:notifications="clr-namespace:Samples.Notifications"
+             x:Class="Samples.Notifications.CreatePage"             
              x:DataType="notifications:CreateViewModel"
              Title="Create">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
 
-                <Button Text="Request Permissions (iOS Only)"
-                        Command="{Binding PermissionCheck}" />
+                <Button Text="Request Permissions"
+                        Command="{Binding PermissionCheck}"
+                        IsVisible="{Binding IsAndroid, Converter={StaticResource Not}}"/>
 
                 <Label Text="Title" />
                 <Entry Text="{Binding NotificationTitle}" />
@@ -32,13 +33,28 @@
 
                 <Label Text="Sound" />
                 <Picker SelectedItem="{Binding SelectedSoundType}"
-                        ItemsSource="{Binding SoundTypes}"/>
+                        ItemsSource="{Binding SoundTypes}" />
 
                 <Label Text="Use Actions" />
                 <CheckBox IsChecked="{Binding UseActions}" />
 
-                <Button Text="Send" Command="{Binding Send}" />
+                <ContentView IsVisible="{Binding IsAndroid}">
+                    <StackLayout>
+                        <Label Text="Android Channel" />
+                        <Entry Text="{Binding AndroidChannel}" />
 
+                        <Label Text="Android High Priority" />
+                        <CheckBox IsChecked="{Binding UseAndroidHighPriority}" />
+
+                        <Label Text="Android Big Text" />
+                        <CheckBox IsChecked="{Binding UseAndroidBigTextStyle}" />
+
+                        <Label Text="Android Vibrate" />
+                        <CheckBox IsChecked="{Binding UseAndroidVibrate}" />
+                    </StackLayout>
+                </ContentView>
+
+                <Button Text="Send" Command="{Binding Send}" />
                 <Button Text="Send Test Now" Command="{Binding SendNow}" />
             </StackLayout>
         </ScrollView>
