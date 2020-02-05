@@ -15,7 +15,6 @@ namespace Samples.ShinyDelegates
         public void OnBackground() => this.Store("Background");
         public void OnForeground() => this.Store("Foreground");
         public void OnStart() => this.Store("Start");
-        public void OnTerminate() => this.Store("Terminate");
 
 
         void Store(string eventName) => this.conn.GetConnection().Insert(new AppStateEvent
