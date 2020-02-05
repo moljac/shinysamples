@@ -40,8 +40,5 @@
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.XamarinForms\Shiny.Integrations.XamarinForms.csproj" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="AppState\" />
-    </ItemGroup>
+
 </Project>

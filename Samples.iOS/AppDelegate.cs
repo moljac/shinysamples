@@ -29,16 +29,6 @@ namespace Samples.iOS
             return base.FinishedLaunching(app, options);
         }
 
-
-        public override void OnActivated(UIApplication application)
-            => iOSShinyHost.OnForeground();
-
-        public override void OnResignActivation(UIApplication uiApplication)
-            => iOSShinyHost.OnBackground();
-
-        public override void WillTerminate(UIApplication uiApplication)
-            => iOSShinyHost.OnTerminate();
-
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
             => iOSShinyHost.RegisteredForRemoteNotifications(deviceToken);
 

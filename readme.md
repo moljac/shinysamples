@@ -1,5 +1,6 @@
 ﻿## Shiny Samples
 
+Use Samples.sln if you want to build the project.  The -Debug.sln is for testing with the raw source code which requires special setup.
 
 ## Builds
 
