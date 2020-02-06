@@ -62,12 +62,12 @@ namespace Samples.Notifications
                         notification.Android.Channel = this.AndroidChannel;
                     }
                     if (this.UseAndroidHighPriority)
-                    {                        
+                    {
                         notification.Android.Priority = 9;
                         notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
-                    }                    
+                    }
                     notification.Android.Vibrate = this.UseAndroidVibrate;
-                    notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
+                    //notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
 
                     await notificationManager.Send(notification);
                     this.NotificationTitle = String.Empty;

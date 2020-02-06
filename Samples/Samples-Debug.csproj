@@ -39,7 +39,6 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.AzureNotifications\Shiny.Integrations.AzureNotifications.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.XamEssentials\Shiny.Integrations.XamEssentials.csproj" />
     </ItemGroup>
 
 </Project>

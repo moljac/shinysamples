@@ -259,10 +259,6 @@
       <Project>{F381051B-F4F5-42C4-9D08-F145FFD93132}</Project>
       <Name>Shiny.Integrations.AzureNotifications</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.XamEssentials\Shiny.Integrations.XamEssentials.csproj">
-      <Project>{6DB6CDC8-67B3-48FE-A210-B9B7717E984F}</Project>
-      <Name>Shiny.Integrations.XamEssentials</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\60.png" />
