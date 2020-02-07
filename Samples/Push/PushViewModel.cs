@@ -17,24 +17,36 @@ namespace Samples.Push
     public class PushViewModel : AbstractLogViewModel<CommandItem>
     {
         readonly SampleSqliteConnection conn;
+        readonly IUserDialogs dialogs;
+        readonly IPushManager? pushManager;
 
 
         public PushViewModel(SampleSqliteConnection conn,
                              IUserDialogs dialogs,
-                             IPushManager pushManager = null) : base(dialogs)
+                             IPushManager? pushManager = null) : base(dialogs)
         {
             this.conn = conn;
+            this.dialogs = dialogs;
+            this.pushManager = pushManager;
 
-            this.CheckPermission = ReactiveCommand.CreateFromTask(async () =>
+
+            this.CheckPermission = this.Create(async () =>
             {
                 var status = await pushManager.RequestAccess();
                 this.AccessStatus = status.Status;
                 this.RegToken = status.RegistrationToken;
             });
+            this.UnRegister = this.Create(async () =>
+            {
+                await pushManager.UnRegister();
+                this.AccessStatus = AccessState.Disabled;
+                this.RegToken = String.Empty;
+            });
         }
 
 
         public ICommand CheckPermission { get; }
+        public ICommand UnRegister { get; }
         [Reactive] public string RegToken { get; private set; }
         [Reactive] public AccessState AccessStatus { get; private set; }
 
@@ -52,5 +64,16 @@ namespace Samples.Push
                 Detail = x.Timestamp.ToLocalTime().ToString()
             });
         }
+
+
+        ICommand Create(Func<Task> create) => ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (this.pushManager == null)
+            {
+                await this.dialogs.Alert("Push not supported");
+                return;
+            }
+            await create();
+        });
     }
 }
