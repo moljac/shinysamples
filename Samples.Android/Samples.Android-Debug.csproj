@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <LinkDescription Include="Linker.xml" />
+    <LinkDescription Include="google-services.json" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\compass.png" />
