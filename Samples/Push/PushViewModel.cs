@@ -8,6 +8,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Samples.Models;
+using Samples.ShinyDelegates;
 using Shiny;
 using Shiny.Push;
 
@@ -19,16 +20,18 @@ namespace Samples.Push
         readonly SampleSqliteConnection conn;
         readonly IUserDialogs dialogs;
         readonly IPushManager? pushManager;
+        readonly Shiny.IMessageBus messageBus;
 
 
         public PushViewModel(SampleSqliteConnection conn,
                              IUserDialogs dialogs,
+                             Shiny.IMessageBus messageBus,
                              IPushManager? pushManager = null) : base(dialogs)
         {
             this.conn = conn;
             this.dialogs = dialogs;
+            this.messageBus = messageBus;
             this.pushManager = pushManager;
-
 
             this.CheckPermission = this.Create(async () =>
             {
@@ -42,6 +45,15 @@ namespace Samples.Push
                 this.AccessStatus = AccessState.Disabled;
                 this.RegToken = String.Empty;
             });
+        }
+
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.messageBus.OnBgEvent("Push")
+                .SubOnMainThread(_ => ((ICommand)this.Load).Execute(null))
+                .DisposedBy(this.DeactivateWith);
         }
 
 
