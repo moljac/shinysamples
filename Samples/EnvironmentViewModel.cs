@@ -4,7 +4,7 @@ using Shiny;
 using Shiny.Net;
 using Shiny.Power;
 using ReactiveUI;
-
+using ReactiveUI.Fody.Helpers;
 
 namespace Samples
 {
@@ -19,24 +19,33 @@ namespace Samples
         {
             this.environment = environment;
 
-            this.networkReach = connectivity
+            connectivity
                 .WhenAnyValue(x => x.Reach)
                 .Select(x => x.ToString())
-                .ToProperty(this, x => x.NetworkReach);
+                .ToPropertyEx(this, x => x.NetworkReach)
+                .DisposedBy(this.DeactivateWith);
 
-            this.networkAccess = connectivity
+            connectivity
                 .WhenAnyValue(x => x.Access)
                 .Select(x => x.ToString())
-                .ToProperty(this, x => x.NetworkAccess);
+                .ToPropertyEx(this, x => x.NetworkAccess)
+                .DisposedBy(this.DeactivateWith);
 
-            this.powerStatus = powerManager
+            powerManager
+                .WhenAnyValue(x => x.IsEnergySavingEnabled)
+                .ToPropertyEx(this, x => x.IsEnergySavingEnabled)
+                .DisposedBy(this.DeactivateWith);
+
+            powerManager
                 .WhenAnyValue(x => x.Status)
                 .Select(x => x.ToString())
-                .ToProperty(this, x => x.PowerStatus);
+                .ToPropertyEx(this, x => x.PowerStatus)
+                .DisposedBy(this.DeactivateWith);
 
-            this.batteryPercentage = powerManager
+            powerManager
                 .WhenAnyValue(x => x.BatteryLevel)
-                .ToProperty(this, x => x.BatteryPercentage);
+                .ToPropertyEx(this, x => x.BatteryPercentage)
+                .DisposedBy(this.DeactivateWith);
         }
 
 
@@ -48,16 +57,10 @@ namespace Samples
         public string OSVersion => this.environment.OperatingSystemVersion;
         public string Device => $"{this.environment.Manufacturer} {this.environment.Model}";
 
-        readonly ObservableAsPropertyHelper<string> networkReach;
-        public string NetworkReach => this.networkReach.Value;
-
-        readonly ObservableAsPropertyHelper<string> networkAccess;
-        public string NetworkAccess => this.networkAccess.Value;
-
-        readonly ObservableAsPropertyHelper<string> powerStatus;
-        public string PowerStatus => this.powerStatus.Value;
-
-        readonly ObservableAsPropertyHelper<int> batteryPercentage;
-        public int BatteryPercentage => this.batteryPercentage.Value;
+        public bool IsEnergySavingEnabled { [ObservableAsProperty] get; }
+        public string NetworkReach { [ObservableAsProperty] get; }
+        public string NetworkAccess { [ObservableAsProperty] get; }
+        public string PowerStatus { [ObservableAsProperty] get; }
+        public int BatteryPercentage { [ObservableAsProperty] get; }
     }
 }

@@ -20,6 +20,7 @@
             </TableSection>
 
             <TableSection Title="Power">
+                <SwitchCell Text="Energy Save Mode" On="{Binding IsEnergySavingEnabled}" />
                 <TextCell Text="Battery %" Detail="{Binding BatteryPercentage}" />
                 <TextCell Text="Status" Detail="{Binding PowerStatus}" />
             </TableSection>

@@ -29,6 +29,7 @@ namespace Samples.iOS
             return base.FinishedLaunching(app, options);
         }
 
+
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
             => iOSShinyHost.RegisteredForRemoteNotifications(deviceToken);
 

@@ -26,6 +26,12 @@ namespace Samples.ShinyDelegates
 
 
         public Task OnReceived(string payload) => this.Pump(payload);
+
+        public async Task OnReceived()
+        {
+            
+        }
+
         public Task OnTokenChanged(string token) => this.Pump("TOKEN CHANGE");
         async Task Pump(string payload)
         {

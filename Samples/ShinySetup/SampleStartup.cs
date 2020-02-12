@@ -91,9 +91,9 @@ namespace Samples.ShinySetup
             services.UseSpeechRecognition();
             services.UseAllSensors();
             services.UseNfc();
-            //services.UsePush<PushDelegate>();
+            //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
-            services.UseAzureNotificationHubs<PushDelegate>(
+            services.UsePushAzureNotificationHubs<PushDelegate>(
                 "shinysamples",
                 "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE="
             );

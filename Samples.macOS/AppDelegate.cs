@@ -26,8 +26,9 @@ namespace Samples.macOS
 
         public override void DidFinishLaunching(NSNotification notification)
         {
+            Shiny.MacShinyHost.Init();
             Forms.Init();
-            //this.LoadApplication(new App());
+            this.LoadApplication(new App());
             base.DidFinishLaunching(notification);
         }
     }
