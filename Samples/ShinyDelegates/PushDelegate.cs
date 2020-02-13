@@ -25,25 +25,19 @@ namespace Samples.ShinyDelegates
         }
 
 
-        public Task OnReceived(string payload) => this.Pump(payload);
-
-        public async Task OnReceived()
-        {
-            
-        }
-
+        public Task OnReceived(IPushNotification notification) => this.Pump(notification.Body);
         public Task OnTokenChanged(string token) => this.Pump("TOKEN CHANGE");
-        async Task Pump(string payload)
+        async Task Pump(string message)
         {
             services.Notifications.Badge = 1;
             await services.Notifications.Send(new Shiny.Notifications.Notification
             {
                 Title = "PUSH",
-                Message = payload
+                Message = message ?? "NO MESSAGE"
             });
             await this.services.Connection.InsertAsync(new PushEvent
             {
-                Payload = payload,
+                Payload = message ?? "NO MESSAGE",
                 Token = this.pushManager.CurrentRegistrationToken,
                 Timestamp = DateTime.UtcNow
             });

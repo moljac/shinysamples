@@ -94,8 +94,8 @@ namespace Samples.ShinySetup
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
             services.UsePushAzureNotificationHubs<PushDelegate>(
-                "shinysamples",
-                "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE="
+                "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE=",
+                "shinysamples"
             );
 
             services.UseNotifications<NotificationDelegate>(
