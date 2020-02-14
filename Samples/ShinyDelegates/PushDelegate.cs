@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Reactive;
-using Shiny;
 using Shiny.Push;
 using Samples.Models;
 
@@ -12,36 +10,49 @@ namespace Samples.ShinyDelegates
     {
         readonly CoreDelegateServices services;
         readonly IPushManager pushManager;
-        readonly IMessageBus messageBus;
 
 
-        public PushDelegate(CoreDelegateServices services,
-                            IPushManager pushManager,
-                            IMessageBus messageBus)
+        public PushDelegate(CoreDelegateServices services, IPushManager pushManager)
         {
             this.services = services;
             this.pushManager = pushManager;
-            this.messageBus = messageBus;
         }
 
 
-        public Task OnReceived(IPushNotification notification) => this.Pump(notification.Body);
-        public Task OnTokenChanged(string token) => this.Pump("TOKEN CHANGE");
-        async Task Pump(string message)
+        public async Task OnReceived(IPushNotification notification)
         {
-            services.Notifications.Badge = 1;
+            var msg = notification.Body ?? "No Message";
+            var n = this.services.Notifications;
+            n.Badge = notification.Badge;
+
+            if (msg != "quiet")
+            {
+                await n.Send(new Shiny.Notifications.Notification
+                {
+                    Title = notification.Title ?? "PUSH",
+                    Message = msg
+                });
+            }
+            await this.Insert(msg);
+        }
+
+
+        public async Task OnTokenChanged(string token)
+        {
+            await this.Insert("TOKEN CHANGE");
             await services.Notifications.Send(new Shiny.Notifications.Notification
             {
                 Title = "PUSH",
-                Message = message ?? "NO MESSAGE"
+                Message = "Token Changed"
             });
-            await this.services.Connection.InsertAsync(new PushEvent
-            {
-                Payload = message ?? "NO MESSAGE",
-                Token = this.pushManager.CurrentRegistrationToken,
-                Timestamp = DateTime.UtcNow
-            });
-            this.messageBus.Publish("Push", Unit.Default);
         }
+
+
+        Task Insert(string info) => this.services.Connection.InsertAsync(new PushEvent
+        {
+            Payload = info,
+            Token = this.pushManager.CurrentRegistrationToken,
+            Timestamp = DateTime.UtcNow
+        });
     }
 }

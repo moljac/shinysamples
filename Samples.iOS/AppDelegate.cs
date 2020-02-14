@@ -7,17 +7,18 @@ using Xamarin.Forms.Platform.iOS;
 using Acr.UserDialogs.Forms;
 using Samples.ShinySetup;
 using Shiny;
-
+using UserNotifications;
 
 namespace Samples.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : FormsApplicationDelegate
+    public partial class AppDelegate : FormsApplicationDelegate, IUNUserNotificationCenterDelegate
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             // this needs to be loaded before EVERYTHING
             iOSShinyHost.Init(new SampleStartup());
+            UNUserNotificationCenter.Current.Delegate = this;
             //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
             //iOSShinyHost.Init(ShinyStartup.AutoRegister());
             Forms.SetFlags("SwipeView_Experimental");
@@ -29,6 +30,12 @@ namespace Samples.iOS
             return base.FinishedLaunching(app, options);
         }
 
+
+        //[Export("userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:")]
+        //public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        //{
+        //    Console.WriteLine("RUNNING");
+        //}
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
             => iOSShinyHost.RegisteredForRemoteNotifications(deviceToken);
