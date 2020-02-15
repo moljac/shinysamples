@@ -26,7 +26,13 @@
     <ProjectReference Include="..\..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
     <ProjectReference Include="..\..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
     <ProjectReference Include="..\..\Samples\Samples-Debug.csproj" />
+    <ProjectReference Include="..\..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
+    <ProjectReference Include="..\..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj" />
+    <ProjectReference Include="..\..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
   </ItemGroup>
   
 
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.282-pre4" />
+  </ItemGroup>
 </Project>
