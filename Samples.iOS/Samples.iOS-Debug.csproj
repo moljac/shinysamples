@@ -232,7 +232,7 @@
       <Name>Shiny.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj">
-      <Project>{B2EC69D7-C76F-4FFC-B2FB-2806E4CFC368}</Project>
+      <Project>{5ED88F69-F4CE-4073-B306-60D684B2152F}</Project>
       <Name>Shiny.BluetoothLE</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj">
@@ -248,7 +248,7 @@
       <Name>Shiny.Notifications</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj">
-      <Project>{98934688-0A44-41A0-B74E-6C4996B63272}</Project>
+      <Project>{685F5C3B-4511-484E-8806-00E06C185987}</Project>
       <Name>Shiny.SpeechRecognition</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj">
