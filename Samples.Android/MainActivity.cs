@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Runtime;
 
+
 namespace Samples.Droid
 {
     [Activity(
@@ -33,21 +34,21 @@ namespace Samples.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             this.LoadApplication(new App());
 
-            Shiny.Notifications.NotificationManager.TryProcessIntent(this.Intent);
+            this.ShinyOnCreate(this.Intent);            
         }
 
 
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
-            Shiny.Notifications.NotificationManager.TryProcessIntent(intent);
+            this.ShinyOnNewIntent(intent);            
         }
 
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            this.ShinyRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
