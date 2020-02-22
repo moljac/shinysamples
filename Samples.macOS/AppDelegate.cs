@@ -22,13 +22,12 @@ namespace Samples.macOS
             {
                 Title = "Shiny"
             };
-            
         }
 
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            MacShinyHost.Init();
+            this.ShinyDidFinishLaunching();
             Forms.Init();
             this.LoadApplication(new App());
             base.DidFinishLaunching(notification);
@@ -36,9 +35,9 @@ namespace Samples.macOS
 
 
         public override void RegisteredForRemoteNotifications(NSApplication application, NSData deviceToken)
-            => MacShinyHost.RegisteredForRemoteNotifications(deviceToken);
+            => this.ShinyRegisteredForRemoteNotifications(deviceToken);
 
         public override void FailedToRegisterForRemoteNotifications(NSApplication application, NSError error)
-            => MacShinyHost.FailedToRegisterForRemoteNotifications(error);
+            => this.ShinyFailedToRegisterForRemoteNotifications(error);
     }
 }

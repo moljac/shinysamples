@@ -23,7 +23,7 @@ namespace Samples.UWP
 
             this.InitializeComponent();
             //UwpShinyHost.ClearBackgroundTasks();
-            UwpShinyHost.Init(this, new SampleStartup());
+            this.ShinyInit(this, new SampleStartup());
         }
 
 
