@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Shiny.Push;
 using Samples.Models;
 
@@ -19,33 +20,12 @@ namespace Samples.ShinyDelegates
         }
 
 
-        public async Task OnReceived(IPushNotification notification)
-        {
-            var msg = notification.Body ?? "No Message";
-            var n = this.services.Notifications;
-            n.Badge = notification.Badge;
-
-            if (msg != "quiet")
-            {
-                await n.Send(new Shiny.Notifications.Notification
-                {
-                    Title = notification.Title ?? "PUSH",
-                    Message = msg
-                });
-            }
-            await this.Insert(msg);
-        }
+        public Task OnReceived(IDictionary<string, string> data)
+            => this.Insert("NOTIFICATION RECEIVED");
 
 
-        public async Task OnTokenChanged(string token)
-        {
-            await this.Insert("TOKEN CHANGE");
-            await services.Notifications.Send(new Shiny.Notifications.Notification
-            {
-                Title = "PUSH",
-                Message = "Token Changed"
-            });
-        }
+        public Task OnTokenChanged(string token)
+            => this.Insert("TOKEN CHANGE");
 
 
         Task Insert(string info) => this.services.Connection.InsertAsync(new PushEvent
