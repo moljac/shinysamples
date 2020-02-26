@@ -34,14 +34,14 @@ namespace Samples.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             this.LoadApplication(new App());
 
-            this.ShinyOnCreate(this.Intent);            
+            this.ShinyOnCreate();
         }
 
 
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
-            this.ShinyOnNewIntent(intent);            
+            this.ShinyOnNewIntent(intent);
         }
 
 
