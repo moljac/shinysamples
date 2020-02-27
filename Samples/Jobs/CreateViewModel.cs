@@ -93,6 +93,14 @@ namespace Samples.Jobs
         [Reactive] public bool DeviceCharging { get; set; }
         [Reactive] public bool Repeat { get; set; } = true;
 
+        [Reactive] public string FgInterval { get; set; }
+        [Reactive] public bool FgAppStart { get; set; }
+        [Reactive] public bool FgAppBackground { get; set; }
+        [Reactive] public bool FgAppResuming { get; set; }
+        [Reactive] public bool FgDeviceCharging { get; set; }
+        [Reactive] public bool FgInternetAvailAny { get; set; }
+        [Reactive] public bool FgInternetAvailDirect { get; set; }
+
 
         public override async void OnAppearing()
         {
