@@ -32,6 +32,7 @@
                 </TableSection>
 
                 <TableSection Title="Criteria">
+                    <SwitchCell Text="Run On Foreground" On="{Binding RunOnForeground}" />
                     <TextCell Text="Required Internet Access"
                               Detail="{Binding RequiredInternetAccess}"
                               Command="{Binding ChangeRequiredInternetAccess}" />
@@ -39,18 +40,6 @@
                     <SwitchCell Text="Peripheral Charging" On="{Binding DeviceCharging}" />
                     <SwitchCell Text="Repeat" On="{Binding Repeat}" />
                 </TableSection>
-
-                <!--<TableSection Title="Foreground Triggers">
-                    <EntryCell Label="Interval (seconds)" Text="{Binding FgInterval}" />
-
-                    <SwitchCell Text="App Start" On="{Binding FgAppStart}" />
-                    <SwitchCell Text="App Backgrounding" On="{Binding FgAppBackgrounding}"/>
-                    <SwitchCell Text="App Resuming" On="{Binding FgAppResuming}" />
-
-                    <SwitchCell Text="Device Charging" On="{Binding FgDeviceCharging}" />
-                    <SwitchCell Text="Internet Available (Any)" On="{Binding FgInternetAvailAny}" />
-                    <SwitchCell Text="Internet Available (Direct)" On="{Binding FgInternetAvailDirect}" />
-                </TableSection>-->
             </TableView>
 
             <Button Text="Create Job"

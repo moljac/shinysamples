@@ -25,7 +25,7 @@ namespace Samples.ShinyDelegates
         public IAppSettings AppSettings { get; }
 
 
-        public async Task SendNotification(string title, string message, Expression<Func<IAppSettings, bool>> expression = null)
+        public async Task SendNotification(string title, string message, Expression<Func<IAppSettings, bool>>? expression = null)
         {
             var notify = expression == null
                 ? true
