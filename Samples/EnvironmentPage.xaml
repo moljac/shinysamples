@@ -26,6 +26,7 @@
             </TableSection>
 
             <TableSection Title="Network">
+                <TextCell Text="Cellular Carrier" Detail="{Binding CellularCarrier}" />
                 <TextCell Text="Reach" Detail="{Binding NetworkReach}" />
                 <TextCell Text="Access" Detail="{Binding NetworkAccess}" />
             </TableSection>

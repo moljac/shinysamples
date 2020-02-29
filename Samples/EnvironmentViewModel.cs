@@ -31,6 +31,11 @@ namespace Samples
                 .ToPropertyEx(this, x => x.NetworkAccess)
                 .DisposedBy(this.DeactivateWith);
 
+            connectivity
+                .WhenAnyValue(x => x.CellularCarrier)
+                .ToPropertyEx(this, x => x.CellularCarrier)
+                .DisposedBy(this.DeactivateWith);
+
             powerManager
                 .WhenAnyValue(x => x.IsEnergySavingEnabled)
                 .ToPropertyEx(this, x => x.IsEnergySavingEnabled)
@@ -62,5 +67,6 @@ namespace Samples
         public string NetworkAccess { [ObservableAsProperty] get; }
         public string PowerStatus { [ObservableAsProperty] get; }
         public int BatteryPercentage { [ObservableAsProperty] get; }
+        public string CellularCarrier { [ObservableAsProperty] get; }
     }
 }
