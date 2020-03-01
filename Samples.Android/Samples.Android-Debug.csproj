@@ -148,13 +148,9 @@
       <Project>{685F5C3B-4511-484E-8806-00E06C185987}</Project>
       <Name>Shiny.SpeechRecognition</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.AzureNotifications\Shiny.Integrations.AzureNotifications.csproj">
-      <Project>{F381051B-F4F5-42C4-9D08-F145FFD93132}</Project>
-      <Name>Shiny.Integrations.AzureNotifications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.FirebaseNotifications\Shiny.Integrations.FirebaseNotifications.csproj">
-      <Project>{535BDAF0-7A00-4820-A751-DAD3CA9DB1CC}</Project>
-      <Name>Shiny.Integrations.FirebaseNotifications</Name>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
+      <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
+      <Name>Shiny.Push.AzureNotificationHubs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

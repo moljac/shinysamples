@@ -255,9 +255,9 @@
       <Project>{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}</Project>
       <Name>Shiny.Sensors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.AzureNotifications\Shiny.Integrations.AzureNotifications.csproj">
-      <Project>{F381051B-F4F5-42C4-9D08-F145FFD93132}</Project>
-      <Name>Shiny.Integrations.AzureNotifications</Name>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
+      <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
+      <Name>Shiny.Push.AzureNotificationHubs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

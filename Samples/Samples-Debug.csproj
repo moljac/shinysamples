@@ -15,7 +15,6 @@
 
     <ItemGroup>
         <PackageReference Include="Acr.UserDialogs.Forms" Version="1.0.0.7-beta" />
-        <PackageReference Include="DryIoc.dll" Version="4.0.7" />
         <PackageReference Include="Humanizer" Version="2.7.9" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
         <PackageReference Include="ReactiveUI.Fody" Version="11.2.1" />
@@ -38,7 +37,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.AzureNotifications\Shiny.Integrations.AzureNotifications.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
     </ItemGroup>
 
 </Project>
