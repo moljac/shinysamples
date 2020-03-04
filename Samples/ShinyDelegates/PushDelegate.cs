@@ -19,6 +19,10 @@ namespace Samples.ShinyDelegates
             this.pushManager = pushManager;
         }
 
+        public Task OnEntry(PushEntryArgs args)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task OnReceived(IDictionary<string, string> data)
             => this.Insert("NOTIFICATION RECEIVED");

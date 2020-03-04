@@ -73,5 +73,12 @@
 	<string></string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.shiny.job</string>
+		<string>com.shiny.jobpower</string>
+		<string>com.shiny.jobnet</string>
+		<string>com.shiny.jobpowernet</string>
+	</array>
 </dict>
 </plist>

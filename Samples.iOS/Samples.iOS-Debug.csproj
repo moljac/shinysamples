@@ -216,7 +216,7 @@
       <Name>Shiny.Nfc</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
-      <Project>{4efa31bb-7616-4075-8698-11978cfeb592}</Project>
+      <Project>{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}</Project>
       <Name>Shiny.Push</Name>
     </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
