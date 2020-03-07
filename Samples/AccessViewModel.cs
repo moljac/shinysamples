@@ -23,6 +23,7 @@ namespace Samples
                                ISpeechRecognizer? speech = null,
                                IGeofenceManager? geofences = null,
                                IGpsManager? gps = null,
+                               IMotionActivityManager? activityManager = null,
                                ICentralManager? bluetooth = null,
                                IBeaconManager? beacons = null,
                                IPushManager? push = null,
@@ -35,6 +36,9 @@ namespace Samples
 
             if (speech != null)
                 this.Append("Speech", AccessState.Unknown, () => speech.RequestAccess());
+
+            if (activityManager != null)
+                this.Append("Motion Activity", AccessState.Unknown, () => activityManager.RequestPermission());
 
             if (gps != null)
             {
