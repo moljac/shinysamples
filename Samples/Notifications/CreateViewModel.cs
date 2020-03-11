@@ -1,19 +1,26 @@
 using System;
 using System.Windows.Input;
 using System.Reactive.Linq;
+using System.Collections.Generic;
 using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Samples.Notifications
 {
     public class CreateViewModel : ViewModel
     {
+        readonly INotificationManager notificationManager;
+
+
         public CreateViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
         {
+            this.notificationManager = notificationManager;
+
             this.WhenAnyValue
             (
                 x => x.SelectedDate,
@@ -32,44 +39,14 @@ namespace Samples.Notifications
             this.SelectedDate = DateTime.Now;
             this.SelectedTime = DateTime.Now.TimeOfDay.Add(TimeSpan.FromMinutes(10));
 
-            this.SendNow = ReactiveCommand.CreateFromTask(() =>
-                notificationManager.Send(new Notification
-                {
-                    Title = "Test Now",
-                    Message = "This is a test of the sendnow stuff",
-                    Payload = this.Payload,
-                    BadgeCount = this.BadgeCount,
-                    Category = this.UseActions ? "Test" : null,
-                    Sound = this.GetSound()
-                })
-            );
+            this.SendNow = ReactiveCommand.CreateFromTask(() => this.BuildAndSend(
+                "Test Now",
+                "This is a test of the sendnow stuff"
+            ));
             this.Send = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    var notification = new Notification
-                    {
-                        Title = this.NotificationTitle,
-                        Message = this.NotificationMessage,
-                        Payload = this.Payload,
-                        BadgeCount = this.BadgeCount,
-                        ScheduleDate = this.ScheduledTime,
-                        Category = this.UseActions ? "Test" : null,
-                        Sound = this.GetSound()
-                    };
-                    if (!this.AndroidChannel.IsEmpty())
-                    {
-                        notification.Android.ChannelId = this.AndroidChannel;
-                        notification.Android.Channel = this.AndroidChannel;
-                    }
-                    if (this.UseAndroidHighPriority)
-                    {
-                        notification.Android.Priority = 9;
-                        notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
-                    }
-                    notification.Android.Vibrate = this.UseAndroidVibrate;
-                    //notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
-
-                    await notificationManager.Send(notification);
+                    await this.BuildAndSend(this.NotificationTitle, this.NotificationMessage);
                     this.NotificationTitle = String.Empty;
                     this.NotificationMessage = String.Empty;
                     this.Payload = String.Empty;
@@ -92,6 +69,39 @@ namespace Samples.Notifications
             });
         }
 
+
+        async Task BuildAndSend(string title, string message)
+        {
+            var notification = new Notification
+            {
+                Title = title,
+                Message = message,
+                BadgeCount = this.BadgeCount,
+                ScheduleDate = this.ScheduledTime,
+                Category = this.UseActions ? "Test" : null,
+                Sound = this.GetSound()
+            };
+            if (!this.Payload.IsEmpty())
+            {
+                notification.Payload = new Dictionary<string, string> {
+                    { nameof(this.Payload), this.Payload }
+                };
+            }
+            if (!this.AndroidChannel.IsEmpty())
+            {
+                notification.Android.ChannelId = this.AndroidChannel;
+                notification.Android.Channel = this.AndroidChannel;
+            }
+            if (this.UseAndroidHighPriority)
+            {
+                notification.Android.Priority = 9;
+                notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
+            }
+            notification.Android.Vibrate = this.UseAndroidVibrate;
+            notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
+
+            await notificationManager.Send(notification);
+        }
 
         NotificationSound GetSound()
         {

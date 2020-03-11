@@ -30,6 +30,9 @@ namespace Samples.iOS
         }
 
 
+        public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+            => this.ShinyDidReceiveRemoteNotification(userInfo, null);
+
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
             => this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
 
