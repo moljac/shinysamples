@@ -2,13 +2,14 @@ using System;
 using System.Windows.Input;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
-using Xamarin.Forms;
-using System.Threading.Tasks;
+
 
 namespace Samples.Notifications
 {
@@ -107,10 +108,9 @@ namespace Samples.Notifications
         {
             switch (this.SelectedSoundType)
             {
-                case "None"     : return NotificationSound.None;
                 case "Default"  : return NotificationSound.DefaultSystem;
                 case "Priority" : return NotificationSound.DefaultPriority;
-                default         : throw new ArgumentException("Invalid Sound Type");
+                default         : return NotificationSound.None;
             }
         }
 
