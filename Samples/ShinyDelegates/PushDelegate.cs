@@ -20,17 +20,13 @@ namespace Samples.ShinyDelegates
         }
 
         public Task OnEntry(PushEntryArgs args)
-        {
-            throw new NotImplementedException();
-        }
+            => this.Insert("PUSH ENTRY");
 
         public Task OnReceived(IDictionary<string, string> data)
-            => this.Insert("NOTIFICATION RECEIVED");
-
+            => this.Insert("PUSH RECEIVED");
 
         public Task OnTokenChanged(string token)
-            => this.Insert("TOKEN CHANGE");
-
+            => this.Insert("PUSH TOKEN CHANGE");
 
         Task Insert(string info) => this.services.Connection.InsertAsync(new PushEvent
         {

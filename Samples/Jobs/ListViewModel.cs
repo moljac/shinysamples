@@ -56,7 +56,9 @@ namespace Samples.Jobs
                     return;
 
                 if (this.jobManager.IsRunning)
+                {
                     await dialogs.Alert("Job Manager is already running");
+                }
                 else
                 {
                     await this.jobManager.RunAll();
@@ -90,8 +92,23 @@ namespace Samples.Jobs
         {
             base.OnAppearing();
             this.LoadJobs.Execute();
-            this.jobManager.JobStarted.Subscribe(_ => this.LoadJobs.Execute()).DisposedBy(this.DeactivateWith);
-            this.jobManager.JobFinished.Subscribe(_ => this.LoadJobs.Execute()).DisposedBy(this.DeactivateWith);
+            this.jobManager
+                .JobStarted
+                .Subscribe(x =>
+                {
+                    this.dialogs.Toast($"Job {x.Identifier} Started");
+                    this.LoadJobs.Execute();
+                })
+                .DisposedBy(this.DeactivateWith);
+
+            this.jobManager
+                .JobFinished
+                .Subscribe(x =>
+                {
+                    this.dialogs.Toast($"Job {x.Job?.Identifier} Finished");
+                    this.LoadJobs.Execute();
+                })
+                .DisposedBy(this.DeactivateWith);
         }
 
 

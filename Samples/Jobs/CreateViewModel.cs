@@ -8,7 +8,7 @@ using Prism.Navigation;
 using Shiny;
 using Shiny.Jobs;
 using Samples.ShinyDelegates;
-
+using Shiny.Notifications;
 
 namespace Samples.Jobs
 {
@@ -20,6 +20,7 @@ namespace Samples.Jobs
 
         public CreateViewModel(IJobManager jobManager,
                                INavigationService navigator,
+                               INotificationManager notifications,
                                IUserDialogs dialogs)
         {
             this.jobManager = jobManager;
@@ -54,10 +55,10 @@ namespace Samples.Jobs
             this.RunAsTask = ReactiveCommand.Create(
                 () => this.jobManager.RunTask(this.JobName + "Task", async _ =>
                 {
-                    this.dialogs.Toast("Task Started");
+                    await notifications.Send("Shiny", $"Task {this.JobName} Started");
                     var ts = TimeSpan.FromSeconds(this.SecondsToRun);
                     await Task.Delay(ts);
-                    this.dialogs.Toast("Task Finished");
+                    await notifications.Send("Shiny", $"Task {this.JobName} Finshed");
                 }),
                 valObs
             );
