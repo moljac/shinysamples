@@ -86,19 +86,16 @@ namespace Samples.ShinySetup
             services.UseBeacons<BeaconDelegate>();
             services.UseBleCentral<BleCentralDelegate>();
             services.UseBlePeripherals();
-            services.UseGeofencing<LocationDelegates>();
-            services.UseGps<LocationDelegates>();
             services.UseMotionActivity();
             services.UseSpeechRecognition();
             services.UseAllSensors();
             services.UseNfc();
-            //services.UsePushNotifications<PushDelegate>();
-            //services.UseFirebaseMessaging<PushDelegate>();
-            services.UsePushAzureNotificationHubs<PushDelegate>(
-                "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE=",
-                "shinysamples"
-            );
 
+            services.UseGeofencing<LocationDelegates>();
+            //services.UseGpsDirectGeofencing<LocationDelegates>();
+            services.UseGps<LocationDelegates>();
+
+            //services.UseNotifications(true);
             services.UseNotifications<NotificationDelegate>(
                 true,
                 new NotificationCategory(
@@ -108,6 +105,13 @@ namespace Samples.ShinySetup
                     new NotificationAction("No", "No", NotificationActionType.Destructive)
                 )
             );
+
+            //services.UsePushNotifications<PushDelegate>();
+            //services.UseFirebaseMessaging<PushDelegate>();
+            //services.UsePushAzureNotificationHubs<PushDelegate>(
+            //    "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE=",
+            //    "shinysamples"
+            //);
         }
     }
 }

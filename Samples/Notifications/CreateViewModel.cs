@@ -42,12 +42,17 @@ namespace Samples.Notifications
 
             this.SendNow = ReactiveCommand.CreateFromTask(() => this.BuildAndSend(
                 "Test Now",
-                "This is a test of the sendnow stuff"
+                "This is a test of the sendnow stuff",
+                null
             ));
             this.Send = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    await this.BuildAndSend(this.NotificationTitle, this.NotificationMessage);
+                    await this.BuildAndSend(
+                        this.NotificationTitle,
+                        this.NotificationMessage,
+                        this.ScheduledTime
+                    );
                     this.NotificationTitle = String.Empty;
                     this.NotificationMessage = String.Empty;
                     this.Payload = String.Empty;
@@ -71,14 +76,14 @@ namespace Samples.Notifications
         }
 
 
-        async Task BuildAndSend(string title, string message)
+        async Task BuildAndSend(string title, string message, DateTime? scheduleDate)
         {
             var notification = new Notification
             {
                 Title = title,
                 Message = message,
                 BadgeCount = this.BadgeCount,
-                ScheduleDate = this.ScheduledTime,
+                ScheduleDate = scheduleDate,
                 Category = this.UseActions ? "Test" : null,
                 Sound = this.GetSound()
             };

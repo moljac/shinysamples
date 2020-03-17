@@ -11,12 +11,14 @@ namespace Samples.ShinyDelegates
     {
         readonly SampleSqliteConnection conn;
         readonly IMessageBus messageBus;
+        readonly INotificationManager notifications;
 
 
-        public NotificationDelegate(SampleSqliteConnection conn, IMessageBus messageBus)
+        public NotificationDelegate(SampleSqliteConnection conn, IMessageBus messageBus, INotificationManager notifications)
         {
             this.conn = conn;
             this.messageBus = messageBus;
+            this.notifications = notifications;
         }
 
 
