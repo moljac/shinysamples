@@ -18,8 +18,8 @@ namespace Samples.iOS
         {
             // this needs to be loaded before EVERYTHING
             this.ShinyFinishedLaunching(new SampleStartup());
-            //iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
-            //iOSShinyHost.Init(ShinyStartup.AutoRegister());
+            //this.ShinyFinishedLaunching(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
+            //this.ShinyFinishedLaunching(ShinyStartup.AutoRegister());
             Forms.SetFlags("SwipeView_Experimental");
 
             Forms.Init();
@@ -33,8 +33,8 @@ namespace Samples.iOS
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
             => this.ShinyDidReceiveRemoteNotification(userInfo, null);
 
-        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
-            => this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
+        //public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        //    => this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
             => this.ShinyRegisteredForRemoteNotifications(deviceToken);
