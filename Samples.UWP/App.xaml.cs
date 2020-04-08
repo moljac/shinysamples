@@ -16,14 +16,13 @@ namespace Samples.UWP
     {
         public App()
         {
-            var app = this;
             //app.EnteredBackground
             //app.LeavingBackground
             //app.Suspending
 
             this.InitializeComponent();
             //UwpShinyHost.ClearBackgroundTasks();
-            this.ShinyInit(this, new SampleStartup());
+            this.ShinyInit(new SampleStartup());
         }
 
 

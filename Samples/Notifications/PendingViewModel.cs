@@ -41,11 +41,11 @@ namespace Samples.Notifications
                         await notifications.Clear();
                         ((ICommand)this.Load).Execute(null);
                     }
-                },
-                this.WhenAny(
-                    x => x.PendingList,
-                    x => x.GetValue()?.Any() ?? false
-                )
+                }
+                //this.WhenAny(
+                //    x => x.PendingList,
+                //    x => x.GetValue()?.Any() ?? false
+                //)
             );
         }
 
