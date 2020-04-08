@@ -17,7 +17,10 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Samples.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>
+    </PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>EC796561E05C0CCA0694D297E3DF4E00D77AC748</PackageCertificateThumbprint>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -132,6 +135,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Images\compass.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +183,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj">
       <Project>{af1473ed-6fc5-4b02-bb79-03e6c1b23bb8}</Project>
       <Name>Shiny.Notifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
+      <Project>{1c8055aa-e6c5-4a6d-9c0b-cf3b36819553}</Project>
+      <Name>Shiny.Push.AzureNotificationHubs</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{4efa31bb-7616-4075-8698-11978cfeb592}</Project>
