@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.SqliteGenerator;
 using Shiny.IO;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.HttpTransfers
@@ -15,19 +15,21 @@ namespace Samples.HttpTransfers
         readonly IFileSystem fileSystem;
 
 
-        public ManageUploadsViewModel(IFileSystem fileSystem, IUserDialogs dialogs)
+        public ManageUploadsViewModel(IFileSystem fileSystem, IMaterialDialog dialogs)
         {
             this.fileSystem = fileSystem;
 
-            this.Delete = ReactiveCommand.Create<string>(file =>
+            this.Delete = ReactiveCommand.CreateFromTask<string>(async file =>
             {
                 var path = Path.Combine(this.fileSystem.AppData.FullName, file);
                 if (!File.Exists(path))
-                    dialogs.Toast($"{file} does not exist");
+                {
+                    await dialogs.SnackbarAsync($"{file} does not exist");
+                }
                 else
                 {
                     File.Delete(path);
-                    dialogs.Toast($"{file} has been deleted");
+                    await dialogs.SnackbarAsync($"{file} has been deleted");
                 }
             });
             this.CreateDatabase = ReactiveCommand.CreateFromTask(

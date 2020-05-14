@@ -3,7 +3,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Samples.Models;
 using Samples.Infrastructure;
@@ -11,6 +10,7 @@ using Shiny;
 using Shiny.Jobs;
 using Shiny.Infrastructure;
 using Prism.Navigation;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Jobs
@@ -23,7 +23,7 @@ namespace Samples.Jobs
 
 
         public LogViewModel(IJobManager jobManager,
-                            IUserDialogs dialogs,
+                            IMaterialDialog dialogs,
                             ISerializer serializer,
                             SampleSqliteConnection conn) : base(dialogs)
         {
@@ -78,7 +78,7 @@ namespace Samples.Jobs
                             foreach (var p in parameters)
                                 sb.AppendLine().Append($"{p.Key}: {p.Value}");
                         }
-                        await this.Dialogs.Alert(sb.ToString(), title);
+                        await this.Dialogs.AlertAsync(sb.ToString(), title);
                     })
                 };
             });

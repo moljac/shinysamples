@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reactive.Disposables;
-using Acr.UserDialogs.Forms;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Sensors;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Sensors
@@ -10,10 +10,10 @@ namespace Samples.Sensors
     public class CompassViewModel : ViewModel
     {
         readonly ICompass compass;
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
 
 
-        public CompassViewModel(ICompass compass, IUserDialogs dialogs)
+        public CompassViewModel(IMaterialDialog dialogs, ICompass compass)
         {
             this.compass = compass;
             this.dialogs = dialogs;
@@ -29,7 +29,7 @@ namespace Samples.Sensors
             base.OnAppearing();
             if (!this.compass.IsAvailable)
             {
-                await this.dialogs.Alert("Compass is not available");
+                await this.dialogs.AlertAsync("Compass is not available");
                 return;
             }
             this.compass

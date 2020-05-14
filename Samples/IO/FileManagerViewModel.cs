@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using Humanizer;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.IO;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.IO
@@ -41,17 +42,17 @@ namespace Samples.IO
     public class FileManagerViewModel : ViewModel
     {
         readonly IFileSystem fileSystem;
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
 
 
-        public FileManagerViewModel(IUserDialogs dialogs, IFileSystem fileSystem)
+        public FileManagerViewModel(IMaterialDialog dialogs, IFileSystem fileSystem)
         {
             this.dialogs = dialogs;
             this.fileSystem = fileSystem;
 
-            this.Select = ReactiveCommand.Create<FileEntryViewModel>(entry =>
+            this.Select = ReactiveCommand.CreateFromTask<FileEntryViewModel>(async entry =>
             {
-                var cfg = new ActionSheetConfig().AddCancel();
+                var cfg = new Dictionary<string, Action>();
 
                 if (entry.IsDirectory)
                 {
@@ -62,7 +63,7 @@ namespace Samples.IO
                     cfg.Add("View", async () =>
                     {
                         var text = File.ReadAllText(entry.Entry.FullName);
-                        await this.dialogs.Alert(text, entry.Entry.Name);
+                        await this.dialogs.AlertAsync(text, entry.Entry.Name);
                     });
                     //cfg.Add("Copy", () =>
                     //{
@@ -86,7 +87,7 @@ namespace Samples.IO
                     //});
                 }
                 //cfg.Add("Delete", () => Confirm("Delete " + entry.Name, entry.Entry.Delete));
-                dialogs.ActionSheet(cfg);
+                await dialogs.ActionSheet(cfg, true);
             });
 
             this.showBack = this.WhenAnyValue(x => x.CurrentPath)
@@ -119,7 +120,7 @@ namespace Samples.IO
 
         async void Confirm(string message, Action action)
         {
-            var result = await this.dialogs.Confirm(message, null, "Yes", "No");
+            var result = await this.dialogs.ConfirmAsync(message, null, "Yes", "No") ?? false;
             if (result)
                 action();
         }

@@ -8,7 +8,7 @@ using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Runtime;
-
+using Android.Graphics;
 
 namespace Samples.Droid
 {
@@ -31,7 +31,9 @@ namespace Samples.Droid
             Forms.SetFlags("SwipeView_Experimental");
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            FormsMaterial.Init(this, savedInstanceState);
+
+            XF.Material.Droid.Material.Init(this, savedInstanceState);
             this.LoadApplication(new App());
 
             this.ShinyOnCreate();

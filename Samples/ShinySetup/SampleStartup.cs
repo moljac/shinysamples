@@ -10,8 +10,8 @@ using Samples.Settings;
 using Samples.ShinyDelegates;
 using Samples.ShinySetup;
 using Shiny.Infrastructure;
-using Acr.UserDialogs.Forms;
 using Shiny.Notifications;
+using XF.Material.Forms.UI.Dialogs;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -71,7 +71,7 @@ namespace Samples.ShinySetup
             // your infrastructure
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
-            services.AddSingleton<IUserDialogs, UserDialogs>();
+            services.AddSingleton<IMaterialDialog>(MaterialDialog.Instance);
             services.AddSingleton<IAppSettings, AppSettings>();
 
             // startup tasks

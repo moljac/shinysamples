@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.BluetoothLE.Central;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.BluetoothLE
@@ -14,7 +14,7 @@ namespace Samples.BluetoothLE
     public class CentralExtensionsViewModel : ViewModel
     {
         public CentralExtensionsViewModel(ICentralManager centralManager,
-                                          IUserDialogs dialogs)
+                                          IMaterialDialog dialogs)
         {
             this.Tasks = new List<TaskViewModel>
             {
@@ -46,7 +46,7 @@ namespace Samples.BluetoothLE
                 )
             };
         }
-        
+
 
         public List<TaskViewModel> Tasks { get; }
         [Reactive] public string? PeripheralName { get; set; }

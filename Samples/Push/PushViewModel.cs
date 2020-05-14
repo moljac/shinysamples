@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Samples.Models;
 using Shiny;
 using Shiny.Push;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Push
@@ -17,12 +17,12 @@ namespace Samples.Push
     public class PushViewModel : AbstractLogViewModel<CommandItem>
     {
         readonly SampleSqliteConnection conn;
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
         readonly IPushManager? pushManager;
 
 
         public PushViewModel(SampleSqliteConnection conn,
-                             IUserDialogs dialogs,
+                             IMaterialDialog dialogs,
                              IPushManager? pushManager = null) : base(dialogs)
         {
             this.conn = conn;
@@ -49,7 +49,7 @@ namespace Samples.Push
             base.OnAppearing();
             if (this.pushManager == null)
             {
-                await this.dialogs.Alert("Push not supported");
+                await this.dialogs.AlertAsync("Push not supported");
             }
             else
             {
@@ -86,7 +86,7 @@ namespace Samples.Push
         {
             if (this.pushManager == null)
             {
-                await this.dialogs.Alert("Push not supported");
+                await this.dialogs.AlertAsync("Push not supported");
                 return;
             }
             await create();

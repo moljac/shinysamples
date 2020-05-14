@@ -10,8 +10,8 @@ using Shiny;
 using Shiny.IO;
 using Shiny.Net.Http;
 using Samples.Settings;
-using Acr.UserDialogs.Forms;
-
+using XF.Material.Forms.UI.Dialogs;
+using System.Collections.Generic;
 
 namespace Samples.HttpTransfers
 {
@@ -22,7 +22,7 @@ namespace Samples.HttpTransfers
 
         public CreateViewModel(INavigationService navigationService,
                                IHttpTransferManager httpTransfers,
-                               IUserDialogs dialogs,
+                               IMaterialDialog dialogs,
                                IFileSystem fileSystem,
                                AppSettings appSettings)
         {
@@ -46,18 +46,20 @@ namespace Samples.HttpTransfers
                 this.Url = appSettings.LastTransferUrl;
             });
 
-            this.SelectUpload = ReactiveCommand.Create(() =>
+            this.SelectUpload = ReactiveCommand.CreateFromTask(async () =>
             {
                 var files = fileSystem.AppData.GetFiles("upload.*", SearchOption.TopDirectoryOnly);
                 if (!files.Any())
-                    dialogs.Alert("There are not files to upload.  Use 'Manage Uploads' below to create them");
+                {
+                    await dialogs.AlertAsync("There are not files to upload.  Use 'Manage Uploads' below to create them");
+                }
                 else
                 {
-                    var cfg = new ActionSheetConfig().AddCancel();
+                    var cfg = new Dictionary<string, Action>();
                     foreach (var file in files)
                         cfg.Add(file.Name, () => this.FileName = file.Name);
 
-                    dialogs.ActionSheet(cfg);
+                    await dialogs.ActionSheet(cfg);
                 }
             });
             this.Save = ReactiveCommand.CreateFromTask(

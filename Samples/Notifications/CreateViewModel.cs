@@ -4,11 +4,11 @@ using System.Reactive.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Notifications
@@ -18,7 +18,7 @@ namespace Samples.Notifications
         readonly INotificationManager notificationManager;
 
 
-        public CreateViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
+        public CreateViewModel(INotificationManager notificationManager, IMaterialDialog dialogs)
         {
             this.notificationManager = notificationManager;
 
@@ -56,7 +56,7 @@ namespace Samples.Notifications
                     this.NotificationTitle = String.Empty;
                     this.NotificationMessage = String.Empty;
                     this.Payload = String.Empty;
-                    await dialogs.Alert("Notification Sent Successfully");
+                    await dialogs.AlertAsync("Notification Sent Successfully");
                 },
                 this.WhenAny(
                     x => x.NotificationTitle,
@@ -71,7 +71,7 @@ namespace Samples.Notifications
             this.PermissionCheck = ReactiveCommand.CreateFromTask(async () =>
             {
                 var result = await notificationManager.RequestAccess();
-                dialogs.Toast("Permission Check Result: " + result);
+                await dialogs.SnackbarAsync("Permission Check Result: " + result);
             });
         }
 

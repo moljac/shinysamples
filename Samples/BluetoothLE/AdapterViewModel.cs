@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.BluetoothLE.Central;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.BluetoothLE
@@ -21,7 +21,7 @@ namespace Samples.BluetoothLE
 
         public AdapterViewModel(ICentralManager central,
                                 INavigationService navigator,
-                                IUserDialogs dialogs)
+                                IMaterialDialog dialogs)
         {
             this.CanControlAdapterState = central.CanControlAdapterState();
 
@@ -30,12 +30,12 @@ namespace Samples.BluetoothLE
                 .Where(x => x != null)
                 .SubOnMainThread(x => navigator.Navigate("Peripheral", ("Peripheral", x.Peripheral)));
 
-            this.ToggleAdapterState = ReactiveCommand.Create(
-                () =>
+            this.ToggleAdapterState = ReactiveCommand.CreateFromTask(
+                async () =>
                 {
                     var poweredOn = central.Status == AccessState.Available;
                     if (!central.TrySetAdapterState(!poweredOn))
-                        dialogs.Alert("Cannot change bluetooth adapter state");
+                        await dialogs.AlertAsync("Cannot change bluetooth adapter state");
                 }
             );
 
@@ -69,8 +69,8 @@ namespace Samples.BluetoothLE
                                         {
                                             peripheral.Update(result);
                                         }
-                                        else 
-                                        { 
+                                        else
+                                        {
                                             peripheral = new PeripheralItemViewModel(result.Peripheral);
                                             peripheral.Update(result);
                                             list.Add(peripheral);
@@ -79,7 +79,7 @@ namespace Samples.BluetoothLE
                                     if (list.Any())
                                         this.Peripherals.AddRange(list);
                                 },
-                                ex => dialogs.Alert(ex.ToString(), "ERROR")
+                                ex => dialogs.AlertAsync(ex.ToString(), "ERROR")
                             )
                             .DisposeWith(this.DeactivateWith);
 

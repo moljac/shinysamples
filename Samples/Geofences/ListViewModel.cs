@@ -4,24 +4,23 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Prism.Navigation;
 using Shiny.Locations;
 using Samples.Models;
-
+using XF.Material.Forms.UI.Dialogs;
 
 namespace Samples.Geofences
 {
     public class ListViewModel : ViewModel
     {
         readonly IGeofenceManager geofenceManager;
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
 
 
         public ListViewModel(INavigationService navigator,
                              IGeofenceManager geofenceManager,
-                             IUserDialogs dialogs)
+                             IMaterialDialog dialogs)
         {
             this.geofenceManager = geofenceManager;
             this.dialogs = dialogs;
@@ -30,7 +29,7 @@ namespace Samples.Geofences
             this.DropAllFences = ReactiveCommand.CreateFromTask(
                 async _ =>
                 {
-                    var confirm = await this.dialogs.Confirm("Are you sure you wish to drop all geofences?");
+                    var confirm = await this.dialogs.ConfirmAsync("Are you sure you wish to drop all geofences?") ?? false;
                     if (confirm)
                     {
                         await this.geofenceManager.StopAllMonitoring();
@@ -71,7 +70,7 @@ namespace Samples.Geofences
                     Region = region,
                     Remove = ReactiveCommand.CreateFromTask(async _ =>
                     {
-                        var confirm = await this.dialogs.Confirm("Are you sure you wish to remove geofence - " + region.Identifier);
+                        var confirm = await this.dialogs.ConfirmAsync("Are you sure you wish to remove geofence - " + region.Identifier) ?? false;
                         if (confirm)
                         {
                             await this.geofenceManager.StopMonitoring(region.Identifier);
@@ -90,7 +89,7 @@ namespace Samples.Geofences
                         if (status != null)
                         {
                             await Task.Delay(2000);
-                            await this.dialogs.Alert($"{region.Identifier} status is {status}");
+                            await this.dialogs.AlertAsync($"{region.Identifier} status is {status}");
                         }
                     })
                 })

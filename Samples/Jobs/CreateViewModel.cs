@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
@@ -9,19 +8,22 @@ using Shiny;
 using Shiny.Jobs;
 using Samples.ShinyDelegates;
 using Shiny.Notifications;
+using XF.Material.Forms.UI.Dialogs;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Samples.Jobs
 {
     public class CreateViewModel : ViewModel
     {
         readonly IJobManager jobManager;
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
 
 
         public CreateViewModel(IJobManager jobManager,
                                INavigationService navigator,
                                INotificationManager notifications,
-                               IUserDialogs dialogs)
+                               IMaterialDialog dialogs)
         {
             this.jobManager = jobManager;
             this.dialogs = dialogs;
@@ -63,23 +65,26 @@ namespace Samples.Jobs
                 valObs
             );
 
-            this.ChangeRequiredInternetAccess = ReactiveCommand.Create(() =>
+            this.ChangeRequiredInternetAccess = ReactiveCommand.CreateFromTask(async () =>
             {
-                var cfg = new ActionSheetConfig()
-                    .Add(
+                var cfg = new Dictionary<string, Action>
+                {
+                    {
                         InternetAccess.None.ToString(),
                         () => this.RequiredInternetAccess = InternetAccess.None.ToString()
-                    )
-                    .Add(
+                    },
+                    {
                         InternetAccess.Any.ToString(),
                         () => this.RequiredInternetAccess = InternetAccess.Any.ToString()
-                    )
-                    .Add(
+                    },
+                    {
                         InternetAccess.Unmetered.ToString(),
-                        () => this.RequiredInternetAccess = InternetAccess.Unmetered.ToString()
-                    )
-                    .AddCancel();
-                this.dialogs.ActionSheet(cfg);
+                        () => this.RequiredInternetAccess = InternetAccess.Any.ToString()
+                    }
+                };
+
+                var task = await this.dialogs.SelectChoiceAsync("Select", cfg.Keys.ToList());
+                cfg.Values.ElementAt(task).Invoke();
             });
         }
 

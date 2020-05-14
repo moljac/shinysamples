@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using Samples.Infrastructure;
 using Samples.Models;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.HttpTransfers
@@ -13,7 +13,7 @@ namespace Samples.HttpTransfers
         readonly SampleSqliteConnection conn;
 
 
-        public LogViewModel(IUserDialogs dialogs, SampleSqliteConnection conn) : base(dialogs)
+        public LogViewModel(IMaterialDialog dialogs, SampleSqliteConnection conn) : base(dialogs)
         {
             this.conn = conn;
         }

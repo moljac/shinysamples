@@ -6,9 +6,9 @@ using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
-using Acr.UserDialogs.Forms;
 using Shiny;
 using Shiny.Locations;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Geofences
@@ -19,13 +19,13 @@ namespace Samples.Geofences
         readonly IGeofenceManager geofenceManager;
         readonly IGpsManager gpsManager;
         readonly INavigationService navigator;
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
 
 
         public CreateViewModel(INavigationService navigator,
                                IGeofenceManager geofenceManager,
                                IGpsManager gpsManager,
-                               IUserDialogs dialogs)
+                               IMaterialDialog dialogs)
         {
             this.navigator = navigator;
             this.geofenceManager = geofenceManager;
@@ -143,7 +143,7 @@ namespace Samples.Geofences
             var access = await this.dialogs.RequestAccess(this.geofenceManager.RequestAccess);
             if (!access)
             {
-                await this.dialogs.Alert("Invalid access " + access);
+                await this.dialogs.AlertAsync("Invalid access " + access);
             }
             else
             {

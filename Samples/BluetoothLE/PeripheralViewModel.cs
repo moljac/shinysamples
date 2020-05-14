@@ -4,24 +4,25 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Shiny;
 using Shiny.BluetoothLE;
 using Shiny.BluetoothLE.Central;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.BluetoothLE
 {
     public class PeripheralViewModel : ViewModel
     {
-        readonly IUserDialogs dialogs;
+        readonly IMaterialDialog dialogs;
         readonly ICentralManager centralManager;
         IPeripheral peripheral;
 
 
-        public PeripheralViewModel(ICentralManager centralManager, IUserDialogs dialogs)
+        public PeripheralViewModel(ICentralManager centralManager, IMaterialDialog dialogs)
         {
             this.centralManager = centralManager;
             this.dialogs = dialogs;
@@ -41,17 +42,17 @@ namespace Samples.BluetoothLE
                 }
             });
 
-            this.PairToDevice = ReactiveCommand.Create(() =>
+            this.PairToDevice = ReactiveCommand.CreateFromTask(async () =>
             {
                 var pair = this.peripheral as ICanPairPeripherals;
 
                 if (pair == null)
                 {
-                    dialogs.Alert("Pairing is not supported on this platform");
+                    dialogs.AlertAsync("Pairing is not supported on this platform");
                 }
                 else if (pair.PairingStatus == PairingState.Paired)
                 {
-                    dialogs.Toast("Peripheral is already paired");
+                    await dialogs.SnackbarAsync("Peripheral is already paired");
                 }
                 else
                 {
@@ -60,7 +61,7 @@ namespace Samples.BluetoothLE
                         .Subscribe(x =>
                         {
                             var txt = x ? "Peripheral Paired Successfully" : "Peripheral Pairing Failed";
-                            dialogs.Toast(txt);
+                            dialogs.SnackbarAsync(txt);
                             this.RaisePropertyChanged(nameof(this.PairingText));
                         });
                 }
@@ -72,16 +73,15 @@ namespace Samples.BluetoothLE
                     var mtu = this.peripheral as ICanRequestMtu;
                     if (mtu == null)
                     {
-                        await dialogs.Alert("MTU requests are not supported on this platform");
+                        await dialogs.AlertAsync("MTU requests are not supported on this platform");
                     }
                     else
                     {
-                        var result = await dialogs.Prompt("Range 20-512", "MTU Request");
-                        if (result.Ok)
+                        var result = await dialogs.InputAsync("MTU Request", "Range 20-512");
+                        if (!result.IsEmpty())
                         {
-
-                            var actual = await mtu.RequestMtu(Int32.Parse(result.Value));
-                            dialogs.Toast("MTU Changed to " + actual);
+                            var actual = await mtu.RequestMtu(Int32.Parse(result));
+                            await dialogs.SnackbarAsync("MTU Changed to " + actual);
                         }
                     }
                 },
@@ -160,7 +160,7 @@ namespace Samples.BluetoothLE
 
                         service.Add(new GattCharacteristicViewModel(chs, this.dialogs));
                     },
-                    ex => this.dialogs.Alert(ex.ToString())
+                    ex => this.dialogs.SnackbarAsync(ex.ToString())
                 )
                 .DisposeWith(this.DeactivateWith);
         }

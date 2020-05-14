@@ -4,7 +4,6 @@ using UIKit;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using Acr.UserDialogs.Forms;
 using Samples.ShinySetup;
 using Shiny;
 
@@ -24,7 +23,7 @@ namespace Samples.iOS
 
             Forms.Init();
             FormsMaps.Init();
-            Rg.Plugins.Popup.Popup.Init();
+            XF.Material.iOS.Material.Init();
             this.LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
@@ -33,11 +32,11 @@ namespace Samples.iOS
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
             => this.ShinyDidReceiveRemoteNotification(userInfo, null);
 
-        //public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
-        //    => this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+            => this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
 
-        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-            => this.ShinyRegisteredForRemoteNotifications(deviceToken);
+        //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        //    => this.ShinyRegisteredForRemoteNotifications(deviceToken);
 
         public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
             => this.ShinyFailedToRegisterForRemoteNotifications(error);
@@ -47,8 +46,5 @@ namespace Samples.iOS
 
         public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
             => this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
-
-        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
-            => ShinyHost.Resolve<IUserDialogs>().Alert(notification.AlertBody, "Notification - " + notification.AlertTitle);
     }
 }
