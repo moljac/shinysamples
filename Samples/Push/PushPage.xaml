@@ -1,46 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pushnotifications="clr-namespace:Samples.Push"
-             xmlns:samples="clr-namespace:Samples"
-             x:DataType="pushnotifications:PushViewModel"
+
              mc:Ignorable="d"
              x:Class="Samples.Push.PushPage"
              Title="Push">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Clear" Command="{Binding Clear}" />
-    </ContentPage.ToolbarItems>
-
-    <ContentPage.Content>
-        <StackLayout>
-            <Button Text="{Binding AccessStatus, StringFormat='Check Status: {0}'}" Command="{Binding CheckPermission}" />
-            <Button Text="UnRegister" Command="{Binding UnRegister}" />
-            <Label Text="{Binding RegToken, StringFormat='Registration Token: {0}'}" />
-
-            <RefreshView Command="{Binding Load}"
-                         IsRefreshing="{Binding IsBusy}">
-                <CollectionView ItemsSource="{Binding Logs}"
-                                VerticalOptions="FillAndExpand"
-                                HorizontalOptions="FillAndExpand">
-                    <CollectionView.EmptyView>
-                        <Label Text="No Push Events"
-                               Style="{StaticResource NoDataLabel}" />
-                    </CollectionView.EmptyView>
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="samples:CommandItem">
-                            <samples:CommandCell Text="{Binding Text}"
-                                                 Detail="{Binding Detail}"
-                                                 PrimaryCommand="{Binding PrimaryCommand}"
-                                                 SecondaryCommand="{Binding SecondaryCommand}" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    <TabbedPage.Children>
+        <pushnotifications:SetupPage />
+        <pushnotifications:EventListPage />
+    </TabbedPage.Children>
+</TabbedPage>

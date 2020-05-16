@@ -21,8 +21,6 @@ using XF.Material.Forms.UI.Dialogs;
 [assembly: ShinyService(typeof(GlobalExceptionHandler))]
 [assembly: ShinyService(typeof(CoreDelegateServices))]
 [assembly: ShinyService(typeof(JobLoggerTask))]
-[assembly: ShinyService(typeof(IUserDialogs), typeof(UserDialogs))]
-[assembly: ShinyService(typeof(IFullService), typeof(FullService))]
 [assembly: ShinyService(typeof(IAppSettings), typeof(AppSettings))]
 
 #if !STARTUP_AUTO
@@ -54,6 +52,7 @@ namespace Samples.ShinySetup
             //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
+            services.AddSingleton<IMaterialDialog>(MaterialDialog.Instance);
 
 #if STARTUP_ATTRIBUTES
             services.RegisterModule(new AssemblyServiceModule());
@@ -71,12 +70,10 @@ namespace Samples.ShinySetup
             // your infrastructure
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
-            services.AddSingleton<IMaterialDialog>(MaterialDialog.Instance);
             services.AddSingleton<IAppSettings, AppSettings>();
 
             // startup tasks
             services.AddSingleton<GlobalExceptionHandler>();
-            services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<JobLoggerTask>();
             services.AddAppState<AppStateDelegate>();
 

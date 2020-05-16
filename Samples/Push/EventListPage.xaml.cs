@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Samples.Push
 {
-    public partial class PushPage : TabbedPage
+    public partial class EventListPage : ContentPage
     {
-        public PushPage()
+        public EventListPage()
         {
             this.InitializeComponent();
         }

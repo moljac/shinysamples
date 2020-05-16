@@ -153,9 +153,6 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\fontawesome.otf" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj">
       <Project>{3a1fb5b6-8363-4b73-b0ae-7be8d8feb926}</Project>
       <Name>Shiny.Beacons</Name>

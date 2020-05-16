@@ -13,24 +13,24 @@
 
     <ItemGroup>
         <PackageReference Include="Acr.UserDialogs.Forms" Version="1.0.0.7-beta" />
-        <PackageReference Include="Humanizer" Version="2.7.9" />
+        <PackageReference Include="Humanizer" Version="2.8.11" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
-        <PackageReference Include="ReactiveUI.Fody" Version="11.2.3" />
-        <PackageReference Include="Shiny.Beacons" Version="1.1.0.1449-beta" />
-        <PackageReference Include="Shiny.BluetoothLE" Version="1.1.0.1449-beta" />
-        <PackageReference Include="Shiny.Integrations.Sqlite" Version="1.1.0.1449-beta" />
-        <PackageReference Include="Shiny.Locations" Version="1.1.0.1449" />
-        <PackageReference Include="Shiny.Logging.AppCenter" Version="1.1.0.1449" />
-        <PackageReference Include="Shiny.Net.Http" Version="1.1.0.1449" />
-        <PackageReference Include="Shiny.Nfc" Version="1.1.0.1449-beta" />
-        <PackageReference Include="Shiny.Notifications" Version="1.1.0.1449" />
-        <PackageReference Include="Shiny.Push" Version="1.1.0.1449-beta" />
-        <PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="1.1.0.1449-beta" />
-        <PackageReference Include="Shiny.Sensors" Version="1.1.0.1449" />
-        <PackageReference Include="Shiny.SpeechRecognition" Version="1.1.0.1449" />
+        <PackageReference Include="ReactiveUI.Fody" Version="11.4.1" />
+        <PackageReference Include="Shiny.Beacons" Version="1.1.0.1590-beta" />
+        <PackageReference Include="Shiny.BluetoothLE" Version="1.1.0.1590-beta" />
+        <PackageReference Include="Shiny.Integrations.Sqlite" Version="1.1.0.1590-beta" />
+        <PackageReference Include="Shiny.Locations" Version="1.1.0.1590" />
+        <PackageReference Include="Shiny.Logging.AppCenter" Version="1.1.0.1590" />
+        <PackageReference Include="Shiny.Net.Http" Version="1.1.0.1590" />
+        <PackageReference Include="Shiny.Nfc" Version="1.1.0.1590-beta" />
+        <PackageReference Include="Shiny.Notifications" Version="1.1.0.1590" />
+        <PackageReference Include="Shiny.Push" Version="1.1.0.1590-beta" />
+        <PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="1.1.0.1590-beta" />
+        <PackageReference Include="Shiny.Sensors" Version="1.1.0.1590" />
+        <PackageReference Include="Shiny.SpeechRecognition" Version="1.1.0.1590" />
         <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-        <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
-        <PackageReference Include="Xamarin.Forms.Maps" Version="4.5.0.356" />
+        <PackageReference Include="Xamarin.Forms" Version="4.6.0.772" />
+        <PackageReference Include="Xamarin.Forms.Maps" Version="4.6.0.772" />
     </ItemGroup>
 
     <ItemGroup>
