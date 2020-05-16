@@ -31,7 +31,6 @@ namespace Samples.Droid
             Forms.SetFlags("SwipeView_Experimental");
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
-            FormsMaterial.Init(this, savedInstanceState);
 
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             this.LoadApplication(new App());
