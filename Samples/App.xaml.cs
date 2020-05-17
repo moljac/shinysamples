@@ -20,6 +20,8 @@ namespace Samples
         protected override async void OnInitialized()
         {
             this.InitializeComponent();
+            XF.Material.Forms.Material.Init(this);
+
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(viewType =>
             {
                 var viewModelTypeName = viewType.FullName.Replace("Page", "ViewModel");
