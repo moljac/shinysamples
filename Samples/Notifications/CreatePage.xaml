@@ -13,6 +13,9 @@
                         Command="{Binding PermissionCheck}"
                         IsVisible="{Binding IsAndroid, Converter={StaticResource Not}}"/>
 
+                <Label Text="ID (Leave blank for auto/default)" />
+                <Entry Text="{Binding Identifier}" Keyboard="Numeric" />
+
                 <Label Text="Title" />
                 <Entry Text="{Binding NotificationTitle}" />
 
