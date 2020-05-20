@@ -35,8 +35,8 @@ namespace Samples.iOS
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
             => this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
 
-        //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        //    => this.ShinyRegisteredForRemoteNotifications(deviceToken);
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+            => this.ShinyRegisteredForRemoteNotifications(deviceToken);
 
         public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
             => this.ShinyFailedToRegisterForRemoteNotifications(error);

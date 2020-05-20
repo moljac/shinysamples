@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:push="clr-namespace:Samples.Push"
+             xmlns:push="clr-namespace:Samples.Push" xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:DataType="push:SetupViewModel"
              x:Class="Samples.Push.SetupPage"
@@ -22,10 +22,10 @@
             <Label Text="{Binding ExpiryDate, StringFormat='Expiry Date: {0}'}" />
 
             <StackLayout IsVisible="{Binding IsTagsSupported}">
-                <Entry Text="{Binding Tag}"
-                       Placeholder="Tag"
-                       ReturnCommand="{Binding UpdateTag}"
-                       ReturnType="Done" />
+                <ui:MaterialTextField Text="{Binding Tag}" 
+                                      Placeholder="Tag"
+                                      ReturnCommand="{Binding UpdateTag}"
+                                      ReturnType="Done" />
 
                 <Button Text="Update Tag"
                         Command="{Binding UpdateTag}" />

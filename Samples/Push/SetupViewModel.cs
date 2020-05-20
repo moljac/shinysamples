@@ -82,7 +82,7 @@ namespace Samples.Push
             this.RegToken = pushManager?.CurrentRegistrationToken ?? "-";
             this.RegDate = pushManager?.CurrentRegistrationTokenDate;
             this.ExpiryDate = pushManager?.CurrentRegistrationExpiryDate;
-            this.Tag = pushManager?.TryGetTags()?.FirstOrDefault() ?? "-";
+            this.Tag = pushManager?.TryGetTags()?.FirstOrDefault() ?? String.Empty;
         }
     }
 }

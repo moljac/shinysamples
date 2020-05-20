@@ -17,10 +17,10 @@
         <PackageReference Include="Humanizer" Version="2.8.11" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
         <PackageReference Include="ReactiveUI.Fody" Version="11.4.1" />
-        <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-        <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
-        <PackageReference Include="Xamarin.Forms.Maps" Version="4.6.0.726" />
-        <PackageReference Include="XF.Material" Version="1.6.3" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+        <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+        <PackageReference Include="Xamarin.Forms.Maps" Version="4.6.0.800" />
+        <PackageReference Include="XF.Material" Version="1.6.4" />
     </ItemGroup>
 
     <ItemGroup>
@@ -44,6 +44,7 @@
         <EmbeddedResource Include="Resources\fa-brands-400.ttf" />
         <EmbeddedResource Include="Resources\fa-regular-400.ttf" />
         <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
+        <EmbeddedResource Include="Resources\MaterialIcons-Regular.ttf" />
     </ItemGroup>
 
 </Project>
