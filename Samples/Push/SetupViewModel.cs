@@ -30,7 +30,7 @@ namespace Samples.Push
                 })
             );
             this.UnRegister = ReactiveCommand.CreateFromTask(
-                () => this.Do(async () => 
+                () => this.Do(async () =>
                 {
                     await this.pushManager.UnRegister();
                     this.AccessStatus = AccessState.Disabled;
@@ -87,7 +87,8 @@ namespace Samples.Push
             if (this.pushManager == null)
                 return;
 
-            using (this.dialogs.LoadingDialogAsync("Updating Push Details"))
+            //using (this.dialogs.LoadingDialogAsync("Updating Push Details"))
+            //using (this.dialogs.LoadingSnackbarAsync("Updating Push Details"))
                 await task();
 
             await this.dialogs.SnackbarAsync("Push Details Updated");
