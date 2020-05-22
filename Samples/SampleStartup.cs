@@ -33,7 +33,8 @@ using XF.Material.Forms.UI.Dialogs;
 [assembly: ShinySensors]
 [assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
 [assembly: ShinySpeechRecognition]
-[assembly: ShinyPush(typeof(PushDelegate))]
+//[assembly: ShinyPush(typeof(PushDelegate))]
+[assembly: ShinyAzureNotificationHub(typeof(PushDelegate), Constants.AnhFullConnectionString, "shinysamples")]
 [assembly: ShinyNfc]
 #endif
 #endif
@@ -106,7 +107,7 @@ namespace Samples.ShinySetup
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
             services.UsePushAzureNotificationHubs<PushDelegate>(
-                "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE=",
+                Constants.AnhFullConnectionString,
                 "shinysamples"
             );
         }

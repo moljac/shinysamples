@@ -77,11 +77,18 @@ namespace Samples.Push
         [Reactive] public AccessState AccessStatus { get; private set; } = AccessState.Unknown;
 
 
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.Refresh();
+        }
+
+
         void Refresh()
         {
             this.RegToken = pushManager?.CurrentRegistrationToken ?? "-";
-            this.RegDate = pushManager?.CurrentRegistrationTokenDate;
-            this.ExpiryDate = pushManager?.CurrentRegistrationExpiryDate;
+            this.RegDate = pushManager?.CurrentRegistrationTokenDate?.ToLocalTime();
+            this.ExpiryDate = pushManager?.CurrentRegistrationExpiryDate?.ToLocalTime();
             this.Tag = pushManager?.TryGetTags()?.FirstOrDefault() ?? String.Empty;
         }
     }
