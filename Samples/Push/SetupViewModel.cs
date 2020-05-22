@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.Push;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Push
@@ -12,47 +14,34 @@ namespace Samples.Push
     public class SetupViewModel : ViewModel
     {
         readonly IPushManager? pushManager;
+        readonly IMaterialDialog dialogs;
 
 
-        public SetupViewModel(IPushManager? pushManager = null)
+        public SetupViewModel(IMaterialDialog dialogs, IPushManager? pushManager = null)
         {
+            this.dialogs = dialogs;
             this.pushManager = pushManager;
 
             this.RequestAccess = ReactiveCommand.CreateFromTask(
-                async () =>
+                () => this.Do(async () =>
                 {
-                    if (this.pushManager == null)
-                        return;
-
                     var result = await this.pushManager.RequestAccess();
                     this.AccessStatus = result.Status;
-                    this.Refresh();
-                }
+                })
             );
             this.UnRegister = ReactiveCommand.CreateFromTask(
-                async () =>
+                () => this.Do(async () => 
                 {
-                    if (this.pushManager == null)
-                        return;
-
                     await this.pushManager.UnRegister();
                     this.AccessStatus = AccessState.Disabled;
-                    this.Refresh();
-                },
+                }),
                 this.WhenAny(
                     x => x.RegToken,
                     x => !x.GetValue().IsEmpty()
                 )
             );
             this.UpdateTag = ReactiveCommand.CreateFromTask(
-                async () =>
-                {
-                    if (this.pushManager == null)
-                        return;
-
-                    await this.pushManager.TryUpdateTags(this.Tag);
-                    this.Refresh();
-                },
+                () => this.Do(() => this.pushManager.TryUpdateTags(this.Tag)),
                 this.WhenAny(
                     x => x.Tag,
                     x => x.RegToken,
@@ -86,10 +75,23 @@ namespace Samples.Push
 
         void Refresh()
         {
-            this.RegToken = pushManager?.CurrentRegistrationToken ?? "-";
-            this.RegDate = pushManager?.CurrentRegistrationTokenDate?.ToLocalTime();
-            this.ExpiryDate = pushManager?.CurrentRegistrationExpiryDate?.ToLocalTime();
-            this.Tag = pushManager?.TryGetTags()?.FirstOrDefault() ?? String.Empty;
+            this.RegToken = this.pushManager?.CurrentRegistrationToken ?? "-";
+            this.RegDate = this.pushManager?.CurrentRegistrationTokenDate?.ToLocalTime();
+            this.ExpiryDate = this.pushManager?.CurrentRegistrationExpiryDate?.ToLocalTime();
+            this.Tag = this.pushManager?.TryGetTags()?.FirstOrDefault() ?? String.Empty;
+        }
+
+
+        async Task Do(Func<Task> task)
+        {
+            if (this.pushManager == null)
+                return;
+
+            using (this.dialogs.LoadingDialogAsync("Updating Push Details"))
+                await task();
+
+            await this.dialogs.SnackbarAsync("Push Details Updated");
+            this.Refresh();
         }
     }
 }

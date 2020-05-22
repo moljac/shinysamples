@@ -34,7 +34,7 @@ using XF.Material.Forms.UI.Dialogs;
 [assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
 [assembly: ShinySpeechRecognition]
 //[assembly: ShinyPush(typeof(PushDelegate))]
-[assembly: ShinyAzureNotificationHub(typeof(PushDelegate), Constants.AnhFullConnectionString, "shinysamples")]
+[assembly: ShinyAzureNotificationHub(typeof(PushDelegate), Constants.AnhListenerConnectionString, Constants.AnhHubName)]
 [assembly: ShinyNfc]
 #endif
 #endif
@@ -107,8 +107,8 @@ namespace Samples.ShinySetup
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
             services.UsePushAzureNotificationHubs<PushDelegate>(
-                Constants.AnhFullConnectionString,
-                "shinysamples"
+                Constants.AnhListenerConnectionString,
+                Constants.AnhHubName
             );
         }
     }
