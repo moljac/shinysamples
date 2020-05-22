@@ -46,9 +46,9 @@ namespace Samples.Infrastructure
         public bool HasLogs { [ObservableAsProperty] get; }
 
 
-        public override async void Initialize(INavigationParameters parameters)
+        public override async void OnAppearing()
         {
-            base.Initialize(parameters);
+            base.OnAppearing();
             await this.Load.Execute();
         }
 
