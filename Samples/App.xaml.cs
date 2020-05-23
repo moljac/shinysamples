@@ -81,6 +81,7 @@ namespace Samples
             containerRegistry.RegisterForNavigation<AccessPage>("Access");
             containerRegistry.RegisterForNavigation<EnvironmentPage>("Environment");
             containerRegistry.RegisterForNavigation<Settings.MainPage>("Settings");
+            containerRegistry.RegisterForNavigation<LocationSync.MainPage>("LocationSync");
         }
 
 

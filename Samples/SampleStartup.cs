@@ -90,8 +90,10 @@ namespace Samples.ShinySetup
             services.UseNfc();
 
             services.UseGeofencing<LocationDelegates>();
+            services.UseGeofencingSync<LocationSyncDelegates>();
             //services.UseGpsDirectGeofencing<LocationDelegates>();
             services.UseGps<LocationDelegates>();
+            services.UseGpsSync<LocationSyncDelegates>();
 
             //services.UseNotifications(true);
             services.UseNotifications<NotificationDelegate>(

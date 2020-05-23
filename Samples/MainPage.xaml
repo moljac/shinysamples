@@ -27,6 +27,7 @@
                         <TextCell Text="Geofencing" Command="{Binding Navigate}" CommandParameter="Nav/Geofencing" />
                         <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
                         <TextCell Text="Motion Activity" Command="{Binding Navigate}" CommandParameter="Nav/MotionActivity" />
+                        <TextCell Text="Sync" Command="{Binding Navigate}" CommandParameter="Nav/LocationSync" />
                     </TableSection>
                     <TableSection Title="Others">
                         <TextCell Text="Notifications" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />
