@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using Samples.Infrastructure;
 using Samples.Models;
-
+using XF.Material.Forms.UI.Dialogs;
 
 namespace Samples.AppState
 {
@@ -14,7 +13,7 @@ namespace Samples.AppState
         readonly SampleSqliteConnection conn;
 
 
-        public LogViewModel(SampleSqliteConnection conn, IUserDialogs dialogs) : base(dialogs)
+        public LogViewModel(SampleSqliteConnection conn, IMaterialDialog dialogs) : base(dialogs)
         {
             this.conn = conn;
         }

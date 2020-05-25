@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
+using System.Windows.Input;
+
 using Prism.AppModel;
 using Prism.Navigation;
 using ReactiveUI;
@@ -41,6 +43,10 @@ namespace Samples
 
         [Reactive] public bool IsBusy { get; set; }
         [Reactive] public string? Title { get; protected set; }
+
+
+        protected void BindBusyCommand(ICommand command)
+            => this.BindBusyCommand((IReactiveCommand)command);
 
 
         protected void BindBusyCommand(IReactiveCommand command) =>

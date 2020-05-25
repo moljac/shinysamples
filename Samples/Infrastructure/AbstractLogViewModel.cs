@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Infrastructure
@@ -18,7 +18,7 @@ namespace Samples.Infrastructure
         readonly object syncLock = new object();
 
 
-        protected AbstractLogViewModel(IUserDialogs dialogs)
+        protected AbstractLogViewModel(IMaterialDialog dialogs)
         {
             this.Dialogs = dialogs;
 
@@ -39,16 +39,16 @@ namespace Samples.Infrastructure
         }
 
 
-        protected IUserDialogs Dialogs { get; }
+        protected IMaterialDialog Dialogs { get; }
         public ObservableList<TItem> Logs { get; }
         public ReactiveCommand<Unit, Unit> Load { get; }
         public ReactiveCommand<Unit, Unit> Clear { get; }
         public bool HasLogs { [ObservableAsProperty] get; }
 
 
-        public override async void Initialize(INavigationParameters parameters)
+        public override async void OnAppearing()
         {
-            base.Initialize(parameters);
+            base.OnAppearing();
             await this.Load.Execute();
         }
 
@@ -64,19 +64,12 @@ namespace Samples.Infrastructure
 
         protected virtual async Task DoClear()
         {
-            var confirm = await this.Dialogs.Confirm("Clear Logs?");
+            var confirm = await this.Dialogs.ConfirmAsync("Clear Logs?") ?? false;
             if (confirm)
             {
                 await this.ClearLogs();
                 await this.Load.Execute();
             }
-        }
-
-
-        void SetLogs(IEnumerable<TItem> items)
-        {
-            lock (this.syncLock)
-                this.Logs.ReplaceAll(items);
         }
     }
 }

@@ -10,8 +10,8 @@ using Samples.Settings;
 using Samples.ShinyDelegates;
 using Samples.ShinySetup;
 using Shiny.Infrastructure;
-using Acr.UserDialogs.Forms;
 using Shiny.Notifications;
+using XF.Material.Forms.UI.Dialogs;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -21,8 +21,6 @@ using Shiny.Notifications;
 [assembly: ShinyService(typeof(GlobalExceptionHandler))]
 [assembly: ShinyService(typeof(CoreDelegateServices))]
 [assembly: ShinyService(typeof(JobLoggerTask))]
-[assembly: ShinyService(typeof(IUserDialogs), typeof(UserDialogs))]
-[assembly: ShinyService(typeof(IFullService), typeof(FullService))]
 [assembly: ShinyService(typeof(IAppSettings), typeof(AppSettings))]
 
 #if !STARTUP_AUTO
@@ -35,7 +33,8 @@ using Shiny.Notifications;
 [assembly: ShinySensors]
 [assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
 [assembly: ShinySpeechRecognition]
-[assembly: ShinyPush(typeof(PushDelegate))]
+//[assembly: ShinyPush(typeof(PushDelegate))]
+[assembly: ShinyAzureNotificationHub(typeof(PushDelegate), Constants.AnhListenerConnectionString, Constants.AnhHubName)]
 [assembly: ShinyNfc]
 #endif
 #endif
@@ -54,6 +53,7 @@ namespace Samples.ShinySetup
             //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
+            services.AddSingleton<IMaterialDialog>(MaterialDialog.Instance);
 
 #if STARTUP_ATTRIBUTES
             services.RegisterModule(new AssemblyServiceModule());
@@ -71,12 +71,10 @@ namespace Samples.ShinySetup
             // your infrastructure
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();
-            services.AddSingleton<IUserDialogs, UserDialogs>();
             services.AddSingleton<IAppSettings, AppSettings>();
 
             // startup tasks
             services.AddSingleton<GlobalExceptionHandler>();
-            services.AddSingleton<IFullService, FullService>();
             services.AddSingleton<JobLoggerTask>();
             services.AddAppState<AppStateDelegate>();
 
@@ -92,8 +90,10 @@ namespace Samples.ShinySetup
             services.UseNfc();
 
             services.UseGeofencing<LocationDelegates>();
+            services.UseGeofencingSync<LocationSyncDelegates>();
             //services.UseGpsDirectGeofencing<LocationDelegates>();
             services.UseGps<LocationDelegates>();
+            services.UseGpsSync<LocationSyncDelegates>();
 
             //services.UseNotifications(true);
             services.UseNotifications<NotificationDelegate>(
@@ -109,8 +109,8 @@ namespace Samples.ShinySetup
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
             services.UsePushAzureNotificationHubs<PushDelegate>(
-                "Endpoint=sb://shinysamples.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=jI6ss5WOD//xPNuHFJmS7sWWzqndYQyz7wAVOMTZoLE=",
-                "shinysamples"
+                Constants.AnhListenerConnectionString,
+                Constants.AnhHubName
             );
         }
     }

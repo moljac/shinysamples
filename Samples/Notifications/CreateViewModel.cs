@@ -4,11 +4,11 @@ using System.Reactive.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Notifications
@@ -18,7 +18,7 @@ namespace Samples.Notifications
         readonly INotificationManager notificationManager;
 
 
-        public CreateViewModel(INotificationManager notificationManager, IUserDialogs dialogs)
+        public CreateViewModel(INotificationManager notificationManager, IMaterialDialog dialogs)
         {
             this.notificationManager = notificationManager;
 
@@ -53,10 +53,7 @@ namespace Samples.Notifications
                         this.NotificationMessage,
                         this.ScheduledTime
                     );
-                    this.NotificationTitle = String.Empty;
-                    this.NotificationMessage = String.Empty;
-                    this.Payload = String.Empty;
-                    await dialogs.Alert("Notification Sent Successfully");
+                    await dialogs.AlertAsync("Notification Sent Successfully");
                 },
                 this.WhenAny(
                     x => x.NotificationTitle,
@@ -71,7 +68,7 @@ namespace Samples.Notifications
             this.PermissionCheck = ReactiveCommand.CreateFromTask(async () =>
             {
                 var result = await notificationManager.RequestAccess();
-                dialogs.Toast("Permission Check Result: " + result);
+                await dialogs.SnackbarAsync("Permission Check Result: " + result);
             });
         }
 
@@ -87,6 +84,10 @@ namespace Samples.Notifications
                 Category = this.UseActions ? "Test" : null,
                 Sound = this.GetSound()
             };
+            if (Int32.TryParse(this.Identifier, out int id))
+            {
+                notification.Id = id;
+            }
             if (!this.Payload.IsEmpty())
             {
                 notification.Payload = new Dictionary<string, string> {
@@ -107,7 +108,9 @@ namespace Samples.Notifications
             notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
 
             await notificationManager.Send(notification);
+            this.Reset();
         }
+
 
         NotificationSound GetSound()
         {
@@ -123,6 +126,7 @@ namespace Samples.Notifications
         public ICommand Send { get; }
         public ICommand SendNow { get; }
 
+        [Reactive] public string Identifier { get; set; }
         [Reactive] public string NotificationTitle { get; set;} = "Test Title";
         [Reactive] public string NotificationMessage { get; set; } = "Test Message";
         public DateTime ScheduledTime { [ObservableAsProperty] get; }
@@ -144,5 +148,14 @@ namespace Samples.Notifications
             "Priority"
         };
         [Reactive] public string SelectedSoundType { get; set; } = "None";
+
+
+        void Reset()
+        {
+            this.Identifier = String.Empty;
+            //this.NotificationTitle = String.Empty;
+            //this.NotificationMessage = String.Empty;
+            this.Payload = String.Empty;
+        }
     }
 }

@@ -66,14 +66,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
-    <PackageReference Include="Xamarin.Firebase.Common" Version="71.1610.0" />
-    <PackageReference Include="Xamarin.Firebase.Messaging" Version="71.1740.0" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="71.1610.0" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.0" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="71.1601.0" />
-    <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.3" />
+    <PackageReference Include="Xamarin.Firebase.Common" Version="119.0.0-preview02" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="119.0.1-preview02" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="117.1.0-preview02" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="117.0.0-preview02" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.1.0-preview02" />
+    <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -82,8 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fontawesome.otf" />
-    <BundleResource Include="Assets\material.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +110,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}</Project>
       <Name>Shiny.Push</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj">
+      <Project>{7c4df671-043b-446a-85a8-872b36441103}</Project>
+      <Name>Shiny.Vpn</Name>
     </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
       <Project>{82F5E401-C438-46B0-BC7C-733D3E017AD5}</Project>
@@ -183,6 +185,9 @@
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

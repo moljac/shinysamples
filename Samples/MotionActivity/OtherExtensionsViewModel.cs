@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Acr.UserDialogs.Forms;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Locations;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.MotionActivity
 {
     public class OtherExtensionsViewModel : ViewModel
     {
-        readonly IMotionActivityManager activityManager;
-        readonly IUserDialogs dialogs;
+        readonly IMotionActivityManager? activityManager;
+        readonly IMaterialDialog dialogs;
 
 
-        public OtherExtensionsViewModel(IMotionActivityManager activityManager, IUserDialogs dialogs)
+        public OtherExtensionsViewModel(IMaterialDialog dialogs, IMotionActivityManager? activityManager = null)
         {
-            this.activityManager = activityManager;
             this.dialogs = dialogs;
+            this.activityManager = activityManager;
         }
 
 
         public override void OnAppearing()
         {
             base.OnAppearing();
+            if (this.activityManager == null)
+                return;
+
             Observable
                 .Interval(TimeSpan.FromSeconds(5))
                 .SubOnMainThread(async _ =>
@@ -47,7 +50,7 @@ namespace Samples.MotionActivity
                     }
                     catch (Exception ex)
                     {
-                        await this.dialogs.Alert(ex.ToString());
+                        await this.dialogs.AlertAsync(ex.ToString());
                     }
                 })
                 .DisposeWith(this.DeactivateWith);

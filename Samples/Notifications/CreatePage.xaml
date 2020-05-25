@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:notifications="clr-namespace:Samples.Notifications"
+             xmlns:notifications="clr-namespace:Samples.Notifications" 
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              x:Class="Samples.Notifications.CreatePage"             
              x:DataType="notifications:CreateViewModel"
              Title="Create">
@@ -13,23 +14,27 @@
                         Command="{Binding PermissionCheck}"
                         IsVisible="{Binding IsAndroid, Converter={StaticResource Not}}"/>
 
-                <Label Text="Title" />
-                <Entry Text="{Binding NotificationTitle}" />
+                <ui:MaterialTextField Text="{Binding Identifier}" 
+                                      Placeholder="ID (Leave blank for auto/default)" 
+                                      InputType="Numeric" />
 
-                <Label Text="Message" />
-                <Entry Text="{Binding NotificationMessage}" />
+                <ui:MaterialTextField Text="{Binding NotificationTitle}"
+                                      Placeholder="Title" />
 
-                <Label Text="Payload" />
-                <Entry Text="{Binding Payload}" />
+                <ui:MaterialTextField Text="{Binding NotificationMessage}"
+                                      Placeholder="Message" />
 
-                <Label Text="Badge Count" />
-                <Entry Text="{Binding BadgeCount}" Keyboard="Numeric" />
+                <ui:MaterialTextField Text="{Binding Payload}"
+                                      Placeholder="Payload" />
 
-                <Label Text="Date" />
-                <DatePicker Date="{Binding SelectedDate}" />
+                <ui:MaterialTextField Text="{Binding BadgeCount}" 
+                                      Placeholder="Badge Count" 
+                                      InputType="Numeric" />
 
-                <Label Text="Time" />
-                <TimePicker Time="{Binding SelectedTime}" />
+                <ui:MaterialDateField Date="{Binding SelectedDate}" 
+                                      Placeholder="Date" />
+
+                <ui:MaterialTimePicker Time="{Binding SelectedTime}" />
 
                 <Label Text="Sound" />
                 <Picker SelectedItem="{Binding SelectedSoundType}"
@@ -40,17 +45,18 @@
 
                 <ContentView IsVisible="{Binding IsAndroid}">
                     <StackLayout>
-                        <Label Text="Android Channel" />
-                        <Entry Text="{Binding AndroidChannel}" />
+                        <ui:MaterialTextField Text="{Binding AndroidChannel}" 
+                                              Placeholder="Android Channel" />
 
-                        <Label Text="Android High Priority" />
-                        <CheckBox IsChecked="{Binding UseAndroidHighPriority}" />
+                        <ui:MaterialCheckbox Text="Android High Priority" 
+                                             IsSelected="{Binding UseAndroidHighPriority}" />
 
-                        <Label Text="Android Big Text" />
-                        <CheckBox IsChecked="{Binding UseAndroidBigTextStyle}" />
+                        <ui:MaterialCheckbox Text="Android Big Text" 
+                                             IsSelected="{Binding UseAndroidBigTextStyle}" />
 
-                        <Label Text="Android Vibrate" />
-                        <CheckBox IsChecked="{Binding UseAndroidVibrate}" />
+
+                        <ui:MaterialCheckbox Text="Android Vibrate" 
+                                             IsSelected="{Binding UseAndroidVibrate}" />
                     </StackLayout>
                 </ContentView>
 

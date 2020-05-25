@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.Locations;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Gps
@@ -17,7 +17,7 @@ namespace Samples.Gps
         IDisposable gpsListener;
 
 
-        public GpsViewModel(IGpsManager manager, IUserDialogs dialogs)
+        public GpsViewModel(IGpsManager manager, IMaterialDialog dialogs)
         {
             this.manager = manager;
             this.IsUpdating = this.manager.IsListening;
@@ -39,19 +39,17 @@ namespace Samples.Gps
 
                 var reading = await this.manager.GetLastReading();
                 if (reading == null)
-                    await dialogs.Alert("Could not getting GPS coordinates");
+                    await dialogs.AlertAsync("Could not getting GPS coordinates");
                 else
                     this.SetValues(reading);
             });
             this.BindBusyCommand(this.GetCurrentPosition);
 
-            this.SelectPriority = ReactiveCommand.Create(() => dialogs.ActionSheet(
-                new ActionSheetConfig()
-                    .SetTitle("Select Priority/Desired Accuracy")
-                    .Add("Highest", () => this.Priority = GpsPriority.Highest)
-                    .Add("Normal", () => this.Priority = GpsPriority.Normal)
-                    .Add("Low", () => this.Priority = GpsPriority.Low)
-                    .AddCancel()
+            ReactiveCommand.Create(() => dialogs.ActionSheet(
+                false,
+                ("Highest", () => this.Priority = GpsPriority.Highest),
+                ("Normal", () => this.Priority = GpsPriority.Normal),
+                ("Low", () => this.Priority = GpsPriority.Low)
             ));
 
             this.ToggleUpdates = ReactiveCommand.CreateFromTask(
@@ -67,7 +65,7 @@ namespace Samples.Gps
                         var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(new GpsRequest { UseBackground = this.UseBackground }));
                         if (!result)
                         {
-                            await dialogs.Alert("Insufficient permissions");
+                            await dialogs.AlertAsync("Insufficient permissions");
                             return;
                         }
 

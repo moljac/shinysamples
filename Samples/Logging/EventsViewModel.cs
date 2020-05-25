@@ -4,17 +4,17 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Samples.Infrastructure;
 using Shiny.Logging;
+using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Logging
 {
     public class EventsViewModel : AbstractLogViewModel<CommandItem>
     {
-        public EventsViewModel(IUserDialogs dialogs) : base(dialogs)
+        public EventsViewModel(IMaterialDialog dialogs) : base(dialogs)
         {
             Log
                 .WhenEventLogged()
@@ -23,13 +23,13 @@ namespace Samples.Logging
                 {
                     Text = $"{x.EventName} ({DateTime.Now:hh:mm:ss tt})",
                     Detail = x.Description,
-                    PrimaryCommand = ReactiveCommand.Create(() =>
+                    PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                     {
                         var s = $"{x.EventName} ({DateTime.Now:hh:mm:ss tt}){Environment.NewLine}{x.Description}";
                         foreach (var p in x.Parameters)
                             s += $"{Environment.NewLine}{p.Key}: {p.Value}";
 
-                        this.Dialogs.Alert(s);
+                        await this.Dialogs.AlertAsync(s);
                     })
                 })
                 .Subscribe(this.InsertItem)

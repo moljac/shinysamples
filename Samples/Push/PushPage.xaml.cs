@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Samples.Push
 {
-    public partial class PushPage : ContentPage
+    public partial class PushPage : TabbedPage
     {
         public PushPage()
         {

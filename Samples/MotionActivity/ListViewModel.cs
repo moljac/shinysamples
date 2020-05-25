@@ -5,20 +5,19 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Locations;
-
+using XF.Material.Forms.UI.Dialogs;
 
 namespace Samples.MotionActivity
 {
     public class ListViewModel : ViewModel
     {
-        readonly IMotionActivityManager activityManager;
+        readonly IMotionActivityManager? activityManager;
 
 
-        public ListViewModel(IUserDialogs dialogs, IMotionActivityManager activityManager = null)
+        public ListViewModel(IMaterialDialog dialogs, IMotionActivityManager? activityManager = null)
         {
             this.activityManager = activityManager;
 
@@ -26,14 +25,14 @@ namespace Samples.MotionActivity
             {
                 if (this.activityManager == null)
                 {
-                    await dialogs.Alert("MotionActivity is not supported on this platform");
+                    await dialogs.AlertAsync("MotionActivity is not supported on this platform");
                     return;
                 }
 
                 var result = await this.activityManager.RequestPermission();
                 if (result != Shiny.AccessState.Available)
                 {
-                    await dialogs.Alert("Motion Activity is not available - " + result);
+                    await dialogs.AlertAsync("Motion Activity is not available - " + result);
                     return;
                 }
 

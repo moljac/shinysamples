@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Samples.Infrastructure;
 using Samples.Models;
 using Shiny;
+using XF.Material.Forms.UI.Dialogs;
 using MsgBus = Shiny.IMessageBus;
 
 
@@ -22,7 +22,7 @@ namespace Samples.Notifications
 
         public LogViewModel(SampleSqliteConnection conn,
                             MsgBus messageBus,
-                            IUserDialogs dialogs) : base(dialogs)
+                            IMaterialDialog dialogs) : base(dialogs)
         {
             this.conn = conn;
             this.messageBus = messageBus;

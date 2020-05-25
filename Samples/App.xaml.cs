@@ -9,7 +9,10 @@ using Samples.Infrastructure;
 using DryIoc;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-
+[assembly: ExportFont("fa-solid-900.ttf", Alias = "FAS")]
+[assembly: ExportFont("fa-regular-400.ttf", Alias = "FAR")]
+[assembly: ExportFont("fa-brands-400.ttf", Alias = "FAB")]
+[assembly: ExportFont("MaterialIcons-Regular.ttf", Alias = "MAT")]
 
 namespace Samples
 {
@@ -18,6 +21,8 @@ namespace Samples
         protected override async void OnInitialized()
         {
             this.InitializeComponent();
+            XF.Material.Forms.Material.Init(this);
+
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(viewType =>
             {
                 var viewModelTypeName = viewType.FullName.Replace("Page", "ViewModel");
@@ -76,6 +81,8 @@ namespace Samples
             containerRegistry.RegisterForNavigation<AccessPage>("Access");
             containerRegistry.RegisterForNavigation<EnvironmentPage>("Environment");
             containerRegistry.RegisterForNavigation<Settings.MainPage>("Settings");
+            containerRegistry.RegisterForNavigation<LocationSync.MainPage>("LocationSync");
+            containerRegistry.RegisterForNavigation<Vpn.MainPage>("Vpn");
         }
 
 

@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Acr.UserDialogs.Forms;
 using ReactiveUI;
 using Humanizer;
 using Shiny.Locations;
 using Samples.Models;
 using Samples.Infrastructure;
 using Prism.Navigation;
+using XF.Material.Forms.UI.Dialogs;
+
 
 namespace Samples.Gps
 {
@@ -23,7 +24,7 @@ namespace Samples.Gps
 
         public LogsViewModel(SampleSqliteConnection conn,
                              IGpsManager manager,
-                             IUserDialogs dialogs) : base(dialogs)
+                             IMaterialDialog dialogs) : base(dialogs)
         {
             this.conn = conn;
             this.manager = manager;
@@ -40,7 +41,7 @@ namespace Samples.Gps
                 {
                     Text = $"{x.Timestamp}",
                     Detail = $"{x.Position.Latitude} / {x.Position.Longitude}",
-                    PrimaryCommand = ReactiveCommand.Create(() =>
+                    PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                     {
                         var msg = new StringBuilder()
                             .AppendLine("Lat: " + x.Position.Latitude)
@@ -52,7 +53,7 @@ namespace Samples.Gps
                             .AppendLine("Speed (m/s) " + x.Speed)
                             .ToString();
 
-                        this.Dialogs.Alert(msg);
+                        await this.Dialogs.AlertAsync(msg);
                     })
                 })
                 .SubOnMainThread(this.InsertItem)
@@ -73,7 +74,7 @@ namespace Samples.Gps
             {
                 Text = $"{x.Date.ToLocalTime()}",
                 Detail = $"{x.Latitude} / {x.Longitude}",
-                PrimaryCommand = ReactiveCommand.Create(() =>
+                PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                 {
                     var msg = new StringBuilder()
                         .AppendLine("Lat: " + x.Latitude)
@@ -85,7 +86,7 @@ namespace Samples.Gps
                         .AppendLine("Speed (m/s) " + x.Speed)
                         .ToString();
 
-                    this.Dialogs.Alert(msg);
+                    await this.Dialogs.AlertAsync(msg);
                 })
             });
         }
