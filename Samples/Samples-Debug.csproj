@@ -37,6 +37,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
     </ItemGroup>
@@ -46,6 +47,12 @@
         <EmbeddedResource Include="Resources\fa-regular-400.ttf" />
         <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
         <EmbeddedResource Include="Resources\MaterialIcons-Regular.ttf" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Vpn\MainPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

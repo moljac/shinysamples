@@ -197,6 +197,10 @@
       <Project>{98934688-0a44-41a0-b74e-6c4996b63272}</Project>
       <Name>Shiny.SpeechRecognition</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj">
+      <Project>{7c4df671-043b-446a-85a8-872b36441103}</Project>
+      <Name>Shiny.Vpn</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
       <Project>{82f5e401-c438-46b0-bc7c-733d3e017ad5}</Project>
       <Name>Samples-Debug</Name>
