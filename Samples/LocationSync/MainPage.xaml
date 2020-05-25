@@ -1,15 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Samples.LocationSync.MainPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+             xmlns:locationsync="clr-namespace:Samples.LocationSync"
+             x:DataType="locationsync:MainViewModel"
+             x:Class="Samples.LocationSync.MainPage"
+             Title="Location Sync">
+
+
+
+    <TabbedPage.Children>
+        <ContentPage Title="Sent">
+            <ContentPage.ToolbarItems>
+                <ToolbarItem Text="Clear"
+                             Command="{Binding Clear}" />
+            </ContentPage.ToolbarItems>
+
+            <ContentPage.IconImageSource>
+                <FontImageSource Glyph="&#xf073;"
+                                 FontFamily="FAR"/>
+            </ContentPage.IconImageSource>
+
+            <ContentPage.Content>
+                <RefreshView IsRefreshing="{Binding IsBusy}"
+                             Command="{Binding Load}">
+                    <CollectionView ItemsSource="{Binding Events}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="locationsync:ItemViewModel">
+                                <StackLayout>
+                                    <Label Text="{Binding Type}" />
+                                    <BoxView Style="{StaticResource HR}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </ContentPage.Content>
+        </ContentPage>
+
+        <ContentPage Title="Pending">
+            <ContentPage.IconImageSource>
+                <FontImageSource Glyph="&#xf04c;"
+                                 FontFamily="FAS"/>
+            </ContentPage.IconImageSource>
+
+            <ContentPage.Content>
+                <RefreshView IsRefreshing="{Binding IsBusy}"
+                             Command="{Binding Load}">
+                    <CollectionView ItemsSource="{Binding Events}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="locationsync:ItemViewModel">
+                                <StackLayout>
+                                    <Label Text="{Binding Type}" />
+                                    <BoxView Style="{StaticResource HR}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </ContentPage.Content>
+        </ContentPage>
+
+    </TabbedPage.Children>
+</TabbedPage>

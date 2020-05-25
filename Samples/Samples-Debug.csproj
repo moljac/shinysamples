@@ -48,10 +48,4 @@
         <EmbeddedResource Include="Resources\MaterialIcons-Regular.ttf" />
     </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Update="LocationSync\MainPage.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-    </ItemGroup>
-
 </Project>
