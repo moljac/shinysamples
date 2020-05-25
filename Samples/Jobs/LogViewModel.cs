@@ -36,8 +36,8 @@ namespace Samples.Jobs
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            this.jobManager.JobStarted.Subscribe(_ => this.Load.Execute()).DisposedBy(this.DeactivateWith);
-            this.jobManager.JobFinished.Subscribe(_ => this.Load.Execute()).DisposedBy(this.DeactivateWith);
+            this.jobManager.JobStarted.Subscribe(_ => this.Load.Execute(null)).DisposedBy(this.DeactivateWith);
+            this.jobManager.JobFinished.Subscribe(_ => this.Load.Execute(null)).DisposedBy(this.DeactivateWith);
         }
 
 

@@ -123,7 +123,7 @@ namespace Samples.Geofences
 
         public ICommand RequestAccess { get; }
         public ICommand CreateGeofence { get; }
-        public ReactiveCommand<Unit, Unit> SetCurrentLocation { get; }
+        public ICommand SetCurrentLocation { get; }
         public ICommand AddCnTower { get; }
         public ICommand AddAppleHQ { get; }
 

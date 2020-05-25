@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -43,7 +42,7 @@ namespace Samples.Jobs
                         SecondaryCommand = ReactiveCommand.CreateFromTask(async () =>
                         {
                             await jobManager.Cancel(x.Identifier);
-                            this.LoadJobs.Execute();
+                            this.LoadJobs.Execute(null);
                         })
                     })
                     .ToList();
@@ -62,7 +61,7 @@ namespace Samples.Jobs
                 else
                 {
                     await this.jobManager.RunAll();
-                    dialogs.SnackbarAsync("Job Batch Started");
+                    await dialogs.SnackbarAsync("Job Batch Started");
                 }
             });
 
@@ -75,15 +74,15 @@ namespace Samples.Jobs
                 if (confirm)
                 {
                     await this.jobManager.CancelAll();
-                    this.LoadJobs.Execute();
+                    this.LoadJobs.Execute(null);
                 }
             });
         }
 
 
-        public ReactiveCommand<Unit, Unit> LoadJobs { get; }
-        public ReactiveCommand<Unit, Unit> CancelAllJobs { get; }
-        public ReactiveCommand<Unit, Unit> RunAllJobs { get; }
+        public ICommand LoadJobs { get; }
+        public ICommand CancelAllJobs { get; }
+        public ICommand RunAllJobs { get; }
         public ICommand Create { get; }
         [Reactive] public List<CommandItem> Jobs { get; private set; }
 
@@ -91,13 +90,14 @@ namespace Samples.Jobs
         public override void OnAppearing()
         {
             base.OnAppearing();
-            this.LoadJobs.Execute();
+            this.LoadJobs.Execute(null);
+
             this.jobManager
                 .JobStarted
                 .Subscribe(x =>
                 {
                     this.dialogs.SnackbarAsync($"Job {x.Identifier} Started");
-                    this.LoadJobs.Execute();
+                    this.LoadJobs.Execute(null);
                 })
                 .DisposedBy(this.DeactivateWith);
 
@@ -106,7 +106,7 @@ namespace Samples.Jobs
                 .Subscribe(x =>
                 {
                     this.dialogs.SnackbarAsync($"Job {x.Job?.Identifier} Finished");
-                    this.LoadJobs.Execute();
+                    this.LoadJobs.Execute(null);
                 })
                 .DisposedBy(this.DeactivateWith);
         }

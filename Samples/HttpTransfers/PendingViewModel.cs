@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Windows.Input;
 using Humanizer;
 using Prism.Navigation;
@@ -49,7 +47,7 @@ namespace Samples.HttpTransfers
                                 if (confirm)
                                 {
                                     await this.httpTransfers.Cancel(transfer.Identifier);
-                                    await this.Load.Execute();
+                                    this.Load.Execute(null);
                                 }
                             })
                         };
@@ -62,22 +60,22 @@ namespace Samples.HttpTransfers
             this.CancelAll = ReactiveCommand.CreateFromTask(async () =>
             {
                 await httpTransfers.Cancel();
-                await this.Load.Execute().ToTask();
+                this.Load.Execute(null);
             });
             this.BindBusyCommand(this.Load);
         }
 
 
         public ICommand Create { get; }
-        public ReactiveCommand<Unit, Unit> Load { get; }
-        public ReactiveCommand<Unit, Unit> CancelAll { get; }
+        public ICommand Load { get; }
+        public ICommand CancelAll { get; }
         [Reactive] public IList<HttpTransferViewModel> Transfers { get; private set; }
 
 
-        public override async void OnAppearing()
+        public override void OnAppearing()
         {
             base.OnAppearing();
-            await this.Load.Execute().ToTask();
+            this.Load.Execute(null);
 
             this.httpTransfers
                 .WhenUpdated()

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Prism.Navigation;
+using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
@@ -41,15 +40,15 @@ namespace Samples.Infrastructure
 
         protected IMaterialDialog Dialogs { get; }
         public ObservableList<TItem> Logs { get; }
-        public ReactiveCommand<Unit, Unit> Load { get; }
-        public ReactiveCommand<Unit, Unit> Clear { get; }
+        public ICommand Load { get; }
+        public ICommand Clear { get; }
         public bool HasLogs { [ObservableAsProperty] get; }
 
 
-        public override async void OnAppearing()
+        public override void OnAppearing()
         {
             base.OnAppearing();
-            await this.Load.Execute();
+            this.Load.Execute(null);
         }
 
 
@@ -68,7 +67,7 @@ namespace Samples.Infrastructure
             if (confirm)
             {
                 await this.ClearLogs();
-                await this.Load.Execute();
+                this.Load.Execute(null);
             }
         }
     }
