@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
-
-using Prism.Services.Dialogs;
-
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Models;
@@ -18,9 +16,7 @@ namespace Samples.LocationSync
 {
     public class MainViewModel : ViewModel
     {
-        readonly SampleSqliteConnection conn;
         readonly LocationSyncDelegates syncDelegate;
-        readonly ILocationSyncManager syncManager;
 
 
         public MainViewModel(SampleSqliteConnection conn,
@@ -28,13 +24,17 @@ namespace Samples.LocationSync
                              LocationSyncDelegates syncDelegate,
                              ILocationSyncManager syncManager)
         {
-            this.conn = conn;
             this.syncDelegate = syncDelegate;
-            this.syncManager = syncManager;
 
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
+                var events = await conn.LocationSyncEvents
+                    .OrderByDescending(x => x.DateCreated)
+                    .ToListAsync();
 
+                this.Events = events
+                    .Select(x => new ItemViewModel(x))
+                    .ToList();
             });
             this.BindBusyCommand(this.Load);
 

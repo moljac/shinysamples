@@ -9,6 +9,11 @@ namespace Samples.LocationSync
         readonly LocationSyncEvent location;
         public ItemViewModel(LocationSyncEvent e) => this.location = e;
 
-        public string Type => this.location.GeofenceIdentifier == null ? "GPS" : "Geofence";
+        
+        public string Description => this.location.Description;
+        public string DateCreated => this.location.DateCreated.ToLocalTime().ToShortDateString();
+        public string Details => this.location.DateSync == null
+            ? $"Pending - {this.location.DateLastAttempt.ToShortDateString()} - Retries {this.location.Retries}"
+            : $"Synchronized: {this.location.DateSync.Value.ToLocalTime()}";
     }
 }
