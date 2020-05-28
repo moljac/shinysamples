@@ -3,33 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:push="clr-namespace:Samples.Push" xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:push="clr-namespace:Samples.Push"
              mc:Ignorable="d"
              x:DataType="push:SetupViewModel"
              x:Class="Samples.Push.SetupPage"
              Title="Setup">
 
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="{Binding AccessStatus, StringFormat='Status: {0}'}"
-                    Command="{Binding RequestAccess}" />
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection Title="Registration">
+                    <TextCell Text="Status" 
+                              Detail="{Binding AccessStatus}"
+                              Command="{Binding RequestAccess}" />
+                    <TextCell Text="Un-Register" 
+                              Command="{Binding UnRegister}" />
+                </TableSection>
 
-            <Button Text="UnRegister"
-                    Command="{Binding UnRegister}" />
+                <TableSection Title="Tags">
+                    <SwitchCell Text="Tags Support" 
+                                On="{Binding IsTagsSupported}" 
+                                IsEnabled="False" />
+                    <EntryCell Label="Tag" 
+                               Text="{Binding Tag}"
+                               IsEnabled="{Binding IsTagsSupported}" />
+                    <TextCell Text="Update Tag" 
+                              Command="{Binding UpdateTag}" />
+                </TableSection>
 
-            <Label Text="{Binding RegToken, StringFormat='Registration Token: {0}'}" />
-            <Label Text="{Binding RegDate, StringFormat='Registration Date: {0}'}" />
-            <Label Text="{Binding ExpiryDate, StringFormat='Expiry Date: {0}'}" />
-
-            <StackLayout IsVisible="{Binding IsTagsSupported}">
-                <ui:MaterialTextField Text="{Binding Tag}" 
-                                      Placeholder="Tag"
-                                      ReturnCommand="{Binding UpdateTag}"
-                                      ReturnType="Done" />
-
-                <Button Text="Update Tag"
-                        Command="{Binding UpdateTag}" />
-            </StackLayout>
-        </StackLayout>
+                <TableSection Title="Info">
+                    <TextCell Text="Implementation"
+                              Detail="{Binding Implementation}" />
+                    <TextCell Text="Registration Token" 
+                              Detail="{Binding RegToken}" />
+                    <TextCell Text="Registration Date" 
+                              Detail="{Binding RegDate}" />
+                    <TextCell Text="ExpiryDate" 
+                              Detail="{Binding ExpiryDate}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
     </ContentPage.Content>
 </ContentPage>

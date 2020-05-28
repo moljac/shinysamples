@@ -59,6 +59,7 @@ namespace Samples.Push
         public ICommand UpdateTag { get; }
 
         public bool IsTagsSupported => this.pushManager?.IsTagsSupport() ?? false;
+        public string Implementation => this.pushManager?.GetType().FullName ?? "None";
         [Reactive] public string Tag { get; set; }
         [Reactive] public string RegToken { get; private set; }
         [Reactive] public DateTime? RegDate { get; private set; }
