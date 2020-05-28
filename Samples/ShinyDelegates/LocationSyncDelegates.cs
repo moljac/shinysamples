@@ -17,8 +17,28 @@ namespace Samples.ShinyDelegates
 
 
         [Reactive] public bool CanProcess { get; set; }
-        public Task Process(GpsEvent gpsEvent) => this.DoProcess(gpsEvent.Id, $"GPS - Lat: {gpsEvent.Latitude} Lng: {gpsEvent.Longitude}");
-        public Task Process(GeofenceEvent geofence) => this.DoProcess(geofence.Id, $"Geofence: {geofence.Identifier} (Entered: {geofence.Entered})");
+        public async Task Process(GpsEvent[] events) 
+        {
+            foreach (var gpsEvent in events)
+            { 
+                await this.DoProcess(
+                    gpsEvent.Id, 
+                    $"GPS - Lat: {gpsEvent.Latitude} Lng: {gpsEvent.Longitude}"
+                );
+            }
+        }
+
+
+        public async Task Process(GeofenceEvent[] events) 
+        {
+            foreach (var geofence in events)
+            { 
+                await this.DoProcess(
+                    geofence.Id, 
+                    $"Geofence: {geofence.Identifier} (Entered: {geofence.Entered})"
+                );
+            }
+        }
 
 
         async Task DoProcess(string identifier, string desc)
