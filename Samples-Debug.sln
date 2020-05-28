@@ -72,6 +72,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Locations.Sync", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Vpn", "..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj", "{7C4DF671-043B-446A-85A8-872B36441103}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{40658C09-64BA-4F0E-AE1D-284B85503717}"
+	ProjectSection(SolutionItems) = preProject
+		..\shiny\.github\ISSUE_TEMPLATE\---support-request.md = ..\shiny\.github\ISSUE_TEMPLATE\---support-request.md
+		..\shiny\.github\ISSUE_TEMPLATE\--bug.md = ..\shiny\.github\ISSUE_TEMPLATE\--bug.md
+		..\shiny\.github\ISSUE_TEMPLATE\--feature-request.md = ..\shiny\.github\ISSUE_TEMPLATE\--feature-request.md
+		..\shiny\.github\ISSUE_TEMPLATE\--thank-you.md = ..\shiny\.github\ISSUE_TEMPLATE\--thank-you.md
+		..\shiny\.github\CODE_OF_CONDUCT.md = ..\shiny\.github\CODE_OF_CONDUCT.md
+		..\shiny\.github\config.yml = ..\shiny\.github\config.yml
+		..\shiny\.dependabot\config.yml = ..\shiny\.dependabot\config.yml
+		..\shiny\.github\CONTRIBUTING.md = ..\shiny\.github\CONTRIBUTING.md
+		..\shiny\.github\FUNDING.yml = ..\shiny\.github\FUNDING.yml
+		..\shiny\.github\issue-close-app.yml = ..\shiny\.github\issue-close-app.yml
+		..\shiny\.github\ISSUE_TEMPLATE.md = ..\shiny\.github\ISSUE_TEMPLATE.md
+		..\shiny\.github\lock.yml = ..\shiny\.github\lock.yml
+		..\shiny\.github\noresponse.yml = ..\shiny\.github\noresponse.yml
+		..\shiny\.github\PULL_REQUEST_TEMPLATE.md = ..\shiny\.github\PULL_REQUEST_TEMPLATE.md
+		..\shiny\.github\stale.yml = ..\shiny\.github\stale.yml
+		..\shiny\.github\support.yml = ..\shiny\.github\support.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
