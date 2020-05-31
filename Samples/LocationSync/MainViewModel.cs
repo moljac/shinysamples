@@ -25,7 +25,7 @@ namespace Samples.LocationSync
                              ILocationSyncManager syncManager)
         {
             this.syncDelegate = syncDelegate;
-
+            
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
                 var events = await conn.LocationSyncEvents
@@ -41,8 +41,7 @@ namespace Samples.LocationSync
             this.Clear = ReactiveCommand.CreateFromTask(async () =>
             {
                 await conn.DeleteAllAsync<LocationSyncEvent>();
-                await syncManager.ClearGeofenceEvents();
-                await syncManager.ClearGpsEvents();
+                await syncManager.ClearEvents();
                 await dialog.SnackbarAsync("Location Sync Events Cleared");
             });
 
@@ -66,6 +65,7 @@ namespace Samples.LocationSync
             base.OnAppearing();
             this.Load.Execute(null);
 
+            this.CanProcessSyncData = this.syncDelegate.CanProcess;
             this.WhenAnyValue(x => x.CanProcessSyncData)
                 .Skip(1)
                 .Subscribe(x => this.syncDelegate.CanProcess = x)

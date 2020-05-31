@@ -18,20 +18,33 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <RefreshView IsRefreshing="{Binding IsBusy}"
-                     Command="{Binding Load}">
-            <CollectionView ItemsSource="{Binding Events}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="locationsync:ItemViewModel">
-                        <StackLayout>
-                            <Label Text="{Binding Description}" />
-                            <Label Text="{Binding Details}" />
-                            <Label Text="{Binding DateCreated, StringFormat='Created: {0}'}" />
-                            <BoxView Style="{StaticResource HR}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="0">
+                <Label Text="Process Sync Events" />
+                <CheckBox IsChecked="{Binding CanProcessSyncData}" />
+            </StackLayout>
+
+            <RefreshView IsRefreshing="{Binding IsBusy}"
+                         Command="{Binding Load}"
+                         Grid.Row="1">
+                <CollectionView ItemsSource="{Binding Events}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="locationsync:ItemViewModel">
+                            <StackLayout>
+                                <Label Text="{Binding Description}" />
+                                <Label Text="{Binding Details}" />
+                                <Label Text="{Binding DateCreated, StringFormat='Created: {0}'}" />
+                                <BoxView Style="{StaticResource HR}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
