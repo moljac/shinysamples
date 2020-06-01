@@ -12,6 +12,16 @@ using Samples.ShinySetup;
 using Shiny.Infrastructure;
 using Shiny.Notifications;
 using XF.Material.Forms.UI.Dialogs;
+using Samples.Infrastructure;
+using Samples.Jobs;
+using Samples.AppState;
+using Samples.HttpTransfers;
+using Samples.Beacons;
+using Samples.BluetoothLE;
+using Samples.Geofences;
+using Samples.Gps;
+using Samples.Notifications;
+using Samples.Push;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -27,8 +37,8 @@ using XF.Material.Forms.UI.Dialogs;
 [assembly: ShinyNotifications(typeof(NotificationDelegate), true)]
 [assembly: ShinyBeacons(typeof(BeaconDelegate))]
 [assembly: ShinyBleCentral(typeof(BleCentralDelegate))]
-[assembly: ShinyGps(typeof(LocationDelegates))]
-[assembly: ShinyGeofences(typeof(LocationDelegates))]
+[assembly: ShinyGps(typeof(GpsDelegate))]
+[assembly: ShinyGeofences(typeof(GeofenceDelegate))]
 [assembly: ShinyMotionActivity]
 [assembly: ShinySensors]
 [assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
@@ -90,10 +100,10 @@ namespace Samples.ShinySetup
             services.UseAllSensors();
             services.UseNfc();
 
-            services.UseGeofencing<LocationDelegates>();
+            services.UseGeofencing<GeofenceDelegate>();
             services.UseGeofencingSync<LocationSyncDelegates>();
             //services.UseGpsDirectGeofencing<LocationDelegates>();
-            services.UseGps<LocationDelegates>();
+            services.UseGps<GpsDelegate>();
             services.UseGpsSync<LocationSyncDelegates>();
 
             //services.UseNotifications(true);

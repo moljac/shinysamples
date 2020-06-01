@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+
+using Samples.Infrastructure;
+
 using Shiny;
 using Shiny.Jobs;
 
 
-namespace Samples.ShinyDelegates
+namespace Samples.Jobs
 {
     public class SampleJob : IJob
     {

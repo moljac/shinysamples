@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+
+using Samples.Infrastructure;
 using Samples.Models;
 using Shiny.Beacons;
 
 
-namespace Samples.ShinyDelegates
+namespace Samples.Beacons
 {
     public class BeaconDelegate : IBeaconDelegate
     {

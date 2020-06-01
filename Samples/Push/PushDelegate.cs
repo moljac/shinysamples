@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Shiny.Push;
 using Samples.Models;
+using Samples.Infrastructure;
 
 
-namespace Samples.ShinyDelegates
+namespace Samples.Push
 {
     public class PushDelegate : IPushDelegate
     {

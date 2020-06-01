@@ -3,7 +3,8 @@ using Samples.Models;
 using Shiny;
 using Shiny.Notifications;
 
-namespace Samples.ShinyDelegates
+
+namespace Samples.AppState
 {
     public class AppStateDelegate : IAppStateDelegate
     {

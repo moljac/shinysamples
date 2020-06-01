@@ -1,11 +1,13 @@
-﻿using Samples.Models;
+﻿using Samples.Infrastructure;
+using Samples.Models;
 using Shiny.Net.Http;
 using SQLite;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Samples.ShinyDelegates
+
+namespace Samples.HttpTransfers
 {
     public class HttpTransferDelegate : IHttpTransferDelegate
     {

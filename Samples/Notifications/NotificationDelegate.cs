@@ -5,20 +5,18 @@ using Shiny;
 using Shiny.Notifications;
 
 
-namespace Samples.ShinyDelegates
+namespace Samples.Notifications
 {
     public class NotificationDelegate : INotificationDelegate
     {
         readonly SampleSqliteConnection conn;
         readonly IMessageBus messageBus;
-        readonly INotificationManager notifications;
 
 
-        public NotificationDelegate(SampleSqliteConnection conn, IMessageBus messageBus, INotificationManager notifications)
+        public NotificationDelegate(SampleSqliteConnection conn, IMessageBus messageBus)
         {
             this.conn = conn;
             this.messageBus = messageBus;
-            this.notifications = notifications;
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -19,7 +20,7 @@ namespace Samples.ShinyDelegates
 
 
         [Reactive] public bool CanProcess { get; set; }
-        public async Task Process(IEnumerable<GpsEvent> events) 
+        public async Task Process(IEnumerable<GpsEvent> events, CancellationToken cancelToken) 
         {
             var batchSize = events.Count();
 
@@ -33,7 +34,7 @@ namespace Samples.ShinyDelegates
         }
 
 
-        public async Task Process(IEnumerable<GeofenceEvent> events) 
+        public async Task Process(IEnumerable<GeofenceEvent> events, CancellationToken cancelToken) 
         {
             var batchSize = events.Count();
 

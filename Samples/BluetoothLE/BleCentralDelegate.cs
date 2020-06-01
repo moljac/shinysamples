@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+
+using Samples.Infrastructure;
 using Samples.Models;
 using Shiny;
 using Shiny.BluetoothLE.Central;
 
 
-namespace Samples.ShinyDelegates
+namespace Samples.BluetoothLE
 {
     public class BleCentralDelegate : IBleCentralDelegate
     {

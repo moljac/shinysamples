@@ -6,7 +6,7 @@ using Shiny.Notifications;
 using Samples.Settings;
 
 
-namespace Samples.ShinyDelegates
+namespace Samples.Infrastructure
 {
     public class CoreDelegateServices
     {

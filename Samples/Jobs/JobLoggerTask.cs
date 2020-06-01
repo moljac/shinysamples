@@ -5,7 +5,7 @@ using Shiny;
 using Shiny.Infrastructure;
 
 
-namespace Samples.ShinySetup
+namespace Samples.Jobs
 {
     public class JobLoggerTask : IShinyStartupTask
     {
