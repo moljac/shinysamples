@@ -47,6 +47,8 @@ using Samples.Push;
 //[assembly: ShinyPushAzureNotificationHub(typeof(PushDelegate), Constants.AnhListenerConnectionString, Constants.AnhHubName)]
 [assembly: ShinyPushFirebase(typeof(PushDelegate))]
 [assembly: ShinyNfc]
+[assembly: ShinyGeofenceSync(typeof(LocationSyncDelegates))]
+[assembly: ShinyGpsSync(typeof(LocationSyncDelegates))]
 #endif
 #endif
 
