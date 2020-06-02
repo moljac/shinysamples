@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 using ReactiveUI;
 using Samples.Infrastructure;
 using Shiny.Logging;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Logging
 {
     public class EventsViewModel : AbstractLogViewModel<CommandItem>
     {
-        public EventsViewModel(IMaterialDialog dialogs) : base(dialogs)
+        public EventsViewModel(IDialogs dialogs) : base(dialogs)
         {
             Log
                 .WhenEventLogged()
-                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(x => new CommandItem
                 {
                     Text = $"{x.EventName} ({DateTime.Now:hh:mm:ss tt})",
@@ -29,10 +27,10 @@ namespace Samples.Logging
                         foreach (var p in x.Parameters)
                             s += $"{Environment.NewLine}{p.Key}: {p.Value}";
 
-                        await this.Dialogs.AlertAsync(s);
+                        await this.Dialogs.Alert(s);
                     })
                 })
-                .Subscribe(this.InsertItem)
+                .SubOnMainThread(this.InsertItem)
                 .DisposeWith(this.DestroyWith);
         }
 

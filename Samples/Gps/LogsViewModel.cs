@@ -11,7 +11,6 @@ using Shiny.Locations;
 using Samples.Models;
 using Samples.Infrastructure;
 using Prism.Navigation;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Gps
@@ -24,12 +23,11 @@ namespace Samples.Gps
 
         public LogsViewModel(SampleSqliteConnection conn,
                              IGpsManager manager,
-                             IMaterialDialog dialogs) : base(dialogs)
+                             IDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
             this.manager = manager;
         }
-
 
 
         public override void Initialize(INavigationParameters parameters)
@@ -39,7 +37,7 @@ namespace Samples.Gps
                 .WhenReading()
                 .Select(x => new CommandItem
                 {
-                    Text = $"{x.Timestamp}",
+                    Text = $"{x.Timestamp.ToLocalTime()}",
                     Detail = $"{x.Position.Latitude} / {x.Position.Longitude}",
                     PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                     {
@@ -53,7 +51,7 @@ namespace Samples.Gps
                             .AppendLine("Speed (m/s) " + x.Speed)
                             .ToString();
 
-                        await this.Dialogs.AlertAsync(msg);
+                        await this.Dialogs.Alert(msg);
                     })
                 })
                 .SubOnMainThread(this.InsertItem)
@@ -86,7 +84,7 @@ namespace Samples.Gps
                         .AppendLine("Speed (m/s) " + x.Speed)
                         .ToString();
 
-                    await this.Dialogs.AlertAsync(msg);
+                    await this.Dialogs.Alert(msg);
                 })
             });
         }

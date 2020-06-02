@@ -5,9 +5,10 @@ using System.Windows.Input;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny.Beacons;
 using Shiny.Logging;
-using XF.Material.Forms.UI.Dialogs;
+
 
 
 namespace Samples.Beacons
@@ -15,11 +16,11 @@ namespace Samples.Beacons
     public class MonitoringViewModel : ViewModel
     {
         readonly IBeaconManager beaconManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
         public MonitoringViewModel(INavigationService navigator,
-                                   IMaterialDialog dialogs,
+                                   IDialogs dialogs,
                                    IBeaconManager beaconManager)
         {
             this.dialogs = dialogs;
@@ -50,7 +51,7 @@ namespace Samples.Beacons
 
             this.StopAllMonitoring = ReactiveCommand.CreateFromTask(async () =>
             {
-                var result = await dialogs.ConfirmAsync("Are you sure you wish to stop all monitoring") ?? false;
+                var result = await dialogs.Confirm("Are you sure you wish to stop all monitoring");
                 if (result)
                 {
                     await this.beaconManager.StopAllMonitoring();
@@ -88,7 +89,7 @@ namespace Samples.Beacons
             catch (Exception ex)
             {
                 Log.Write(ex);
-                await this.dialogs.AlertAsync(ex.ToString());
+                await this.dialogs.Alert(ex.ToString());
             }
         }
     }

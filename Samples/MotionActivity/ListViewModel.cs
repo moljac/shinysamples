@@ -7,8 +7,9 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny.Locations;
-using XF.Material.Forms.UI.Dialogs;
+
 
 namespace Samples.MotionActivity
 {
@@ -17,7 +18,7 @@ namespace Samples.MotionActivity
         readonly IMotionActivityManager? activityManager;
 
 
-        public ListViewModel(IMaterialDialog dialogs, IMotionActivityManager? activityManager = null)
+        public ListViewModel(IDialogs dialogs, IMotionActivityManager? activityManager = null)
         {
             this.activityManager = activityManager;
 
@@ -25,14 +26,14 @@ namespace Samples.MotionActivity
             {
                 if (this.activityManager == null)
                 {
-                    await dialogs.AlertAsync("MotionActivity is not supported on this platform");
+                    await dialogs.Alert("MotionActivity is not supported on this platform");
                     return;
                 }
 
                 var result = await this.activityManager.RequestPermission();
                 if (result != Shiny.AccessState.Available)
                 {
-                    await dialogs.AlertAsync("Motion Activity is not available - " + result);
+                    await dialogs.Alert("Motion Activity is not available - " + result);
                     return;
                 }
 

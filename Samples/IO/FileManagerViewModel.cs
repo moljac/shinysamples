@@ -9,9 +9,9 @@ using Humanizer;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.IO;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.IO
@@ -42,10 +42,10 @@ namespace Samples.IO
     public class FileManagerViewModel : ViewModel
     {
         readonly IFileSystem fileSystem;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
-        public FileManagerViewModel(IMaterialDialog dialogs, IFileSystem fileSystem)
+        public FileManagerViewModel(IDialogs dialogs, IFileSystem fileSystem)
         {
             this.dialogs = dialogs;
             this.fileSystem = fileSystem;
@@ -63,7 +63,7 @@ namespace Samples.IO
                     cfg.Add("View", async () =>
                     {
                         var text = File.ReadAllText(entry.Entry.FullName);
-                        await this.dialogs.AlertAsync(text, entry.Entry.Name);
+                        await this.dialogs.Alert(text, entry.Entry.Name);
                     });
                     //cfg.Add("Copy", () =>
                     //{
@@ -87,7 +87,7 @@ namespace Samples.IO
                     //});
                 }
                 //cfg.Add("Delete", () => Confirm("Delete " + entry.Name, entry.Entry.Delete));
-                await dialogs.ActionSheet(cfg, true);
+                await dialogs.ActionSheet("Actions", cfg, true);
             });
 
             this.showBack = this.WhenAnyValue(x => x.CurrentPath)
@@ -120,7 +120,7 @@ namespace Samples.IO
 
         async void Confirm(string message, Action action)
         {
-            var result = await this.dialogs.ConfirmAsync(message, null, "Yes", "No") ?? false;
+            var result = await this.dialogs.Confirm(message);
             if (result)
                 action();
         }

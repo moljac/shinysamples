@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ReactiveUI;
@@ -6,24 +7,22 @@ using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
 using Shiny;
 using Shiny.Jobs;
-using Samples.ShinyDelegates;
 using Shiny.Notifications;
-using XF.Material.Forms.UI.Dialogs;
-using System.Collections.Generic;
-using System.Linq;
+using Samples.Infrastructure;
+
 
 namespace Samples.Jobs
 {
     public class CreateViewModel : ViewModel
     {
         readonly IJobManager jobManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
         public CreateViewModel(IJobManager jobManager,
                                INavigationService navigator,
                                INotificationManager notifications,
-                               IMaterialDialog dialogs)
+                               IDialogs dialogs)
         {
             this.jobManager = jobManager;
             this.dialogs = dialogs;
@@ -83,8 +82,7 @@ namespace Samples.Jobs
                     }
                 };
 
-                var task = await this.dialogs.SelectChoiceAsync("Select", cfg.Keys.ToList());
-                cfg.Values.ElementAt(task).Invoke();
+                await this.dialogs.ActionSheet("Select", cfg);
             });
         }
 

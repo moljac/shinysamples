@@ -2,8 +2,8 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny.Locations;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.MotionActivity
@@ -11,10 +11,10 @@ namespace Samples.MotionActivity
     public class OtherExtensionsViewModel : ViewModel
     {
         readonly IMotionActivityManager? activityManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
-        public OtherExtensionsViewModel(IMaterialDialog dialogs, IMotionActivityManager? activityManager = null)
+        public OtherExtensionsViewModel(IDialogs dialogs, IMotionActivityManager? activityManager = null)
         {
             this.dialogs = dialogs;
             this.activityManager = activityManager;
@@ -50,7 +50,7 @@ namespace Samples.MotionActivity
                     }
                     catch (Exception ex)
                     {
-                        await this.dialogs.AlertAsync(ex.ToString());
+                        await this.dialogs.Alert(ex.ToString());
                     }
                 })
                 .DisposeWith(this.DeactivateWith);

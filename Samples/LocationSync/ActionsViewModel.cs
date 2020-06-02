@@ -4,10 +4,10 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Samples.Models;
 using Samples.ShinyDelegates;
 using Shiny.Locations.Sync;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.LocationSync
@@ -17,13 +17,13 @@ namespace Samples.LocationSync
         readonly SampleSqliteConnection conn;
         readonly LocationSyncDelegates syncDelegate;
         readonly ILocationSyncManager syncManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
         public ActionsViewModel(SampleSqliteConnection conn, 
                                 LocationSyncDelegates syncDelegate, 
                                 ILocationSyncManager syncManager,
-                                IMaterialDialog dialogs)
+                                IDialogs dialogs)
         {
             this.conn = conn;
             this.syncDelegate = syncDelegate;
@@ -58,26 +58,24 @@ namespace Samples.LocationSync
 
         ICommand ProcessCommand(LocationSyncType syncType) => ReactiveCommand.CreateFromTask(async () =>
         {
-            var result = await this.dialogs.ConfirmAsync("Run the sync?") ?? false;
+            var result = await this.dialogs.Confirm("Run the sync?");
             if (!result)
                 return;
 
-            using (await this.dialogs.LoadingDialogAsync("Running Sync Processes"))
-                await syncManager.ForceRun(syncType);
-
-            await this.dialogs.SnackbarAsync("Sync Process Complete");
+            await this.dialogs.LoadingTask(() => this.syncManager.ForceRun(syncType), "Running Sync Processes");
+            await this.dialogs.Snackbar("Sync Process Complete");
         });
 
 
         ICommand ClearCommand(LocationSyncType syncType) => ReactiveCommand.CreateFromTask(async () =>
         {
-            var result = await this.dialogs.ConfirmAsync("Are you sure you want to delete these events?") ?? false;
+            var result = await this.dialogs.Confirm("Are you sure you want to delete these events?");
             if (!result)
                 return;
 
             await conn.DeleteAllAsync<LocationSyncEvent>();
             await syncManager.ClearEvents(syncType);
-            await this.dialogs.SnackbarAsync("Events Cleared");
+            await this.dialogs.Snackbar("Events Cleared");
         });
     }
 }

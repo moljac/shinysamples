@@ -61,7 +61,7 @@ namespace Samples.ShinyDelegates
 
         async Task DoProcess(string identifier, string desc)
         {
-            var e = await this.conn.GetAsync<LocationSyncEvent>(identifier);
+            var e = await this.conn.FindAsync<LocationSyncEvent>(identifier);
             if (e == null)
             {
                 e = new LocationSyncEvent

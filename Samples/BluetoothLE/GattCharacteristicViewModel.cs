@@ -9,18 +9,18 @@ using System.Collections.Generic;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.BluetoothLE.Central;
-using XF.Material.Forms.UI.Dialogs;
+using Samples.Infrastructure;
 
 
 namespace Samples.BluetoothLE
 {
     public class GattCharacteristicViewModel : ViewModel
     {
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
         IDisposable watcher;
 
 
-        public GattCharacteristicViewModel(IGattCharacteristic characteristic, IMaterialDialog dialogs)
+        public GattCharacteristicViewModel(IGattCharacteristic characteristic, IDialogs dialogs)
         {
             this.Characteristic = characteristic;
             this.dialogs = dialogs;
@@ -61,10 +61,7 @@ namespace Samples.BluetoothLE
                 cfg.Add(txt, this.ToggleNotify);
             }
             if (cfg.Any())
-            {
-                var choice = await this.dialogs.SelectChoiceAsync($"{this.Description} - {this.Uuid}", cfg.Keys.ToList());
-                cfg.Values.ElementAt(choice).Invoke();
-            }
+                await this.dialogs.ActionSheet($"{this.Description} - {this.Uuid}", cfg);
         }
 
 
@@ -83,14 +80,14 @@ namespace Samples.BluetoothLE
                     ex =>
                     {
                         //dlg.Dispose();
-                        this.dialogs.SnackbarAsync("Failed writing blob - " + ex);
+                        this.dialogs.Snackbar("Failed writing blob - " + ex);
                         sw.Stop();
                     },
                     () =>
                     {
                         //dlg.Dispose();
                         sw.Stop();
-                        this.dialogs.SnackbarAsync($"BLOB write took " + sw.Elapsed);
+                        this.dialogs.Snackbar($"BLOB write took " + sw.Elapsed);
                     }
                 );
 
@@ -102,8 +99,8 @@ namespace Samples.BluetoothLE
         {
             try
             {
-                var utf8 = await this.dialogs.ConfirmAsync("Confirm", "Write value from UTF8 or HEX?", "UTF8", "HEX");
-                var result = await this.dialogs.InputAsync(this.Description, "Please enter a write value");
+                var utf8 = await this.dialogs.Confirm("Confirm", "Write value from UTF8 or HEX?", "UTF8", "HEX");
+                var result = await this.dialogs.Input(this.Description, "Please enter a write value");
 
                 if (!result.IsEmpty())
                 {
@@ -113,14 +110,14 @@ namespace Samples.BluetoothLE
                         .Write(bytes, withResponse)
                         .Timeout(TimeSpan.FromSeconds(2))
                         .Subscribe(
-                            x => this.dialogs.SnackbarAsync(msg),
-                            ex => this.dialogs.AlertAsync(ex.ToString())
+                            x => this.dialogs.Snackbar(msg),
+                            ex => this.dialogs.Alert(ex.ToString())
                         );
                 }
             }
             catch (Exception ex)
             {
-                await this.dialogs.AlertAsync(ex.ToString(), "ERROR");
+                await this.dialogs.Alert(ex.ToString(), "ERROR");
             }
         }
 
@@ -135,18 +132,18 @@ namespace Samples.BluetoothLE
             else
             {
                 this.IsNotifying = true;
-                var utf8 = await this.dialogs.ConfirmAsync(
+                var utf8 = await this.dialogs.Confirm(
                     "Display Value as UTF8 or HEX?",
                     "Confirm",
                     "UTF8",
                     "HEX"
-                ) ?? false;
+                );
                 this.watcher = this.Characteristic
                     .Notify()
                     .Where(x => x.Type == CharacteristicResultType.Notification)
                     .SubOnMainThread(
                         x => this.SetReadValue(x, utf8),
-                        ex => this.dialogs.AlertAsync(ex.ToString())
+                        ex => this.dialogs.Alert(ex.ToString())
                     );
             }
         }
@@ -154,18 +151,18 @@ namespace Samples.BluetoothLE
 
         async void DoRead()
         {
-            var utf8 = await this.dialogs.ConfirmAsync(
+            var utf8 = await this.dialogs.Confirm(
                 "Confirm",
                 "Display Value as UTF8 or HEX?",
                 "UTF8",
                 "HEX"
-            ) ?? false;
+            );
             this.Characteristic
                 .Read()
                 .Timeout(TimeSpan.FromSeconds(2))
                 .Subscribe(
                     x => this.SetReadValue(x, utf8),
-                    ex => this.dialogs.AlertAsync(ex.ToString())
+                    ex => this.dialogs.Alert(ex.ToString())
                 );
         }
 

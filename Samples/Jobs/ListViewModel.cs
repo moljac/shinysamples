@@ -9,7 +9,7 @@ using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
 using Shiny.Jobs;
 using Shiny;
-using XF.Material.Forms.UI.Dialogs;
+using Samples.Infrastructure;
 
 
 namespace Samples.Jobs
@@ -17,12 +17,12 @@ namespace Samples.Jobs
     public class ListViewModel : ViewModel
     {
         readonly IJobManager jobManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
         public ListViewModel(IJobManager jobManager,
                              INavigationService navigator,
-                             IMaterialDialog dialogs)
+                             IDialogs dialogs)
         {
             this.jobManager = jobManager;
             this.dialogs = dialogs;
@@ -56,12 +56,12 @@ namespace Samples.Jobs
 
                 if (this.jobManager.IsRunning)
                 {
-                    await dialogs.AlertAsync("Job Manager is already running");
+                    await dialogs.Alert("Job Manager is already running");
                 }
                 else
                 {
                     await this.jobManager.RunAll();
-                    await dialogs.SnackbarAsync("Job Batch Started");
+                    await dialogs.Snackbar("Job Batch Started");
                 }
             });
 
@@ -70,7 +70,7 @@ namespace Samples.Jobs
                 if (!await this.AssertJobs())
                     return;
 
-                var confirm = await dialogs.ConfirmAsync("Are you sure you wish to cancel all jobs?") ?? false;
+                var confirm = await dialogs.Confirm("Are you sure you wish to cancel all jobs?");
                 if (confirm)
                 {
                     await this.jobManager.CancelAll();
@@ -96,7 +96,7 @@ namespace Samples.Jobs
                 .JobStarted
                 .Subscribe(x =>
                 {
-                    this.dialogs.SnackbarAsync($"Job {x.Identifier} Started");
+                    this.dialogs.Snackbar($"Job {x.Identifier} Started");
                     this.LoadJobs.Execute(null);
                 })
                 .DisposedBy(this.DeactivateWith);
@@ -105,7 +105,7 @@ namespace Samples.Jobs
                 .JobFinished
                 .Subscribe(x =>
                 {
-                    this.dialogs.SnackbarAsync($"Job {x.Job?.Identifier} Finished");
+                    this.dialogs.Snackbar($"Job {x.Job?.Identifier} Finished");
                     this.LoadJobs.Execute(null);
                 })
                 .DisposedBy(this.DeactivateWith);
@@ -117,7 +117,7 @@ namespace Samples.Jobs
             var jobs = await this.jobManager.GetJobs();
             if (!jobs.Any())
             {
-                await this.dialogs.AlertAsync("There are no jobs");
+                await this.dialogs.Alert("There are no jobs");
                 return false;
             }
 

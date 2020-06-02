@@ -2,7 +2,6 @@
 using Samples.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.LocationSync
@@ -10,7 +9,7 @@ namespace Samples.LocationSync
     public class AttemptsViewModel : AbstractLogViewModel<SyncAttempt>
     {
         readonly SampleSqliteConnection conn;
-        public AttemptsViewModel(SampleSqliteConnection conn, IMaterialDialog dialogs) : base(dialogs) => this.conn = conn;
+        public AttemptsViewModel(SampleSqliteConnection conn, IDialogs dialogs) : base(dialogs) => this.conn = conn;
 
         
 

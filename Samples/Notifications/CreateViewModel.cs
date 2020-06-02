@@ -8,7 +8,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
-using XF.Material.Forms.UI.Dialogs;
+using Samples.Infrastructure;
 
 
 namespace Samples.Notifications
@@ -18,7 +18,7 @@ namespace Samples.Notifications
         readonly INotificationManager notificationManager;
 
 
-        public CreateViewModel(INotificationManager notificationManager, IMaterialDialog dialogs)
+        public CreateViewModel(INotificationManager notificationManager, IDialogs dialogs)
         {
             this.notificationManager = notificationManager;
 
@@ -53,7 +53,7 @@ namespace Samples.Notifications
                         this.NotificationMessage,
                         this.ScheduledTime
                     );
-                    await dialogs.AlertAsync("Notification Sent Successfully");
+                    await dialogs.Alert("Notification Sent Successfully");
                 },
                 this.WhenAny(
                     x => x.NotificationTitle,
@@ -68,7 +68,7 @@ namespace Samples.Notifications
             this.PermissionCheck = ReactiveCommand.CreateFromTask(async () =>
             {
                 var result = await notificationManager.RequestAccess();
-                await dialogs.SnackbarAsync("Permission Check Result: " + result);
+                await dialogs.Snackbar("Permission Check Result: " + result);
             });
         }
 

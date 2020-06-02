@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.HttpTransfers
@@ -13,10 +12,8 @@ namespace Samples.HttpTransfers
         readonly SampleSqliteConnection conn;
 
 
-        public LogViewModel(IMaterialDialog dialogs, SampleSqliteConnection conn) : base(dialogs)
-        {
-            this.conn = conn;
-        }
+        public LogViewModel(IDialogs dialogs, SampleSqliteConnection conn) : base(dialogs)
+            => this.conn = conn;
 
 
         protected override Task ClearLogs() => this.conn.DeleteAllAsync<HttpEvent>();

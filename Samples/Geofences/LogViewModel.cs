@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Geofences
@@ -12,10 +11,8 @@ namespace Samples.Geofences
     public class LogViewModel : AbstractLogViewModel<CommandItem>
     {
         readonly SampleSqliteConnection conn;
-        public LogViewModel(SampleSqliteConnection conn, IMaterialDialog dialogs) : base(dialogs)
-        {
-            this.conn = conn;
-        }
+        public LogViewModel(SampleSqliteConnection conn, IDialogs dialogs) : base(dialogs)
+            => this.conn = conn;
 
 
         protected override Task ClearLogs() => this.conn.DeleteAllAsync<GeofenceEvent>();

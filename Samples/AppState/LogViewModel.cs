@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
-using XF.Material.Forms.UI.Dialogs;
+
 
 namespace Samples.AppState
 {
@@ -13,7 +13,7 @@ namespace Samples.AppState
         readonly SampleSqliteConnection conn;
 
 
-        public LogViewModel(SampleSqliteConnection conn, IMaterialDialog dialogs) : base(dialogs)
+        public LogViewModel(SampleSqliteConnection conn, IDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
         }

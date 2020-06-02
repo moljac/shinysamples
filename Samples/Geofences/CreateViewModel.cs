@@ -8,7 +8,7 @@ using ReactiveUI.Fody.Helpers;
 using Prism.Navigation;
 using Shiny;
 using Shiny.Locations;
-using XF.Material.Forms.UI.Dialogs;
+using Samples.Infrastructure;
 
 
 namespace Samples.Geofences
@@ -19,13 +19,13 @@ namespace Samples.Geofences
         readonly IGeofenceManager geofenceManager;
         readonly IGpsManager gpsManager;
         readonly INavigationService navigator;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
         public CreateViewModel(INavigationService navigator,
                                IGeofenceManager geofenceManager,
                                IGpsManager gpsManager,
-                               IMaterialDialog dialogs)
+                               IDialogs dialogs)
         {
             this.navigator = navigator;
             this.geofenceManager = geofenceManager;
@@ -141,11 +141,7 @@ namespace Samples.Geofences
         async Task AddGeofence(string id, double lat, double lng, double distance)
         {
             var access = await this.dialogs.RequestAccess(this.geofenceManager.RequestAccess);
-            if (!access)
-            {
-                await this.dialogs.AlertAsync("Invalid access " + access);
-            }
-            else
+            if (access)
             {
                 await this.geofenceManager.StartMonitoring(new GeofenceRegion(
                     id,

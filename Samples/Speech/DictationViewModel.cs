@@ -2,16 +2,16 @@
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.SpeechRecognition;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Speech
 {
     public class DictationViewModel : ViewModel
     {
-        public DictationViewModel(ISpeechRecognizer speech, IMaterialDialog dialogs)
+        public DictationViewModel(ISpeechRecognizer speech, IDialogs dialogs)
         {
             speech
                 .WhenListeningStatusChanged()
@@ -32,7 +32,7 @@ namespace Samples.Speech
                             .ContinuousDictation()
                             .SubOnMainThread(
                                 x => this.Text += " " + x,
-                                ex => dialogs.AlertAsync(ex.ToString())
+                                ex => dialogs.Alert(ex.ToString())
                             )
                             .DisposedBy(this.DeactivateWith);
                     }
@@ -42,7 +42,7 @@ namespace Samples.Speech
                             .ListenUntilPause()
                             .SubOnMainThread(
                                 x => this.Text = x,
-                                ex => dialogs.AlertAsync(ex.ToString())
+                                ex => dialogs.Alert(ex.ToString())
                             )
                             .DisposedBy(this.DeactivateWith);
                     }

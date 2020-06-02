@@ -11,7 +11,6 @@ using Shiny.Infrastructure;
 using Shiny.Integrations.Sqlite;
 using Shiny.Logging;
 using Shiny.Models;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Logging
@@ -24,14 +23,13 @@ namespace Samples.Logging
 
         public ErrorLogViewModel(ShinySqliteConnection conn,
                                  ISerializer serializer,
-                                 IMaterialDialog dialogs) : base(dialogs)
+                                 IDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
             this.serializer = serializer;
 
             Log
                 .WhenExceptionLogged()
-                .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(x => new CommandItem
                 {
                     Text = DateTime.Now.ToString(),
@@ -42,10 +40,10 @@ namespace Samples.Logging
                         foreach (var p in x.Parameters)
                             s += $"{Environment.NewLine}{p.Key}: {p.Value}";
 
-                        await this.Dialogs.AlertAsync(s);
+                        await this.Dialogs.Alert(s);
                     })
                 })
-                .Subscribe(this.InsertItem)
+                .SubOnMainThread(this.InsertItem)
                 .DisposeWith(this.DestroyWith);
         }
 
@@ -74,7 +72,7 @@ namespace Samples.Logging
                         foreach (var p in parameters)
                             s += $"{Environment.NewLine}{p.Item1}: {p.Item2}";
                     }
-                    await this.Dialogs.AlertAsync(s);
+                    await this.Dialogs.Alert(s);
                 })
             });
         }

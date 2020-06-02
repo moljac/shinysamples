@@ -8,8 +8,8 @@ using Humanizer;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny.Net.Http;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.HttpTransfers
@@ -17,12 +17,12 @@ namespace Samples.HttpTransfers
     public class PendingViewModel : ViewModel
     {
         readonly IHttpTransferManager httpTransfers;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
         public PendingViewModel(INavigationService navigation,
                                 IHttpTransferManager httpTransfers,
-                                IMaterialDialog dialogs)
+                                IDialogs dialogs)
         {
             this.httpTransfers = httpTransfers;
             this.dialogs = dialogs;
@@ -43,7 +43,7 @@ namespace Samples.HttpTransfers
 
                             Cancel = ReactiveCommand.CreateFromTask(async () =>
                             {
-                                var confirm = await dialogs.ConfirmAsync("Are you sure you want to cancel all transfers?", "Confirm", "Yes", "No") ?? false;
+                                var confirm = await dialogs.Confirm("Are you sure you want to cancel all transfers?", "Confirm", "Yes", "No");
                                 if (confirm)
                                 {
                                     await this.httpTransfers.Cancel(transfer.Identifier);
@@ -91,7 +91,7 @@ namespace Samples.HttpTransfers
                             vm.EstimateTimeRemaining = Math.Round(transfer.EstimatedTimeRemaining.TotalMinutes, 1) + " min(s)";
                         }
                     },
-                    ex => this.dialogs.AlertAsync(ex.ToString())
+                    ex => this.dialogs.Alert(ex.ToString())
                 )
                 .DisposeWith(this.DeactivateWith);
         }

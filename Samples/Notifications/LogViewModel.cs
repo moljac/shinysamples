@@ -8,7 +8,6 @@ using ReactiveUI;
 using Samples.Infrastructure;
 using Samples.Models;
 using Shiny;
-using XF.Material.Forms.UI.Dialogs;
 using MsgBus = Shiny.IMessageBus;
 
 
@@ -22,7 +21,7 @@ namespace Samples.Notifications
 
         public LogViewModel(SampleSqliteConnection conn,
                             MsgBus messageBus,
-                            IMaterialDialog dialogs) : base(dialogs)
+                            IDialogs dialogs) : base(dialogs)
         {
             this.conn = conn;
             this.messageBus = messageBus;

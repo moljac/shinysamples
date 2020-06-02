@@ -4,8 +4,8 @@ using System.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny.Notifications;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Notifications
@@ -13,7 +13,7 @@ namespace Samples.Notifications
     public class PendingViewModel : ViewModel
     {
         public PendingViewModel(INotificationManager notifications,
-                                IMaterialDialog dialogs)
+                                IDialogs dialogs)
         {
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -36,7 +36,7 @@ namespace Samples.Notifications
             this.Clear = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    var confirm = await dialogs.ConfirmAsync("Clear All Pending Notifications?", "Confirm", "Yes", "No") ?? false;
+                    var confirm = await dialogs.Confirm("Clear All Pending Notifications?");
                     if (confirm)
                     {
                         await notifications.Clear();

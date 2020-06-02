@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using System.Reactive.Linq;
+using System.Collections.Generic;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -10,8 +11,8 @@ using Shiny;
 using Shiny.IO;
 using Shiny.Net.Http;
 using Samples.Settings;
-using XF.Material.Forms.UI.Dialogs;
-using System.Collections.Generic;
+using Samples.Infrastructure;
+
 
 namespace Samples.HttpTransfers
 {
@@ -22,7 +23,7 @@ namespace Samples.HttpTransfers
 
         public CreateViewModel(INavigationService navigationService,
                                IHttpTransferManager httpTransfers,
-                               IMaterialDialog dialogs,
+                               IDialogs dialogs,
                                IFileSystem fileSystem,
                                AppSettings appSettings)
         {
@@ -51,7 +52,7 @@ namespace Samples.HttpTransfers
                 var files = fileSystem.AppData.GetFiles("upload.*", SearchOption.TopDirectoryOnly);
                 if (!files.Any())
                 {
-                    await dialogs.AlertAsync("There are not files to upload.  Use 'Manage Uploads' below to create them");
+                    await dialogs.Alert("There are not files to upload.  Use 'Manage Uploads' below to create them");
                 }
                 else
                 {
@@ -59,7 +60,7 @@ namespace Samples.HttpTransfers
                     foreach (var file in files)
                         cfg.Add(file.Name, () => this.FileName = file.Name);
 
-                    await dialogs.ActionSheet(cfg);
+                    await dialogs.ActionSheet("Actions", cfg);
                 }
             });
             this.Save = ReactiveCommand.CreateFromTask(

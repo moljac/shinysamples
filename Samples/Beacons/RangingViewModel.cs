@@ -7,7 +7,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.Beacons;
-using XF.Material.Forms.UI.Dialogs;
+using Samples.Infrastructure;
 
 
 namespace Samples.Beacons
@@ -15,13 +15,13 @@ namespace Samples.Beacons
     public class RangingViewModel : ViewModel
     {
         readonly IBeaconManager beaconManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
         BeaconRegion region;
         IDisposable scanner;
 
 
         public RangingViewModel(INavigationService navigator,
-                                IMaterialDialog dialogs,
+                                IDialogs dialogs,
                                 IBeaconManager beaconManager)
         {
             this.dialogs = dialogs;
@@ -108,7 +108,7 @@ namespace Samples.Beacons
                         else
                             beacon.Proximity = x.Proximity;
                     },
-                    ex => this.dialogs.AlertAsync(ex.ToString(), "Beacon Scan Error")
+                    ex => this.dialogs.Alert(ex.ToString(), "Beacon Scan Error")
                 );
         }
 

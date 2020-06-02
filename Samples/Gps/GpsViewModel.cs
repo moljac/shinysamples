@@ -4,9 +4,9 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.Locations;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Gps
@@ -17,7 +17,7 @@ namespace Samples.Gps
         IDisposable gpsListener;
 
 
-        public GpsViewModel(IGpsManager manager, IMaterialDialog dialogs)
+        public GpsViewModel(IGpsManager manager, IDialogs dialogs)
         {
             this.manager = manager;
             this.IsUpdating = this.manager.IsListening;
@@ -39,13 +39,14 @@ namespace Samples.Gps
 
                 var reading = await this.manager.GetLastReading();
                 if (reading == null)
-                    await dialogs.AlertAsync("Could not getting GPS coordinates");
+                    await dialogs.Alert("Could not getting GPS coordinates");
                 else
                     this.SetValues(reading);
             });
             this.BindBusyCommand(this.GetCurrentPosition);
 
             ReactiveCommand.Create(() => dialogs.ActionSheet(
+                "Select Priority",
                 false,
                 ("Highest", () => this.Priority = GpsPriority.Highest),
                 ("Normal", () => this.Priority = GpsPriority.Normal),
@@ -65,7 +66,7 @@ namespace Samples.Gps
                         var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(new GpsRequest { UseBackground = this.UseBackground }));
                         if (!result)
                         {
-                            await dialogs.AlertAsync("Insufficient permissions");
+                            await dialogs.Alert("Insufficient permissions");
                             return;
                         }
 

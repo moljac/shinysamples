@@ -1,16 +1,16 @@
 ﻿using System;
 using ReactiveUI;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.Logging;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples
 {
     public class GlobalExceptionHandler : IObserver<Exception>, IShinyStartupTask
     {
-        readonly IMaterialDialog dialogs;
-        public GlobalExceptionHandler(IMaterialDialog dialogs) => this.dialogs = dialogs;
+        readonly IDialogs dialogs;
+        public GlobalExceptionHandler(IDialogs dialogs) => this.dialogs = dialogs;
 
 
         public void Start() => RxApp.DefaultExceptionHandler = this;
@@ -21,7 +21,7 @@ namespace Samples
         public async void OnNext(Exception value)
         {
             Log.Write(value);
-            await this.dialogs.AlertAsync(value.ToString(), "ERROR");
+            await this.dialogs.Alert(value.ToString(), "ERROR");
         }
     }
 }

@@ -1,47 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
+using Samples.Infrastructure;
 using Shiny;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples
 {
     public static class Extensions
     {
-        public static Task ActionSheet(this IMaterialDialog dialogs, bool allowCancel = false, params (string Key, Action Action)[] actions)
-        {
-            var dict = actions.ToDictionary(
-                x => x.Key,
-                x => x.Action
-            );
-            return dialogs.ActionSheet(dict, allowCancel);
-        }
-
-
-        public static async Task ActionSheet(this IMaterialDialog dialogs, IDictionary<string, Action> actions, bool allowCancel = false)
-        {
-            var task = allowCancel
-                ? await dialogs.SelectChoiceAsync("Select", actions.Keys.ToList())
-                : await dialogs.SelectActionAsync("Select", actions.Keys.ToList());
-
-            if (task >= 0)
-                actions.Values.ElementAt(task).Invoke();
-        }
-
-
-        public static async Task<bool> RequestAccess(this IMaterialDialog dialogs, Func<Task<AccessState>> request)
+        public static async Task<bool> RequestAccess(this IDialogs dialogs, Func<Task<AccessState>> request)
         {
             var access = await request();
             return await dialogs.AlertAccess(access);
         }
 
 
-        public static async Task<bool> AlertAccess(this IMaterialDialog dialogs,  AccessState access)
+        public static async Task<bool> AlertAccess(this IDialogs dialogs,  AccessState access)
         {
             switch (access)
             {
@@ -49,11 +25,11 @@ namespace Samples
                     return true;
 
                 case AccessState.Restricted:
-                    await dialogs.AlertAsync("WARNING: Access is restricted");
+                    await dialogs.Alert("WARNING: Access is restricted");
                     return true;
 
                 default:
-                    await dialogs.AlertAsync("Invalid Access State: " + access);
+                    await dialogs.Alert("Invalid Access State: " + access);
                     return false;
             }
         }

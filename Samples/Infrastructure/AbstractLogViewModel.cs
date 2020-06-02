@@ -7,7 +7,6 @@ using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Infrastructure
@@ -17,7 +16,7 @@ namespace Samples.Infrastructure
         readonly object syncLock = new object();
 
 
-        protected AbstractLogViewModel(IMaterialDialog dialogs)
+        protected AbstractLogViewModel(IDialogs dialogs)
         {
             this.Dialogs = dialogs;
 
@@ -38,7 +37,7 @@ namespace Samples.Infrastructure
         }
 
 
-        protected IMaterialDialog Dialogs { get; }
+        protected IDialogs Dialogs { get; }
         public ObservableList<TItem> Logs { get; }
         public ICommand Load { get; }
         public ICommand Clear { get; }
@@ -63,7 +62,7 @@ namespace Samples.Infrastructure
 
         protected virtual async Task DoClear()
         {
-            var confirm = await this.Dialogs.ConfirmAsync("Clear Logs?") ?? false;
+            var confirm = await this.Dialogs.Confirm("Clear Logs?");
             if (confirm)
             {
                 await this.ClearLogs();

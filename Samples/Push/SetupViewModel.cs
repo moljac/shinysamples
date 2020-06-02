@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.Push;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Push
@@ -14,10 +14,10 @@ namespace Samples.Push
     public class SetupViewModel : ViewModel
     {
         readonly IPushManager? pushManager;
-        readonly IMaterialDialog dialogs;
+        readonly IDialogs dialogs;
 
 
-        public SetupViewModel(IMaterialDialog dialogs, IPushManager? pushManager = null)
+        public SetupViewModel(IDialogs dialogs, IPushManager? pushManager = null)
         {
             this.dialogs = dialogs;
             this.pushManager = pushManager;
@@ -88,11 +88,8 @@ namespace Samples.Push
             if (this.pushManager == null)
                 return;
 
-            //using (this.dialogs.LoadingDialogAsync("Updating Push Details"))
-            //using (this.dialogs.LoadingSnackbarAsync("Updating Push Details"))
-                await task();
-
-            await this.dialogs.SnackbarAsync("Push Details Updated");
+            await this.dialogs.LoadingTask(task, "Updating Push Details");
+            await this.dialogs.Snackbar("Push Details Updated");
             this.Refresh();
         }
     }

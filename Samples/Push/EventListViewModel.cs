@@ -7,7 +7,6 @@ using System.Windows.Input;
 using Samples.Infrastructure;
 using Samples.Models;
 using Shiny.Push;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Push
@@ -19,7 +18,7 @@ namespace Samples.Push
 
 
         public EventListViewModel(SampleSqliteConnection conn,
-                                  IMaterialDialog dialogs,
+                                  IDialogs dialogs,
                                   IPushManager? pushManager = null) : base(dialogs)
         {
             this.conn = conn;
@@ -50,7 +49,7 @@ namespace Samples.Push
                 .SubOnMainThread(async x =>
                 {
                     ((ICommand)this.Load).Execute(null);
-                    await this.Dialogs.SnackbarAsync("New Push Event");
+                    await this.Dialogs.Snackbar("New Push Event");
                 })
                 .DisposeWith(this.DeactivateWith);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
-using XF.Material.Forms.UI.Dialogs;
+
 
 namespace Samples.Beacons
 {
@@ -12,7 +12,7 @@ namespace Samples.Beacons
         readonly SampleSqliteConnection conn;
 
 
-        public LogsViewModel(IMaterialDialog dialogs, SampleSqliteConnection conn) : base(dialogs)
+        public LogsViewModel(IDialogs dialogs, SampleSqliteConnection conn) : base(dialogs)
         {
             this.conn = conn;
         }

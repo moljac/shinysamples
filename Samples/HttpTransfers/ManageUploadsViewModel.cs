@@ -3,9 +3,9 @@ using System.IO;
 using System.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Samples.SqliteGenerator;
 using Shiny.IO;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.HttpTransfers
@@ -15,7 +15,7 @@ namespace Samples.HttpTransfers
         readonly IFileSystem fileSystem;
 
 
-        public ManageUploadsViewModel(IFileSystem fileSystem, IMaterialDialog dialogs)
+        public ManageUploadsViewModel(IFileSystem fileSystem, IDialogs dialogs)
         {
             this.fileSystem = fileSystem;
 
@@ -24,12 +24,12 @@ namespace Samples.HttpTransfers
                 var path = Path.Combine(this.fileSystem.AppData.FullName, file);
                 if (!File.Exists(path))
                 {
-                    await dialogs.SnackbarAsync($"{file} does not exist");
+                    await dialogs.Snackbar($"{file} does not exist");
                 }
                 else
                 {
                     File.Delete(path);
-                    await dialogs.SnackbarAsync($"{file} has been deleted");
+                    await dialogs.Snackbar($"{file} has been deleted");
                 }
             });
             this.CreateDatabase = ReactiveCommand.CreateFromTask(

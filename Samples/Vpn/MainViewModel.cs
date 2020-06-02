@@ -3,8 +3,8 @@ using System.Reactive.Disposables;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny.Vpn;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Vpn
@@ -14,7 +14,7 @@ namespace Samples.Vpn
         readonly IVpnManager? vpnManager;
 
 
-        public MainViewModel(IMaterialDialog dialogs, IVpnManager? vpnManager = null)
+        public MainViewModel(IDialogs dialogs, IVpnManager? vpnManager = null)
         {
             this.vpnManager = vpnManager;
 
@@ -22,7 +22,7 @@ namespace Samples.Vpn
             {
                 if (this.vpnManager == null)
                 {
-                    await dialogs.AlertAsync("VPN Management is not supported on this platform");
+                    await dialogs.Alert("VPN Management is not supported on this platform");
                     return;
                 }
                 if (this.vpnManager.Status != VpnConnectionState.Disconnected)

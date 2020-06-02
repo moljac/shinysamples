@@ -11,7 +11,6 @@ using Samples.ShinyDelegates;
 using Samples.ShinySetup;
 using Shiny.Infrastructure;
 using Shiny.Notifications;
-using XF.Material.Forms.UI.Dialogs;
 using Samples.Infrastructure;
 using Samples.Jobs;
 using Samples.AppState;
@@ -66,7 +65,7 @@ namespace Samples.ShinySetup
             //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
-            services.AddSingleton<IMaterialDialog>(MaterialDialog.Instance);
+            services.AddSingleton<IDialogs, Dialogs>();
 
 #if STARTUP_ATTRIBUTES
             services.RegisterModule(new AssemblyServiceModule());

@@ -7,9 +7,9 @@ using System.Windows.Input;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.BluetoothLE.Central;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.BluetoothLE
@@ -21,7 +21,7 @@ namespace Samples.BluetoothLE
 
         public AdapterViewModel(ICentralManager central,
                                 INavigationService navigator,
-                                IMaterialDialog dialogs)
+                                IDialogs dialogs)
         {
             this.CanControlAdapterState = central.CanControlAdapterState();
 
@@ -35,7 +35,7 @@ namespace Samples.BluetoothLE
                 {
                     var poweredOn = central.Status == AccessState.Available;
                     if (!central.TrySetAdapterState(!poweredOn))
-                        await dialogs.AlertAsync("Cannot change bluetooth adapter state");
+                        await dialogs.Alert("Cannot change bluetooth adapter state");
                 }
             );
 
@@ -79,7 +79,7 @@ namespace Samples.BluetoothLE
                                     if (list.Any())
                                         this.Peripherals.AddRange(list);
                                 },
-                                ex => dialogs.AlertAsync(ex.ToString(), "ERROR")
+                                ex => dialogs.Alert(ex.ToString(), "ERROR")
                             )
                             .DisposeWith(this.DeactivateWith);
 

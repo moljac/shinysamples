@@ -4,9 +4,9 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
 using Shiny;
 using Shiny.BluetoothLE.Central;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.BluetoothLE
@@ -14,7 +14,7 @@ namespace Samples.BluetoothLE
     public class CentralExtensionsViewModel : ViewModel
     {
         public CentralExtensionsViewModel(ICentralManager centralManager,
-                                          IMaterialDialog dialogs)
+                                          IDialogs dialogs)
         {
             this.Tasks = new List<TaskViewModel>
             {

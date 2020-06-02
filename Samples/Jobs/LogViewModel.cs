@@ -10,7 +10,6 @@ using Shiny;
 using Shiny.Jobs;
 using Shiny.Infrastructure;
 using Prism.Navigation;
-using XF.Material.Forms.UI.Dialogs;
 
 
 namespace Samples.Jobs
@@ -23,7 +22,7 @@ namespace Samples.Jobs
 
 
         public LogViewModel(IJobManager jobManager,
-                            IMaterialDialog dialogs,
+                            IDialogs dialogs,
                             ISerializer serializer,
                             SampleSqliteConnection conn) : base(dialogs)
         {
@@ -78,7 +77,7 @@ namespace Samples.Jobs
                             foreach (var p in parameters)
                                 sb.AppendLine().Append($"{p.Key}: {p.Value}");
                         }
-                        await this.Dialogs.AlertAsync(sb.ToString(), title);
+                        await this.Dialogs.Alert(sb.ToString(), title);
                     })
                 };
             });
