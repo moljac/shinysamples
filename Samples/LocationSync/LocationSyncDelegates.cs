@@ -20,15 +20,17 @@ namespace Samples.ShinyDelegates
 
 
         [Reactive] public bool CanProcess { get; set; }
+
+
         public async Task Process(IEnumerable<GpsEvent> events, CancellationToken cancelToken) 
         {
-            var batchSize = events.Count();
+            await this.SyncAttempt(true, events.Count());
 
             foreach (var gpsEvent in events)
             { 
                 await this.DoProcess(
                     gpsEvent.Id, 
-                    $"GPS - Lat: {gpsEvent.Latitude} Lng: {gpsEvent.Longitude} - Batch Size: {batchSize}"
+                    $"GPS - Lat: {gpsEvent.Latitude} Lng: {gpsEvent.Longitude}"
                 );
             }
         }
@@ -36,16 +38,25 @@ namespace Samples.ShinyDelegates
 
         public async Task Process(IEnumerable<GeofenceEvent> events, CancellationToken cancelToken) 
         {
-            var batchSize = events.Count();
+            await this.SyncAttempt(false, events.Count());
 
             foreach (var geofence in events)
             { 
                 await this.DoProcess(
                     geofence.Id, 
-                    $"Geofence: {geofence.Identifier} (Entered: {geofence.Entered} - Batch: {batchSize})"
+                    $"Geofence: {geofence.Identifier} (Entered: {geofence.Entered})"
                 );
             }
         }
+
+
+        Task SyncAttempt(bool isGps, int batchSize) => this.conn.InsertAsync(new SyncAttempt
+        {
+            Description = isGps ? "GPS" : "Geofences",
+            BatchSize = batchSize,
+            IsProcessed = this.CanProcess,
+            DateCreated = DateTime.UtcNow
+        });
 
 
         async Task DoProcess(string identifier, string desc)

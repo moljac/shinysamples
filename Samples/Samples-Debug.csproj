@@ -51,13 +51,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Vpn\MainPage.xaml">
+      <EmbeddedResource Update="LocationSync\ActionsPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="ShinyDelegates\" />
+      <EmbeddedResource Update="LocationSync\AttemptsPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="LocationSync\SyncItemsPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

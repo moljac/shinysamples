@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Samples.LocationSync
 {
-    public partial class MainPage : TabbedPage
+    public partial class ActionsPage : ContentPage
     {
-        public MainPage()
+        public ActionsPage()
         {
             this.InitializeComponent();
         }

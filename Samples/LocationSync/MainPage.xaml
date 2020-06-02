@@ -1,50 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             xmlns:locationsync="clr-namespace:Samples.LocationSync"
-             x:DataType="locationsync:MainViewModel"
-             x:Class="Samples.LocationSync.MainPage"
-             Title="Location Sync">
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:locationsync="clr-namespace:Samples.LocationSync"
+            SelectedTabColor="#C2E812"
+            UnselectedTabColor="#4BA677"
+            mc:Ignorable="d"
+            x:Class="Samples.LocationSync.MainPage">
     
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Run"
-                     Command="{Binding ForceRun}" />
-        
-        <ToolbarItem Text="Clear"
-                     Command="{Binding Clear}" />
-    </ContentPage.ToolbarItems>
-
-    <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <StackLayout Orientation="Horizontal" Grid.Row="0">
-                <Label Text="Process Sync Events" />
-                <CheckBox IsChecked="{Binding CanProcessSyncData}" />
-            </StackLayout>
-
-            <RefreshView IsRefreshing="{Binding IsBusy}"
-                         Command="{Binding Load}"
-                         Grid.Row="1">
-                <CollectionView ItemsSource="{Binding Events}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="locationsync:ItemViewModel">
-                            <StackLayout>
-                                <Label Text="{Binding Description}" />
-                                <Label Text="{Binding Details}" />
-                                <Label Text="{Binding DateCreated, StringFormat='Created: {0}'}" />
-                                <BoxView Style="{StaticResource HR}" />
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-        </Grid>
-    </ContentPage.Content>
-</ContentPage>
+    <TabbedPage.Children>
+        <locationsync:ActionsPage Title="Actions">
+            <ContentPage.IconImageSource>
+                <FontImageSource Glyph="&#xf06a;"
+                                 FontFamily="FAS" />
+            </ContentPage.IconImageSource>
+        </locationsync:ActionsPage>
+        <locationsync:SyncItemsPage Title="Sync Log">
+            <ContentPage.IconImageSource>
+                <FontImageSource Glyph="&#xf021;"
+                                 FontFamily="FAS" />
+            </ContentPage.IconImageSource>
+        </locationsync:SyncItemsPage>
+        <locationsync:AttemptsPage Title="Attempts">
+            <ContentPage.IconImageSource>
+                <FontImageSource Glyph="&#xf201;"
+                                 FontFamily="FAS" />
+            </ContentPage.IconImageSource>
+        </locationsync:AttemptsPage>
+    </TabbedPage.Children>
+</TabbedPage>
