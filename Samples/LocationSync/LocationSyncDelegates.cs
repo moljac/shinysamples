@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ReactiveUI;
@@ -24,8 +23,6 @@ namespace Samples.ShinyDelegates
 
         public async Task Process(IEnumerable<GpsEvent> events, CancellationToken cancelToken) 
         {
-            await this.SyncAttempt(true, events.Count());
-
             foreach (var gpsEvent in events)
             { 
                 await this.DoProcess(
@@ -38,8 +35,6 @@ namespace Samples.ShinyDelegates
 
         public async Task Process(IEnumerable<GeofenceEvent> events, CancellationToken cancelToken) 
         {
-            await this.SyncAttempt(false, events.Count());
-
             foreach (var geofence in events)
             { 
                 await this.DoProcess(
@@ -48,15 +43,6 @@ namespace Samples.ShinyDelegates
                 );
             }
         }
-
-
-        Task SyncAttempt(bool isGps, int batchSize) => this.conn.InsertAsync(new SyncAttempt
-        {
-            Description = isGps ? "GPS" : "Geofences",
-            BatchSize = batchSize,
-            IsProcessed = this.IsSyncDelegateCrashEnabled,
-            DateCreated = DateTime.UtcNow
-        });
 
 
         async Task DoProcess(string identifier, string desc)

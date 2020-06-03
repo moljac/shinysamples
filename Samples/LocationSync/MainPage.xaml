@@ -22,11 +22,11 @@
                                  FontFamily="FAS" />
             </ContentPage.IconImageSource>
         </locationsync:SyncItemsPage>
-        <locationsync:AttemptsPage Title="Attempts">
+        <locationsync:PendingQueuePage Title="Pending">
             <ContentPage.IconImageSource>
                 <FontImageSource Glyph="&#xf201;"
                                  FontFamily="FAS" />
             </ContentPage.IconImageSource>
-        </locationsync:AttemptsPage>
+        </locationsync:PendingQueuePage>
     </TabbedPage.Children>
 </TabbedPage>
