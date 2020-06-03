@@ -70,6 +70,15 @@ namespace Samples.Notifications
                 var result = await notificationManager.RequestAccess();
                 await dialogs.Snackbar("Permission Check Result: " + result);
             });
+
+            this.StartChat = ReactiveCommand.CreateFromTask(() =>
+                notificationManager.Send(
+                    "Shiny Chat", 
+                    "Hi, What's your name?", 
+                    "ChatName",
+                    DateTime.Now.AddSeconds(10)
+                )
+            );
         }
 
 
@@ -125,6 +134,7 @@ namespace Samples.Notifications
         public ICommand PermissionCheck { get; }
         public ICommand Send { get; }
         public ICommand SendNow { get; }
+        public ICommand StartChat { get; }
 
         [Reactive] public string Identifier { get; set; }
         [Reactive] public string NotificationTitle { get; set;} = "Test Title";

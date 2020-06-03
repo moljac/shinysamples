@@ -62,6 +62,7 @@
 
                 <Button Text="Send" Command="{Binding Send}" />
                 <Button Text="Send Test Now" Command="{Binding SendNow}" />
+                <Button Text="Start A Chat" Command="{Binding StartChat}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
