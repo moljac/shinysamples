@@ -42,16 +42,24 @@ namespace Samples.LocationSync
         public ICommand ProcessGeofences { get; }
         public ICommand ClearGps { get; }
         public ICommand ProcessGps { get; }
-        [Reactive] public bool CanProcessSyncData { get; set; }
+
+        [Reactive] public bool IsSyncEnabled { get; set; }
+        [Reactive] public bool IsSyncDelegateCrashEnabled { get; set; }
 
 
         public override void OnAppearing()
         {
             base.OnAppearing();
-            this.CanProcessSyncData = this.syncDelegate.CanProcess;
-            this.WhenAnyValue(x => x.CanProcessSyncData)
+            this.IsSyncDelegateCrashEnabled = this.syncDelegate.IsSyncDelegateCrashEnabled;
+            this.WhenAnyValue(x => x.IsSyncDelegateCrashEnabled)
                 .Skip(1)
-                .Subscribe(x => this.syncDelegate.CanProcess = x)
+                .Subscribe(x => this.syncDelegate.IsSyncDelegateCrashEnabled = x)
+                .DisposeWith(this.DeactivateWith);
+
+            this.IsSyncEnabled = this.syncManager.IsSyncEnabled;
+            this.WhenAnyValue(x => x.IsSyncEnabled)
+                .Skip(1)
+                .Subscribe(x => this.syncManager.IsSyncEnabled = x)
                 .DisposeWith(this.DeactivateWith);
         }
 

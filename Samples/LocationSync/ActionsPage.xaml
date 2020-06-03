@@ -12,7 +12,8 @@
         <TableView Intent="Form">
             <TableRoot>
                 <TableSection>
-                    <SwitchCell Text="Process Sync Events" On="{Binding CanProcessSyncData}" />
+                    <SwitchCell Text="Delegate Test Crash Enabled" On="{Binding IsSyncDelegateCrashEnabled}" />
+                    <SwitchCell Text="Sync Enabled" On="{Binding IsSyncEnabled}" />
                 </TableSection>
 
                 <TableSection Title="Geofences">

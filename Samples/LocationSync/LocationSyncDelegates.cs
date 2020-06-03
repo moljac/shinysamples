@@ -19,7 +19,7 @@ namespace Samples.ShinyDelegates
         public LocationSyncDelegates(SampleSqliteConnection conn) => this.conn = conn;
 
 
-        [Reactive] public bool CanProcess { get; set; }
+        [Reactive] public bool IsSyncDelegateCrashEnabled { get; set; }
 
 
         public async Task Process(IEnumerable<GpsEvent> events, CancellationToken cancelToken) 
@@ -54,7 +54,7 @@ namespace Samples.ShinyDelegates
         {
             Description = isGps ? "GPS" : "Geofences",
             BatchSize = batchSize,
-            IsProcessed = this.CanProcess,
+            IsProcessed = this.IsSyncDelegateCrashEnabled,
             DateCreated = DateTime.UtcNow
         });
 
@@ -72,17 +72,17 @@ namespace Samples.ShinyDelegates
                     DateCreated = DateTime.UtcNow                    
                 };
             }
-            else if (!this.CanProcess)
+            else if (this.IsSyncDelegateCrashEnabled)
             { 
                 e.Retries++;
                 e.DateLastAttempt = DateTime.UtcNow;
             }
 
-            if (this.CanProcess)
+            if (!this.IsSyncDelegateCrashEnabled)
                 e.DateSync = DateTime.UtcNow;
 
             await this.conn.InsertOrReplaceAsync(e);
-            if (!this.CanProcess)
+            if (this.IsSyncDelegateCrashEnabled)
                 throw new ArgumentException("No processing events right now");
         }
     }
