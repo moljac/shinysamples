@@ -115,6 +115,15 @@ namespace Samples.ShinySetup
                     new NotificationAction("Reply", "Reply", NotificationActionType.TextReply),
                     new NotificationAction("Yes", "Yes", NotificationActionType.None),
                     new NotificationAction("No", "No", NotificationActionType.Destructive)
+                ),
+                new NotificationCategory(
+                    "ChatName",
+                    new NotificationAction("Answer", "Answer", NotificationActionType.TextReply)
+                ),
+                new NotificationCategory(
+                    "ChatAnswer",
+                    new NotificationAction("yes", "Yes", NotificationActionType.None),
+                    new NotificationAction("no", "No", NotificationActionType.Destructive)
                 )
             );
 
