@@ -277,4 +277,7 @@
   <ItemGroup>
     <Folder Include="Assets.xcassets\logo.imageset\" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\notification.mp3" />
+  </ItemGroup>
 </Project>

@@ -127,6 +127,7 @@ namespace Samples.Notifications
             {
                 case "Default"  : return NotificationSound.DefaultSystem;
                 case "Priority" : return NotificationSound.DefaultPriority;
+                case "Custom"   : return NotificationSound.FromCustom("notification.mp3");
                 default         : return NotificationSound.None;
             }
         }
@@ -155,6 +156,7 @@ namespace Samples.Notifications
         {
             "None",
             "Default",
+            "Custom",
             "Priority"
         };
         [Reactive] public string SelectedSoundType { get; set; } = "None";
