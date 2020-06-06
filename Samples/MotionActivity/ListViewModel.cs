@@ -37,7 +37,7 @@ namespace Samples.MotionActivity
                     return;
                 }
 
-                var activities = await activityManager.QueryByDate(this.Date);
+                var activities = await this.activityManager.QueryByDate(this.Date);
                 this.Events = activities
                     .OrderByDescending(x => x.Timestamp)
                     .Select(x => new CommandItem
@@ -62,13 +62,16 @@ namespace Samples.MotionActivity
         public override void OnAppearing()
         {
             base.OnAppearing();
+
+            this.Load.Execute(null);
             this.activityManager?
                 .WhenActivityChanged()
                 .SubOnMainThread(x => this.CurrentActivity = $"({x.Confidence}) {x.Types}")
                 .DisposeWith(this.DeactivateWith);
         }
 
-        public IReactiveCommand Load { get; }
+
+        public ICommand Load { get; }
         [Reactive] public DateTime Date { get; set; } = DateTime.Now;
         [Reactive] public int EventCount { get; private set; }
         [Reactive] public string CurrentActivity { get; private set; }

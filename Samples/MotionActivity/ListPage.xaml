@@ -29,7 +29,6 @@
             <Label Text="{Binding CurrentActivity, StringFormat='Currently: {0}'}"
                 FontSize="Medium"
                 HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
                 Grid.Row="1"
                 Grid.Column="0" />
 
@@ -47,8 +46,7 @@
 
                     <CollectionView.EmptyView>
                         <Label Text="No Events Found"
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand" />
+                               Style="{StaticResource NoDataLabel}" />
                     </CollectionView.EmptyView>
 
                     <CollectionView.ItemTemplate>
