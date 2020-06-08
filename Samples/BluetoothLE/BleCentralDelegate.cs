@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
 using Shiny;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 
 
 namespace Samples.BluetoothLE
 {
-    public class BleCentralDelegate : IBleCentralDelegate
+    public class BleClientDelegate : IBleDelegate
     {
         readonly CoreDelegateServices services;
-        public BleCentralDelegate(CoreDelegateServices services) => this.services = services;
+        public BleClientDelegate(CoreDelegateServices services) => this.services = services;
 
 
         public async Task OnAdapterStateChanged(AccessState state)

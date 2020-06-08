@@ -9,7 +9,7 @@ using Humanizer;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 
 
 namespace Samples.BluetoothLE
@@ -19,13 +19,13 @@ namespace Samples.BluetoothLE
         const string DefaultServiceUuid = "A495FF20-C5B1-4B44-B512-1370F02D74DE";
         const string DefaultCharacteristicUuid = "A495FF21-C5B1-4B44-B512-1370F02D74DE";
 
-        readonly ICentralManager centralManager;
+        readonly IBleManager centralManager;
         int bytes;
         IDisposable? notifySub;
         IDisposable? speedSub;
 
 
-        public PerformanceViewModel(ICentralManager centralManager, BleCentralConfiguration configuration)
+        public PerformanceViewModel(IBleManager centralManager, BleConfiguration configuration)
         {
             this.centralManager = centralManager;
 

@@ -9,7 +9,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Shiny;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 
 
 namespace Samples.BluetoothLE
@@ -19,7 +19,7 @@ namespace Samples.BluetoothLE
         IDisposable scan;
 
 
-        public AdapterViewModel(ICentralManager central,
+        public AdapterViewModel(IBleManager central,
                                 INavigationService navigator,
                                 IDialogs dialogs)
         {

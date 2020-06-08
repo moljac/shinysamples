@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
+using ReactiveUI;
 using Shiny;
 using Shiny.Beacons;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 using Shiny.Jobs;
 using Shiny.Locations;
 using Shiny.Notifications;
 using Shiny.SpeechRecognition;
-using ReactiveUI;
 using Shiny.Push;
 using Shiny.Nfc;
+
 
 namespace Samples
 {
@@ -24,7 +25,7 @@ namespace Samples
                                IGeofenceManager? geofences = null,
                                IGpsManager? gps = null,
                                IMotionActivityManager? activityManager = null,
-                               ICentralManager? bluetooth = null,
+                               IBleManager? bluetooth = null,
                                IBeaconManager? beacons = null,
                                IPushManager? push = null,
                                INfcManager? nfc = null)

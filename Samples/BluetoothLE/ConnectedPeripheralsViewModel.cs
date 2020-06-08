@@ -3,14 +3,14 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 
 
 namespace Samples.BluetoothLE
 {
     public class ConnectedPeripheralsViewModel : ViewModel
     {
-        public ConnectedPeripheralsViewModel(ICentralManager centralManager)
+        public ConnectedPeripheralsViewModel(IBleManager centralManager)
         {
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {

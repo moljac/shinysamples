@@ -8,7 +8,7 @@ using System.Threading;
 using System.Collections.Generic;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 using Samples.Infrastructure;
 
 
@@ -36,7 +36,6 @@ namespace Samples.BluetoothLE
         [Reactive] public DateTime LastValue { get; private set; }
         public Guid Uuid => this.Characteristic.Uuid;
         public Guid ServiceUuid => this.Characteristic.Service.Uuid;
-        public string Description => this.Characteristic.Description;
         public string Properties => this.Characteristic.Properties.ToString();
 
 
@@ -61,7 +60,7 @@ namespace Samples.BluetoothLE
                 cfg.Add(txt, this.ToggleNotify);
             }
             if (cfg.Any())
-                await this.dialogs.ActionSheet($"{this.Description} - {this.Uuid}", cfg);
+                await this.dialogs.ActionSheet($"{this.Uuid}", cfg);
         }
 
 

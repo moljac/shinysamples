@@ -10,7 +10,6 @@ using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Shiny;
 using Shiny.BluetoothLE;
-using Shiny.BluetoothLE.Central;
 
 
 namespace Samples.BluetoothLE
@@ -18,11 +17,11 @@ namespace Samples.BluetoothLE
     public class PeripheralViewModel : ViewModel
     {
         readonly IDialogs dialogs;
-        readonly ICentralManager centralManager;
+        readonly IBleManager centralManager;
         IPeripheral peripheral;
 
 
-        public PeripheralViewModel(ICentralManager centralManager, IDialogs dialogs)
+        public PeripheralViewModel(IBleManager centralManager, IDialogs dialogs)
         {
             this.centralManager = centralManager;
             this.dialogs = dialogs;

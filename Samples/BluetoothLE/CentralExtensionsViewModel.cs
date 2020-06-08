@@ -6,14 +6,14 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Shiny;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 
 
 namespace Samples.BluetoothLE
 {
     public class CentralExtensionsViewModel : ViewModel
     {
-        public CentralExtensionsViewModel(ICentralManager centralManager,
+        public CentralExtensionsViewModel(IBleManager centralManager,
                                           IDialogs dialogs)
         {
             this.Tasks = new List<TaskViewModel>
