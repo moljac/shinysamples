@@ -151,7 +151,7 @@ namespace Samples.BluetoothLE
                         if (service == null)
                         {
                             service = new Group<GattCharacteristicViewModel>(
-                                $"{chs.Service.Description} ({chs.Service.Uuid})",
+                                chs.Service.Uuid.ToString(),
                                 chs.Service.Uuid.ToString()
                             );
                             this.GattCharacteristics.Add(service);

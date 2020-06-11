@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Shiny.BluetoothLE.Central;
+using Shiny.BluetoothLE;
 using ReactiveUI.Fody.Helpers;
 
 
@@ -28,7 +28,7 @@ namespace Samples.BluetoothLE
         [Reactive] public int TxPower { get; private set; }
 
 
-        public void Update(IScanResult result)
+        public void Update(ScanResult result)
         {
             using (this.SuppressChangeNotifications())
             {

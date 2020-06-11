@@ -41,7 +41,7 @@ namespace Samples.Push
                 )
             );
             this.UpdateTag = ReactiveCommand.CreateFromTask(
-                () => this.Do(() => this.pushManager.TryUpdateTags(this.Tag)),
+                () => this.Do(() => this.pushManager.TrySetTags(this.Tag)),
                 this.WhenAny(
                     x => x.Tag,
                     x => x.RegToken,

@@ -99,7 +99,7 @@ namespace Samples.BluetoothLE
             try
             {
                 var utf8 = await this.dialogs.Confirm("Confirm", "Write value from UTF8 or HEX?", "UTF8", "HEX");
-                var result = await this.dialogs.Input(this.Description, "Please enter a write value");
+                var result = await this.dialogs.Input(this.Uuid.ToString(), "Please enter a write value");
 
                 if (!result.IsEmpty())
                 {

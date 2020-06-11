@@ -94,8 +94,8 @@ namespace Samples.ShinySetup
             services.UseJobForegroundService(TimeSpan.FromSeconds(30));
             services.UseHttpTransfers<HttpTransferDelegate>();
             services.UseBeacons<BeaconDelegate>();
-            services.UseBleCentral<BleCentralDelegate>();
-            services.UseBlePeripherals();
+            //services.UseBleCentral<BleCentralDelegate>();
+            //services.UseBlePeripherals();
             services.UseMotionActivity();
             services.UseSpeechRecognition();
             services.UseAllSensors();
