@@ -36,7 +36,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.PhotoSync\Shiny.PhotoSync.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />

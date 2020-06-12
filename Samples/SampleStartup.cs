@@ -136,11 +136,9 @@ namespace Samples.ShinySetup
             // app services
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
-            services.UsePhotoSync<PhotoSyncDelegate>(new Shiny.PhotoSync.SyncConfig(Constants.PhotoSyncUploadUri)
+            services.UsePhotoSync<SampleMediaSyncDelegate>(new Shiny.MediaSync.SyncConfig(Constants.PhotoSyncUploadUri)
             {
-                ShowBadgeCount = true,
-                NotifyOnStart = true,
-                NotifyOnComplete = true
+                ShowBadgeCount = true
             });
         }
     }

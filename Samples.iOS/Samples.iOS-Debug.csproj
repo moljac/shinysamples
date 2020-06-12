@@ -222,6 +222,10 @@
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
       <Name>Shiny.BluetoothLE.Hosting</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj">
+      <Project>{2c501957-afff-4e63-b1a0-b1d4db964083}</Project>
+      <Name>Shiny.MediaSync</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>

@@ -56,7 +56,7 @@
                     </TableSection>
                     <TableSection Title="App Services">
                         <TextCell Text="Location Sync" Command="{Binding Navigate}" CommandParameter="Nav/LocationSync" />
-                        <TextCell Text="Photo Sync" Command="{Binding Navigate}" CommandParameter="Nav/PhotoSync" />
+                        <TextCell Text="Media Sync" Command="{Binding Navigate}" CommandParameter="Nav/MediaSync" />
                     </TableSection>
                 </TableRoot>
             </TableView>
