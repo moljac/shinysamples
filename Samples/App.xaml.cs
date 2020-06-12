@@ -83,6 +83,8 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Settings.MainPage>("Settings");
             containerRegistry.RegisterForNavigation<LocationSync.MainPage>("LocationSync");
             containerRegistry.RegisterForNavigation<Vpn.MainPage>("Vpn");
+
+            containerRegistry.RegisterForNavigation<PhotoSync.MainPage>("PhotoSync");
         }
 
 

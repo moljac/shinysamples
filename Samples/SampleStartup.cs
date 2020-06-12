@@ -21,6 +21,7 @@ using Samples.Geofences;
 using Samples.Gps;
 using Samples.Notifications;
 using Samples.Push;
+using Samples.PhotoSync;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -102,10 +103,8 @@ namespace Samples.ShinySetup
             services.UseNfc();
 
             services.UseGeofencing<GeofenceDelegate>();
-            services.UseGeofencingSync<LocationSyncDelegates>();
             //services.UseGpsDirectGeofencing<LocationDelegates>();
             services.UseGps<GpsDelegate>();
-            services.UseGpsSync<LocationSyncDelegates>();
 
             //services.UseNotifications(true);
             services.UseNotifications<NotificationDelegate>(
@@ -133,6 +132,16 @@ namespace Samples.ShinySetup
                 Constants.AnhListenerConnectionString,
                 Constants.AnhHubName
             );
+
+            // app services
+            services.UseGeofencingSync<LocationSyncDelegates>();
+            services.UseGpsSync<LocationSyncDelegates>();
+            services.UsePhotoSync<PhotoSyncDelegate>(new Shiny.PhotoSync.SyncConfig(Constants.PhotoSyncUploadUri)
+            {
+                ShowBadgeCount = true,
+                NotifyOnStart = true,
+                NotifyOnComplete = true
+            });
         }
     }
 }

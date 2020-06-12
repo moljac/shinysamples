@@ -29,7 +29,6 @@
                         <TextCell Text="Geofencing" Command="{Binding Navigate}" CommandParameter="Nav/Geofencing" />
                         <TextCell Text="Beacons" Command="{Binding Navigate}" CommandParameter="Nav/Beacons" />
                         <TextCell Text="Motion Activity" Command="{Binding Navigate}" CommandParameter="Nav/MotionActivity" />
-                        <TextCell Text="Sync" Command="{Binding Navigate}" CommandParameter="Nav/LocationSync" />
                     </TableSection>
                     <TableSection Title="Notifications">
                         <TextCell Text="Local" Command="{Binding Navigate}" CommandParameter="Nav/Notifications" />
@@ -54,6 +53,10 @@
                         <TextCell Text="Access" Command="{Binding Navigate}" CommandParameter="Nav/Access" />
                         <TextCell Text="Environment" Command="{Binding Navigate}" CommandParameter="Nav/Environment" />
                         <TextCell Text="Settings" Command="{Binding Navigate}" CommandParameter="Nav/Settings" />
+                    </TableSection>
+                    <TableSection Title="App Services">
+                        <TextCell Text="Location Sync" Command="{Binding Navigate}" CommandParameter="Nav/LocationSync" />
+                        <TextCell Text="Photo Sync" Command="{Binding Navigate}" CommandParameter="Nav/PhotoSync" />
                     </TableSection>
                 </TableRoot>
             </TableView>
