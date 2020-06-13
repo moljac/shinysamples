@@ -21,7 +21,7 @@
                             VerticalOptions="FillAndExpand"
                             HorizontalOptions="FillAndExpand">
                 <CollectionView.EmptyView>
-                    <Label Text="No Push Events"
+                    <Label Text="No Logged Events"
                            Style="{StaticResource NoDataLabel}" />
                 </CollectionView.EmptyView>
 

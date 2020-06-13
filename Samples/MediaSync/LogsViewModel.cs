@@ -23,6 +23,7 @@ namespace Samples.MediaSync
             return results.Select(x => new CommandItem
             {
                 Text = x.DateCompleted.ToString(),
+                Detail = x.Type,
                 ImageUri = x.FilePath
             });
         }

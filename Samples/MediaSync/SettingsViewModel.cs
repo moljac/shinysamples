@@ -15,8 +15,8 @@ namespace Samples.MediaSync
         public SettingsViewModel(SampleMediaSyncDelegate? syncDelegate = null, IMediaSyncManager? manager = null)
         {
             this.IsEnabled = manager != null;
-            //manager?.ReflectCopyTo(this);
-            //syncDelegate?.ReflectCopyTo(this);
+            manager?.ReflectCopyTo(this);
+            syncDelegate?.ReflectCopyTo(this);
 
             this.WhenAnyValue(
                     x => x.CanSyncPhotos,
@@ -89,7 +89,7 @@ namespace Samples.MediaSync
         [Reactive] public bool CanSyncAudio { get; set; }
         [Reactive] public bool CanSyncVideos { get; set; }
         [Reactive] public bool AllowUploadOnMeteredConnection { get; set; }
-        [Reactive] public DateTime SyncFrom { get; set; }
+        [Reactive] public DateTimeOffset SyncFrom { get; set; }
         [Reactive] public string Permission { get; private set; } = "Unknown";
 
 

@@ -4,31 +4,44 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:mediasync="clr-namespace:Samples.MediaSync" 
-             xmlns:samples="clr-namespace:Samples"
+             xmlns:samples="clr-namespace:Samples" 
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:DataType="mediasync:MediaScannerViewModel"
              x:Class="Samples.MediaSync.MediaScannerPage">
 
     <ContentPage.Content>
-        <RefreshView Command="{Binding RunQuery}"
-                     IsRefreshing="{Binding IsBusy}">
-            <CollectionView ItemsSource="{Binding List}"
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand">
-                
-                <CollectionView.EmptyView>
-                    <Label Text="No Media Assets Found"
-                        Style="{StaticResource NoDataLabel}" />
-                </CollectionView.EmptyView>
+        <ScrollView>
+            <StackLayout>
+                <ui:MaterialDateField Placeholder="Sync From" 
+                                      Date="{Binding SyncFrom}" 
+                                      HorizontalOptions="CenterAndExpand" />
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="samples:CommandItem">
-                        <samples:CommandCell Text="{Binding Text}"
-                                             Detail="{Binding Detail}" />
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+                <ui:MaterialCheckbox Text="Include Images" IsSelected="{Binding IncludeImages}" />
+                <ui:MaterialCheckbox Text="Include Audio" IsSelected="{Binding IncludeAudio}" />
+                <ui:MaterialCheckbox Text="Include Video" IsSelected="{Binding IncludeVideos}" />
+
+                <RefreshView Command="{Binding RunQuery}"
+                             IsRefreshing="{Binding IsBusy}">
+                    <CollectionView ItemsSource="{Binding List}"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand">
+
+                        <CollectionView.EmptyView>
+                            <Label Text="No Media Assets Found"
+                                   Style="{StaticResource NoDataLabel}" />
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="samples:CommandItem">
+                                <samples:CommandCell Text="{Binding Text}"
+                                                     Detail="{Binding Detail}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-    
+
 </ContentPage>

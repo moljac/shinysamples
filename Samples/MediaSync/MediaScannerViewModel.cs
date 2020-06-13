@@ -37,11 +37,11 @@ namespace Samples.MediaSync
                 if (this.IncludeVideos)
                     mediaTypes |= MediaTypes.Video;
 
-                var list = await scanner.Query(mediaTypes, this.Date);
+                var list = await scanner.Query(mediaTypes, this.SyncFrom);
                 this.List.ReplaceAll(list.Select(x => new CommandItem
                 { 
-                    Text = x.FilePath,
-                    ImageUri = x.FilePath
+                    Text = $"{x.Type} - {x.FilePath}",
+                    ImageUri = x.Type == MediaTypes.Audio ? null : x.FilePath
                 }));
             });
             this.BindBusyCommand(this.RunQuery);
@@ -52,7 +52,7 @@ namespace Samples.MediaSync
         [Reactive] public bool IncludeVideos { get; set; } = true;
         [Reactive] public bool IncludeImages { get; set; } = true;
         [Reactive] public bool IncludeAudio { get; set; } = true;
-        [Reactive] public DateTime Date { get; set; } = DateTime.Now.AddDays(-30);
+        [Reactive] public DateTime SyncFrom { get; set; } = DateTime.Now.AddDays(-30);
         public ObservableList<CommandItem> List { get; } = new ObservableList<CommandItem>();
 
 
@@ -63,7 +63,7 @@ namespace Samples.MediaSync
                     x => x.IncludeVideos,
                     x => x.IncludeImages,
                     x => x.IncludeAudio,
-                    x => x.Date
+                    x => x.SyncFrom
                 )
                 .Subscribe(_ => this.RunQuery.Execute(null))
                 .DisposeWith(this.DeactivateWith);

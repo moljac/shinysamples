@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:mediasync="clr-namespace:Samples.MediaSync"
+             xmlns:converters="clr-namespace:Samples.Infrastructure"
+             xmlns:mediasync="clr-namespace:Samples.MediaSync" xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              mc:Ignorable="d"
              x:DataType="mediasync:SettingsViewModel"
              x:Class="Samples.MediaSync.SettingsPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeOffsetToDateTimeConverter x:Key="dateTimeOffsetToDateTimeConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         <TableView Intent="Form">
@@ -36,20 +43,10 @@
                                 On="{Binding AllowUploadOnMeteredConnection}" 
                                 IsEnabled="{Binding IsEnabled}" />
                     <ViewCell>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="4*" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <Label Text="Sync From" 
-                                   IsEnabled="{Binding IsEnabled}"
-                                   Grid.Column="0" />
-                            
-                            <DatePicker Date="{Binding SyncFrom}" 
-                                        IsEnabled="{Binding IsEnabled}"
-                                        Grid.Column="1" />
-                        </Grid>
+                        <ui:MaterialDateField Placeholder="Sync From" 
+                                              Date="{Binding SyncFrom, Converter={StaticResource dateTimeOffsetToDateTimeConverter}}" 
+                                              IsEnabled="{Binding IsEnabled}"
+                                              HorizontalOptions="CenterAndExpand" />
                     </ViewCell>
                 </TableSection>
                 
