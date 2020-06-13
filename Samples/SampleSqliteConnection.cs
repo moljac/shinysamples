@@ -22,6 +22,7 @@ namespace Samples
             conn.CreateTable<LocationSyncEvent>();
             conn.CreateTable<NotificationEvent>();
             conn.CreateTable<PushEvent>();
+            conn.CreateTable<MediaSyncEvent>();
         }
 
 
@@ -35,5 +36,6 @@ namespace Samples
         public AsyncTableQuery<LocationSyncEvent> LocationSyncEvents => this.Table<LocationSyncEvent>();
         public AsyncTableQuery<NotificationEvent> NotificationEvents => this.Table<NotificationEvent>();
         public AsyncTableQuery<PushEvent> PushEvents => this.Table<PushEvent>();
+        public AsyncTableQuery<MediaSyncEvent> MediaSyncEvents => this.Table<MediaSyncEvent>();
     }
 }

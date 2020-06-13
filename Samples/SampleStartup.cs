@@ -21,7 +21,7 @@ using Samples.Geofences;
 using Samples.Gps;
 using Samples.Notifications;
 using Samples.Push;
-using Samples.PhotoSync;
+using Samples.MediaSync;
 
 #if STARTUP_ATTRIBUTES
 //[assembly: ShinySqliteIntegration(true, true, true, true, true)]
@@ -95,8 +95,8 @@ namespace Samples.ShinySetup
             services.UseJobForegroundService(TimeSpan.FromSeconds(30));
             services.UseHttpTransfers<HttpTransferDelegate>();
             services.UseBeacons<BeaconDelegate>();
-            //services.UseBleCentral<BleCentralDelegate>();
-            //services.UseBlePeripherals();
+            services.UseBleClient<BleClientDelegate>();
+            services.UseBleHosting();
             services.UseMotionActivity();
             services.UseSpeechRecognition();
             services.UseAllSensors();
@@ -136,10 +136,7 @@ namespace Samples.ShinySetup
             // app services
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
-            services.UsePhotoSync<SampleMediaSyncDelegate>(new Shiny.MediaSync.SyncConfig(Constants.PhotoSyncUploadUri)
-            {
-                ShowBadgeCount = true
-            });
+            services.UseMediaSync<SampleMediaSyncDelegate>();
         }
     }
 }

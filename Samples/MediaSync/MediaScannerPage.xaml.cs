@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Samples.MediaSync
 {
-    public partial class MainPage : TabbedPage
+    public partial class MediaScannerPage : ContentPage
     {
-        public MainPage()
+        public MediaScannerPage()
         {
             this.InitializeComponent();
         }

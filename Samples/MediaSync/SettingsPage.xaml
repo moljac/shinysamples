@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mediasync="clr-namespace:Samples.MediaSync"
+             mc:Ignorable="d"
+             x:DataType="mediasync:SettingsViewModel"
+             x:Class="Samples.MediaSync.SettingsPage">
+    
+    <ContentPage.Content>
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection Title="Sync Settings">
+                    <EntryCell Label="Default URI" 
+                               Text="{Binding DefaultUploadUri}" 
+                               IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Sync Videos" 
+                                On="{Binding IsVideoSyncEnabled}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Sync Audio" 
+                                On="{Binding IsAudioSyncEnabled}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Sync Images" 
+                                On="{Binding IsPhotoSyncEnabled}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Show Badge Count" 
+                                On="{Binding ShowBadgeCount}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Upload on Metered Connection" 
+                                On="{Binding AllowUploadOnMeteredConnection}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Text="Sync From" 
+                                   IsEnabled="{Binding IsEnabled}"
+                                   Grid.Column="0" />
+                            
+                            <DatePicker Date="{Binding SyncFrom}" 
+                                        IsEnabled="{Binding IsEnabled}"
+                                        Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                </TableSection>
+                
+                <TableSection Title="Delegate Settings">
+                    <SwitchCell Text="Sync Video" 
+                                On="{Binding CanSyncVideos}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Sync Audio" 
+                                On="{Binding CanSyncAudio}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                    
+                    <SwitchCell Text="Sync Images" 
+                                On="{Binding CanSyncPhotos}" 
+                                IsEnabled="{Binding IsEnabled}" />
+                </TableSection>
+
+                <TableSection>
+                    <TextCell Text="Request Permission" 
+                              Detail="{Binding Permission}" 
+                              Command="{Binding RequestPermission}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
