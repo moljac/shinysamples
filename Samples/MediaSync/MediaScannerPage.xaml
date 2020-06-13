@@ -13,14 +13,25 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <ui:MaterialDateField Placeholder="Sync From" 
-                                      Date="{Binding SyncFrom}" 
-                                      HorizontalOptions="CenterAndExpand" />
-
-                <ui:MaterialCheckbox Text="Include Images" IsSelected="{Binding IncludeImages}" />
-                <ui:MaterialCheckbox Text="Include Audio" IsSelected="{Binding IncludeAudio}" />
-                <ui:MaterialCheckbox Text="Include Video" IsSelected="{Binding IncludeVideos}" />
-
+                <Expander>
+                    <Expander.Header>
+                        <Label Text="Filters" />
+                    </Expander.Header>
+                    <TableView Intent="Form">
+                        <TableRoot>
+                            <TableSection>
+                                <SwitchCell Text="Include Images" On="{Binding IncludeImages}" />
+                                <SwitchCell Text="Include Audio" On="{Binding IncludeAudio}" />
+                                <SwitchCell Text="Include Video" On="{Binding IncludeVideos}" />
+                                <ViewCell Height="100">
+                                    <ui:MaterialDateField Placeholder="Sync From" 
+                                                          Date="{Binding SyncFrom}" 
+                                                          HorizontalOptions="FillAndExpand" />
+                                </ViewCell>
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                </Expander>
                 <RefreshView Command="{Binding RunQuery}"
                              IsRefreshing="{Binding IsBusy}">
                     <CollectionView ItemsSource="{Binding List}"

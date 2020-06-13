@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:converters="clr-namespace:Samples.Infrastructure"
-             xmlns:mediasync="clr-namespace:Samples.MediaSync" xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:mediasync="clr-namespace:Samples.MediaSync"
              mc:Ignorable="d"
              x:DataType="mediasync:SettingsViewModel"
              x:Class="Samples.MediaSync.SettingsPage">
@@ -18,6 +19,13 @@
     <ContentPage.Content>
         <TableView Intent="Form">
             <TableRoot>
+
+                <TableSection>
+                    <TextCell Text="Request Permission" 
+                              Detail="{Binding Permission}" 
+                              Command="{Binding RequestPermission}" />
+                </TableSection>
+                
                 <TableSection Title="Sync Settings">
                     <EntryCell Label="Default URI" 
                                Text="{Binding DefaultUploadUri}" 
@@ -42,32 +50,27 @@
                     <SwitchCell Text="Upload on Metered Connection" 
                                 On="{Binding AllowUploadOnMeteredConnection}" 
                                 IsEnabled="{Binding IsEnabled}" />
-                    <ViewCell>
+                    
+                    <ViewCell Height="100">
                         <ui:MaterialDateField Placeholder="Sync From" 
                                               Date="{Binding SyncFrom, Converter={StaticResource dateTimeOffsetToDateTimeConverter}}" 
                                               IsEnabled="{Binding IsEnabled}"
-                                              HorizontalOptions="CenterAndExpand" />
+                                              HorizontalOptions="FillAndExpand" />
                     </ViewCell>
                 </TableSection>
-                
+
                 <TableSection Title="Delegate Settings">
                     <SwitchCell Text="Sync Video" 
                                 On="{Binding CanSyncVideos}" 
                                 IsEnabled="{Binding IsEnabled}" />
-                    
+
                     <SwitchCell Text="Sync Audio" 
                                 On="{Binding CanSyncAudio}" 
                                 IsEnabled="{Binding IsEnabled}" />
-                    
+
                     <SwitchCell Text="Sync Images" 
                                 On="{Binding CanSyncPhotos}" 
                                 IsEnabled="{Binding IsEnabled}" />
-                </TableSection>
-
-                <TableSection>
-                    <TextCell Text="Request Permission" 
-                              Detail="{Binding Permission}" 
-                              Command="{Binding RequestPermission}" />
                 </TableSection>
             </TableRoot>
         </TableView>
