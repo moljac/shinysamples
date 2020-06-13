@@ -19,6 +19,32 @@ namespace Samples.MediaSync
             this.manager = manager;
             this.syncDelegate = syncDelegate;
             this.conn = conn;
+
+            this.WhenAnyValue(
+                x => x.CanSyncPhotos,
+                x => x.CanSyncVideos,
+                x => x.CanSyncAudio
+            )
+            .Skip(1)
+            .Subscribe(_ => { })
+            .DisposeWith(this.DestroyWith);
+
+
+            this.WhenAnyValue(
+                x => x.IsVideoSyncEnabled,
+                x => x.IsPhotoSyncEnabled,
+                x => x.IsAudioSyncEnabled
+            )
+            .Skip(1)
+            .Subscribe(_ => { })
+            .DisposeWith(this.DestroyWith);
+
+            this.WhenAnyValue(
+                x => x.x.DefaultUploadUri
+            )
+            .Skip(1)
+            .Subscribe(x => manager.DefaultUploadUri = x)
+            .DisposeWith(this.DestroyWith);
         }
 
 
