@@ -8,7 +8,7 @@ using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Runtime;
-using Android.Graphics;
+
 
 namespace Samples.Droid
 {
@@ -28,7 +28,10 @@ namespace Samples.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Forms.SetFlags("SwipeView_Experimental");
+            Forms.SetFlags(
+                "SwipeView_Experimental",
+                "Expander_Experimental"
+            );
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -65,6 +66,7 @@ namespace Samples.MediaSync
                     x => x.IncludeAudio,
                     x => x.SyncFrom
                 )
+                .Skip(1)
                 .Subscribe(_ => this.RunQuery.Execute(null))
                 .DisposeWith(this.DeactivateWith);
         }

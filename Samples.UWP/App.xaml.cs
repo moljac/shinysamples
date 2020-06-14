@@ -35,8 +35,10 @@ namespace Samples.UWP
                 rootFrame = new Frame();
                 rootFrame.NavigationFailed += this.OnNavigationFailed;
                 Rg.Plugins.Popup.Popup.Init();
-                Forms.SetFlags("CollectionView_Experimental");
-                Forms.SetFlags("SwipeView_Experimental");
+                Forms.SetFlags(
+                    "SwipeView_Experimental",
+                    "Expander_Experimental"
+                );
                 Forms.Init(e);
 
                 Window.Current.Content = rootFrame;

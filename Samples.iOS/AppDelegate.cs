@@ -19,7 +19,10 @@ namespace Samples.iOS
             this.ShinyFinishedLaunching(new SampleStartup());
             //this.ShinyFinishedLaunching(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
             //this.ShinyFinishedLaunching(ShinyStartup.AutoRegister());
-            Forms.SetFlags("SwipeView_Experimental");
+            Forms.SetFlags(
+                "SwipeView_Experimental",
+                "Expander_Experimental"
+            );
 
             Forms.Init();
             FormsMaps.Init();

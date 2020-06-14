@@ -13,10 +13,14 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Expander>
+                <Expander IsExpanded="False">
                     <Expander.Header>
-                        <Label Text="Filters" />
+                        <Label Text="Filters" 
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               HorizontalOptions="CenterAndExpand" />
                     </Expander.Header>
+                    
                     <TableView Intent="Form">
                         <TableRoot>
                             <TableSection>
@@ -38,6 +42,11 @@
                                     VerticalOptions="FillAndExpand"
                                     HorizontalOptions="FillAndExpand">
 
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" 
+                                             Span="2" />
+                        </CollectionView.ItemsLayout>
+                        
                         <CollectionView.EmptyView>
                             <Label Text="No Media Assets Found"
                                    Style="{StaticResource NoDataLabel}" />
@@ -45,8 +54,23 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="samples:CommandItem">
-                                <samples:CommandCell Text="{Binding Text}"
-                                                     Detail="{Binding Detail}" />
+                                <StackLayout Orientation="Vertical">
+                                    <Image Source="{Binding ImageUri}" 
+                                           WidthRequest="120"
+                                           HeightRequest="120"
+                                           Aspect="AspectFit" />
+
+                                    <Label Text="{Binding Text}"
+                                           FontSize="Caption" 
+                                           HorizontalOptions="CenterAndExpand" 
+                                           HorizontalTextAlignment="Center" />
+
+                                    <Label Text="{Binding Detail}"
+                                           FontSize="Micro"
+                                           FontAttributes="Italic"
+                                           HorizontalOptions="CenterAndExpand"
+                                           HorizontalTextAlignment="Center" />
+                                </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
