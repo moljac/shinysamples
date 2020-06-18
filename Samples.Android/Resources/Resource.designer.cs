@@ -1653,7 +1653,6 @@ namespace Samples.Droid
 			global::Lottie.Forms.Resource.Style.CardView = global::Samples.Droid.Resource.Style.CardView;
 			global::Lottie.Forms.Resource.Style.CardView_Dark = global::Samples.Droid.Resource.Style.CardView_Dark;
 			global::Lottie.Forms.Resource.Style.CardView_Light = global::Samples.Droid.Resource.Style.CardView_Light;
-			global::Lottie.Forms.Resource.Style.collectionViewStyle = global::Samples.Droid.Resource.Style.collectionViewStyle;
 			global::Lottie.Forms.Resource.Style.Platform_AppCompat = global::Samples.Droid.Resource.Style.Platform_AppCompat;
 			global::Lottie.Forms.Resource.Style.Platform_AppCompat_Light = global::Samples.Droid.Resource.Style.Platform_AppCompat_Light;
 			global::Lottie.Forms.Resource.Style.Platform_MaterialComponents = global::Samples.Droid.Resource.Style.Platform_MaterialComponents;
@@ -6301,7 +6300,6 @@ namespace Samples.Droid
 			global::Rg.Plugins.Popup.Resource.Style.CardView = global::Samples.Droid.Resource.Style.CardView;
 			global::Rg.Plugins.Popup.Resource.Style.CardView_Dark = global::Samples.Droid.Resource.Style.CardView_Dark;
 			global::Rg.Plugins.Popup.Resource.Style.CardView_Light = global::Samples.Droid.Resource.Style.CardView_Light;
-			global::Rg.Plugins.Popup.Resource.Style.collectionViewStyle = global::Samples.Droid.Resource.Style.collectionViewStyle;
 			global::Rg.Plugins.Popup.Resource.Style.Platform_AppCompat = global::Samples.Droid.Resource.Style.Platform_AppCompat;
 			global::Rg.Plugins.Popup.Resource.Style.Platform_AppCompat_Light = global::Samples.Droid.Resource.Style.Platform_AppCompat_Light;
 			global::Rg.Plugins.Popup.Resource.Style.Platform_MaterialComponents = global::Samples.Droid.Resource.Style.Platform_MaterialComponents;
@@ -12644,6 +12642,7 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Maps.Android.Resource.Attribute.collapsedTitleGravity = global::Samples.Droid.Resource.Attribute.collapsedTitleGravity;
 			global::Xamarin.Forms.Maps.Android.Resource.Attribute.collapsedTitleTextAppearance = global::Samples.Droid.Resource.Attribute.collapsedTitleTextAppearance;
 			global::Xamarin.Forms.Maps.Android.Resource.Attribute.collapseIcon = global::Samples.Droid.Resource.Attribute.collapseIcon;
+			global::Xamarin.Forms.Maps.Android.Resource.Attribute.collectionViewStyle = global::Samples.Droid.Resource.Attribute.collectionViewStyle;
 			global::Xamarin.Forms.Maps.Android.Resource.Attribute.color = global::Samples.Droid.Resource.Attribute.color;
 			global::Xamarin.Forms.Maps.Android.Resource.Attribute.colorAccent = global::Samples.Droid.Resource.Attribute.colorAccent;
 			global::Xamarin.Forms.Maps.Android.Resource.Attribute.colorBackgroundFloating = global::Samples.Droid.Resource.Attribute.colorBackgroundFloating;
@@ -14145,7 +14144,8 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Maps.Android.Resource.Style.CardView = global::Samples.Droid.Resource.Style.CardView;
 			global::Xamarin.Forms.Maps.Android.Resource.Style.CardView_Dark = global::Samples.Droid.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Maps.Android.Resource.Style.CardView_Light = global::Samples.Droid.Resource.Style.CardView_Light;
-			global::Xamarin.Forms.Maps.Android.Resource.Style.collectionViewStyle = global::Samples.Droid.Resource.Style.collectionViewStyle;
+			global::Xamarin.Forms.Maps.Android.Resource.Style.collectionViewScrollBars = global::Samples.Droid.Resource.Style.collectionViewScrollBars;
+			global::Xamarin.Forms.Maps.Android.Resource.Style.collectionViewTheme = global::Samples.Droid.Resource.Style.collectionViewTheme;
 			global::Xamarin.Forms.Maps.Android.Resource.Style.MainTheme = global::Samples.Droid.Resource.Style.MainTheme;
 			global::Xamarin.Forms.Maps.Android.Resource.Style.MainTheme_Base = global::Samples.Droid.Resource.Style.MainTheme_Base;
 			global::Xamarin.Forms.Maps.Android.Resource.Style.Platform_AppCompat = global::Samples.Droid.Resource.Style.Platform_AppCompat;
@@ -14894,6 +14894,8 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Maps.Android.Resource.Styleable.GradientColor_android_startY = global::Samples.Droid.Resource.Styleable.GradientColor_android_startY;
 			global::Xamarin.Forms.Maps.Android.Resource.Styleable.GradientColor_android_tileMode = global::Samples.Droid.Resource.Styleable.GradientColor_android_tileMode;
 			global::Xamarin.Forms.Maps.Android.Resource.Styleable.GradientColor_android_type = global::Samples.Droid.Resource.Styleable.GradientColor_android_type;
+			global::Xamarin.Forms.Maps.Android.Resource.Styleable.ItemsViewRendererTheme = global::Samples.Droid.Resource.Styleable.ItemsViewRendererTheme;
+			global::Xamarin.Forms.Maps.Android.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle = global::Samples.Droid.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle;
 			global::Xamarin.Forms.Maps.Android.Resource.Styleable.LinearLayoutCompat = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat;
 			global::Xamarin.Forms.Maps.Android.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
 			global::Xamarin.Forms.Maps.Android.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
@@ -15432,6 +15434,7 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.collapsedTitleGravity = global::Samples.Droid.Resource.Attribute.collapsedTitleGravity;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.collapsedTitleTextAppearance = global::Samples.Droid.Resource.Attribute.collapsedTitleTextAppearance;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.collapseIcon = global::Samples.Droid.Resource.Attribute.collapseIcon;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.collectionViewStyle = global::Samples.Droid.Resource.Attribute.collectionViewStyle;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.color = global::Samples.Droid.Resource.Attribute.color;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.colorAccent = global::Samples.Droid.Resource.Attribute.colorAccent;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.colorBackgroundFloating = global::Samples.Droid.Resource.Attribute.colorBackgroundFloating;
@@ -16852,7 +16855,8 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView = global::Samples.Droid.Resource.Style.CardView;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView_Dark = global::Samples.Droid.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView_Light = global::Samples.Droid.Resource.Style.CardView_Light;
-			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewStyle = global::Samples.Droid.Resource.Style.collectionViewStyle;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewScrollBars = global::Samples.Droid.Resource.Style.collectionViewScrollBars;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewTheme = global::Samples.Droid.Resource.Style.collectionViewTheme;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.MainTheme = global::Samples.Droid.Resource.Style.MainTheme;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.MainTheme_Base = global::Samples.Droid.Resource.Style.MainTheme_Base;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Platform_AppCompat = global::Samples.Droid.Resource.Style.Platform_AppCompat;
@@ -17601,6 +17605,8 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.GradientColor_android_startY = global::Samples.Droid.Resource.Styleable.GradientColor_android_startY;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.GradientColor_android_tileMode = global::Samples.Droid.Resource.Styleable.GradientColor_android_tileMode;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.GradientColor_android_type = global::Samples.Droid.Resource.Styleable.GradientColor_android_type;
+			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ItemsViewRendererTheme = global::Samples.Droid.Resource.Styleable.ItemsViewRendererTheme;
+			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle = global::Samples.Droid.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.LinearLayoutCompat = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
@@ -18106,6 +18112,7 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Platform.Resource.Attribute.collapsedTitleGravity = global::Samples.Droid.Resource.Attribute.collapsedTitleGravity;
 			global::Xamarin.Forms.Platform.Resource.Attribute.collapsedTitleTextAppearance = global::Samples.Droid.Resource.Attribute.collapsedTitleTextAppearance;
 			global::Xamarin.Forms.Platform.Resource.Attribute.collapseIcon = global::Samples.Droid.Resource.Attribute.collapseIcon;
+			global::Xamarin.Forms.Platform.Resource.Attribute.collectionViewStyle = global::Samples.Droid.Resource.Attribute.collectionViewStyle;
 			global::Xamarin.Forms.Platform.Resource.Attribute.color = global::Samples.Droid.Resource.Attribute.color;
 			global::Xamarin.Forms.Platform.Resource.Attribute.colorAccent = global::Samples.Droid.Resource.Attribute.colorAccent;
 			global::Xamarin.Forms.Platform.Resource.Attribute.colorBackgroundFloating = global::Samples.Droid.Resource.Attribute.colorBackgroundFloating;
@@ -19526,7 +19533,8 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Platform.Resource.Style.CardView = global::Samples.Droid.Resource.Style.CardView;
 			global::Xamarin.Forms.Platform.Resource.Style.CardView_Dark = global::Samples.Droid.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Platform.Resource.Style.CardView_Light = global::Samples.Droid.Resource.Style.CardView_Light;
-			global::Xamarin.Forms.Platform.Resource.Style.collectionViewStyle = global::Samples.Droid.Resource.Style.collectionViewStyle;
+			global::Xamarin.Forms.Platform.Resource.Style.collectionViewScrollBars = global::Samples.Droid.Resource.Style.collectionViewScrollBars;
+			global::Xamarin.Forms.Platform.Resource.Style.collectionViewTheme = global::Samples.Droid.Resource.Style.collectionViewTheme;
 			global::Xamarin.Forms.Platform.Resource.Style.MainTheme = global::Samples.Droid.Resource.Style.MainTheme;
 			global::Xamarin.Forms.Platform.Resource.Style.MainTheme_Base = global::Samples.Droid.Resource.Style.MainTheme_Base;
 			global::Xamarin.Forms.Platform.Resource.Style.Platform_AppCompat = global::Samples.Droid.Resource.Style.Platform_AppCompat;
@@ -20275,6 +20283,8 @@ namespace Samples.Droid
 			global::Xamarin.Forms.Platform.Resource.Styleable.GradientColor_android_startY = global::Samples.Droid.Resource.Styleable.GradientColor_android_startY;
 			global::Xamarin.Forms.Platform.Resource.Styleable.GradientColor_android_tileMode = global::Samples.Droid.Resource.Styleable.GradientColor_android_tileMode;
 			global::Xamarin.Forms.Platform.Resource.Styleable.GradientColor_android_type = global::Samples.Droid.Resource.Styleable.GradientColor_android_type;
+			global::Xamarin.Forms.Platform.Resource.Styleable.ItemsViewRendererTheme = global::Samples.Droid.Resource.Styleable.ItemsViewRendererTheme;
+			global::Xamarin.Forms.Platform.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle = global::Samples.Droid.Resource.Styleable.ItemsViewRendererTheme_collectionViewStyle;
 			global::Xamarin.Forms.Platform.Resource.Styleable.LinearLayoutCompat = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat;
 			global::Xamarin.Forms.Platform.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
 			global::Xamarin.Forms.Platform.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::Samples.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
@@ -22262,7 +22272,6 @@ namespace Samples.Droid
 			global::XF.Material.Resource.Style.CardView = global::Samples.Droid.Resource.Style.CardView;
 			global::XF.Material.Resource.Style.CardView_Dark = global::Samples.Droid.Resource.Style.CardView_Dark;
 			global::XF.Material.Resource.Style.CardView_Light = global::Samples.Droid.Resource.Style.CardView_Light;
-			global::XF.Material.Resource.Style.collectionViewStyle = global::Samples.Droid.Resource.Style.collectionViewStyle;
 			global::XF.Material.Resource.Style.Platform_AppCompat = global::Samples.Droid.Resource.Style.Platform_AppCompat;
 			global::XF.Material.Resource.Style.Platform_AppCompat_Light = global::Samples.Droid.Resource.Style.Platform_AppCompat_Light;
 			global::XF.Material.Resource.Style.Platform_MaterialComponents = global::Samples.Droid.Resource.Style.Platform_MaterialComponents;
@@ -23944,6 +23953,9 @@ namespace Samples.Droid
 			// aapt resource value: 0x7f01005d
 			public const int collapsedTitleTextAppearance = 2130772061;
 			
+			// aapt resource value: 0x7f01020a
+			public const int collectionViewStyle = 2130772490;
+			
 			// aapt resource value: 0x7f01017b
 			public const int color = 2130772347;
 			
@@ -24490,53 +24502,53 @@ namespace Samples.Droid
 			// aapt resource value: 0x7f0101ba
 			public const int logoDescription = 2130772410;
 			
-			// aapt resource value: 0x7f01020e
-			public const int lottie_autoPlay = 2130772494;
-			
-			// aapt resource value: 0x7f010218
-			public const int lottie_cacheComposition = 2130772504;
-			
-			// aapt resource value: 0x7f010215
-			public const int lottie_colorFilter = 2130772501;
-			
-			// aapt resource value: 0x7f010214
-			public const int lottie_enableMergePathsForKitKatAndAbove = 2130772500;
-			
-			// aapt resource value: 0x7f01020d
-			public const int lottie_fallbackRes = 2130772493;
-			
-			// aapt resource value: 0x7f01020a
-			public const int lottie_fileName = 2130772490;
-			
-			// aapt resource value: 0x7f010212
-			public const int lottie_imageAssetsFolder = 2130772498;
-			
 			// aapt resource value: 0x7f01020f
-			public const int lottie_loop = 2130772495;
-			
-			// aapt resource value: 0x7f010213
-			public const int lottie_progress = 2130772499;
-			
-			// aapt resource value: 0x7f01020b
-			public const int lottie_rawRes = 2130772491;
+			public const int lottie_autoPlay = 2130772495;
 			
 			// aapt resource value: 0x7f010219
-			public const int lottie_renderMode = 2130772505;
-			
-			// aapt resource value: 0x7f010211
-			public const int lottie_repeatCount = 2130772497;
-			
-			// aapt resource value: 0x7f010210
-			public const int lottie_repeatMode = 2130772496;
+			public const int lottie_cacheComposition = 2130772505;
 			
 			// aapt resource value: 0x7f010216
-			public const int lottie_scale = 2130772502;
+			public const int lottie_colorFilter = 2130772502;
 			
-			// aapt resource value: 0x7f010217
-			public const int lottie_speed = 2130772503;
+			// aapt resource value: 0x7f010215
+			public const int lottie_enableMergePathsForKitKatAndAbove = 2130772501;
+			
+			// aapt resource value: 0x7f01020e
+			public const int lottie_fallbackRes = 2130772494;
+			
+			// aapt resource value: 0x7f01020b
+			public const int lottie_fileName = 2130772491;
+			
+			// aapt resource value: 0x7f010213
+			public const int lottie_imageAssetsFolder = 2130772499;
+			
+			// aapt resource value: 0x7f010210
+			public const int lottie_loop = 2130772496;
+			
+			// aapt resource value: 0x7f010214
+			public const int lottie_progress = 2130772500;
 			
 			// aapt resource value: 0x7f01020c
-			public const int lottie_url = 2130772492;
+			public const int lottie_rawRes = 2130772492;
+			
+			// aapt resource value: 0x7f01021a
+			public const int lottie_renderMode = 2130772506;
+			
+			// aapt resource value: 0x7f010212
+			public const int lottie_repeatCount = 2130772498;
+			
+			// aapt resource value: 0x7f010211
+			public const int lottie_repeatMode = 2130772497;
+			
+			// aapt resource value: 0x7f010217
+			public const int lottie_scale = 2130772503;
+			
+			// aapt resource value: 0x7f010218
+			public const int lottie_speed = 2130772504;
+			
+			// aapt resource value: 0x7f01020d
+			public const int lottie_url = 2130772493;
 			
 			// aapt resource value: 0x7f0101ec
 			public const int mapType = 2130772460;
@@ -28303,8 +28315,8 @@ namespace Samples.Droid
 			// aapt resource value: 0x7f0d000c
 			public const int Animation_Design_BottomSheetDialog = 2131558412;
 			
-			// aapt resource value: 0x7f0d01fb
-			public const int AppCompatDialogStyle = 2131558907;
+			// aapt resource value: 0x7f0d01fc
+			public const int AppCompatDialogStyle = 2131558908;
 			
 			// aapt resource value: 0x7f0d0126
 			public const int Base_AlertDialog_AppCompat = 2131558694;
@@ -28882,11 +28894,11 @@ namespace Samples.Droid
 			// aapt resource value: 0x7f0d01ef
 			public const int CardView_Light = 2131558895;
 			
-			// aapt resource value: 0x7f0d01f9
-			public const int MainTheme = 2131558905;
-			
 			// aapt resource value: 0x7f0d01fa
-			public const int MainTheme_Base = 2131558906;
+			public const int MainTheme = 2131558906;
+			
+			// aapt resource value: 0x7f0d01fb
+			public const int MainTheme_Base = 2131558907;
 			
 			// aapt resource value: 0x7f0d0107
 			public const int Platform_AppCompat = 2131558663;
@@ -29807,7 +29819,10 @@ namespace Samples.Droid
 			public const int Widget_Support_CoordinatorLayout = 2131558896;
 			
 			// aapt resource value: 0x7f0d01f8
-			public const int collectionViewStyle = 2131558904;
+			public const int collectionViewScrollBars = 2131558904;
+			
+			// aapt resource value: 0x7f0d01f9
+			public const int collectionViewTheme = 2131558905;
 			
 			static Style()
 			{
@@ -31516,6 +31531,12 @@ namespace Samples.Droid
 			// aapt resource value: 1
 			public const int GradientColorItem_android_offset = 1;
 			
+			public static int[] ItemsViewRendererTheme = new int[] {
+					2130772490};
+			
+			// aapt resource value: 0
+			public const int ItemsViewRendererTheme_collectionViewStyle = 0;
+			
 			public static int[] LinearLayoutCompat = new int[] {
 					16842927,
 					16842948,
@@ -31597,7 +31618,6 @@ namespace Samples.Droid
 			public const int LoadingImageView_imageAspectRatioAdjust = 0;
 			
 			public static int[] LottieAnimationView = new int[] {
-					2130772490,
 					2130772491,
 					2130772492,
 					2130772493,
@@ -31612,7 +31632,8 @@ namespace Samples.Droid
 					2130772502,
 					2130772503,
 					2130772504,
-					2130772505};
+					2130772505,
+					2130772506};
 			
 			// aapt resource value: 4
 			public const int LottieAnimationView_lottie_autoPlay = 4;

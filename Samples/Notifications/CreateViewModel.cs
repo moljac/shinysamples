@@ -9,7 +9,7 @@ using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
 using Samples.Infrastructure;
-
+using System.Reactive.Disposables;
 
 namespace Samples.Notifications
 {
@@ -35,7 +35,10 @@ namespace Samples.Notifications
                 x.Item2.Minutes,
                 x.Item2.Seconds)
             )
-            .ToPropertyEx(this, x => x.ScheduledTime);
+            .Subscribe(x => this.ScheduledTime = x)
+            .DisposeWith(this.DestroyWith);
+
+            //.ToPropertyEx(this, x => x.ScheduledTime);
 
             this.SelectedDate = DateTime.Now;
             this.SelectedTime = DateTime.Now.TimeOfDay.Add(TimeSpan.FromMinutes(10));
@@ -125,8 +128,8 @@ namespace Samples.Notifications
         {
             switch (this.SelectedSoundType)
             {
-                case "Default"  : return NotificationSound.DefaultSystem;
-                case "Priority" : return NotificationSound.DefaultPriority;
+                case "Default"  : return NotificationSound.Default;
+                //case "Priority" : return NotificationSound.Default;
                 case "Custom"   : return NotificationSound.FromCustom("notification.mp3");
                 default         : return NotificationSound.None;
             }
@@ -140,7 +143,8 @@ namespace Samples.Notifications
         [Reactive] public string Identifier { get; set; }
         [Reactive] public string NotificationTitle { get; set;} = "Test Title";
         [Reactive] public string NotificationMessage { get; set; } = "Test Message";
-        public DateTime ScheduledTime { [ObservableAsProperty] get; }
+        //public DateTime ScheduledTime { [ObservableAsProperty] get; }
+        [Reactive] public DateTime ScheduledTime { get; private set; }
         [Reactive] public bool UseActions { get; set; } = true;
         [Reactive] public DateTime SelectedDate { get; set; }
         [Reactive] public TimeSpan SelectedTime { get; set; }
@@ -156,8 +160,8 @@ namespace Samples.Notifications
         {
             "None",
             "Default",
-            "Custom",
-            "Priority"
+            "Custom"
+            //"Priority"
         };
         [Reactive] public string SelectedSoundType { get; set; } = "None";
 
