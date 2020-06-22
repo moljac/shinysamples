@@ -133,7 +133,7 @@ namespace Samples.ShinySetup
                 Constants.AnhHubName
             );
 
-            // app services
+            //// app services
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
             services.UseMediaSync<SampleMediaSyncDelegate>();

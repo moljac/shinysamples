@@ -3,13 +3,14 @@ using System.Windows.Input;
 using System.Reactive.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Reactive.Disposables;
 using Xamarin.Forms;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny.Notifications;
 using Shiny;
 using Samples.Infrastructure;
-using System.Reactive.Disposables;
+
 
 namespace Samples.Notifications
 {
