@@ -13,12 +13,26 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Expander IsExpanded="False">
+                <Expander IsExpanded="{Binding IsSearchExpanded}">
                     <Expander.Header>
-                        <Label Text="Filters" 
-                               FontSize="Large"
-                               FontAttributes="Bold"
-                               HorizontalOptions="CenterAndExpand" />
+                        <Grid ColumnDefinitions="*, Auto"
+                              HorizontalOptions="FillAndExpand"
+                              BackgroundColor="Beige">
+                            <Label Text="Filters" 
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Grid.Column="0" />
+
+                            <Image Grid.Column="1">
+                                <Image.Source>
+                                    <FontImageSource Glyph="&#xf103;"
+                                                     FontFamily="FAS"
+                                                     Color="Black" />
+                                </Image.Source>
+                            </Image>
+                         </Grid>
                     </Expander.Header>
                     
                     <TableView Intent="Form">
@@ -32,6 +46,10 @@
                                                           Date="{Binding SyncFrom}" 
                                                           HorizontalOptions="FillAndExpand" />
                                 </ViewCell>
+                            </TableSection>
+                            <TableSection>
+                                <TextCell Text="Run Query"
+                                          Command="{Binding RunQuery}" />
                             </TableSection>
                         </TableRoot>
                     </TableView>

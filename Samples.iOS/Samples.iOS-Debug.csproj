@@ -56,7 +56,6 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>None</MtouchLink>
-    <MtouchInterpreter>-all</MtouchInterpreter>
     <CodesignProvision>VS: com.shiny.test Development</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
@@ -229,10 +228,6 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj">
-      <Project>{b68160ff-cb75-4230-89be-fb5d8b01ffee}</Project>
-      <Name>Shiny.Push.FirebaseMessaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}</Project>

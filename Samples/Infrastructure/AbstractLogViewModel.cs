@@ -25,7 +25,8 @@ namespace Samples.Infrastructure
                 .WhenCollectionChanged()
                 .Synchronize(this.syncLock)
                 .Select(_ => this.Logs.Any())
-                .ToPropertyEx(this, x => x.HasLogs);
+                .Subscribe(x => this.HasLogs = x)
+                .DisposedBy(this.DestroyWith);
 
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -41,7 +42,7 @@ namespace Samples.Infrastructure
         public ObservableList<TItem> Logs { get; }
         public ICommand Load { get; }
         public ICommand Clear { get; }
-        public bool HasLogs { [ObservableAsProperty] get; }
+        [Reactive] public bool HasLogs { get; private set; }
 
 
         public override void OnAppearing()
