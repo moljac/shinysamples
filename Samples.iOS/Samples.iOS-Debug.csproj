@@ -57,6 +57,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>None</MtouchLink>
     <CodesignProvision>VS: com.shiny.test Development</CodesignProvision>
+    <MtouchInterpreter>-all</MtouchInterpreter>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -220,6 +221,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting\Shiny.BluetoothLE.Hosting.csproj">
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
       <Name>Shiny.BluetoothLE.Hosting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj">
+      <Project>{c412ef3c-2ab0-415d-acf9-a8f554178875}</Project>
+      <Name>Shiny.Core.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj">
       <Project>{2c501957-afff-4e63-b1a0-b1d4db964083}</Project>

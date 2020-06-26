@@ -1,16 +1,6 @@
-﻿//#define STARTUP_ATTRIBUTES
-//#define STARTUP_AUTO
-
-using System;
-using Shiny;
-using Shiny.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Samples;
+﻿using System;
 using Samples.Settings;
 using Samples.ShinyDelegates;
-using Samples.ShinySetup;
-using Shiny.Infrastructure;
-using Shiny.Notifications;
 using Samples.Infrastructure;
 using Samples.Jobs;
 using Samples.AppState;
@@ -22,35 +12,11 @@ using Samples.Gps;
 using Samples.Notifications;
 using Samples.Push;
 using Samples.MediaSync;
+using Microsoft.Extensions.DependencyInjection;
+using Shiny;
+using Shiny.Notifications;
+using Shiny.Logging;
 
-#if STARTUP_ATTRIBUTES
-//[assembly: ShinySqliteIntegration(true, true, true, true, true)]
-//[assembly: ShinyJob(typeof(SampleJob), "MyIdentifier", BatteryNotLow = true, DeviceCharging = false, RequiredInternetAccess = Shiny.Jobs.InternetAccess.Any)]
-[assembly: ShinyAppCenterIntegration(Constants.AppCenterTokens, true, true)]
-[assembly: ShinyService(typeof(SampleSqliteConnection))]
-[assembly: ShinyService(typeof(GlobalExceptionHandler))]
-[assembly: ShinyService(typeof(CoreDelegateServices))]
-[assembly: ShinyService(typeof(JobLoggerTask))]
-[assembly: ShinyService(typeof(IAppSettings), typeof(AppSettings))]
-
-#if !STARTUP_AUTO
-[assembly: ShinyNotifications(typeof(NotificationDelegate), true)]
-[assembly: ShinyBeacons(typeof(BeaconDelegate))]
-[assembly: ShinyBleCentral(typeof(BleCentralDelegate))]
-[assembly: ShinyGps(typeof(GpsDelegate))]
-[assembly: ShinyGeofences(typeof(GeofenceDelegate))]
-[assembly: ShinyMotionActivity]
-[assembly: ShinySensors]
-[assembly: ShinyHttpTransfers(typeof(HttpTransferDelegate))]
-[assembly: ShinySpeechRecognition]
-//[assembly: ShinyPush(typeof(PushDelegate))]
-//[assembly: ShinyPushAzureNotificationHub(typeof(PushDelegate), Constants.AnhListenerConnectionString, Constants.AnhHubName)]
-[assembly: ShinyPushFirebase(typeof(PushDelegate))]
-[assembly: ShinyNfc]
-[assembly: ShinyGeofenceSync(typeof(LocationSyncDelegates))]
-[assembly: ShinyGpsSync(typeof(LocationSyncDelegates))]
-#endif
-#endif
 
 namespace Samples.ShinySetup
 {
@@ -61,6 +27,7 @@ namespace Samples.ShinySetup
             Log.UseConsole();
             Log.UseDebug();
             services.UseMemoryCache();
+
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             services.UseSqliteLogging(true, true);
             //services.UseSqliteCache();
@@ -68,19 +35,6 @@ namespace Samples.ShinySetup
             //services.UseSqliteStorage();
             services.AddSingleton<IDialogs, Dialogs>();
 
-#if STARTUP_ATTRIBUTES
-            services.RegisterModule(new AssemblyServiceModule());
-#if STARTUP_AUTO
-            services.RegisterModule(new AutoRegisterModule());
-#endif
-#else
-            UseAllServices(services);
-#endif
-        }
-
-
-        static void UseAllServices(IServiceCollection services)
-        {
             // your infrastructure
             services.AddSingleton<SampleSqliteConnection>();
             services.AddSingleton<CoreDelegateServices>();

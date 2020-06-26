@@ -17,8 +17,6 @@ namespace Samples.iOS
         {
             // this needs to be loaded before EVERYTHING
             this.ShinyFinishedLaunching(new SampleStartup());
-            //this.ShinyFinishedLaunching(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
-            //this.ShinyFinishedLaunching(ShinyStartup.AutoRegister());
             Forms.SetFlags(
                 "SwipeView_Experimental",
                 "Expander_Experimental"
