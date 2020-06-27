@@ -54,8 +54,11 @@ namespace Samples
             if (bluetooth != null)
                 this.Append("BluetoothLE Central", bluetooth.Status, () => bluetooth.RequestAccess().ToTask(CancellationToken.None));
 
+            if (beaconRanging != null)
+                this.Append("iBeacons (Ranging)", AccessState.Unknown, () => beaconRanging.RequestAccess());
+
             if (beaconMonitoring != null)
-                this.Append("iBeacons (Monitoring)", beaconMonitoring.GetCurrentStatus(true), () => beaconMonitoring.RequestAccess(true));
+                this.Append("iBeacons (Monitoring)", AccessState.Unknown, () => beaconMonitoring.RequestAccess());
 
             if (push != null)
                 this.Append("Push", AccessState.Unknown, async () =>
