@@ -15,13 +15,13 @@ namespace Samples.Beacons
 {
     public class MonitoringViewModel : ViewModel
     {
-        readonly IBeaconManager beaconManager;
+        readonly IBeaconMonitoringManager? beaconManager;
         readonly IDialogs dialogs;
 
 
         public MonitoringViewModel(INavigationService navigator,
                                    IDialogs dialogs,
-                                   IBeaconManager beaconManager)
+                                   IBeaconMonitoringManager? beaconManager = null)
         {
             this.dialogs = dialogs;
             this.beaconManager = beaconManager;

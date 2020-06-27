@@ -26,11 +26,9 @@ namespace Samples.ShinySetup
         {
             Log.UseConsole();
             Log.UseDebug();
-            services.UseMemoryCache();
 
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             services.UseSqliteLogging(true, true);
-            //services.UseSqliteCache();
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
             services.AddSingleton<IDialogs, Dialogs>();
@@ -48,7 +46,8 @@ namespace Samples.ShinySetup
             // register all of the shiny stuff you want to use
             services.UseJobForegroundService(TimeSpan.FromSeconds(30));
             services.UseHttpTransfers<HttpTransferDelegate>();
-            services.UseBeacons<BeaconDelegate>();
+            services.UseBeaconRanging();
+            services.UseBeaconMonitoring<BeaconDelegate>();
             services.UseBleClient<BleClientDelegate>();
             services.UseBleHosting();
             services.UseMotionActivity();

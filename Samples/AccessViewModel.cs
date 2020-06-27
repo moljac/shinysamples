@@ -26,7 +26,8 @@ namespace Samples
                                IGpsManager? gps = null,
                                IMotionActivityManager? activityManager = null,
                                IBleManager? bluetooth = null,
-                               IBeaconManager? beacons = null,
+                               IBeaconRangingManager? beaconRanging = null,
+                               IBeaconMonitoringManager? beaconMonitoring = null,
                                IPushManager? push = null,
                                INfcManager? nfc = null)
         {
@@ -53,8 +54,8 @@ namespace Samples
             if (bluetooth != null)
                 this.Append("BluetoothLE Central", bluetooth.Status, () => bluetooth.RequestAccess().ToTask(CancellationToken.None));
 
-            if (beacons != null)
-                this.Append("iBeacons (Monitoring)", beacons.GetCurrentStatus(true), () => beacons.RequestAccess(true));
+            if (beaconMonitoring != null)
+                this.Append("iBeacons (Monitoring)", beaconMonitoring.GetCurrentStatus(true), () => beaconMonitoring.RequestAccess(true));
 
             if (push != null)
                 this.Append("Push", AccessState.Unknown, async () =>

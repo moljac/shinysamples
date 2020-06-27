@@ -8,7 +8,7 @@ using Shiny.Beacons;
 
 namespace Samples.Beacons
 {
-    public class BeaconDelegate : IBeaconDelegate
+    public class BeaconDelegate : IBeaconMonitorDelegate
     {
         readonly CoreDelegateServices services;
         public BeaconDelegate(CoreDelegateServices services) => this.services = services;

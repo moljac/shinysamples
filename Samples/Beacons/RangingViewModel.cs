@@ -14,7 +14,7 @@ namespace Samples.Beacons
 {
     public class RangingViewModel : ViewModel
     {
-        readonly IBeaconManager beaconManager;
+        readonly IBeaconRangingManager beaconManager;
         readonly IDialogs dialogs;
         BeaconRegion region;
         IDisposable scanner;
@@ -22,7 +22,7 @@ namespace Samples.Beacons
 
         public RangingViewModel(INavigationService navigator,
                                 IDialogs dialogs,
-                                IBeaconManager beaconManager)
+                                IBeaconRangingManager beaconManager)
         {
             this.dialogs = dialogs;
             this.beaconManager = beaconManager;
