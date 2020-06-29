@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:triptracker="clr-namespace:Samples.TripTracker" 
+             xmlns:samples="clr-namespace:Samples"
+             mc:Ignorable="d"
+             x:DataType="triptracker:LogViewModel"
+             x:Class="Samples.TripTracker.LogPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Purge" 
+                     Command="{Binding Clear}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <RefreshView Command="{Binding Load}"
+                     IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding Logs}"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" 
+                                     Span="2" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <Label Text="No Logged Events"
+                           Style="{StaticResource NoDataLabel}" />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="samples:CommandItem">
+                        <StackLayout Orientation="Vertical">
+                            <Image Source="{Binding ImageUri}" 
+                                           WidthRequest="120"
+                                           HeightRequest="120"
+                                           Aspect="AspectFit" />
+
+                            <Label Text="{Binding Text}"
+                                           FontSize="Caption" 
+                                           HorizontalOptions="CenterAndExpand" 
+                                           HorizontalTextAlignment="Center" />
+
+                            <Label Text="{Binding Detail}"
+                                           FontSize="Micro"
+                                           FontAttributes="Italic"
+                                           HorizontalOptions="CenterAndExpand"
+                                           HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

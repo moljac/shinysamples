@@ -12,10 +12,12 @@ using Samples.Gps;
 using Samples.Notifications;
 using Samples.Push;
 using Samples.MediaSync;
+using Samples.TripTracker;
 using Microsoft.Extensions.DependencyInjection;
 using Shiny;
 using Shiny.Notifications;
 using Shiny.Logging;
+using Shiny.TripTracker;
 
 
 namespace Samples.ShinySetup
@@ -90,6 +92,7 @@ namespace Samples.ShinySetup
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
             services.UseMediaSync<SampleMediaSyncDelegate>();
+            services.UseTripTracking<SampleTripTrackerDelegate>();
         }
     }
 }
