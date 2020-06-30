@@ -9,7 +9,6 @@ using Shiny.TripTracker;
 using Samples.Infrastructure;
 
 
-
 namespace Samples.TripTracker
 {
     public class LogViewModel : AbstractLogViewModel<CommandItem>
@@ -39,7 +38,7 @@ namespace Samples.TripTracker
                     Detail = $"Distance: {km} km",
                     PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                     {
-                        var email = await this.Dialogs.Input("Email address");
+                        var email = await this.Dialogs.Input("Do you wish to email this trip?  If so, enter and ok it!");
                         if (email == null)
                             return;
 

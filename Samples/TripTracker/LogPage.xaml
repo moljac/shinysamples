@@ -34,6 +34,10 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="samples:CommandItem">
                         <StackLayout Orientation="Vertical">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PrimaryCommand}" />
+                            </StackLayout.GestureRecognizers>
+                            
                             <Image Source="{Binding ImageUri}" 
                                            WidthRequest="120"
                                            HeightRequest="120"
