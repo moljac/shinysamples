@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:triptracker="clr-namespace:Samples.TripTracker"
              mc:Ignorable="d"
              x:DataType="triptracker:SettingsViewModel"
-             x:Class="Samples.TripTracker.SettingsPage">
+             x:Class="Samples.TripTracker.SettingsPage"
+             Title="Trip Tracker">
     
     <ContentPage.Content>
         <TableView Intent="Form">
