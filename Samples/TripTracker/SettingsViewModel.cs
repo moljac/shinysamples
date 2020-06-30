@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
+using Shiny;
 using Shiny.Locations;
 using Shiny.TripTracker;
 
@@ -10,7 +12,7 @@ namespace Samples.TripTracker
 {
     public class SettingsViewModel : ViewModel
     {
-        public SettingsViewModel(ITripTrackerManager manager)
+        public SettingsViewModel(ITripTrackerManager manager, IDialogs dialogs)
         {
             this.IsEnabled = manager.TrackingActivityTypes == null;
             this.UseAutomotive = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Automotive) ?? false;
@@ -18,20 +20,29 @@ namespace Samples.TripTracker
             this.UseRunning = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Running) ?? false;
             this.UseWalking = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Walking) ?? false;
 
-            this.ToggleMonitoring = ReactiveCommand.CreateFromTask(
+            this.ToggleMonitoring = ReactiveCommand.CreateFromTask
+            (
                 async () =>
                 {
-                    if (this.IsEnabled)
+                    var access = await manager.RequestAccess();
+                    if (access != AccessState.Available)
                     {
-                        await manager.StopTracking();
+                        await dialogs.Alert("Invalid Access - " + access);
                     }
                     else
                     {
-                        var types = this.GetTypes();
-                        await manager.StartTracking(types);
+                        if (!this.IsEnabled)
+                        {
+                            await manager.StopTracking();
+                        }
+                        else
+                        {
+                            var types = this.GetTypes();
+                            await manager.StartTracking(types);
+                        }
+                        this.IsEnabled = !this.IsEnabled;
+                        this.RaisePropertyChanged(nameof(this.MonitoringText));
                     }
-                    this.IsEnabled = !this.IsEnabled;
-                    this.RaisePropertyChanged(nameof(this.MonitoringText));
                 },
                 this.WhenAny(
                     x => x.UseAutomotive,
