@@ -38,7 +38,7 @@ namespace Samples.Droid
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             this.LoadApplication(new App());
 
-            this.ShinyOnCreate();
+            this.ShinyOnCreate();            
         }
 
 

@@ -66,6 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.5.3.2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
     <PackageReference Include="Xamarin.Firebase.Common" Version="71.1610.1" />
     <PackageReference Include="Xamarin.Firebase.Messaging" Version="71.1740.1" />
@@ -117,6 +120,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting\Shiny.BluetoothLE.Hosting.csproj">
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
       <Name>Shiny.BluetoothLE.Hosting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj">
+      <Project>{c412ef3c-2ab0-415d-acf9-a8f554178875}</Project>
+      <Name>Shiny.Core.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj">
       <Project>{2c501957-afff-4e63-b1a0-b1d4db964083}</Project>

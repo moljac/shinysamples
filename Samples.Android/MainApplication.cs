@@ -13,5 +13,12 @@ namespace Samples.Droid
         public MainApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
         {
         }
+
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            Xamarin.Essentials.Platform.Init(this);
+        }
     }
 }

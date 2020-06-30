@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Samples.Infrastructure;
+using ReactiveUI;
 using Shiny;
 using Shiny.TripTracker;
+using Samples.Infrastructure;
+
 
 
 namespace Samples.TripTracker
@@ -33,7 +36,33 @@ namespace Samples.TripTracker
                 return new CommandItem 
                 {
                     Text = $"{x.DateStarted} - {x.DateFinished}",
-                    Detail = $"Distance: {km}km"
+                    Detail = $"Distance: {km} km",
+                    PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
+                    {
+                        var email = await this.Dialogs.Input("Email address");
+                        if (email == null)
+                            return;
+
+                        var sb = new StringBuilder();
+                        var checkins = await this.manager.GetCheckinsByTrip(x.Id);
+                        sb.AppendLine($"Trip: {x.Id}");
+                        sb.AppendLine();
+                        sb.AppendLine($"Started: {x.DateStarted}");
+                        sb.AppendLine($"Start Location: {x.StartLatitude} / {x.StartLongitude}");
+                        sb.AppendLine();
+                        sb.AppendLine($"Finished: {x.DateFinished}");
+                        sb.AppendLine($"Finish Location: {x.EndLatitude} / {x.EndLongitude}");
+                        sb.AppendLine();
+                        sb.AppendLine($"Total Distance (meters): {x.TotalDistanceMeters}");
+                        sb.AppendLine($"GPS Pings: {checkins.Count()}");
+                        sb.AppendLine();
+                        sb.AppendLine("Lat,Long,Speed,Direction,Ticks");
+
+                        foreach (var checkin in checkins)
+                            sb.AppendLine($"{checkin.Latitude},{checkin.Longitude},{checkin.Speed},{checkin.Direction},{checkin.DateCreated.Ticks}");
+
+                        await Xamarin.Essentials.Email.ComposeAsync("Shiny Trip", sb.ToString(), email);
+                    })
                 };
             });
         }
