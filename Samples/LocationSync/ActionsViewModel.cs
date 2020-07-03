@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+
+using ImTools;
+
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Samples.Models;
 using Samples.ShinyDelegates;
+
+using Shiny.Locations;
 using Shiny.Locations.Sync;
 
 
@@ -43,11 +49,12 @@ namespace Samples.LocationSync
         public ICommand ClearGps { get; }
         public ICommand ProcessGps { get; }
 
-        [Reactive] public bool IsSyncEnabled { get; set; }
+        [Reactive] public bool IsGeofenceSyncEnabled { get; set; }
+        [Reactive] public bool IsGpsSyncEnabled { get; set; }
         [Reactive] public bool IsSyncDelegateCrashEnabled { get; set; }
 
 
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
             base.OnAppearing();
             this.IsSyncDelegateCrashEnabled = this.syncDelegate.IsSyncDelegateCrashEnabled;
@@ -56,13 +63,63 @@ namespace Samples.LocationSync
                 .Subscribe(x => this.syncDelegate.IsSyncDelegateCrashEnabled = x)
                 .DisposeWith(this.DeactivateWith);
 
-            this.IsSyncEnabled = this.syncManager.IsSyncEnabled;
-            this.WhenAnyValue(x => x.IsSyncEnabled)
+            this.SetGps();
+            this.SetGeofence();
+        }
+
+
+        async Task SetGeofence()
+        {
+            this.IsGeofenceSyncEnabled = await this.syncManager.IsMonitoring(LocationSyncType.Geofence);
+            this.WhenAnyValue(x => x.IsGeofenceSyncEnabled)
                 .Skip(1)
-                .Subscribe(x => this.syncManager.IsSyncEnabled = x)
+                .Subscribe(async enabled =>
+                {
+                    try
+                    { 
+                        if (enabled)
+                        {
+                            await this.dialogs.Alert("Make sure to go to the geofence menu and add a new geofence", "Info");
+                        }
+                        else
+                        {
+                            await this.syncManager.StopMonitoring(LocationSyncType.Geofence);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await this.dialogs.Alert(ex.ToString());
+                    }
+                })
                 .DisposeWith(this.DeactivateWith);
         }
 
+
+        async Task SetGps()
+        {
+            this.IsGpsSyncEnabled = await this.syncManager.IsMonitoring(LocationSyncType.GPS);
+            this.WhenAnyValue(x => x.IsGeofenceSyncEnabled)
+                .Skip(1)
+                .Subscribe(async enabled =>
+                {
+                    try
+                    {
+                        if (enabled)
+                        {
+                            await this.syncManager.StartGpsMonitoring(GpsRequest.Realtime(true));
+                        }
+                        else
+                        {
+                            await this.syncManager.StopMonitoring(LocationSyncType.Geofence);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await this.dialogs.Alert(ex.ToString());
+                    }
+                })
+                .DisposeWith(this.DeactivateWith);
+        }
 
         ICommand ProcessCommand(LocationSyncType syncType) => ReactiveCommand.CreateFromTask(async () =>
         {

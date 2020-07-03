@@ -91,8 +91,8 @@ namespace Samples.ShinySetup
             //// app services
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
-            services.UseMediaSync<SampleMediaSyncDelegate>();
             services.UseTripTracking<SampleTripTrackerDelegate>();
+            services.UseMediaSync<SampleMediaSyncDelegate>();            
         }
     }
 }

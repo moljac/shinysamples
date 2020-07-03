@@ -13,15 +13,16 @@
             <TableRoot>
                 <TableSection>
                     <SwitchCell Text="Delegate Test Crash Enabled" On="{Binding IsSyncDelegateCrashEnabled}" />
-                    <SwitchCell Text="Sync Enabled" On="{Binding IsSyncEnabled}" />
                 </TableSection>
 
                 <TableSection Title="Geofences">
+                    <SwitchCell Text="Enabled" On="{Binding IsGeofenceSyncEnabled}" />
                     <TextCell Text="Process" Command="{Binding ProcessGeofences}" />
                     <TextCell Text="Clear" Command="{Binding ClearGeofences}" />
                 </TableSection>
 
                 <TableSection Title="GPS">
+                    <SwitchCell Text="Enabled" On="{Binding IsGpsSyncEnabled}" />
                     <TextCell Text="Process" Command="{Binding ProcessGps}" />
                     <TextCell Text="Clear" Command="{Binding ClearGps}" />
                 </TableSection>

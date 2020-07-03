@@ -25,7 +25,7 @@ namespace Samples.TripTracker
         {
             this.notifications.Badge = 1;
 
-            var km = Distance.FromMeters(trip.TotalDistanceMeters);
+            var km = Distance.FromMeters(trip.TotalDistanceMeters).TotalKilometers;
             var time = trip.DateFinished - trip.DateStarted;
 
             await this.notifications.Send(N_TITLE, $"You just finished a trip that was {km} kilometers and took {time.Value.TotalMinutes} minutes");
