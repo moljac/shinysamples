@@ -1,0 +1,9 @@
+<Project>
+    <!--
+    <ItemGroup>
+        <PackageReference Include="Uno.SourceGenerationTasks" Version="2.0.6" PrivateAssets="all" />
+        <SourceGenerator Include="$(MSBuildThisFileDirectory)\..\Shiny\src\Shiny.BluetoothLE.RefitClient.Generator\bin\$(Configuration)\netstandard2.0\Shiny.BluetoothLE.RefitClient.Generator.dll" />--><!--
+        <SourceGenerator Include="$(MSBuildThisFileDirectory)..\Shiny\src\Shiny.Core\bin\$(Configuration)\netstandard2.0\Shiny.Generators.dll" />
+    </ItemGroup>
+    -->
+</Project>

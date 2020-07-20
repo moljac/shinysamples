@@ -17,10 +17,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Shiny;
 using Shiny.Notifications;
 using Shiny.Logging;
-using Shiny.TripTracker;
 
+//[assembly:Shiny.Generators.GenerateStaticClasses]
 
-namespace Samples.ShinySetup
+namespace Samples
 {
     public class SampleStartup : ShinyStartup
     {
@@ -29,7 +29,7 @@ namespace Samples.ShinySetup
             Log.UseConsole();
             Log.UseDebug();
 
-            //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
+            //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);B
             services.UseSqliteLogging(true, true);
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
@@ -91,8 +91,8 @@ namespace Samples.ShinySetup
             //// app services
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
-            services.UseTripTracking<SampleTripTrackerDelegate>();
-            services.UseMediaSync<SampleMediaSyncDelegate>();            
+            //services.UseTripTracking<SampleTripTrackerDelegate>();
+            services.UseMediaSync<SampleMediaSyncDelegate>();
         }
     }
 }

@@ -4,7 +4,6 @@ using UIKit;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using Samples.ShinySetup;
 using Shiny;
 
 
@@ -28,7 +27,6 @@ namespace Samples.iOS
             this.LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
-
 
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
             => this.ShinyDidReceiveRemoteNotification(userInfo, null);

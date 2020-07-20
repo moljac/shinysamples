@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nfc="clr-namespace:Samples.Nfc"
-             xmlns:nfc1="clr-namespace:Shiny.Nfc;assembly=Shiny.Nfc"
+             xmlns:nfc1="clr-namespace:Shiny.Nfc;assembly=Shiny.Nfc.Abstractions"
              x:DataType="nfc:NfcViewModel"
              mc:Ignorable="d"
              x:Class="Samples.Nfc.NfcPage"

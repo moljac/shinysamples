@@ -51,7 +51,6 @@
         <EmbeddedResource Include="Resources\fa-brands-400.ttf" />
         <EmbeddedResource Include="Resources\fa-regular-400.ttf" />
         <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
-        <EmbeddedResource Include="Resources\MaterialIcons-Regular.ttf" />
     </ItemGroup>
 
 </Project>
