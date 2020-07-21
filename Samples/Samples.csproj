@@ -26,7 +26,6 @@
         <PackageReference Include="Shiny.Net.Http" Version="1.2.0.1866" />
         <PackageReference Include="Shiny.Nfc" Version="1.2.0.1866-beta" />
         <PackageReference Include="Shiny.Notifications" Version="1.2.0.1866" />
-        <PackageReference Include="Shiny.PhotoSync" Version="1.2.0.1715-alpha" />
         <PackageReference Include="Shiny.Push" Version="1.2.0.1866" />
         <PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="1.2.0.1866" />
         <PackageReference Include="Shiny.Push.FirebaseMessaging" Version="1.2.0.1866-beta" />
