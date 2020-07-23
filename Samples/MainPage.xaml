@@ -7,9 +7,9 @@
                   ios:Page.LargeTitleDisplay="Always"
                   x:DataType="samples:MainViewModel"
                   x:Class="Samples.MainPage"
-                  Title="Shiny"                  
+                  Title="Shiny"
                   IsPresented="{Binding IsPresented}">
-    
+
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <TableView Intent="Menu">
@@ -48,7 +48,6 @@
                         <TextCell Text="Jobs" Command="{Binding Navigate}" CommandParameter="Nav/Jobs" />
                         <TextCell Text="App State" Command="{Binding Navigate}" CommandParameter="Nav/AppState" />
                         <TextCell Text="IO" Command="{Binding Navigate}" CommandParameter="Nav/IO" />
-                        <TextCell Text="Caching" Command="{Binding Navigate}" CommandParameter="Nav/Cache" />
                         <TextCell Text="Logging" Command="{Binding Navigate}" CommandParameter="Nav/Logs" />
                         <TextCell Text="Access" Command="{Binding Navigate}" CommandParameter="Nav/Access" />
                         <TextCell Text="Environment" Command="{Binding Navigate}" CommandParameter="Nav/Environment" />

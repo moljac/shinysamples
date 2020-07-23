@@ -91,7 +91,7 @@ namespace Samples
             //// app services
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
-            //services.UseTripTracking<SampleTripTrackerDelegate>();
+            services.UseTripTracker<SampleTripTrackerDelegate>();
             services.UseMediaSync<SampleMediaSyncDelegate>();
         }
     }
