@@ -26,9 +26,10 @@ namespace Samples.TripTracker
             this.notifications.Badge = 1;
 
             var km = Distance.FromMeters(trip.TotalDistanceMeters).TotalKilometers;
+            var avgSpeed = Distance.FromMeters(trip.AverageSpeedMetersPerHour).TotalKilometers;
             var time = trip.DateFinished - trip.DateStarted;
 
-            await this.notifications.Send(N_TITLE, $"You just finished a trip that was {km} kilometers and took {time.Value.TotalMinutes} minutes");
+            await this.notifications.Send(N_TITLE, $"You just finished a trip that was {km} km and took {time.Value.TotalMinutes} minutes with an average speed of {avgSpeed} km");
         }
     }
 }

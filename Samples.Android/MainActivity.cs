@@ -27,11 +27,6 @@ namespace Samples.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
-            Forms.SetFlags(
-                "SwipeView_Experimental",
-                "Expander_Experimental"
-            );
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
 

@@ -20,6 +20,11 @@ namespace Samples
         protected override async void OnInitialized()
         {
             this.InitializeComponent();
+            //global::Xamarin.Forms.Forms.SetFlags(
+            //    "SwipeView_Experimental",
+            //    "Expander_Experimental",
+            //    "RadioButton_Experimental"
+            //);
             XF.Material.Forms.Material.Init(this);
 
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(viewType =>

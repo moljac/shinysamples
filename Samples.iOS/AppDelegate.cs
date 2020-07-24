@@ -16,11 +16,6 @@ namespace Samples.iOS
         {
             // this needs to be loaded before EVERYTHING
             this.ShinyFinishedLaunching(new SampleStartup());
-            Forms.SetFlags(
-                "SwipeView_Experimental",
-                "Expander_Experimental"
-            );
-
             Forms.Init();
             FormsMaps.Init();
             XF.Material.iOS.Material.Init();

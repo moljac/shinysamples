@@ -212,7 +212,7 @@
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.5.3.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -283,6 +283,30 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
       <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
       <Name>Shiny.Push.AzureNotificationHubs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Notifications.Abstractions\Shiny.Notifications.Abstractions.csproj">
+      <Project>{31A9ECFC-61EB-4579-98BA-209A463EDFFE}</Project>
+      <Name>Shiny.Notifications.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Abstractions\Shiny.Locations.Abstractions.csproj">
+      <Project>{D6CF56D9-E27B-4A61-ACF3-EC8722E404A5}</Project>
+      <Name>Shiny.Locations.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Nfc.Abstractions\Shiny.Nfc.Abstractions.csproj">
+      <Project>{7DD9F300-1D8F-4724-8178-30BFA7D50509}</Project>
+      <Name>Shiny.Nfc.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj">
+      <Project>{F2249781-6D49-4A5F-92C9-6AF5AC1F4AF4}</Project>
+      <Name>Shiny.Push.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Sensors.Abstractions\Shiny.Sensors.Abstractions.csproj">
+      <Project>{6E638CCD-BF1A-42D4-A2B1-1526BEAFD62C}</Project>
+      <Name>Shiny.Sensors.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition.Abstractions\Shiny.SpeechRecognition.Abstractions.csproj">
+      <Project>{6DCFE687-4C85-4443-A860-457F57018A2E}</Project>
+      <Name>Shiny.SpeechRecognition.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

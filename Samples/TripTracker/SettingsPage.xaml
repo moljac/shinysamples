@@ -2,39 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:triptracker="clr-namespace:Samples.TripTracker"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:triptracker="clr-namespace:Samples.TripTracker"
              mc:Ignorable="d"
              x:DataType="triptracker:SettingsViewModel"
              x:Class="Samples.TripTracker.SettingsPage">
     
     <ContentPage.Content>
-        <TableView Intent="Form">
-            <TableRoot>
-                <TableSection>
-                    <SwitchCell Text="Automotive" 
-                                On="{Binding UseAutomotive}" 
-                                IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
-                    
-                    <SwitchCell Text="Cycling" 
-                                On="{Binding UseCycling}" 
-                                IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
-                    
-                    <SwitchCell Text="Running" 
-                                On="{Binding UseRunning}" 
-                                IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
-                    
-                    <SwitchCell Text="Walking" 
-                                On="{Binding UseWalking}" 
-                                IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
-                </TableSection>
-                
-                <TableSection>
-                    <TextCell Text="{Binding MonitoringText, Mode=OneWay}" 
-                              Command="{Binding ToggleMonitoring}"
-                              IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
+        <StackLayout>
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseAutomotive}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         Text="Automotive" />
 
-                </TableSection>
-            </TableRoot>
-        </TableView>
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseCycling}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         Text="Cycling" />
+
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseRunning}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         Text="Running" />
+
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseWalking}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         Text="Walking" />
+
+            <Button Text="{Binding MonitoringText, Mode=OneWay}" 
+                    Command="{Binding ToggleMonitoring}"
+                    IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

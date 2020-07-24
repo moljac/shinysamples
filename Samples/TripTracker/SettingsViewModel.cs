@@ -14,11 +14,11 @@ namespace Samples.TripTracker
     {
         public SettingsViewModel(ITripTrackerManager manager, IDialogs dialogs)
         {
-            this.IsEnabled = manager.TrackingActivityTypes == null;
-            this.UseAutomotive = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Automotive) ?? false;
-            this.UseCycling = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Cycling) ?? false;
-            this.UseRunning = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Running) ?? false;
-            this.UseWalking = manager.TrackingActivityTypes?.HasFlag(MotionActivityType.Walking) ?? false;
+            this.IsEnabled = manager.TrackingActivityType == null;
+            this.UseAutomotive = manager.TrackingActivityType == MotionActivityType.Automotive;
+            this.UseCycling = manager.TrackingActivityType == MotionActivityType.Cycling;
+            this.UseRunning = manager.TrackingActivityType == MotionActivityType.Running;
+            this.UseWalking = manager.TrackingActivityType == MotionActivityType.Walking;
 
             this.ToggleMonitoring = ReactiveCommand.CreateFromTask
             (
@@ -37,8 +37,8 @@ namespace Samples.TripTracker
                         }
                         else
                         {
-                            var types = this.GetTypes();
-                            await manager.StartTracking(types);
+                            var type = this.GetTrackingType().Value;
+                            await manager.StartTracking(type);
                         }
                         this.IsEnabled = !this.IsEnabled;
                         this.RaisePropertyChanged(nameof(this.MonitoringText));
@@ -49,7 +49,7 @@ namespace Samples.TripTracker
                     x => x.UseRunning,
                     x => x.UseWalking,
                     x => x.UseCycling,
-                    (auto, run, walk, cycle) => auto.GetValue() || run.GetValue() || walk.GetValue() || cycle.GetValue()
+                    (auto, run, walk, cycle) => this.GetTrackingType() != null
                 )
             );
         }
@@ -64,22 +64,21 @@ namespace Samples.TripTracker
         [Reactive] public bool UseCycling { get; set; }
 
 
-        MotionActivityType GetTypes()
+        MotionActivityType? GetTrackingType()
         {
-            MotionActivityType type = 0;
             if (this.UseAutomotive)
-                type |= MotionActivityType.Automotive;
+                return MotionActivityType.Automotive;
 
             if (this.UseCycling)
-                type |= MotionActivityType.Cycling;
+                return MotionActivityType.Cycling;
 
             if (this.UseRunning)
-                type |= MotionActivityType.Running;
+                return MotionActivityType.Running;
 
             if (this.UseWalking)
-                type |= MotionActivityType.Walking;
+                return MotionActivityType.Walking;
 
-            return type;
+            return null;
         }
     }
 }
