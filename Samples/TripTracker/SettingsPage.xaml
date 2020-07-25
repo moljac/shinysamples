@@ -7,9 +7,9 @@
              mc:Ignorable="d"
              x:DataType="triptracker:SettingsViewModel"
              x:Class="Samples.TripTracker.SettingsPage">
-    
+
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
             <RadioButton GroupName="Selection"
                          IsChecked="{Binding UseAutomotive}"
                          IsEnabled="{Binding IsEnabled, Mode=OneWay}"
@@ -30,9 +30,8 @@
                          IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                          Text="Walking" />
 
-            <Button Text="{Binding MonitoringText, Mode=OneWay}" 
-                    Command="{Binding ToggleMonitoring}"
-                    IsEnabled="{Binding IsEnabled, Mode=OneWay}" />
+            <Button Text="{Binding MonitoringText, Mode=OneWay}"
+                    Command="{Binding ToggleMonitoring}" />
 
         </StackLayout>
     </ContentPage.Content>

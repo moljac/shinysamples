@@ -156,13 +156,25 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Abstractions\Shiny.Beacons.Abstractions.csproj">
+      <Project>{ce212900-cd9a-4298-b96d-c31a32fb3f0d}</Project>
+      <Name>Shiny.Beacons.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj">
       <Project>{3a1fb5b6-8363-4b73-b0ae-7be8d8feb926}</Project>
       <Name>Shiny.Beacons</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Abstractions\Shiny.BluetoothLE.Abstractions.csproj">
+      <Project>{7cc555c9-9247-47b5-aceb-2069b1aee1fd}</Project>
+      <Name>Shiny.BluetoothLE.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Common\Shiny.BluetoothLE.Common.csproj">
       <Project>{ec506ae0-9123-43aa-a04c-887865f5182e}</Project>
       <Name>Shiny.BluetoothLE.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting.Abstractions\Shiny.BluetoothLE.Hosting.Abstractions.csproj">
+      <Project>{b0b472d8-f9bc-4984-b485-93f460d6f5b6}</Project>
+      <Name>Shiny.BluetoothLE.Hosting.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting\Shiny.BluetoothLE.Hosting.csproj">
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
@@ -172,9 +184,17 @@
       <Project>{b2ec69d7-c76f-4ffc-b2fb-2806e4cfc368}</Project>
       <Name>Shiny.BluetoothLE</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj">
+      <Project>{c412ef3c-2ab0-415d-acf9-a8f554178875}</Project>
+      <Name>Shiny.Core.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj">
       <Project>{f704315d-7f4f-4090-b635-7fe634565187}</Project>
       <Name>Shiny.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Abstractions\Shiny.Locations.Abstractions.csproj">
+      <Project>{d6cf56d9-e27b-4a61-acf3-ec8722e404a5}</Project>
+      <Name>Shiny.Locations.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj">
       <Project>{8d242035-644c-4939-b2d5-be9ee77467dc}</Project>
@@ -184,21 +204,41 @@
       <Project>{bcc73e34-b4c5-4f48-b84b-7c17dc489e89}</Project>
       <Name>Shiny.Net.Http</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Nfc.Abstractions\Shiny.Nfc.Abstractions.csproj">
+      <Project>{7dd9f300-1d8f-4724-8178-30bfa7d50509}</Project>
+      <Name>Shiny.Nfc.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
       <Project>{fedc40be-5198-449d-969f-59694d30c2aa}</Project>
       <Name>Shiny.Nfc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Notifications.Abstractions\Shiny.Notifications.Abstractions.csproj">
+      <Project>{31a9ecfc-61eb-4579-98ba-209a463edffe}</Project>
+      <Name>Shiny.Notifications.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj">
       <Project>{af1473ed-6fc5-4b02-bb79-03e6c1b23bb8}</Project>
       <Name>Shiny.Notifications</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj">
+      <Project>{f2249781-6d49-4a5f-92c9-6af5ac1f4af4}</Project>
+      <Name>Shiny.Push.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
       <Project>{1c8055aa-e6c5-4a6d-9c0b-cf3b36819553}</Project>
       <Name>Shiny.Push.AzureNotificationHubs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj">
+      <Project>{b68160ff-cb75-4230-89be-fb5d8b01ffee}</Project>
+      <Name>Shiny.Push.FirebaseMessaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{4efa31bb-7616-4075-8698-11978cfeb592}</Project>
       <Name>Shiny.Push</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Sensors.Abstractions\Shiny.Sensors.Abstractions.csproj">
+      <Project>{6e638ccd-bf1a-42d4-a2b1-1526beafd62c}</Project>
+      <Name>Shiny.Sensors.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj">
       <Project>{62130fe7-9f43-4531-a9ed-6ce2314b4a3c}</Project>

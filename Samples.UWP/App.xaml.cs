@@ -7,7 +7,6 @@ using Xamarin.Forms;
 using Application = Windows.UI.Xaml.Application;
 using Frame = Windows.UI.Xaml.Controls.Frame;
 using Shiny;
-using Samples.ShinySetup;
 
 
 namespace Samples.UWP
@@ -37,7 +36,8 @@ namespace Samples.UWP
                 Rg.Plugins.Popup.Popup.Init();
                 Forms.SetFlags(
                     "SwipeView_Experimental",
-                    "Expander_Experimental"
+                    "Expander_Experimental",
+                    "RadioButton_Experimental"
                 );
                 Forms.Init(e);
 

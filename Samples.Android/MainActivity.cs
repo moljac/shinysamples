@@ -27,13 +27,18 @@ namespace Samples.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            Forms.SetFlags(
+                "SwipeView_Experimental",
+                "Expander_Experimental",
+                "RadioButton_Experimental"
+            );
             Forms.Init(this, savedInstanceState);
             FormsMaps.Init(this, savedInstanceState);
 
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             this.LoadApplication(new App());
 
-            this.ShinyOnCreate();     
+            this.ShinyOnCreate();
         }
 
 
