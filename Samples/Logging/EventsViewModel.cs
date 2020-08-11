@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Prism.Navigation;
 using ReactiveUI;
 using Samples.Infrastructure;
 using Shiny;
@@ -18,14 +19,17 @@ namespace Samples.Logging
     {
         readonly ShinySqliteConnection conn;
         readonly ISerializer serializer;
+        readonly INavigationService navigator;
 
 
         public EventsViewModel(ShinySqliteConnection conn,
                                ISerializer serializer,
-                               IDialogs dialogs) : base(dialogs)
+                               IDialogs dialogs,
+                               INavigationService navigator) : base(dialogs)
         {
             this.conn = conn;
             this.serializer = serializer;
+            this.navigator = navigator;
         }
 
 
@@ -44,7 +48,7 @@ namespace Samples.Logging
                         foreach (var p in x.Parameters)
                             s += $"{Environment.NewLine}{p.Key}: {p.Value}";
 
-                        await this.Dialogs.Alert(s);
+                        await this.navigator.ShowBigText(s, $"{x.EventName} ({DateTime.Now:hh:mm:ss tt})");
                     })
                 })
                 .SubOnMainThread(this.InsertItem)
@@ -73,7 +77,7 @@ namespace Samples.Logging
                         foreach (var p in parameters)
                             s += $"{Environment.NewLine}{p.Item1}: {p.Item2}";
                     }
-                    await this.Dialogs.Alert(s);
+                    await this.navigator.ShowBigText(s, $"{x.Description} ({ x.TimestampUtc.ToLocalTime():hh: mm: ss tt})");
                 })
             });
         }

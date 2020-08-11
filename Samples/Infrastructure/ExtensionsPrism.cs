@@ -10,6 +10,10 @@ namespace Samples
 {
     public static class ExtensionsPrism
     {
+        public static Task ShowBigText(this INavigationService navigator, string text, string? title = null)
+            => navigator.Navigate("BigText", ("Text", text), ("Title", title));
+
+
         public static Task Navigate(this INavigationService navigation, string uri, params (string, object)[] parameters)
             => navigation.Navigate(uri, parameters.ToNavParams());
 

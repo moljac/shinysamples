@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Samples.Infrastructure;
 using DryIoc;
+using Samples.Logging;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 [assembly: ExportFont("fa-solid-900.ttf", Alias = "FAS")]
@@ -41,6 +42,7 @@ namespace Samples
             containerRegistry.RegisterForNavigation<NavigationPage>("Nav");
             containerRegistry.RegisterForNavigation<MainPage>("Main");
             containerRegistry.RegisterForNavigation<WelcomePage>("Welcome");
+            containerRegistry.RegisterForNavigation<BigTextViewPage>("BigText");
             containerRegistry.RegisterForNavigation<DelegateNotificationsPage>("DelegateNotifications");
 
             containerRegistry.RegisterForNavigation<Gps.MainPage>("Gps");

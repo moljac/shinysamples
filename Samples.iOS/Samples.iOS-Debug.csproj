@@ -312,6 +312,18 @@
       <Project>{B68160FF-CB75-4230-89BE-FB5D8B01FFEE}</Project>
       <Name>Shiny.Push.FirebaseMessaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj">
+      <Project>{4190E58C-A512-4E97-B212-295C21D4DCD1}</Project>
+      <Name>Shiny.TripTracker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.Sqlite\Shiny.Integrations.Sqlite.csproj">
+      <Project>{6E2A1D3E-445F-4BD5-9D47-05F49E3CEAD4}</Project>
+      <Name>Shiny.Integrations.Sqlite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Sync\Shiny.Locations.Sync.csproj">
+      <Project>{C356B984-0CCF-41CF-A745-5719695FF81E}</Project>
+      <Name>Shiny.Locations.Sync</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\60.png" />
