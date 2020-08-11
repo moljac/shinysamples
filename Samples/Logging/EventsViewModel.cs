@@ -61,6 +61,7 @@ namespace Samples.Logging
         {
             var logs = await this.conn
                 .Logs
+                .OrderByDescending(x => x.TimestampUtc)
                 .Where(x => !x.IsError)
                 .ToListAsync();
 
