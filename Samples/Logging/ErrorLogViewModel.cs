@@ -66,7 +66,7 @@ namespace Samples.Logging
 
             return results.Select(x => new CommandItem
             {
-                Text = x.TimestampUtc.ToString(),
+                Text = x.TimestampUtc.ToLocalTime().ToString(),
                 Detail = x.Description,
                 PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                 {
