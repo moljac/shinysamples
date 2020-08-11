@@ -7,42 +7,40 @@
              Title="Activities">
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <StackLayout>
+            <Expander>
+                <Expander.Header>
+                    <Label Text="{Binding Date, StringFormat='Filter: {0:d}'}"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           HorizontalOptions="FillAndExpand"
+                           HorizontalTextAlignment="Center"
+                           TextColor="White"
+                           BackgroundColor="Black" />
+                </Expander.Header>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+                <Frame BorderColor="Black">
+                    <StackLayout>
+                        <DatePicker Date="{Binding Date}"
+                                    MaximumDate="{x:Static sys:DateTime.Now}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    FontSize="Large"/>
 
-            <DatePicker Date="{Binding Date}"
-                        MaximumDate="{x:Static sys:DateTime.Now}"
-                        HorizontalOptions="CenterAndExpand"
-                        FontSize="Large"
-                        Grid.Row="0"
-                        Grid.ColumnSpan="2" />
+                        <Label Text="{Binding CurrentActivity, StringFormat='Currently: {0}'}"
+                               FontSize="Medium"
+                               HorizontalOptions="Center" />
 
-            <Label Text="{Binding CurrentActivity, StringFormat='Currently: {0}'}"
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                Grid.Row="1"
-                Grid.Column="0" />
+                        <Label Text="{Binding EventCount, StringFormat='{0} Event(s)'}"
+                               FontSize="Medium"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"  />
+                    </StackLayout>
+                </Frame>
+            </Expander>
 
-            <Label Text="{Binding EventCount, StringFormat='{0} Event(s)'}"
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                Grid.Row="1"
-                Grid.Column="1" />
-
-            <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding Load}">
-                <CollectionView ItemsSource="{Binding Events}"
-                                Grid.Row="2"
-                                Grid.ColumnSpan="2">
+            <RefreshView IsRefreshing="{Binding IsBusy}"
+                         Command="{Binding Load}">
+                <CollectionView ItemsSource="{Binding Events}">
 
                     <CollectionView.EmptyView>
                         <Label Text="No Events Found"
@@ -55,13 +53,13 @@
                                 <Label Text="{Binding Text}" FontSize="Title" />
                                 <Label Text="{Binding Detail}" FontSize="Subtitle" />
                                 <BoxView HeightRequest="1"
-                                        BackgroundColor="Black"
-                                        HorizontalOptions="CenterAndExpand" />
+                                         BackgroundColor="Black"
+                                         HorizontalOptions="CenterAndExpand" />
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

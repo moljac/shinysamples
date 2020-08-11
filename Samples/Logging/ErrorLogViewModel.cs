@@ -10,7 +10,6 @@ using Shiny;
 using Shiny.Infrastructure;
 using Shiny.Integrations.Sqlite;
 using Shiny.Logging;
-using Shiny.Models;
 
 
 namespace Samples.Logging
@@ -27,7 +26,12 @@ namespace Samples.Logging
         {
             this.conn = conn;
             this.serializer = serializer;
+        }
 
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
             Log
                 .WhenExceptionLogged()
                 .Select(x => new CommandItem
@@ -44,13 +48,10 @@ namespace Samples.Logging
                     })
                 })
                 .SubOnMainThread(this.InsertItem)
-                .DisposeWith(this.DestroyWith);
+                .DisposeWith(this.DeactivateWith);
         }
 
-
-        protected override Task ClearLogs() => this.conn.DeleteAllAsync<LogStore>();
-
-
+        protected override Task ClearLogs() => this.conn.Logs.DeleteAsync(x => x.IsError);
         protected override async Task<IEnumerable<CommandItem>> LoadLogs()
         {
             var results = await this.conn
@@ -65,7 +66,7 @@ namespace Samples.Logging
                 Detail = x.Description,
                 PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                 {
-                    var s = $"{x.TimestampUtc}{Environment.NewLine}{x.Description}{Environment.NewLine}";
+                    var s = $"{x.TimestampUtc.ToLocalTime()}{Environment.NewLine}{x.Description}{Environment.NewLine}";
                     if (!x.Parameters.IsEmpty())
                     {
                         var parameters = this.serializer.Deserialize<Tuple<string, string>[]>(x.Parameters);

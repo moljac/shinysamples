@@ -308,6 +308,10 @@
       <Project>{6DCFE687-4C85-4443-A860-457F57018A2E}</Project>
       <Name>Shiny.SpeechRecognition.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj">
+      <Project>{B68160FF-CB75-4230-89BE-FB5D8B01FFEE}</Project>
+      <Name>Shiny.Push.FirebaseMessaging</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\60.png" />
