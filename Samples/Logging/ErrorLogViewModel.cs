@@ -38,19 +38,11 @@ namespace Samples.Logging
             base.OnAppearing();
             Log
                 .WhenExceptionLogged()
-                .Select(x => new CommandItem
-                {
-                    Text = DateTime.Now.ToString(),
-                    Detail = x.Exception.ToString(),
-                    PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
-                    {
-                        var s = $"{x.Exception}{Environment.NewLine}";
-                        foreach (var p in x.Parameters)
-                            s += $"{Environment.NewLine}{p.Key}: {p.Value}";
-
-                        await navigator.ShowBigText(s, $"Error: {DateTime.Now}");
-                    })
-                })
+                .Select(x => this.ToItem(
+                    DateTime.UtcNow,
+                    x.Exception.ToString(),
+                    () => x.Parameters
+                ))
                 .SubOnMainThread(this.InsertItem)
                 .DisposeWith(this.DeactivateWith);
         }
@@ -64,22 +56,39 @@ namespace Samples.Logging
                 .OrderByDescending(x => x.TimestampUtc)
                 .ToListAsync();
 
-            return results.Select(x => new CommandItem
+            return results.Select(x => this.ToItem(
+                x.TimestampUtc,
+                x.Description,
+                () =>
+                {
+                    if (x.Parameters.IsEmpty())
+                        return null;
+
+                    return this.serializer.Deserialize<Dictionary<string, string>>(x.Parameters);
+                }
+            ));
+        }
+
+
+        CommandItem ToItem(DateTime date, string exception, Func<IDictionary<string, string>?> getParameters)
+        {
+            var title = date.ToLocalTime().ToString("MMM dd, hh:dd:ss tt");
+            return new CommandItem
             {
-                Text = x.TimestampUtc.ToLocalTime().ToString(),
-                Detail = x.Description,
+                Text = title,
+                Detail = exception,
                 PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                 {
-                    var s = $"{x.TimestampUtc.ToLocalTime()}{Environment.NewLine}{x.Description}{Environment.NewLine}";
-                    if (!x.Parameters.IsEmpty())
-                    {
-                        var parameters = this.serializer.Deserialize<Tuple<string, string>[]>(x.Parameters);
+                    var s = $"{title}{Environment.NewLine}{exception}{Environment.NewLine}";
+                    var parameters = getParameters();
+
+                    if (!parameters.IsEmpty())
                         foreach (var p in parameters)
-                            s += $"{Environment.NewLine}{p.Item1}: {p.Item2}";
-                    }
-                    await navigator.ShowBigText(s, $"Error: {DateTime.Now}");
+                            s += $"{Environment.NewLine}{p.Key}: {p.Value}";
+
+                    await navigator.ShowBigText(s, title);
                 })
-            });
+            };
         }
     }
 }

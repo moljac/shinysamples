@@ -38,19 +38,12 @@ namespace Samples.Logging
             base.OnAppearing();
             Log
                 .WhenEventLogged()
-                .Select(x => new CommandItem
-                {
-                    Text = $"{x.EventName} ({DateTime.Now:hh:mm:ss tt})",
-                    Detail = x.Description,
-                    PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
-                    {
-                        var s = $"{x.EventName} ({DateTime.Now:hh:mm:ss tt}){Environment.NewLine}{x.Description}";
-                        foreach (var p in x.Parameters)
-                            s += $"{Environment.NewLine}{p.Key}: {p.Value}";
-
-                        await this.navigator.ShowBigText(s, $"{x.EventName} ({DateTime.Now:hh:mm:ss tt})");
-                    })
-                })
+                .Select(x => this.ToItem(
+                    x.EventName,
+                    x.Description,
+                    DateTime.UtcNow,
+                    () => x.Parameters
+                ))
                 .SubOnMainThread(this.InsertItem)
                 .DisposeWith(this.DeactivateWith);
         }
@@ -65,22 +58,40 @@ namespace Samples.Logging
                 .Where(x => !x.IsError)
                 .ToListAsync();
 
-            return logs.Select(x => new CommandItem
+            return logs.Select(x => this.ToItem(
+                x.Description,
+                x.Detail,
+                x.TimestampUtc,
+                () =>
+                {
+                    if (x.Parameters.IsEmpty())
+                        return null;
+
+                    return this.serializer.Deserialize<Dictionary<string, string>>(x.Parameters);
+                })
+            );
+        }
+
+
+        CommandItem ToItem(string description, string detail, DateTime dt, Func<IDictionary<string, string>?> getParameters)
+        {
+            var title = $"{description} ({dt.ToLocalTime():MMM dd, hh:dd:ss tt})";
+            return new CommandItem
             {
-                Text = $"{x.Description} ({x.TimestampUtc.ToLocalTime():hh:mm:ss tt})",
-                Detail = x.Detail,
+                Text = title,
+                Detail = detail,
                 PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                 {
-                    var s = $"{x.Description} ({x.TimestampUtc.ToLocalTime():hh:mm:ss tt}){Environment.NewLine}{x.Description}";
-                    if (!x.Parameters.IsEmpty())
+                    var s = $"{title}{Environment.NewLine}{detail}";
+                    var parameters = getParameters();
+                    if (!parameters.IsEmpty())
                     {
-                        var parameters = this.serializer.Deserialize<Tuple<string, string>[]>(x.Parameters);
                         foreach (var p in parameters)
-                            s += $"{Environment.NewLine}{p.Item1}: {p.Item2}";
+                            s += $"{Environment.NewLine}{p.Key}: {p.Value}";
                     }
-                    await this.navigator.ShowBigText(s, $"{x.Description} ({ x.TimestampUtc.ToLocalTime():hh: mm: ss tt})");
+                    await this.navigator.ShowBigText(s, title);
                 })
-            });
+            };
         }
     }
 }
