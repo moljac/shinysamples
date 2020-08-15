@@ -30,6 +30,16 @@
                          IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                          Text="Walking" />
 
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseOnFoot}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         Text="On-Foot (Running or Walking)" />
+
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseExercise}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         Text="Exercise" />
+
             <Button Text="{Binding MonitoringText, Mode=OneWay}"
                     Command="{Binding ToggleMonitoring}" />
 

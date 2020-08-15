@@ -4,7 +4,6 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Shiny;
-using Shiny.Locations;
 using Shiny.TripTracker;
 
 
@@ -14,11 +13,13 @@ namespace Samples.TripTracker
     {
         public SettingsViewModel(ITripTrackerManager manager, IDialogs dialogs)
         {
-            this.IsEnabled = manager.TrackingActivityType == null;
-            this.UseAutomotive = manager.TrackingActivityType == MotionActivityType.Automotive;
-            this.UseCycling = manager.TrackingActivityType == MotionActivityType.Cycling;
-            this.UseRunning = manager.TrackingActivityType == MotionActivityType.Running;
-            this.UseWalking = manager.TrackingActivityType == MotionActivityType.Walking;
+            this.IsEnabled = manager.TrackingType == null;
+            this.UseAutomotive = manager.TrackingType == TripTrackingType.Automotive;
+            this.UseCycling = manager.TrackingType == TripTrackingType.Cycling;
+            this.UseRunning = manager.TrackingType == TripTrackingType.Running;
+            this.UseWalking = manager.TrackingType == TripTrackingType.Walking;
+            this.UseOnFoot = manager.TrackingType == TripTrackingType.OnFoot;
+            this.UseExercise = manager.TrackingType == TripTrackingType.Exercise;
 
             this.ToggleMonitoring = ReactiveCommand.CreateFromTask
             (
@@ -49,7 +50,9 @@ namespace Samples.TripTracker
                     x => x.UseRunning,
                     x => x.UseWalking,
                     x => x.UseCycling,
-                    (auto, run, walk, cycle) => this.GetTrackingType() != null
+                    x => x.UseOnFoot,
+                    x => x.UseExercise,
+                    (auto, run, walk, cycle, foot, ex) => this.GetTrackingType() != null
                 )
             );
         }
@@ -62,21 +65,29 @@ namespace Samples.TripTracker
         [Reactive] public bool UseWalking { get; set; }
         [Reactive] public bool UseRunning { get; set; }
         [Reactive] public bool UseCycling { get; set; }
+        [Reactive] public bool UseOnFoot { get; set; }
+        [Reactive] public bool UseExercise { get; set; }
 
 
-        MotionActivityType? GetTrackingType()
+        TripTrackingType? GetTrackingType()
         {
             if (this.UseAutomotive)
-                return MotionActivityType.Automotive;
+                return TripTrackingType.Automotive;
 
             if (this.UseCycling)
-                return MotionActivityType.Cycling;
+                return TripTrackingType.Cycling;
 
             if (this.UseRunning)
-                return MotionActivityType.Running;
+                return TripTrackingType.Running;
 
             if (this.UseWalking)
-                return MotionActivityType.Walking;
+                return TripTrackingType.Walking;
+
+            if (this.UseOnFoot)
+                return TripTrackingType.OnFoot;
+
+            if (this.UseExercise)
+                return TripTrackingType.Exercise;
 
             return null;
         }
