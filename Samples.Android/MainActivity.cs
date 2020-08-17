@@ -19,7 +19,7 @@ namespace Samples.Droid
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
     )]
-    public class MainActivity : FormsAppCompatActivity
+    public partial class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,7 +33,6 @@ namespace Samples.Droid
                 "RadioButton_Experimental"
             );
             Forms.Init(this, savedInstanceState);
-            FormsMaps.Init(this, savedInstanceState);
 
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             this.LoadApplication(new App());

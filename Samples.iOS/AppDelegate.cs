@@ -22,7 +22,6 @@ namespace Samples.iOS
                 "RadioButton_Experimental"
             );
             Forms.Init();
-            FormsMaps.Init();
             XF.Material.iOS.Material.Init();
             this.LoadApplication(new App());
             return base.FinishedLaunching(app, options);

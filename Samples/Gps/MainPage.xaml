@@ -13,14 +13,6 @@
                                  FontFamily="FAS" />
             </ContentPage.IconImageSource>
         </gps:GpsPage>
-        <!--
-        <gps:MapPage>
-            <ContentPage.IconImageSource>
-                <FontImageSource Glyph="&#xf5a0;"
-                                 FontFamily="FAS" />
-            </ContentPage.IconImageSource>
-        </gps:MapPage>
-        -->
         <gps:LogsPage>
             <ContentPage.IconImageSource>
                 <FontImageSource Glyph="&#xf7e6;"
