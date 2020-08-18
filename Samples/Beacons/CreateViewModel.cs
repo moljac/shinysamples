@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Reactive.Linq;
+using Shiny;
 using Shiny.Beacons;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Shiny;
+using Samples.Infrastructure;
 
 
 namespace Samples.Beacons
 {
     public class CreateViewModel : ViewModel
     {
-        public CreateViewModel(INavigationService navigationService)
+        public CreateViewModel(INavigationService navigator,
+                               IDialogs dialogs,
+                               IBeaconRangingManager rangingManager,
+                               IBeaconMonitoringManager? monitorManager = null)
         {
-            this.Title = "Create Region";
+            this.IsMonitoringSupported = monitorManager != null;
 
             this.EstimoteDefaults = ReactiveCommand.Create(() =>
             {
@@ -26,20 +30,18 @@ namespace Samples.Beacons
                 .Select(x => !x.IsEmpty() && UInt16.TryParse(x, out _))
                 .ToPropertyEx(this, x => x.IsMajorSet);
 
-            this.Create = ReactiveCommand.CreateFromTask(
-                () => navigationService.GoBack(false, (
-                    nameof(BeaconRegion),
-                    new BeaconRegion(
-                        this.Identifier,
-                        Guid.Parse(this.Uuid),
-                        GetNumberAddress(this.Major),
-                        GetNumberAddress(this.Minor)
-                    )
+            this.StartMonitoring = ReactiveCommand.CreateFromTask(
+                async () =>
+                {
+                    var result = await monitorManager.RequestAccess();
+                    if (result != AccessState.Available)
+                        await dialogs.AlertAccess(result);
+                    else
                     {
-                        NotifyOnEntry = this.NotifyOnEntry,
-                        NotifyOnExit = this.NotifyOnExit
+                        await monitorManager.StartMonitoring(this.GetBeaconRegion());
+                        await navigator.GoBack();
                     }
-                )),
+                },
                 this.WhenAny(
                     x => x.Identifier,
                     x => x.Uuid,
@@ -49,63 +51,85 @@ namespace Samples.Beacons
                     x => x.NotifyOnExit,
                     (idValue, uuidValue, majorValue, minorValue, entry, exit) =>
                     {
-                        if (this.ForMonitoring)
-                        {
-                            var atLeast1Notification = entry.GetValue() || exit.GetValue();
-                            if (!atLeast1Notification)
-                                return false;
-                        }
-                        if (String.IsNullOrWhiteSpace(idValue.GetValue()))
+                        if (monitorManager == null)
                             return false;
 
-                        var uuid = uuidValue.GetValue();
-                        if (!uuid.IsEmpty() && !Guid.TryParse(uuid, out _))
+                        var atLeast1Notification = entry.GetValue() || exit.GetValue();
+                        if (!atLeast1Notification)
                             return false;
 
-                        var result = ValidateNumberAddress(this.Major);
-                        if (!result)
-                            return false;
-
-                        result = ValidateNumberAddress(this.Minor);
-                        if (!result)
-                            return false;
-
-                        return true;
+                        return this.IsValid();
                     }
+                )
+            );
+
+
+            this.StartRanging = ReactiveCommand.CreateFromTask(
+                async () =>
+                {
+                    var result = await rangingManager.RequestAccess();
+                    if (result != AccessState.Available)
+                        await dialogs.AlertAccess(result);
+                    else
+                    {
+                        var region = this.GetBeaconRegion();
+                        await navigator.GoBack(false, (nameof(BeaconRegion), region));
+                    }
+                },
+                this.WhenAny(
+                    x => x.Identifier,
+                    x => x.Uuid,
+                    x => x.Major,
+                    x => x.Minor,
+                    (idValue, uuidValue, majorValue, minorValue) => this.IsValid()
                 )
             );
         }
 
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            this.ForMonitoring = parameters.GetValue<bool>("Monitoring");
-            this.Title = this.ForMonitoring
-                ? "Create Monitoring Region"
-                : "Create Ranging Region";
-
-            var current = parameters.GetValue<BeaconRegion>(nameof(BeaconRegion));
-            if (current != null)
-            {
-                this.Identifier = current.Identifier;
-                this.Uuid = current.Uuid.ToString();
-                this.Major = current.Major?.ToString() ?? String.Empty;
-                this.Minor = current.Minor?.ToString() ?? String.Empty;
-            }
-        }
-
 
         public bool IsMajorSet { [ObservableAsProperty] get; }
 
-        public ICommand Create { get; }
+        public ICommand StartMonitoring { get; }
+        public ICommand StartRanging { get; }
         public ICommand EstimoteDefaults { get; }
         [Reactive] public string Identifier { get; set; }
         [Reactive] public string Uuid { get; set; }
         [Reactive] public string Major { get; set; }
         [Reactive] public string Minor { get; set; }
-        [Reactive] public bool ForMonitoring { get; private set; }
         [Reactive] public bool NotifyOnEntry { get; set; } = true;
         [Reactive] public bool NotifyOnExit { get; set; } = true;
+        public bool IsMonitoringSupported { get; }
+
+
+        BeaconRegion GetBeaconRegion() => new BeaconRegion(
+            this.Identifier,
+            Guid.Parse(this.Uuid),
+            GetNumberAddress(this.Major),
+            GetNumberAddress(this.Minor)
+        )
+        {
+            NotifyOnEntry = this.NotifyOnEntry,
+            NotifyOnExit = this.NotifyOnExit
+        };
+
+
+        bool IsValid()
+        {
+            if (this.Identifier.IsEmpty())
+                return false;
+
+            if (!this.Uuid.IsEmpty() && !Guid.TryParse(this.Uuid, out _))
+                return false;
+
+            if (!ValidateNumberAddress(this.Major))
+                return false;
+
+            if (!ValidateNumberAddress(this.Minor))
+                return false;
+
+            return true;
+        }
 
 
         static bool ValidateNumberAddress(string value)

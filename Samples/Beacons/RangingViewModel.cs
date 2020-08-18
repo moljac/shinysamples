@@ -16,8 +16,8 @@ namespace Samples.Beacons
     {
         readonly IBeaconRangingManager beaconManager;
         readonly IDialogs dialogs;
-        BeaconRegion region;
-        IDisposable scanner;
+        BeaconRegion? region;
+        IDisposable? scanner;
 
 
         public RangingViewModel(INavigationService navigator,

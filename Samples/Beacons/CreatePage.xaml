@@ -3,17 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.Beacons.CreatePage"
              Style="{StaticResource ContentPage}"
-             Title="{Binding Title}">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Create" Command="{Binding Create}" />
-        <!--<ToolbarItem Command="{Binding Create}">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="\\ue3ba"
-                                 FontFamily="{StaticResource MaterialIcons}" />
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>-->
-    </ContentPage.ToolbarItems>
+             Title="Create Beacon Region">
 
     <ContentPage.Content>
         <TableView Intent="Form">
@@ -35,18 +25,27 @@
                            IsEnabled="{Binding IsMajorSet}" />
             </TableSection>
 
-            <TableSection Title="Notifications">
+            <TableSection Title="{Binding MonitorText, StringFormat='Monitoring'}">
                 <SwitchCell Text="Entry"
                             On="{Binding NotifyOnEntry}"
-                            IsEnabled="{Binding ForMonitoring}" />
+                            IsEnabled="{Binding IsMonitorSupported}" />
 
                 <SwitchCell Text="Exit"
                             On="{Binding NotifyOnExit}"
-                            IsEnabled="{Binding ForMonitoring}" />
+                            IsEnabled="{Binding IsMonitorSupported}" />
             </TableSection>
 
             <TableSection>
                 <TextCell Text="Estimote Defaults" Command="{Binding EstimoteDefaults}" />
+            </TableSection>
+
+            <TableSection>
+                <TextCell x:Name="MonitorButton"
+                          Text="Start Monitor"
+                          Command="{Binding StartMonitoring}" />
+
+                <TextCell Text="Start Ranging"
+                          Command="{Binding StartRanging}" />
             </TableSection>
         </TableView>
     </ContentPage.Content>

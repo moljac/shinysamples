@@ -1,39 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Shiny.Beacons;
-using Shiny.Logging;
-
 
 
 namespace Samples.Beacons
 {
     public class MonitoringViewModel : ViewModel
     {
-        readonly IBeaconMonitoringManager? beaconManager;
-        readonly IDialogs dialogs;
-
-
         public MonitoringViewModel(INavigationService navigator,
                                    IDialogs dialogs,
                                    IBeaconMonitoringManager? beaconManager = null)
         {
-            this.dialogs = dialogs;
-            this.beaconManager = beaconManager;
-
-            this.Add = navigator.NavigateCommand(
-                "CreateBeacon",
-                p => p.Add("Monitoring", true)
-            );
-
+            this.Add = navigator.NavigateCommand("CreateBeacon");
             this.Load = ReactiveCommand.CreateFromTask(async () =>
             {
-                var regions = await this.beaconManager.GetMonitoredRegions();
+                if (beaconManager == null)
+                {
+                    await dialogs.Alert("Beacon monitoring is not supported on this platform");
+                    return;
+                }
+                var regions = await beaconManager.GetMonitoredRegions();
 
                 this.Regions = regions
                     .Select(x => new CommandItem
@@ -42,22 +35,25 @@ namespace Samples.Beacons
                         Detail = $"{x.Uuid}/{x.Major ?? 0}/{x.Minor ?? 0}",
                         PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                         {
-                            await this.beaconManager.StopMonitoring(x.Identifier);
+                            await beaconManager.StopMonitoring(x.Identifier);
                             this.Load.Execute(null);
                         })
                     })
                     .ToList();
             });
 
-            this.StopAllMonitoring = ReactiveCommand.CreateFromTask(async () =>
-            {
-                var result = await dialogs.Confirm("Are you sure you wish to stop all monitoring");
-                if (result)
+            this.StopAllMonitoring = ReactiveCommand.CreateFromTask(
+                async () =>
                 {
-                    await this.beaconManager.StopAllMonitoring();
-                    this.Load.Execute(null);
-                }
-            });
+                    var result = await dialogs.Confirm("Are you sure you wish to stop all monitoring");
+                    if (result)
+                    {
+                        await beaconManager.StopAllMonitoring();
+                        this.Load.Execute(null);
+                    }
+                },
+                Observable.Return(beaconManager != null)
+            );
         }
 
 
@@ -71,26 +67,6 @@ namespace Samples.Beacons
         {
             base.Initialize(parameters);
             this.Load.Execute(null);
-        }
-
-
-        public override async void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-            try
-            {
-                var newRegion = parameters.GetValue<BeaconRegion>(nameof(BeaconRegion));
-                if (newRegion != null)
-                {
-                    await this.beaconManager.StartMonitoring(newRegion);
-                    this.Load.Execute(null);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Write(ex);
-                await this.dialogs.Alert(ex.ToString());
-            }
         }
     }
 }
