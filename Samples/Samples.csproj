@@ -14,24 +14,24 @@
     <ItemGroup>
         <PackageReference Include="Humanizer" Version="2.8.26" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
-        <PackageReference Include="ReactiveUI.Fody" Version="11.5.17" />
-        <PackageReference Include="Shiny.Beacons" Version="2.0.0.1933-beta" />
-        <PackageReference Include="Shiny.BluetoothLE" Version="2.0.0.1933-beta" />
-        <PackageReference Include="Shiny.BluetoothLE.Hosting" Version="2.0.0.1933-beta" />
-        <PackageReference Include="Shiny.Integrations.Sqlite" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.Locations" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.Locations.Sync" Version="2.0.0.1933-beta" />
-        <PackageReference Include="Shiny.Logging.AppCenter" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.MediaSync" Version="2.0.0.1933-alpha" />
-        <PackageReference Include="Shiny.Net.Http" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.Nfc" Version="2.0.0.1933-beta" />
-        <PackageReference Include="Shiny.Notifications" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.Push" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.Push.FirebaseMessaging" Version="2.0.0.1933-beta" />
-        <PackageReference Include="Shiny.Sensors" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.SpeechRecognition" Version="2.0.0.1933" />
-        <PackageReference Include="Shiny.TripTracker" Version="2.0.0.1933-alpha" />
+        <PackageReference Include="ReactiveUI.Fody" Version="11.5.26" />
+        <PackageReference Include="Shiny.Beacons" Version="2.0.0.1992-beta" />
+        <PackageReference Include="Shiny.BluetoothLE" Version="2.0.0.1992-beta" />
+        <PackageReference Include="Shiny.BluetoothLE.Hosting" Version="2.0.0.1992-beta" />
+        <PackageReference Include="Shiny.Integrations.Sqlite" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Locations" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Locations.Sync" Version="2.0.0.1992-beta" />
+        <PackageReference Include="Shiny.Logging.AppCenter" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.MediaSync" Version="2.0.0.1992-alpha" />
+        <PackageReference Include="Shiny.Net.Http" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Nfc" Version="2.0.0.1992-beta" />
+        <PackageReference Include="Shiny.Notifications" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Push" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Push.FirebaseMessaging" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.Sensors" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.SpeechRecognition" Version="2.0.0.1992" />
+        <PackageReference Include="Shiny.TripTracker" Version="2.0.0.1992-alpha" />
         <PackageReference Include="Shiny.Vpn" Version="1.2.0.1812-alpha" />
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
