@@ -63,9 +63,9 @@ namespace Samples.Beacons
         [Reactive] public IList<CommandItem> Regions { get; private set; }
 
 
-        public override void Initialize(INavigationParameters parameters)
+        public override void OnAppearing()
         {
-            base.Initialize(parameters);
+            base.OnAppearing();
             this.Load.Execute(null);
         }
     }

@@ -44,7 +44,6 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors.Abstractions\Shiny.Sensors.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition.Abstractions\Shiny.SpeechRecognition.Abstractions.csproj" />
@@ -52,8 +51,6 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj" />
     </ItemGroup>
 
     <ItemGroup>

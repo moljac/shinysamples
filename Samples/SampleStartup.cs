@@ -83,10 +83,10 @@ namespace Samples
 
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
-            services.UsePushAzureNotificationHubs<PushDelegate>(
-                Constants.AnhListenerConnectionString,
-                Constants.AnhHubName
-            );
+            //services.UsePushAzureNotificationHubs<PushDelegate>(
+            //    Constants.AnhListenerConnectionString,
+            //    Constants.AnhHubName
+            //);
 
             //// app services
             services.UseGeofencingSync<LocationSyncDelegates>();

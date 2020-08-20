@@ -70,12 +70,12 @@
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.5.3.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.Datatransport" Version="117.0.5-preview02" />
+    <!--<PackageReference Include="Xamarin.Firebase.Datatransport" Version="117.0.5-preview02" />
     <PackageReference Include="Xamarin.Firebase.Common" Version="119.3.0-preview02" />
     <PackageReference Include="Xamarin.Firebase.Messaging" Version="120.1.7-preview02" />
     <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.2.1-preview02" />
     <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="117.2.1-preview02" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="117.0.2-preview02" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="117.0.2-preview02" />-->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -125,14 +125,6 @@
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj">
-      <Project>{b68160ff-cb75-4230-89be-fb5d8b01ffee}</Project>
-      <Name>Shiny.Push.FirebaseMessaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
-      <Project>{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}</Project>
-      <Name>Shiny.Push</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj">
       <Project>{7c4df671-043b-446a-85a8-872b36441103}</Project>
       <Name>Shiny.Vpn</Name>
@@ -172,10 +164,6 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj">
       <Project>{685F5C3B-4511-484E-8806-00E06C185987}</Project>
       <Name>Shiny.SpeechRecognition</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
-      <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
-      <Name>Shiny.Push.AzureNotificationHubs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
