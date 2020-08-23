@@ -75,11 +75,14 @@ namespace Samples.Gps
                             UseBackground = this.UseBackground,
                             Priority = this.Priority,
                         };
-                        if (IsInterval(this.DesiredInterval))
+                        if (IsNumeric(this.DesiredInterval))
                             request.Interval = ToInterval(this.DesiredInterval);
 
-                        if (IsInterval(this.ThrottledInterval))
+                        if (IsNumeric(this.ThrottledInterval))
                             request.ThrottledInterval = ToInterval(this.ThrottledInterval);
+
+                        if (IsNumeric(this.MinimumDistanceMeters))
+                            request.MinimumDistance = Distance.FromMeters(Int32.Parse(this.MinimumDistanceMeters));
 
                         await this.manager.StartListener(request);
                     }
@@ -89,13 +92,15 @@ namespace Samples.Gps
                     x => x.IsUpdating,
                     x => x.DesiredInterval,
                     x => x.ThrottledInterval,
-                    (u, i, t) =>
+                    x => x.MinimumDistanceMeters,
+                    (u, i, t, d) =>
                     {
                         if (u.GetValue())
                             return true;
 
-                        var isdesired = IsInterval(i.GetValue());
-                        var isthrottled = IsInterval(t.GetValue());
+                        var isdesired = IsNumeric(i.GetValue());
+                        var isthrottled = IsNumeric(t.GetValue());
+                        var ismindist = IsNumeric(d.GetValue());
 
                         if (isdesired && isthrottled)
                         {
@@ -166,6 +171,7 @@ namespace Samples.Gps
         [Reactive] public GpsPriority Priority { get; set; } = GpsPriority.Normal;
         [Reactive] public string DesiredInterval { get; set; }
         [Reactive] public string ThrottledInterval { get; set; }
+        [Reactive] public string MinimumDistanceMeters { get; set; }
         [Reactive] public string Access { get; private set; }
         [Reactive] public bool IsUpdating { get; private set; }
         [Reactive] public double Latitude { get; private set; }
@@ -177,7 +183,7 @@ namespace Samples.Gps
         [Reactive] public double Speed { get; private set; }
 
 
-        static bool IsInterval(string value)
+        static bool IsNumeric(string value)
         {
             if (value.IsEmpty())
                 return false;

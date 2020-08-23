@@ -56,6 +56,10 @@
                                    Text="{Binding ThrottledInterval}"
                                    Keyboard="Numeric" />
 
+                        <EntryCell Label="Minimum Distance (meters)"
+                                   Text="{Binding MinDistanceMeters}"
+                                   Keyboard="Numeric" />
+
                         <TextCell Text="{Binding ListenerText}"
                                   Command="{Binding ToggleUpdates}" />
 
