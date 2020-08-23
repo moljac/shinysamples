@@ -57,7 +57,7 @@
                                    Keyboard="Numeric" />
 
                         <EntryCell Label="Minimum Distance (meters)"
-                                   Text="{Binding MinDistanceMeters}"
+                                   Text="{Binding MinimumDistanceMeters}"
                                    Keyboard="Numeric" />
 
                         <TextCell Text="{Binding ListenerText}"
