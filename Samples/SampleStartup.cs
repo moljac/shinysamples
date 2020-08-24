@@ -17,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Shiny;
 using Shiny.Notifications;
 using Shiny.Logging;
+using Samples.DataSync;
+
 
 //[assembly:Shiny.Generators.GenerateStaticClasses]
 
@@ -93,6 +95,7 @@ namespace Samples
             services.UseGpsSync<LocationSyncDelegates>();
             services.UseTripTracker<SampleTripTrackerDelegate>();
             services.UseMediaSync<SampleMediaSyncDelegate>();
+            services.UseDataSync<SampleDataSyncDelegate>(true);
         }
     }
 }
