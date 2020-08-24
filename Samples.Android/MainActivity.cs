@@ -40,7 +40,8 @@ namespace Samples.Droid
             this.ShinyOnCreate();
         }
 
-
+#if !PRODUCTION
+// these are generated in the main sample
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
@@ -53,5 +54,6 @@ namespace Samples.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             this.ShinyRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+#endif
     }
 }

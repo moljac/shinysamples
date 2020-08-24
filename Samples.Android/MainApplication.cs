@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !PRODUCTION
+// this is generated in the main sample
+using System;
 using Shiny;
 using Android.App;
 using Android.Runtime;
@@ -21,3 +23,4 @@ namespace Samples.Droid
         }
     }
 }
+#endif

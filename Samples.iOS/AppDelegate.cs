@@ -27,6 +27,10 @@ namespace Samples.iOS
             return base.FinishedLaunching(app, options);
         }
 
+
+        #if !PRODUCTION
+        // these are generated in the main sample
+
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
             => this.ShinyDidReceiveRemoteNotification(userInfo, null);
 
@@ -44,5 +48,7 @@ namespace Samples.iOS
 
         public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
             => this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
+
+        #endif
     }
 }
