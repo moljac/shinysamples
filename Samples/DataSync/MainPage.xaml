@@ -2,10 +2,44 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ds="clr-namespace:Samples.DataSync"
+             xmlns:samples="clr-namespace:Samples"
              x:DataType="ds:MainViewModel"
              x:Class="Samples.DataSync.MainPage"
              Title="Data Sync">
-    <ContentPage.Content>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear" Command="{Binding Clear}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Force Run" Command="{Binding ForceRun}" />
+            <Button Text="Generate Test Item" Command="{Binding GenerateTestItem}" />
+
+            <Label Text="Sync Enabled" />
+            <CheckBox IsChecked="{Binding IsSyncEnabled}" />
+
+            <Label Text="Allow Data To Sync in Delegate" />
+            <CheckBox IsChecked="{Binding AllowOutgoing}" />
+
+            <CollectionView ItemsSource="{Binding SyncEvents}">
+                <CollectionView.EmptyView>
+                    <Label Text="Nothing in the Pending Queue"
+                           Style="{StaticResource NoDataLabel}" />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="samples:CommandItem">
+                        <samples:CommandCell Text="{Binding Text}"
+                                             Detail="{Binding Detail}"
+                                             PrimaryCommand="{Binding PrimaryCommand}"
+                                             PrimaryCommandText="View"
+                                             SecondaryCommand="{Binding SecondaryCommand}"
+                                             SecondaryCommandColor="Red"
+                                             SecondaryCommandText="Remove" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -56,7 +56,7 @@
                     <TableSection Title="App Services">
                         <TextCell Text="Trip Tracker" Command="{Binding Navigate}" CommandParameter="Nav/TripTracker" />
                         <TextCell Text="Location Sync" Command="{Binding Navigate}" CommandParameter="Nav/LocationSync" />
-                        <TextCell Text="Data Sync" Command="{Binding Navigate}" Command="Nav/DataSync" />
+                        <TextCell Text="Data Sync" Command="{Binding Navigate}" CommandParameter="Nav/DataSync" />
                         <TextCell Text="Media Sync" Command="{Binding Navigate}" CommandParameter="Nav/MediaSync" />
                     </TableSection>
                 </TableRoot>

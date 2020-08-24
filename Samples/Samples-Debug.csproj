@@ -20,7 +20,7 @@
         <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
         <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
         <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
-        <PackageReference Include="XF.Material" Version="1.6.5" />
+        <PackageReference Include="XF.Material" Version="1.6.6" />
     </ItemGroup>
 
     <ItemGroup>
@@ -32,6 +32,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.DataSync\Shiny.DataSync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.Sqlite\Shiny.Integrations.Sqlite.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Abstractions\Shiny.Locations.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Sync\Shiny.Locations.Sync.csproj" />
@@ -44,6 +45,9 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors.Abstractions\Shiny.Sensors.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition.Abstractions\Shiny.SpeechRecognition.Abstractions.csproj" />
