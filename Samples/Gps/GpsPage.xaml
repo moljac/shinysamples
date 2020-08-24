@@ -13,9 +13,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ActivityIndicator IsRunning="{Binding IsBusy}" Grid.Row="0" />
-
-            <TableView Grid.Row="1" Intent="Form">
+            <TableView Grid.Row="0" Intent="Form">
                 <TableRoot>
                     <TableSection>
                         <TextCell Text="Access" Detail="{Binding Access}" Command="{Binding RequestAccess}" />
@@ -59,13 +57,13 @@
                         <EntryCell Label="Minimum Distance (meters)"
                                    Text="{Binding MinimumDistanceMeters}"
                                    Keyboard="Numeric" />
-
-                        <TextCell Text="{Binding ListenerText}"
-                                  Command="{Binding ToggleUpdates}" />
-
                     </TableSection>
                 </TableRoot>
             </TableView>
+
+            <Button Text="{Binding ListenerText}"
+                    Command="{Binding ToggleUpdates}"
+                    Grid.Row="1" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

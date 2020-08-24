@@ -29,12 +29,15 @@ namespace Samples.TripTracker
         {
             var trips = await this.manager.GetAllTrips();
 
-            return trips.Select(x => 
+            return trips.Select(x =>
             {
                 var km = Distance.FromMeters(x.TotalDistanceMeters).TotalKilometers;
-                return new CommandItem 
+                var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "g" : "t";
+                var text = $"{x.DateStarted:g} - {x.DateFinished.Value.ToString(format)}";
+
+                return new CommandItem
                 {
-                    Text = $"{x.DateStarted} - {x.DateFinished}",
+                    Text = text,
                     Detail = $"Distance: {km} km",
                     PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                     {
