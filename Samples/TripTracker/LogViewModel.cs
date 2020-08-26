@@ -32,8 +32,17 @@ namespace Samples.TripTracker
             return trips.Select(x =>
             {
                 var km = Distance.FromMeters(x.TotalDistanceMeters).TotalKilometers;
-                var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "g" : "t";
-                var text = $"{x.DateStarted:g} - {x.DateFinished.Value.ToString(format)}";
+
+                var text = String.Empty;
+                if (x.DateFinished == null)
+                {
+                    text = $"UNFINISHED: {x.DateStarted:g}";
+                }
+                else
+                {
+                    var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "g" : "t";
+                    text = $"FINISHED: {x.DateStarted:g} - {x.DateFinished.Value.ToString(format)}";
+                }
 
                 return new CommandItem
                 {
@@ -47,18 +56,25 @@ namespace Samples.TripTracker
 
                         var sb = new StringBuilder();
                         var checkins = await this.manager.GetCheckinsByTrip(x.Id);
-                        sb.AppendLine($"Trip: {x.Id}");
-                        sb.AppendLine();
-                        sb.AppendLine($"Started: {x.DateStarted}");
-                        sb.AppendLine($"Start Location: {x.StartLatitude} / {x.StartLongitude}");
-                        sb.AppendLine();
-                        sb.AppendLine($"Finished: {x.DateFinished}");
-                        sb.AppendLine($"Finish Location: {x.EndLatitude} / {x.EndLongitude}");
-                        sb.AppendLine();
-                        sb.AppendLine($"Total Distance (meters): {x.TotalDistanceMeters}");
-                        sb.AppendLine($"GPS Pings: {checkins.Count()}");
-                        sb.AppendLine();
-                        sb.AppendLine("Lat,Long,Speed,Direction,Ticks");
+                        sb
+                            .AppendLine($"Trip: {x.Id}")
+                            .AppendLine()
+                            .AppendLine($"Started: {x.DateStarted.LocalDateTime}")
+                            .AppendLine($"Start Location: {x.StartLatitude} / {x.StartLongitude}")
+                            .AppendLine();
+
+                        if (x.DateFinished != null)
+                        {
+                            sb
+                                .AppendLine($"Finished: {x.DateFinished.Value.LocalDateTime:g}")
+                                .AppendLine($"Finish Location: {x.EndLatitude} / {x.EndLongitude}")
+                                .AppendLine();
+                        }
+                        sb
+                            .AppendLine($"Total Distance (meters): {x.TotalDistanceMeters}")
+                            .AppendLine($"GPS Pings: {checkins.Count()}")
+                            .AppendLine()
+                            .AppendLine("Lat,Long,Speed,Direction,Ticks");
 
                         foreach (var checkin in checkins)
                             sb.AppendLine($"{checkin.Latitude},{checkin.Longitude},{checkin.Speed},{checkin.Direction},{checkin.DateCreated.Ticks}");

@@ -10,10 +10,19 @@ using Shiny;
 using Shiny.DataSync;
 using Samples.Infrastructure;
 using Prism.Navigation;
+using Bogus;
 
 
 namespace Samples.DataSync
 {
+    public class MyEntity : ISyncEntity
+    {
+        public string EntityId { get; set; } = Guid.NewGuid().ToString();
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
+
     public class MainViewModel : ViewModel
     {
         readonly IDataSyncManager manager;
@@ -29,11 +38,18 @@ namespace Samples.DataSync
             this.manager = manager;
             this.navigator = navigator;
 
+            var faker = new Faker<MyEntity>()
+                .RuleFor(x => x.FirstName, (f, _) => f.Name.FirstName())
+                .RuleFor(x => x.LastName, (f, _) => f.Name.LastName());
+
             this.IsSyncEnabled = manager.Enabled;
             this.AllowOutgoing = sdelegate.AllowOutgoing;
 
             this.GenerateTestItem = ReactiveCommand.CreateFromTask(() =>
-                dialogs.LoadingTask(() => manager.ForceRun())
+                dialogs.LoadingTask(() => manager.Save(
+                    faker.Generate(1).First(),
+                    SyncOperation.Create
+                ))
             );
 
             this.ForceRun = ReactiveCommand.CreateFromTask(() =>
