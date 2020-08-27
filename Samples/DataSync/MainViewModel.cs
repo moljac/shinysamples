@@ -47,23 +47,14 @@ namespace Samples.DataSync
 
             this.GenerateTestItem = ReactiveCommand.CreateFromTask(async () =>
             {
-                try
-                {
-                    await manager.Save(
-                        faker.Generate(1).First(),
-                        SyncOperation.Create
-                    );
-                    await this.BindList();
-                }
-                catch (Exception ex)
-                {
-                    Console.Write(ex.ToString());
-                }
-                //dialogs.LoadingTask(() => )
+                var entity = faker.Generate(1).First();
+                await manager.Save(entity, SyncOperation.Create);
+                await this.BindList();
             });
 
             this.ForceRun = ReactiveCommand.CreateFromTask(() =>
-                dialogs.LoadingTask(() => manager.ForceRun())
+                //dialogs.LoadingTask(() => manager.ForceRun())
+                manager.ForceRun()
             );
 
             this.Clear = ReactiveCommand.CreateFromTask(async () =>
