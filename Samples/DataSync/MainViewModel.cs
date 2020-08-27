@@ -45,12 +45,22 @@ namespace Samples.DataSync
             this.IsSyncEnabled = manager.Enabled;
             this.AllowOutgoing = sdelegate.AllowOutgoing;
 
-            this.GenerateTestItem = ReactiveCommand.CreateFromTask(() =>
-                dialogs.LoadingTask(() => manager.Save(
-                    faker.Generate(1).First(),
-                    SyncOperation.Create
-                ))
-            );
+            this.GenerateTestItem = ReactiveCommand.CreateFromTask(async () =>
+            {
+                try
+                {
+                    await manager.Save(
+                        faker.Generate(1).First(),
+                        SyncOperation.Create
+                    );
+                    await this.BindList();
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.ToString());
+                }
+                //dialogs.LoadingTask(() => )
+            });
 
             this.ForceRun = ReactiveCommand.CreateFromTask(() =>
                 dialogs.LoadingTask(() => manager.ForceRun())
