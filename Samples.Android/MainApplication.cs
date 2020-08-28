@@ -1,5 +1,7 @@
 ﻿#if !PRODUCTION
 // this is generated in the main sample
+
+// You don't need this if you install Shiny.Core in your android project
 using System;
 using Shiny;
 using Android.App;

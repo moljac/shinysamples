@@ -42,6 +42,12 @@ namespace Samples.Droid
 
 #if !PRODUCTION
 // these are generated in the main sample
+
+    //These methods will automatically be created for you as long as you:
+        // 1. Have Shiny.Core install in this project
+        // 2. Don't require customization on them (meaning you haven't implemented them yourself)
+        // 3. Your activity class is marked as partial
+
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);

@@ -30,6 +30,10 @@ namespace Samples.iOS
 
         #if !PRODUCTION
         // these are generated in the main sample
+        // These methods will automatically be created and wired for you, as long as
+        // 1. You install Shiny.Core in this project
+        // 2. You don't customize them (meaning you don't implement these yourself)
+        // 3. This class is marked as partial
 
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
             => this.ShinyDidReceiveRemoteNotification(userInfo, null);
