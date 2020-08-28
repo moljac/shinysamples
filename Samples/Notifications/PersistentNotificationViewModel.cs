@@ -26,16 +26,16 @@ namespace Samples.Notifications
                 .Skip(1)
                 .Throttle(TimeSpan.FromMilliseconds(500))
                 .Subscribe(x => this.notification?.SetProgress(
-                    this.ToValue(x),
-                    this.ToValue(this.Total)
+                    ToValue(x),
+                    ToValue(this.Total)
                 ));
 
             this.WhenAnyValue(x => x.Total)
                 .Skip(1)
                 .Throttle(TimeSpan.FromMilliseconds(500))
                 .Subscribe(x => this.notification?.SetProgress(
-                    this.ToValue(this.Progress),
-                    this.ToValue(x)
+                    ToValue(this.Progress),
+                    ToValue(x)
                 ));
 
             this.Toggle = ReactiveCommand.Create(
@@ -60,8 +60,8 @@ namespace Samples.Notifications
                         else
                         {
                             this.notification.SetProgress(
-                                this.ToValue(this.Progress),
-                                this.ToValue(this.Total)
+                                ToValue(this.Progress),
+                                ToValue(this.Total)
                             );
                         }
                     }
@@ -78,6 +78,6 @@ namespace Samples.Notifications
         [Reactive] public double Total { get; set; } = 1.0;
         [Reactive] public double Progress { get; set; } = 0.0;
 
-        int ToValue(double value) => Convert.ToInt32(value * 100);
+        static int ToValue(double value) => Convert.ToInt32(value * 100);
     }
 }
