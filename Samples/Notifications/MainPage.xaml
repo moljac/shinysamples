@@ -28,6 +28,8 @@
             </ContentPage.IconImageSource>
         </notifications:BadgePage>
 
+        <notifications:PersistentNotificationPage Title="Persistent" />
+
         <notifications:LogPage Title="Logs">
             <ContentPage.IconImageSource>
                 <FontImageSource Glyph="&#xf017;"
