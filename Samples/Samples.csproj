@@ -13,9 +13,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Humanizer" Version="2.8.26" />
+        <PackageReference Include="Humanizer" Version="2.8.25" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
-        <PackageReference Include="ReactiveUI.Fody" Version="11.5.26" />
+        <PackageReference Include="ReactiveUI.Fody" Version="11.5.35" />
         <PackageReference Include="Shiny.Beacons" Version="2.0.0.2029-beta" />
         <PackageReference Include="Shiny.BluetoothLE" Version="2.0.0.2029-beta" />
         <PackageReference Include="Shiny.BluetoothLE.Hosting" Version="2.0.0.2029-beta" />
