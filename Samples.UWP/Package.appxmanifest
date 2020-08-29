@@ -35,10 +35,8 @@
             <Task Type="general"/>
             <Task Type="location"/>
             <Task Type="systemEvent"/>
-            <Task Type="timer"/>
             <Task Type="pushNotification"/>
-            <uap:Task Type="mediaProcessing"/>
-            <uap:Task Type="vpnClient"/>
+            <Task Type="timer"/>
           </BackgroundTasks>
         </Extension>             
       </Extensions>
