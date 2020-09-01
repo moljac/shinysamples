@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+
+using DynamicData;
+
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
@@ -20,7 +23,14 @@ namespace Samples.Gps
         public GpsViewModel(IGpsManager manager, IDialogs dialogs)
         {
             this.manager = manager;
-            this.IsUpdating = this.manager.IsListening;
+
+            var l = this.manager.CurrentListener;
+            this.IsUpdating = l != null;
+            this.UseBackground = l?.UseBackground ?? true;
+            this.Priority = l?.Priority ?? GpsPriority.Normal;
+            this.DesiredInterval = l?.Interval.TotalSeconds.ToString() ?? String.Empty;
+            this.ThrottledInterval = l?.ThrottledInterval?.TotalSeconds.ToString() ?? String.Empty;
+            this.MinimumDistanceMeters = l?.MinimumDistance?.TotalMeters.ToString() ?? String.Empty;
 
             this.WhenAnyValue(x => x.UseBackground)
                 .Subscribe(x => this.Access = this.manager.GetCurrentStatus(
@@ -56,14 +66,17 @@ namespace Samples.Gps
             this.ToggleUpdates = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    if (this.manager.IsListening)
+                    if (this.manager.CurrentListener == null)
                     {
                         await this.manager.StopListener();
                         this.gpsListener?.Dispose();
                     }
                     else
                     {
-                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(new GpsRequest { UseBackground = this.UseBackground }));
+                        var result = await dialogs.RequestAccess(() => this.manager.RequestAccess(new GpsRequest
+                        {
+                            UseBackground = this.UseBackground
+                        }));
                         if (!result)
                         {
                             await dialogs.Alert("Insufficient permissions");
@@ -86,7 +99,7 @@ namespace Samples.Gps
 
                         await this.manager.StartListener(request);
                     }
-                    this.IsUpdating = this.manager.IsListening;
+                    this.IsUpdating = this.manager.CurrentListener != null;
                 },
                 this.WhenAny(
                     x => x.IsUpdating,
