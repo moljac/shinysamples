@@ -8,20 +8,20 @@ using Shiny.BluetoothLE;
 
 namespace Samples.BluetoothLE
 {
-    public class BleClientDelegate : IBleDelegate
+    public class BleClientDelegate : BleDelegate
     {
         readonly CoreDelegateServices services;
         public BleClientDelegate(CoreDelegateServices services) => this.services = services;
 
 
-        public async Task OnAdapterStateChanged(AccessState state)
+        public override async Task OnAdapterStateChanged(AccessState state)
         {
             if (state == AccessState.Disabled && this.services.AppSettings.UseNotificationsBle)
                 await this.services.SendNotification("BLE State", "Turn on Bluetooth already");
         }
 
 
-        public Task OnConnected(IPeripheral peripheral) => Task.WhenAll(
+        public override Task OnConnected(IPeripheral peripheral) => Task.WhenAll(
             this.services.Connection.InsertAsync(new BleEvent
             {
                 Timestamp = DateTime.Now
@@ -32,5 +32,12 @@ namespace Samples.BluetoothLE
                 x => x.UseNotificationsBle
             )
         );
+
+
+        //public override Task OnScanResult(ScanResult result)
+        //{
+        //    // we only want this to run in the background
+        //    return base.OnScanResult(result);
+        //}
     }
 }
