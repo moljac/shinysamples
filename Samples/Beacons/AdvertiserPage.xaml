@@ -13,7 +13,7 @@
                     <EntryCell Label="UUID" Text="{Binding Uuid}" />
                     <EntryCell Label="Major" Text="{Binding Major}" />
                     <EntryCell Label="Minor" Text="{Binding Minor}" />
-                    <EntryCell Label="TX Power" Text="{Binding txpower}" />
+                    <EntryCell Label="TX Power" Text="{Binding TxPower}" />
                 </TableSection>
                 <TableSection>
                     <TextCell Text="{Binding ToggleText}" Command="{Binding Toggle}" />
