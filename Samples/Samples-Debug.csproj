@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Advertising\Shiny.Beacons.Advertising.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Abstractions\Shiny.BluetoothLE.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Common\Shiny.BluetoothLE.Common.csproj" />
@@ -62,5 +63,4 @@
         <EmbeddedResource Include="Resources\fa-regular-400.ttf" />
         <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
     </ItemGroup>
-
 </Project>

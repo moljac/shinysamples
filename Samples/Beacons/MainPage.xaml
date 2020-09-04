@@ -22,6 +22,13 @@
         </ContentPage.IconImageSource>
     </sample:MonitoringPage>
 
+    <sample:AdvertiserPage>
+        <ContentPage.IconImageSource>
+            <FontImageSource Glyph="&#xf7e6;"
+                             FontFamily="FAS" />
+        </ContentPage.IconImageSource>
+    </sample:AdvertiserPage>
+
     <sample:LogsPage>
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf7e6;"

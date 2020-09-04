@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:beacons="clr-namespace:Samples.Beacons"
+             x:DataType="beacons:AdvertiserViewModel"
+             x:Class="Samples.Beacons.AdvertiserPage"
+             Title="Advertising">
+
+    <ContentPage.Content>
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection>
+                    <EntryCell Label="UUID" Text="{Binding Uuid}" />
+                    <EntryCell Label="Major" Text="{Binding Major}" />
+                    <EntryCell Label="Minor" Text="{Binding Minor}" />
+                    <EntryCell Label="TX Power" Text="{Binding txpower}" />
+                </TableSection>
+                <TableSection>
+                    <TextCell Text="{Binding ToggleText}" Command="{Binding Toggle}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
