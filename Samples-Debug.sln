@@ -76,6 +76,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{40658C
 		..\shiny\.github\ISSUE_TEMPLATE\--bug.md = ..\shiny\.github\ISSUE_TEMPLATE\--bug.md
 		..\shiny\.github\ISSUE_TEMPLATE\--feature-request.md = ..\shiny\.github\ISSUE_TEMPLATE\--feature-request.md
 		..\shiny\.github\ISSUE_TEMPLATE\--thank-you.md = ..\shiny\.github\ISSUE_TEMPLATE\--thank-you.md
+		..\shiny\build.cake = ..\shiny\build.cake
 		..\shiny\.github\CODE_OF_CONDUCT.md = ..\shiny\.github\CODE_OF_CONDUCT.md
 		..\shiny\.github\config.yml = ..\shiny\.github\config.yml
 		..\shiny\.dependabot\config.yml = ..\shiny\.dependabot\config.yml
@@ -152,7 +153,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snippets", "..\shiny\src\Sn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Push.AwsSns", "..\shiny\src\Shiny.Push.AwsSns\Shiny.Push.AwsSns.csproj", "{B24CE57C-2A6C-4935-A6C5-8D221859B239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Logging.Aws", "..\shiny\src\Shiny.Logging.Aws\Shiny.Logging.Aws.csproj", "{1D5A06B8-DB37-45B2-A134-CEB276483B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Logging.Aws", "..\shiny\src\Shiny.Logging.Aws\Shiny.Logging.Aws.csproj", "{1D5A06B8-DB37-45B2-A134-CEB276483B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
