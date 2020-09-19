@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -6,62 +7,55 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Settings;
 using Shiny;
+using Shiny.Settings;
 
 
 namespace Samples
 {
-    public class DelegateNotificationsViewModel : ViewModel, IAppSettings
+    public class DelegateNotificationsViewModel : ViewModel
     {
-        public DelegateNotificationsViewModel(IAppSettings appSettings)
+        public DelegateNotificationsViewModel(ISettings settings, IAppSettings appSettings)
         {
-            appSettings
-                .GetType()
-                .GetProperties()
-                .Where(x =>
-                    x.Name.StartsWith("UseNotifications") &&
-                    x.CanRead &&
-                    x.PropertyType == typeof(bool)
-                )
-                .ToList()
-                .ForEach(x =>
-                    this.ReflectSet(x.Name, appSettings.ReflectGet(x.Name))
-                );
+            this.Notifications = new List<DelegateNotificationItemViewModel>
+            {
+                new DelegateNotificationItemViewModel(settings, nameof(BluetoothLE.BleClientDelegate), "BluetoothLE"),
+                new DelegateNotificationItemViewModel(settings, nameof(HttpTransfers.HttpTransferDelegate), "HTTP Transfers"),
+                new DelegateNotificationItemViewModel(settings, nameof(Beacons.BeaconDelegate) + "Entry", "Beacon Region Entry"),
+                new DelegateNotificationItemViewModel(settings, nameof(Beacons.BeaconDelegate) + "Exit", "Beacon Region Exit"),
+                new DelegateNotificationItemViewModel(settings, nameof(Geofences.GeofenceDelegate) + "Entry", "Geofence Entry"),
+                new DelegateNotificationItemViewModel(settings, nameof(Geofences.GeofenceDelegate) + "Exit", "Geofence Exit"),
+                new DelegateNotificationItemViewModel(settings, nameof(Jobs.JobLoggerTask) + "Start", "Job Started"),
+                new DelegateNotificationItemViewModel(settings, nameof(Jobs.JobLoggerTask) + "Finished", "Job Finished")
+            };
 
             this.WhenAnyValue(x => x.ToggleAll)
                 .Skip(1)
-                .Subscribe(x =>
-                    this.GetType()
-                        .GetProperties()
-                        .Where(y =>
-                            y.Name.StartsWith("UseNotifications") &&
-                            y.CanWrite &&
-                            y.PropertyType == typeof(bool)
-                        )
-                        .ToList()
-                        .ForEach(y => y.SetValue(this, x))
-                )
-                .DisposeWith(this.DeactivateWith);
-
-            this.WhenAnyProperty()
-                .Skip(1)
-                .Where(x => x.Value != "ToggleAll")
-                .Subscribe(x => appSettings.ReflectSet(x.Value, this.ReflectGet(x.Value)))
+                .Subscribe(x => this.Notifications.ForEach(y => y.IsEnabled = x))
                 .DisposeWith(this.DeactivateWith);
         }
 
 
+        public List<DelegateNotificationItemViewModel> Notifications { get; }
         [Reactive] public bool ToggleAll { get; set; }
-        [Reactive] public bool UseNotificationsBle { get; set; }
-        [Reactive] public bool UseNotificationsHttpTransfers { get; set; }
-        [Reactive] public bool UseNotificationsBeaconRegionEntry { get; set; }
-        [Reactive] public bool UseNotificationsBeaconRegionExit { get; set; }
-        [Reactive] public bool UseNotificationsGeofenceEntry { get; set; }
-        [Reactive] public bool UseNotificationsGeofenceExit { get; set; }
-        [Reactive] public bool UseNotificationsJobStart { get; set; }
-        [Reactive] public bool UseNotificationsJobFinish { get; set; }
+    }
 
-        [Reactive] public bool IsChecked { get; set; }
-        [Reactive] public string YourText { get; set; }
-        [Reactive] public DateTime? LastUpdated { get; set; }
+
+    public class DelegateNotificationItemViewModel : ReactiveObject
+    {
+        public DelegateNotificationItemViewModel(ISettings settings, string key, string description)
+        {
+            this.Key = key;
+            this.Description = description;
+            this.IsEnabled = settings.Get<bool>(key);
+
+            this.WhenAnyValue(x => x.IsEnabled)
+                .Skip(1)
+                .Subscribe(x => settings.Set(Key, x));
+        }
+
+
+        public string Key { get; }
+        public string Description { get; }
+        public bool IsEnabled { get; set; }
     }
 }

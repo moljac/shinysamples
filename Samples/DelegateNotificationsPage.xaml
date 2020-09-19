@@ -3,24 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Samples.DelegateNotificationsPage"
              Title="Delegate Notifications">
-    <ContentPage.Content>
-        <TableView Intent="Settings">
-            <TableRoot>
-                <TableSection>
-                    <SwitchCell Text="Toggle All" On="{Binding ToggleAll}" />
-                </TableSection>
 
-                <TableSection Title="Events">
-                    <SwitchCell Text="BluetoothLE" On="{Binding UseNotificationsBle}" />
-                    <SwitchCell Text="Geofence Entry" On="{Binding UseNotificationsGeofenceEntry}" />
-                    <SwitchCell Text="Geofence Exit" On="{Binding UseNotificationsGeofenceExit}" />
-                    <SwitchCell Text="Job Start" On="{Binding UseNotificationsJobStart}" />
-                    <SwitchCell Text="Job Finish" On="{Binding UseNotificationsJobFinish}" />
-                    <SwitchCell Text="HTTP Transfers" On="{Binding UseNotificationsHttpTransfers}" />
-                    <SwitchCell Text="Beacon Region Entry" On="{Binding UseNotificationsBeaconRegionEntry}" />
-                    <SwitchCell Text="Beacon Region Exit" On="{Binding UseNotificationsBeaconRegionExit}" />
-                </TableSection>
-            </TableRoot>
-        </TableView>
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding Notifications}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsEnabled}" />
+                        <Label Text="{Binding Description}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>
