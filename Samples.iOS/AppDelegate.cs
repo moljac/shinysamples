@@ -1,7 +1,6 @@
 ﻿using System;
 using Foundation;
 using UIKit;
-using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Shiny;

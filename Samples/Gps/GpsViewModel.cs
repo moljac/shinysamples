@@ -66,7 +66,7 @@ namespace Samples.Gps
             this.ToggleUpdates = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    if (this.manager.CurrentListener == null)
+                    if (this.manager.CurrentListener != null)
                     {
                         await this.manager.StopListener();
                         this.gpsListener?.Dispose();
