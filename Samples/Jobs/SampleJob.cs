@@ -10,10 +10,11 @@ using Shiny.Jobs;
 
 namespace Samples.Jobs
 {
-    public class SampleJob : IJob
+    public class SampleJob : IJob, IShinyStartupTask
     {
         readonly CoreDelegateServices services;
         public SampleJob(CoreDelegateServices services) => this.services = services;
+
 
 
         public async Task Run(JobInfo jobInfo, CancellationToken cancelToken)
@@ -34,5 +35,8 @@ namespace Samples.Jobs
                 $"{jobInfo.Identifier} Finished"
             );
         }
+
+        public void Start()
+            => this.services.Notifications.Register(this.GetType(), true, "Jobs");
     }
 }

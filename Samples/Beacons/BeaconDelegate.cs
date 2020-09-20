@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 
 using Samples.Infrastructure;
 using Samples.Models;
+using Shiny;
 using Shiny.Beacons;
 
 
 namespace Samples.Beacons
 {
-    public class BeaconDelegate : IBeaconMonitorDelegate
+    public class BeaconDelegate : IBeaconMonitorDelegate, IShinyStartupTask
     {
         readonly CoreDelegateServices services;
         public BeaconDelegate(CoreDelegateServices services) => this.services = services;
@@ -32,5 +33,9 @@ namespace Samples.Beacons
                 $"{region.Identifier} - {region.Uuid}/{region.Major}/{region.Minor}"
             );
         }
+
+
+        public void Start()
+            => this.services.Notifications.Register(this.GetType(), true, "Beacon Regions");
     }
 }

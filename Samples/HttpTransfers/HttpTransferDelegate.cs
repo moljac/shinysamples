@@ -3,13 +3,14 @@ using System.IO;
 using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
+using Shiny;
 using Shiny.Net.Http;
 using SQLite;
 
 
 namespace Samples.HttpTransfers
 {
-    public class HttpTransferDelegate : IHttpTransferDelegate
+    public class HttpTransferDelegate : IHttpTransferDelegate, IShinyStartupTask
     {
         readonly CoreDelegateServices services;
         public HttpTransferDelegate(CoreDelegateServices services) => this.services = services;
@@ -56,10 +57,13 @@ namespace Samples.HttpTransfers
             });
             await this.services.Notifications.Send(
                 this.GetType(),
-                true,
+                false,
                 "HTTP Transfer",
                 description
             );
         }
+
+        public void Start()
+            => this.services.Notifications.Register(this.GetType(), false, "HTTP Transfers");
     }
 }

@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using Samples.Infrastructure;
 using Samples.Models;
+using Shiny;
 using Shiny.Locations;
 
 
 namespace Samples.Geofences
 {
-    public class GeofenceDelegate : IGeofenceDelegate
+    public class GeofenceDelegate : IGeofenceDelegate, IShinyStartupTask
     {
         readonly CoreDelegateServices services;
         public GeofenceDelegate(CoreDelegateServices services) => this.services = services;
@@ -28,5 +29,9 @@ namespace Samples.Geofences
                 $"{region.Identifier} was {newStatus}"
             );
         }
+
+
+        public void Start()
+            => this.services.Notifications.Register(this.GetType(), true, "Geofences");
     }
 }

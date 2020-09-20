@@ -8,7 +8,7 @@ using Shiny.BluetoothLE;
 
 namespace Samples.BluetoothLE
 {
-    public class BleClientDelegate : BleDelegate
+    public class BleClientDelegate : BleDelegate, IShinyStartupTask
     {
         readonly CoreDelegateServices services;
         public BleClientDelegate(CoreDelegateServices services) => this.services = services;
@@ -40,5 +40,7 @@ namespace Samples.BluetoothLE
         //    // we only want this to run in the background
         //    return base.OnScanResult(result);
         //}
+        public void Start()
+            => this.services.Notifications.Register(this.GetType(), false, "BluetoothLE"); 
     }
 }

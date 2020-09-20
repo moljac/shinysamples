@@ -6,6 +6,7 @@ using Shiny.Power;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
+
 namespace Samples
 {
     public class EnvironmentViewModel : ViewModel

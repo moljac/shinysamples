@@ -39,7 +39,8 @@ namespace Samples
         }
 
 
-        public NotificationRegistration[] GetRegistrations() => this.registrations.Values.ToArray();
+        public NotificationRegistration[] GetRegistrations()
+            => this.registrations.Values.OrderBy(x => x.Description).ToArray();
 
 
         public void Set(Type type, bool entry, bool enabled)

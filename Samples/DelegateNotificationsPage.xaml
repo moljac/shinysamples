@@ -1,23 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:samples="clr-namespace:Samples"
              x:Class="Samples.DelegateNotificationsPage"
+             x:DataType="samples:DelegateNotificationsViewModel"
              Title="Delegate Notifications">
 
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Notifications}">
+        <CollectionView ItemsSource="{Binding Notifications}"
+                        SelectionMode="None">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="samples:DelegateNotificationItemViewModel">
                     <StackLayout>
                         <Label Text="{Binding Description}" />
 
-                        <Label Text="{Binding EntryText}" />
-                        <CheckBox IsChecked="{Binding IsEntyEnabled}" />
+                        <Label Text="{Binding Text}" />
+                        <CheckBox IsChecked="{Binding IsEntryEnabled}" />
 
                         <Label Text="Exit"
                                IsVisible="{Binding HasEntryExit}" />
                         <CheckBox IsChecked="{Binding IsExitEnabled}"
                                   IsVisible="{Binding HasEntryExit}" />
+
+                        <BoxView BackgroundColor="Black"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

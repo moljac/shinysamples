@@ -13,18 +13,6 @@ namespace Samples
     {
         public DelegateNotificationsViewModel(AppNotifications notifications)
         {
-
-            //this.Notifications = new List<DelegateNotificationItemViewModel>
-            //{
-            //    new DelegateNotificationItemViewModel(settings, nameof(BluetoothLE.BleClientDelegate), "BluetoothLE"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(HttpTransfers.HttpTransferDelegate), "HTTP Transfers"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(Beacons.BeaconDelegate) + "Entry", "Beacon Region Entry"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(Beacons.BeaconDelegate) + "Exit", "Beacon Region Exit"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(Geofences.GeofenceDelegate) + "Entry", "Geofence Entry"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(Geofences.GeofenceDelegate) + "Exit", "Geofence Exit"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(Jobs.JobLoggerTask) + "Start", "Job Started"),
-            //    new DelegateNotificationItemViewModel(settings, nameof(Jobs.JobLoggerTask) + "Finished", "Job Finished")
-            //};
             this.Notifications = notifications
                 .GetRegistrations()
                 .Select(x => new DelegateNotificationItemViewModel(notifications, x))
@@ -53,6 +41,9 @@ namespace Samples
             this.Description = reg.Description;
             this.Text = reg.HasEntryExit ? "Entry" : "Enabled";
             this.HasEntryExit = reg.HasEntryExit;
+
+            this.IsEntryEnabled = notifications.IsEnabled(reg.Type, true);
+            this.IsExitEnabled = notifications.IsEnabled(reg.Type, false);
 
             this.WhenAnyValue(x => x.IsEntryEnabled)
                 .Skip(1)
