@@ -8,9 +8,16 @@
         <CollectionView ItemsSource="{Binding Notifications}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding IsEnabled}" />
+                    <StackLayout>
                         <Label Text="{Binding Description}" />
+
+                        <Label Text="{Binding EntryText}" />
+                        <CheckBox IsChecked="{Binding IsEntyEnabled}" />
+
+                        <Label Text="Exit"
+                               IsVisible="{Binding HasEntryExit}" />
+                        <CheckBox IsChecked="{Binding IsExitEnabled}"
+                                  IsVisible="{Binding HasEntryExit}" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
