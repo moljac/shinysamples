@@ -58,7 +58,7 @@ namespace Samples.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            this.ShinyRequestPermissionsResult(requestCode, permissions, grantResults);
+            this.ShinyOnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 #endif
     }

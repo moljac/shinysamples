@@ -16,8 +16,8 @@ namespace Samples.BluetoothLE
 
         public override async Task OnAdapterStateChanged(AccessState state)
         {
-            if (state == AccessState.Disabled && this.services.AppSettings.UseNotificationsBle)
-                await this.services.SendNotification("BLE State", "Turn on Bluetooth already");
+            if (state == AccessState.Disabled)
+                await this.services.Notifications.Send(this.GetType(), true, "BLE State", "Turn on Bluetooth already");
         }
 
 
@@ -26,10 +26,11 @@ namespace Samples.BluetoothLE
             {
                 Timestamp = DateTime.Now
             }),
-            this.services.SendNotification(
+            this.services.Notifications.Send(
+                this.GetType(),
+                true,
                 "BluetoothLE Device Connected",
-                $"{peripheral.Name} has connected",
-                x => x.UseNotificationsBle
+                $"{peripheral.Name} has connected"
             )
         );
 

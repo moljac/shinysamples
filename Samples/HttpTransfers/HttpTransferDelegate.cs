@@ -1,10 +1,10 @@
-﻿using Samples.Infrastructure;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using Samples.Infrastructure;
 using Samples.Models;
 using Shiny.Net.Http;
 using SQLite;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 
 namespace Samples.HttpTransfers
@@ -54,10 +54,11 @@ namespace Samples.HttpTransfers
                 Description = description,
                 DateCreated = DateTime.Now
             });
-            await this.services.SendNotification(
+            await this.services.Notifications.Send(
+                this.GetType(),
+                true,
                 "HTTP Transfer",
-                description,
-                x => x.UseNotificationsHttpTransfers
+                description
             );
         }
     }

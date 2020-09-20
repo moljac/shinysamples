@@ -18,18 +18,20 @@ namespace Samples.Jobs
 
         public async Task Run(JobInfo jobInfo, CancellationToken cancelToken)
         {
-            await this.services.SendNotification(
+            await this.services.Notifications.Send(
+                this.GetType(),
+                true,
                 "Job Started",
-                $"{jobInfo.Identifier} Started",
-                x => x.UseNotificationsJobStart
+                $"{jobInfo.Identifier} Started"
             );
             var seconds = jobInfo.Parameters.Get("SecondsToRun", 10);
             await Task.Delay(TimeSpan.FromSeconds(seconds), cancelToken);
 
-            await this.services.SendNotification(
+            await this.services.Notifications.Send(
+                this.GetType(),
+                false,
                 "Job Finished",
-                $"{jobInfo.Identifier} Finished",
-                x => x.UseNotificationsJobFinish
+                $"{jobInfo.Identifier} Finished"
             );
         }
     }

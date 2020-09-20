@@ -21,14 +21,11 @@ namespace Samples.Geofences
                 Entered = newStatus == GeofenceState.Entered,
                 Date = DateTime.Now
             });
-            var notify = newStatus == GeofenceState.Entered
-                ? this.services.AppSettings.UseNotificationsGeofenceEntry
-                : this.services.AppSettings.UseNotificationsGeofenceExit;
-
-            await this.services.SendNotification(
+            await this.services.Notifications.Send(
+                this.GetType(),
+                newStatus == GeofenceState.Entered,
                 "Geofence Event",
-                $"{region.Identifier} was {newStatus}",
-                x => x.UseNotificationsBle
+                $"{region.Identifier} was {newStatus}"
             );
         }
     }

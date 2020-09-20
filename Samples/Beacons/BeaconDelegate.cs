@@ -25,17 +25,12 @@ namespace Samples.Beacons
                 Entered = newStatus == BeaconRegionState.Entered,
                 Date = DateTime.Now
             });
-            var notify = newStatus == BeaconRegionState.Entered
-                ? this.services.AppSettings.UseNotificationsBeaconRegionEntry
-                : this.services.AppSettings.UseNotificationsBeaconRegionExit;
-
-            if (notify)
-            {
-                await this.services.SendNotification(
-                    $"Beacon Region {newStatus}",
-                    $"{region.Identifier} - {region.Uuid}/{region.Major}/{region.Minor}"
-                );
-            }
+            await this.services.Notifications.Send(
+                this.GetType(),
+                newStatus == BeaconRegionState.Entered,
+                $"Beacon Region {newStatus}",
+                $"{region.Identifier} - {region.Uuid}/{region.Major}/{region.Minor}"
+            );
         }
     }
 }
