@@ -70,9 +70,10 @@
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.5.3.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.Messaging" Version="71.1740.4" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="71.1601.4" />
-    <!--
+      <!--
+        <PackageReference Include="Xamarin.Firebase.Messaging" Version="71.1740.4" />
+        <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="71.1601.4" />
+
         <PackageReference Include="Xamarin.Firebase.Datatransport" Version="117.0.5-preview02" />
         <PackageReference Include="Xamarin.Firebase.Common" Version="119.3.0-preview02" />
         <PackageReference Include="Xamarin.Firebase.Messaging" Version="120.1.7-preview02" />
@@ -132,10 +133,6 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj">
       <Project>{f2249781-6d49-4a5f-92c9-6af5ac1f4af4}</Project>
       <Name>Shiny.Push.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
-      <Project>{1c8055aa-e6c5-4a6d-9c0b-cf3b36819553}</Project>
-      <Name>Shiny.Push.AzureNotificationHubs</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{e01aa1cd-070d-4ce2-82d8-4c7002a9ae0f}</Project>

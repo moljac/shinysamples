@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-
 using Samples.Infrastructure;
 using Samples.Models;
 using Shiny;
