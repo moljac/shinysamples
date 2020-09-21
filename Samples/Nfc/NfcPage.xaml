@@ -4,9 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nfc="clr-namespace:Samples.Nfc"
-             xmlns:nfc1="clr-namespace:Shiny.Nfc;assembly=Shiny.Nfc.Abstractions"
-             x:DataType="nfc:NfcViewModel"
              mc:Ignorable="d"
+             x:DataType="nfc:NfcViewModel"
              x:Class="Samples.Nfc.NfcPage"
              Title="NFC">
 
@@ -16,7 +15,9 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="{Binding Access, StringFormat='Check Access: {0}'}" />
+            <Button Text="{Binding Access, StringFormat='Check Access: {0}'}"
+                    Command="{Binding CheckPermission}"/>
+
             <Button Text="Start Listening" Command="{Binding Listen}">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding IsListening}" Value="True">
@@ -35,10 +36,11 @@
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="nfc1:NDefRecord">
+                    <DataTemplate x:DataType="nfc:NDefItemViewModel">
                         <StackLayout>
-                            <Label Text="{Binding Payload}" />
-                            <Label Text="{Binding PayloadType}" />
+                            <Label Text="{Binding Type}" FontSize="Title" />
+                            <Label Text="{Binding Payload}" FontSize="Subtitle" />
+
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

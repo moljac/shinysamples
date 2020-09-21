@@ -2,10 +2,12 @@
 using ReactiveUI.Fody.Helpers;
 using Shiny;
 using Shiny.Nfc;
-using System;
-using System.Collections.Generic;
+
+using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 
@@ -13,23 +15,20 @@ namespace Samples.Nfc
 {
     public class NfcViewModel : ViewModel
     {
-        readonly INfcManager nfcManager;
-
-
-        public NfcViewModel(INfcManager nfcManager = null)
+        public NfcViewModel(INfcManager? nfcManager = null)
         {
-            this.nfcManager = nfcManager;
-
-            this.CheckPermission = ReactiveCommand.CreateFromTask(async () =>
-                this.Access = await nfcManager.RequestAccess().ToTask()
-            );
+            this.CheckPermission = ReactiveCommand.CreateFromTask(() => this.DoCheckPermission(nfcManager));
 
             this.Clear = ReactiveCommand.Create(() =>
-                this.ChangeRecords(() => this.NDefRecords.Clear())
+                this.NDefRecords.Clear()
             );
 
-            this.Listen = ReactiveCommand.Create(() =>
+            this.Listen = ReactiveCommand.CreateFromTask(async () =>
             {
+                await this.DoCheckPermission(nfcManager);
+                if (this.Access != AccessState.Available)
+                    return;
+
                 if (this.IsListening)
                 {
                     this.IsListening = false;
@@ -37,11 +36,10 @@ namespace Samples.Nfc
                 }
                 else
                 {
-                    this.nfcManager
+                    nfcManager
                         .Reader()
-                        .SubOnMainThread(x =>
-                            this.ChangeRecords(() => this.NDefRecords.AddRange(x))
-                        )
+                        .SelectMany(x => x.Select(y => new NDefItemViewModel(y)))
+                        .SubOnMainThread(this.NDefRecords.Add)
                         .DisposeWith(this.DeactivateWith);
                     this.IsListening = true;
                 }
@@ -49,20 +47,21 @@ namespace Samples.Nfc
         }
 
 
-        void ChangeRecords(Action action)
-        {
-            lock (this.NDefRecords)
-                action();
-
-            this.RaisePropertyChanged(nameof(NDefRecords));
-        }
-
 
         public ICommand Clear { get; }
         public ICommand Listen { get; }
         public ICommand CheckPermission { get; }
-        public List<NDefRecord> NDefRecords { get; } = new List<NDefRecord>();
+        public ObservableList<NDefItemViewModel> NDefRecords { get; } = new ObservableList<NDefItemViewModel>();
         [Reactive] public AccessState Access { get; private set; } = AccessState.Unknown;
         [Reactive] public bool IsListening { get; private set; }
+
+
+        async Task DoCheckPermission(INfcManager? manager = null)
+        {
+            if (manager == null)
+                this.Access = AccessState.NotSupported;
+            else
+                this.Access = await manager.RequestAccess().ToTask();
+        }
     }
 }
