@@ -85,6 +85,7 @@
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -97,6 +98,7 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -280,10 +282,6 @@
       <Project>{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}</Project>
       <Name>Shiny.Sensors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
-      <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
-      <Name>Shiny.Push.AzureNotificationHubs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Notifications.Abstractions\Shiny.Notifications.Abstractions.csproj">
       <Project>{31A9ECFC-61EB-4579-98BA-209A463EDFFE}</Project>
       <Name>Shiny.Notifications.Abstractions</Name>
@@ -307,10 +305,6 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition.Abstractions\Shiny.SpeechRecognition.Abstractions.csproj">
       <Project>{6DCFE687-4C85-4443-A860-457F57018A2E}</Project>
       <Name>Shiny.SpeechRecognition.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj">
-      <Project>{B68160FF-CB75-4230-89BE-FB5D8B01FFEE}</Project>
-      <Name>Shiny.Push.FirebaseMessaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj">
       <Project>{4190E58C-A512-4E97-B212-295C21D4DCD1}</Project>
