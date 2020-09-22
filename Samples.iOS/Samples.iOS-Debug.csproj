@@ -315,6 +315,26 @@
             <Project>{C356B984-0CCF-41CF-A745-5719695FF81E}</Project>
             <Name>Shiny.Locations.Sync</Name>
         </ProjectReference>
+        <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Abstractions\Shiny.BluetoothLE.Abstractions.csproj">
+          <Project>{7CC555C9-9247-47B5-ACEB-2069B1AEE1FD}</Project>
+          <Name>Shiny.BluetoothLE.Abstractions</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Abstractions\Shiny.Beacons.Abstractions.csproj">
+          <Project>{CE212900-CD9A-4298-B96D-C31A32FB3F0D}</Project>
+          <Name>Shiny.Beacons.Abstractions</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\shiny\src\Shiny.DataSync\Shiny.DataSync.csproj">
+          <Project>{8C3EE629-2475-4A18-98C4-1ADD788EB8BA}</Project>
+          <Name>Shiny.DataSync</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting.Abstractions\Shiny.BluetoothLE.Hosting.Abstractions.csproj">
+          <Project>{B0B472D8-F9BC-4984-B485-93F460D6F5B6}</Project>
+          <Name>Shiny.BluetoothLE.Hosting.Abstractions</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Advertising\Shiny.Beacons.Advertising.csproj">
+          <Project>{8F5708DF-4CC5-4D6B-9FDC-B42BC1DAD5E5}</Project>
+          <Name>Shiny.Beacons.Advertising</Name>
+        </ProjectReference>
     </ItemGroup>
     <ItemGroup>
         <BundleResource Include="Resources\60.png" />

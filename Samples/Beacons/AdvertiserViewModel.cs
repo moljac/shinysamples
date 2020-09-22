@@ -50,10 +50,10 @@ namespace Samples.Beacons
                         if (!Guid.TryParse(uuid.GetValue(), out var _))
                             return false;
 
-                        if (!UInt16.TryParse(major.GetValue(), out var M) && M > 0)
+                        if (!UInt16.TryParse(major.GetValue(), out var M) || M == 0)
                             return false;
 
-                        if (!UInt16.TryParse(minor.GetValue(), out var m) && m > 0)
+                        if (!UInt16.TryParse(minor.GetValue(), out var m) || m == 0)
                             return false;
 
                         if (!Byte.TryParse(tx.GetValue(), out var _))
