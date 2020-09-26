@@ -40,7 +40,9 @@ namespace Samples.BluetoothLE
         //    // we only want this to run in the background
         //    return base.OnScanResult(result);
         //}
+
+
         public void Start()
-            => this.services.Notifications.Register(this.GetType(), false, "BluetoothLE"); 
+            => this.services.Notifications.Register(this.GetType(), false, "BluetoothLE");
     }
 }
