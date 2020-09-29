@@ -50,7 +50,7 @@ namespace Samples
         public void Register(Type type, bool hasEntryExit, string description)
         {
             if (this.registrations.ContainsKey(type))
-                throw new ArgumentException("Already registrated");
+                return;
 
             this.registrations.Add(type, new NotificationRegistration(description, type, hasEntryExit));
         }
