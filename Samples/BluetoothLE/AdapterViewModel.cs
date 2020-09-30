@@ -19,29 +19,40 @@ namespace Samples.BluetoothLE
         IDisposable scan;
 
 
-        public AdapterViewModel(IBleManager central,
-                                INavigationService navigator,
-                                IDialogs dialogs)
+        public AdapterViewModel(INavigationService navigator,
+                                IDialogs dialogs,
+                                IBleManager? bleManager = null)
         {
-            this.CanControlAdapterState = central.CanControlAdapterState();
+            this.CanControlAdapterState = bleManager?.CanControlAdapterState() ?? false;
 
-            this.WhenAnyValue(x => x.SelectedPeripheral)
-                .Skip(1)
-                .Where(x => x != null)
-                .SubOnMainThread(x => navigator.Navigate("Peripheral", ("Peripheral", x.Peripheral)));
+            this.Select = ReactiveCommand.CreateFromTask<PeripheralItemViewModel>(vm =>
+                navigator.Navigate("Peripheral", ("Peripheral", vm.Peripheral))
+            );
 
             this.ToggleAdapterState = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    var poweredOn = central.Status == AccessState.Available;
-                    if (!central.TrySetAdapterState(!poweredOn))
-                        await dialogs.Alert("Cannot change bluetooth adapter state");
+                    if (bleManager == null)
+                    {
+                        await dialogs.Alert("Platform Not Supported");
+                    }
+                    else
+                    {
+                        var poweredOn = bleManager.Status == AccessState.Available;
+                        if (!bleManager.TrySetAdapterState(!poweredOn))
+                            await dialogs.Alert("Cannot change bluetooth adapter state");
+                    }
                 }
             );
 
-            this.ScanToggle = ReactiveCommand.Create(
-                () =>
+            this.ScanToggle = ReactiveCommand.CreateFromTask(
+                async () =>
                 {
+                    if (bleManager == null)
+                    {
+                        await dialogs.Alert("Platform Not Supported");
+                        return;
+                    }
                     if (this.IsScanning)
                     {
                         this.IsScanning = false;
@@ -51,7 +62,7 @@ namespace Samples.BluetoothLE
                     {
                         this.Peripherals.Clear();
 
-                        this.scan = central
+                        this.scan = bleManager
                             .Scan()
                             .Buffer(TimeSpan.FromSeconds(1))
                             .Synchronize()
@@ -97,11 +108,11 @@ namespace Samples.BluetoothLE
         }
 
 
+        public ICommand Select { get; }
         public ICommand ScanToggle { get; }
         public ICommand ToggleAdapterState { get; }
         public bool CanControlAdapterState { get; }
         public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
-        [Reactive] public PeripheralItemViewModel SelectedPeripheral { get; set; }
         [Reactive] public bool IsScanning { get; private set; }
     }
 }

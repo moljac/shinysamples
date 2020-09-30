@@ -38,7 +38,7 @@ namespace Samples.BluetoothLE
         public IReactiveCommand Start { get; }
         public IReactiveCommand Stop { get; }
         public string Text { get; }
-        public string ButtonText { [ObservableAsProperty] get; }
+        public string? ButtonText { [ObservableAsProperty] get; }
     }
 }
 

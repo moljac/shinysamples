@@ -5,7 +5,6 @@
              x:DataType="ble:AdapterViewModel"
              x:Class="Samples.BluetoothLE.AdapterPage"
              Title="BLE Central"
-
              NavigationPage.BackButtonTitle="Back">
 
     <ContentPage.Content>
@@ -27,8 +26,8 @@
 
             <CollectionView ItemsSource="{Binding Peripherals}"
                             ItemSizingStrategy="MeasureFirstItem"
+                            SelectionChangedCommand="{Binding Select}"
                             SelectionMode="Single"
-                            SelectedItem="{Binding SelectedPeripheral}"
                             VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="ble:PeripheralItemViewModel">
