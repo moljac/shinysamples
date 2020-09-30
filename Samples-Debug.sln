@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.iOS-Debug", "Sample
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{8F70D1FE-7FDB-4425-A4A8-4EEB90E3D382}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Testing", "..\shiny\src\Shiny.Testing\Shiny.Testing.csproj", "{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Testing", "..\shiny\src\Shiny.Testing\Shiny.Testing.csproj", "{C4EE6597-94E5-4700-8E3E-3FCB4CBCA21B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.UWP-Debug", "Samples.UWP\Samples.UWP-Debug.csproj", "{4718D281-A453-42A7-9381-0FD48DB8D801}"
 EndProject

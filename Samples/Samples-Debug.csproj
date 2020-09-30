@@ -53,6 +53,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Testing\Shiny.Testing.csproj" />
     </ItemGroup>
 
     <ItemGroup>
