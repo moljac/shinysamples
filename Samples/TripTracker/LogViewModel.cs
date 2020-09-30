@@ -36,12 +36,12 @@ namespace Samples.TripTracker
                 var text = String.Empty;
                 if (x.DateFinished == null)
                 {
-                    text = $"UNFINISHED: {x.DateStarted:g}";
+                    text = $"UNFINISHED: {x.DateStarted.LocalDateTime:g}";
                 }
                 else
                 {
                     var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "g" : "t";
-                    text = $"FINISHED: {x.DateStarted:g} - {x.DateFinished.Value.ToString(format)}";
+                    text = $"FINISHED: {x.DateStarted.LocalDateTime:g} - {x.DateFinished.Value.LocalDateTime.ToString(format)}";
                 }
 
                 return new CommandItem
