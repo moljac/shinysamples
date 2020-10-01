@@ -14,12 +14,8 @@ namespace Samples.TripTracker
     public class LogViewModel : AbstractLogViewModel<CommandItem>
     {
         readonly ITripTrackerManager manager;
-
-
         public LogViewModel(ITripTrackerManager manager, IDialogs dialogs) : base(dialogs)
-        {
-            this.manager = manager;
-        }
+            => this.manager = manager;
 
 
         protected override Task ClearLogs() => this.manager.Purge();
@@ -40,7 +36,7 @@ namespace Samples.TripTracker
                 }
                 else
                 {
-                    var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "g" : "t";
+                    var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "t" : "g";
                     text = $"FINISHED: {x.DateStarted.LocalDateTime:g} - {x.DateFinished.Value.LocalDateTime.ToString(format)}";
                 }
 

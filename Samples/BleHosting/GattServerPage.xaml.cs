@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 
 
-namespace Samples.BluetoothLE
+namespace Samples.BleHosting
 {
     public partial class GattServerPage : ContentPage
     {

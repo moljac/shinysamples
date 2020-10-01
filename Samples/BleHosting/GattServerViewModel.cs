@@ -3,13 +3,11 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using ReactiveUI.Fody.Helpers;
-
 using Shiny.BluetoothLE.Hosting;
 
 
-namespace Samples.BluetoothLE
+namespace Samples.BleHosting
 {
     public class GattServerViewModel : ViewModel
     {
@@ -21,12 +19,8 @@ namespace Samples.BluetoothLE
         static readonly Guid Characteristic4Uuid = Guid.Parse("A495FF24-C5B1-4B44-B512-1370F02D74DE");
 
         readonly IBleHostingManager peripheralManager;
-
-
-        public GattServerViewModel(IBleHostingManager peripheralManager)
-        {
-            this.peripheralManager = peripheralManager;
-        }
+        public GattServerViewModel(IBleHostingManager hostingManager)
+            => this.peripheralManager = hostingManager;
 
 
         [Reactive] public string LastWriteValue { get; private set; }
