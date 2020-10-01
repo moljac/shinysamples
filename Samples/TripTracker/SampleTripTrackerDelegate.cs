@@ -1,5 +1,7 @@
-﻿using Shiny;
+﻿using Humanizer;
+using Shiny;
 using Shiny.TripTracker;
+using System;
 using System.Threading.Tasks;
 
 
@@ -25,15 +27,15 @@ namespace Samples.TripTracker
 
         public async Task OnTripEnd(Trip trip)
         {
-            var km = Distance.FromMeters(trip.TotalDistanceMeters).TotalKilometers;
-            var avgSpeed = Distance.FromMeters(trip.AverageSpeedMetersPerHour).TotalKilometers;
-            var time = trip.DateFinished - trip.DateStarted;
+            var km = Math.Round(Distance.FromMeters(trip.TotalDistanceMeters).TotalKilometers, 0);
+            var avgSpeed = Math.Round(Distance.FromMeters(trip.AverageSpeedMetersPerHour).TotalKilometers, 0);
+            var time = (trip.DateFinished - trip.DateStarted).Value.Humanize();
 
             await this.notifications.Send(
                 this.GetType(),
                 false,
                 N_TITLE,
-                $"You just finished a trip that was {km} km and took {time.Value.TotalMinutes} minutes with an average speed of {avgSpeed} km"
+                $"You just finished a trip that was {km} km and took {time} with an average speed of {avgSpeed} km"
              );
         }
 

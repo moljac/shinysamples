@@ -58,6 +58,7 @@
         <MtouchLink>None</MtouchLink>
         <CodesignProvision>VS: com.shiny.test Development</CodesignProvision>
         <MtouchInterpreter>-all</MtouchInterpreter>
+<MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
         <DebugType>none</DebugType>
@@ -334,6 +335,10 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Advertising\Shiny.Beacons.Advertising.csproj">
           <Project>{8F5708DF-4CC5-4D6B-9FDC-B42BC1DAD5E5}</Project>
           <Name>Shiny.Beacons.Advertising</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
+          <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
+          <Name>Shiny.Push.AzureNotificationHubs</Name>
         </ProjectReference>
     </ItemGroup>
     <ItemGroup>

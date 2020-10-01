@@ -27,9 +27,9 @@ namespace Samples.TripTracker
 
             return trips.Select(x =>
             {
-                var km = Distance.FromMeters(x.TotalDistanceMeters).TotalKilometers;
-
+                var km = Math.Round(Distance.FromMeters(x.TotalDistanceMeters).TotalKilometers, 1);
                 var text = String.Empty;
+
                 if (x.DateFinished == null)
                 {
                     text = $"UNFINISHED: {x.DateStarted.LocalDateTime:g}";
@@ -55,7 +55,7 @@ namespace Samples.TripTracker
                         sb
                             .AppendLine($"Trip: {x.Id}")
                             .AppendLine()
-                            .AppendLine($"Started: {x.DateStarted.LocalDateTime}")
+                            .AppendLine($"Started: {x.DateStarted.LocalDateTime:g}")
                             .AppendLine($"Start Location: {x.StartLatitude} / {x.StartLongitude}")
                             .AppendLine();
 
@@ -66,8 +66,10 @@ namespace Samples.TripTracker
                                 .AppendLine($"Finish Location: {x.EndLatitude} / {x.EndLongitude}")
                                 .AppendLine();
                         }
+
+                        var meters = Math.Round(x.TotalDistanceMeters);
                         sb
-                            .AppendLine($"Total Distance (meters): {x.TotalDistanceMeters}")
+                            .AppendLine($"Total Distance (meters): {meters}")
                             .AppendLine($"GPS Pings: {checkins.Count()}")
                             .AppendLine()
                             .AppendLine("Lat,Long,Speed,Direction,Ticks");

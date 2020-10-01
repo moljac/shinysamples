@@ -178,6 +178,10 @@
       <Project>{685F5C3B-4511-484E-8806-00E06C185987}</Project>
       <Name>Shiny.SpeechRecognition</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
+      <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>
+      <Name>Shiny.Push.AzureNotificationHubs</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\notification.png">

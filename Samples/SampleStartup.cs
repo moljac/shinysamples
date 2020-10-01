@@ -18,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shiny;
 using Shiny.Notifications;
 using Shiny.Logging;
-
+using Shiny.Testing;
 //[assembly:Shiny.Generators.GenerateStaticClasses]
 
 namespace Samples
@@ -29,6 +29,8 @@ namespace Samples
         {
             Log.UseConsole();
             Log.UseDebug();
+
+            //services.UseTestMotionActivity(Shiny.Locations.MotionActivityType.Automotive);
 
             //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);B
             services.UseSqliteLogging(true, true);
@@ -86,10 +88,10 @@ namespace Samples
 
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();
-            //services.UsePushAzureNotificationHubs<PushDelegate>(
-            //    Constants.AnhListenerConnectionString,
-            //    Constants.AnhHubName
-            //);
+            services.UsePushAzureNotificationHubs<PushDelegate>(
+                Constants.AnhListenerConnectionString,
+                Constants.AnhHubName
+            );
 
             //// app services
             services.UseGeofencingSync<LocationSyncDelegates>();

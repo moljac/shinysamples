@@ -54,6 +54,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Vpn\Shiny.Vpn.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Testing\Shiny.Testing.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
     </ItemGroup>
 
     <ItemGroup>
