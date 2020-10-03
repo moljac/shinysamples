@@ -20,6 +20,7 @@ namespace Samples.TripTracker
             this.UseWalking = manager.TrackingType == TripTrackingType.Walking;
             this.UseOnFoot = manager.TrackingType == TripTrackingType.OnFoot;
             this.UseExercise = manager.TrackingType == TripTrackingType.Exercise;
+            this.UseStationary = manager.TrackingType == TripTrackingType.Stationary;
 
             this.ToggleMonitoring = ReactiveCommand.CreateFromTask
             (
@@ -52,7 +53,8 @@ namespace Samples.TripTracker
                     x => x.UseCycling,
                     x => x.UseOnFoot,
                     x => x.UseExercise,
-                    (auto, run, walk, cycle, foot, ex) => this.GetTrackingType() != null
+                    x => x.UseStationary,
+                    (auto, run, walk, cycle, foot, ex, st) => this.GetTrackingType() != null
                 )
             );
         }
@@ -67,7 +69,7 @@ namespace Samples.TripTracker
         [Reactive] public bool UseCycling { get; set; }
         [Reactive] public bool UseOnFoot { get; set; }
         [Reactive] public bool UseExercise { get; set; }
-
+        [Reactive] public bool UseStationary { get; set; }
 
         TripTrackingType? GetTrackingType()
         {
@@ -88,6 +90,9 @@ namespace Samples.TripTracker
 
             if (this.UseExercise)
                 return TripTrackingType.Exercise;
+
+            if (this.UseStationary)
+                return TripTrackingType.Stationary;
 
             return null;
         }

@@ -73,6 +73,12 @@
                          HorizontalOptions="FillAndExpand"
                          Text="Exercise" />
 
+            <RadioButton GroupName="Selection"
+                         IsChecked="{Binding UseStationary}"
+                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                         HorizontalOptions="FillAndExpand"
+                         Text="Stationary" />
+
             <Button Text="{Binding MonitoringText, Mode=OneWay}"
                     Command="{Binding ToggleMonitoring}" />
 
