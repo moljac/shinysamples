@@ -1,6 +1,5 @@
 ﻿using AppKit;
 using Foundation;
-using Shiny;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 
@@ -27,17 +26,17 @@ namespace Samples.macOS
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            this.ShinyDidFinishLaunching();
+            //this.ShinyDidFinishLaunching();
             Forms.Init();
-            this.LoadApplication(new App());
+            //this.LoadApplication(new App());
             base.DidFinishLaunching(notification);
         }
 
 
-        public override void RegisteredForRemoteNotifications(NSApplication application, NSData deviceToken)
-            => this.ShinyRegisteredForRemoteNotifications(deviceToken);
+        //public override void RegisteredForRemoteNotifications(NSApplication application, NSData deviceToken)
+        //    => this.ShinyRegisteredForRemoteNotifications(deviceToken);
 
-        public override void FailedToRegisterForRemoteNotifications(NSApplication application, NSError error)
-            => this.ShinyFailedToRegisterForRemoteNotifications(error);
+        //public override void FailedToRegisterForRemoteNotifications(NSApplication application, NSError error)
+        //    => this.ShinyFailedToRegisterForRemoteNotifications(error);
     }
 }
