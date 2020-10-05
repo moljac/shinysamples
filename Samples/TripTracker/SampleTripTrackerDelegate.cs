@@ -10,18 +10,22 @@ namespace Samples.TripTracker
     public class SampleTripTrackerDelegate : ITripTrackerDelegate, IShinyStartupTask
     {
         const string N_TITLE = "Shiny Trip";
+        readonly ITripTrackerManager manager;
         readonly AppNotifications notifications;
 
 
-        public SampleTripTrackerDelegate(AppNotifications notifications)
-            => this.notifications = notifications;
+        public SampleTripTrackerDelegate(ITripTrackerManager manager, AppNotifications notifications)
+        {
+            this.manager = manager;
+            this.notifications = notifications;
+        }
 
 
         public Task OnTripStart(Trip trip) => this.notifications.Send(
             this.GetType(),
             true,
             N_TITLE,
-            "Starting a new trip"
+            $"Starting a new {this.manager.TrackingType.Value} trip"
         );
 
 
@@ -36,7 +40,7 @@ namespace Samples.TripTracker
                 false,
                 N_TITLE,
                 $"You just finished a trip that was {km} km and took {time} with an average speed of {avgSpeed} km"
-             );
+            );
         }
 
 

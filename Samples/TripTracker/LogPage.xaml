@@ -30,8 +30,7 @@
                     <DataTemplate x:DataType="samples:CommandItem">
                         <samples:CommandCell Text="{Binding Text}"
                                              Detail="{Binding Detail}"
-                                             PrimaryCommand="{Binding PrimaryCommand}"
-                                             SecondaryCommand="{Binding SecondaryCommand}" />
+                                             PrimaryCommand="{Binding PrimaryCommand}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
