@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-    <PackageReference Include="ZNetCS.AspNetCore.ResumingFileResults" Version="2.2.0" />
+    <PackageReference Include="sqlite-net-pcl" />
+    <PackageReference Include="ZNetCS.AspNetCore.ResumingFileResults" />
   </ItemGroup>
 
   <ItemGroup>

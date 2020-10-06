@@ -14,12 +14,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Humanizer" Version="2.8.25" />
-        <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
-        <PackageReference Include="ReactiveUI.Fody" Version="11.5.35" />
-        <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-        <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
-        <PackageReference Include="XF.Material" Version="1.7.4" />
+        <PackageReference Include="Humanizer" />
+        <PackageReference Include="Prism.DryIoc.Forms" />
+        <PackageReference Include="ReactiveUI.Fody" />
+        <PackageReference Include="sqlite-net-pcl" />
+        <PackageReference Include="Xamarin.Forms" />
+        <PackageReference Include="XF.Material" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Tizen.NET.Sdk/1.0.3">
+﻿<Project Sdk="Tizen.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -30,9 +30,9 @@
     <ProjectReference Include="..\..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj" />
     <ProjectReference Include="..\..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
   </ItemGroup>
-  
+
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
+    <PackageReference Include="Xamarin.Forms" />
   </ItemGroup>
 </Project>
