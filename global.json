@@ -1,0 +1,7 @@
+{
+  "msbuild-sdks": {
+    "Meadow.Sdk": "1.1.0",
+    "Tizen.NET.Sdk": "1.0.9",
+    "Microsoft.Build.CentralPackageVersions": "2.0.79"
+  }
+}

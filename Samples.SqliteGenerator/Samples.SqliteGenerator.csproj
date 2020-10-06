@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="31.0.2" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Bogus" />
+    <PackageReference Include="sqlite-net-pcl" />
   </ItemGroup>
 
 </Project>
