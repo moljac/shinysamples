@@ -62,7 +62,7 @@ namespace Samples.BluetoothLE
                 });
 
             this.Permissions = ReactiveCommand.CreateFromTask(async () =>
-                this.Status = await this.centralManager.RequestAccess().ToTask()
+                this.Status = await this.centralManager.RequestAccess(false).ToTask()
             );
             this.WriteTest = this.DoWrite(true);
             this.WriteWithoutResponseTest = this.DoWrite(false);

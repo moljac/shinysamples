@@ -25,9 +25,10 @@ namespace Samples.BluetoothLE
         {
             this.CanControlAdapterState = bleManager?.CanControlAdapterState() ?? false;
 
-            this.Select = ReactiveCommand.CreateFromTask<PeripheralItemViewModel>(vm =>
-                navigator.Navigate("Peripheral", ("Peripheral", vm.Peripheral))
-            );
+            this.WhenAnyValue(x => x.SelectedPeripheral)
+                .Skip(1)
+                .Where(x => x != null)
+                .Subscribe(async x => await navigator.Navigate("Peripheral", ("Peripheral", x.Peripheral)));
 
             this.ToggleAdapterState = ReactiveCommand.CreateFromTask(
                 async () =>
@@ -108,11 +109,11 @@ namespace Samples.BluetoothLE
         }
 
 
-        public ICommand Select { get; }
         public ICommand ScanToggle { get; }
         public ICommand ToggleAdapterState { get; }
         public bool CanControlAdapterState { get; }
         public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
+        [Reactive] public PeripheralItemViewModel SelectedPeripheral { get; set; }
         [Reactive] public bool IsScanning { get; private set; }
     }
 }

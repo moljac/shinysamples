@@ -26,7 +26,7 @@
 
             <CollectionView ItemsSource="{Binding Peripherals}"
                             ItemSizingStrategy="MeasureFirstItem"
-                            SelectionChangedCommand="{Binding Select}"
+                            SelectedItem="{Binding SelectedPeripheral}"
                             SelectionMode="Single"
                             VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
