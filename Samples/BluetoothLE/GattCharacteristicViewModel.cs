@@ -34,8 +34,8 @@ namespace Samples.BluetoothLE
         [Reactive] public bool IsNotifying { get; private set; }
         [Reactive] public bool IsValueAvailable { get; private set; }
         [Reactive] public DateTime LastValue { get; private set; }
-        public Guid Uuid => this.Characteristic.Uuid;
-        public Guid ServiceUuid => this.Characteristic.Service.Uuid;
+        public string Uuid => this.Characteristic.Uuid;
+        public string ServiceUuid => this.Characteristic.Service.Uuid;
         public string Properties => this.Characteristic.Properties.ToString();
 
 
