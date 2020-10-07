@@ -5,7 +5,6 @@
              xmlns:ble="clr-namespace:Samples.BluetoothLE"
              x:Class="Samples.BluetoothLE.PeripheralPage"
              Title="{Binding Name}"
-             x:DataType="ble:PeripheralViewModel"
              NavigationPage.BackButtonTitle="Back">
 
     <ContentPage.Content>

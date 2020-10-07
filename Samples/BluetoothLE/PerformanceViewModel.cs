@@ -189,9 +189,6 @@ namespace Samples.BluetoothLE
         {
             try
             {
-                var suuid = Guid.Parse(this.ServiceUuid);
-                var cuuid = Guid.Parse(this.CharacteristicUuid);
-
                 this.Info = "Searching for peripheral..";
 
                 this.peripheral = await this.centralManager
@@ -218,8 +215,8 @@ namespace Samples.BluetoothLE
                 this.Info = "Searching for characteristic";
                 var characteristic = await this.peripheral
                     .GetKnownCharacteristics(
-                        suuid,
-                        cuuid
+                        this.ServiceUuid,
+                        this.CharacteristicUuid
                     )
                     .Timeout(TimeSpan.FromSeconds(5))
                     .ToTask(cancelToken);
@@ -245,8 +242,8 @@ namespace Samples.BluetoothLE
             (stat, dn, suuid, cuuid, run) =>
                 stat.GetValue() == AccessState.Available &&
                 !dn.GetValue().IsEmpty() &&
-                Guid.TryParse(suuid.GetValue(), out _) &&
-                Guid.TryParse(cuuid.GetValue(), out _) &&
+                !suuid.GetValue().IsEmpty() &&
+                !cuuid.GetValue().IsEmpty() &&
                 !run.GetValue()
         );
     }

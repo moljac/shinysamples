@@ -16,7 +16,7 @@ namespace Samples.BluetoothLE
             => this.Peripheral.Equals(obj);
 
         public IPeripheral Peripheral { get; }
-        public Guid Uuid => this.Peripheral.Uuid;
+        public string Uuid => this.Peripheral.Uuid;
 
         [Reactive] public string Name { get; private set; }
         [Reactive] public bool IsConnected { get; private set; }

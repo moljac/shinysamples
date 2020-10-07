@@ -26,15 +26,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Locations", "..\shiny
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Net.Http", "..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj", "{BCC73E34-B4C5-4F48-B84B-7C17DC489E89}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Notifications", "..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj", "{AF1473ED-6FC5-4B02-BB79-03E6C1B23BB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Notifications", "..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj", "{AF1473ED-6FC5-4B02-BB79-03E6C1B23BB8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Sensors", "..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj", "{62130FE7-9F43-4531-A9ED-6CE2314B4A3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Android-Debug", "Samples.Android\Samples.Android-Debug.csproj", "{E780B778-C40F-4993-A62F-277486480A67}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Api", "Samples.Api\Samples.Api.csproj", "{7F8002BB-B90B-4BD7-A8E6-5FDBCF287F4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Api", "Samples.Api\Samples.Api.csproj", "{7F8002BB-B90B-4BD7-A8E6-5FDBCF287F4B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SqliteGenerator", "Samples.SqliteGenerator\Samples.SqliteGenerator.csproj", "{DF24C99F-71D9-4576-8E3E-F3BF1E83464B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.SqliteGenerator", "Samples.SqliteGenerator\Samples.SqliteGenerator.csproj", "{DF24C99F-71D9-4576-8E3E-F3BF1E83464B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.iOS-Debug", "Samples.iOS\Samples.iOS-Debug.csproj", "{227E1B5E-7678-4492-B100-B069186494E5}"
 EndProject
@@ -62,9 +62,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Push.FirebaseMessagin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Push.AzureNotificationHubs", "..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj", "{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Push", "..\shiny\src\Shiny.Push\Shiny.Push.csproj", "{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push", "..\shiny\src\Shiny.Push\Shiny.Push.csproj", "{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Core", "..\shiny\src\Shiny.Core\Shiny.Core.csproj", "{F38A04D0-0D68-440F-BB93-B6B765133FE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Core", "..\shiny\src\Shiny.Core\Shiny.Core.csproj", "{F38A04D0-0D68-440F-BB93-B6B765133FE0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Locations.Sync", "..\shiny\src\Shiny.Locations.Sync\Shiny.Locations.Sync.csproj", "{C356B984-0CCF-41CF-A745-5719695FF81E}"
 EndProject
@@ -149,7 +149,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Beacons.Advertising",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snippets", "..\shiny\src\Snippets\Snippets.csproj", "{C893CBBA-21C9-447D-A40B-F4E04CBF4E45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Push.AwsSns", "..\shiny\src\Shiny.Push.AwsSns\Shiny.Push.AwsSns.csproj", "{B24CE57C-2A6C-4935-A6C5-8D221859B239}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push.AwsSns", "..\shiny\src\Shiny.Push.AwsSns\Shiny.Push.AwsSns.csproj", "{B24CE57C-2A6C-4935-A6C5-8D221859B239}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shiny.Logging.Aws", "..\shiny\src\Shiny.Logging.Aws\Shiny.Logging.Aws.csproj", "{1D5A06B8-DB37-45B2-A134-CEB276483B4A}"
 EndProject

@@ -171,7 +171,7 @@ namespace Samples.BluetoothLE
         public ICommand SelectCharacteristic { get; }
 
         [Reactive] public string Name { get; private set; }
-        [Reactive] public Guid Uuid { get; private set; }
+        [Reactive] public string Uuid { get; private set; }
         [Reactive] public string PairingText { get; private set; }
         public ObservableCollection<Group<GattCharacteristicViewModel>> GattCharacteristics { get; } = new ObservableCollection<Group<GattCharacteristicViewModel>>();
 
