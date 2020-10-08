@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <LatestShinyBuild>2.0.0.2247</LatestShinyBuild>
-        <XamarinFormsVersion>4.8.0.1451</XamarinFormsVersion>
+        <XamarinFormsVersion>4.8.0.1534</XamarinFormsVersion>
     </PropertyGroup>
 
     <!--<ItemGroup>
@@ -30,10 +30,6 @@
     </ItemGroup>-->
 
     <ItemGroup>
-        <PackageReference Update="MarkdownSnippets.MsBuild" Version="21.1.4">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
         <PackageReference Update="System.Reactive" Version="4.4.1" />
         <PackageReference Update="Bogus" Version="31.0.3" />
