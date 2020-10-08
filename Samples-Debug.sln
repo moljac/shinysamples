@@ -17,7 +17,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{662FBBF3-E4EF-4D94-9222-B1C020C98918}"
 	ProjectSection(SolutionItems) = preProject
 		..\shiny\src\Directory.build.props = ..\shiny\src\Directory.build.props
-		..\shiny\Packages.props = ..\shiny\Packages.props
+		..\shiny\src\Directory.Build.targets = ..\shiny\src\Directory.Build.targets
+		..\shiny\src\Packages.props = ..\shiny\src\Packages.props
 		..\shiny\readme.md = ..\shiny\readme.md
 	EndProjectSection
 EndProject
@@ -52,6 +53,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "platforms", "platforms", "{DF57C74B-EF7E-44C5-A637-D0029674330B}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.build.props = Directory.build.props
+		Directory.Build.targets = Directory.Build.targets
 		Packages.props = Packages.props
 		readme.md = readme.md
 	EndProjectSection
