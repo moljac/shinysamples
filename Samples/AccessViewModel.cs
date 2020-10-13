@@ -52,7 +52,7 @@ namespace Samples
                 this.Append("Geofences", geofences.Status, () => geofences.RequestAccess());
 
             if (bluetooth != null)
-                this.Append("BluetoothLE Central", bluetooth.Status, () => bluetooth.RequestAccess(true).ToTask(CancellationToken.None));
+                this.Append("BluetoothLE Central", bluetooth.Status, () => bluetooth.RequestAccess().ToTask(CancellationToken.None));
 
             if (beaconRanging != null)
                 this.Append("iBeacons (Ranging)", AccessState.Unknown, () => beaconRanging.RequestAccess());
