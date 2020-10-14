@@ -67,7 +67,6 @@ namespace Samples.BluetoothLE
                         this.scan = bleManager
                             .Scan()
                             .Buffer(TimeSpan.FromSeconds(1))
-                            .Synchronize()
                             .SubOnMainThread(
                                 results =>
                                 {
@@ -90,7 +89,10 @@ namespace Samples.BluetoothLE
                                         }
                                     }
                                     if (list.Any())
-                                        this.Peripherals.AddRange(list);
+                                    {
+                                        list.AddRange(this.Peripherals);
+                                        this.Peripherals = list;
+                                    }
                                 },
                                 ex => dialogs.Alert(ex.ToString(), "ERROR")
                             )
@@ -113,7 +115,7 @@ namespace Samples.BluetoothLE
         public ICommand ScanToggle { get; }
         public ICommand ToggleAdapterState { get; }
         public bool CanControlAdapterState { get; }
-        public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
+        [Reactive] public List<PeripheralItemViewModel> Peripherals { get; private set; }
         [Reactive] public PeripheralItemViewModel SelectedPeripheral { get; set; }
         [Reactive] public bool IsScanning { get; private set; }
     }
