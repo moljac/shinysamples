@@ -40,7 +40,7 @@ namespace Samples
                 this.Append("Speech", AccessState.Unknown, () => speech.RequestAccess());
 
             if (activityManager != null)
-                this.Append("Motion Activity", AccessState.Unknown, () => activityManager.RequestPermission());
+                this.Append("Motion Activity", AccessState.Unknown, () => activityManager.RequestAccess());
 
             if (gps != null)
             {

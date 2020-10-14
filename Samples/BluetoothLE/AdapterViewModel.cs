@@ -23,6 +23,7 @@ namespace Samples.BluetoothLE
                                 IDialogs dialogs,
                                 IBleManager? bleManager = null)
         {
+            this.IsScanning = bleManager?.IsScanning ?? false;
             this.CanControlAdapterState = bleManager?.CanControlAdapterState() ?? false;
 
             this.WhenAnyValue(x => x.SelectedPeripheral)
