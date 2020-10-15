@@ -16,13 +16,11 @@ namespace Samples.BluetoothLE
 {
     public class AdapterViewModel : ViewModel
     {
-        IDisposable scan;
-
-
         public AdapterViewModel(INavigationService navigator,
                                 IDialogs dialogs,
                                 IBleManager? bleManager = null)
         {
+            this.IsScanning = bleManager?.IsScanning ?? false;
             this.CanControlAdapterState = bleManager?.CanControlAdapterState() ?? false;
 
             this.WhenAnyValue(x => x.SelectedPeripheral)
@@ -56,17 +54,19 @@ namespace Samples.BluetoothLE
                     }
                     if (this.IsScanning)
                     {
-                        this.IsScanning = false;
-                        this.scan?.Dispose();
+                        this.Deactivate();
                     }
                     else
                     {
+                        this.IsScanning = true;
                         this.Peripherals.Clear();
+                        this.RaisePropertyChanged(nameof(this.Peripherals));
 
-                        this.scan = bleManager
+                        bleManager
                             .Scan()
                             .Buffer(TimeSpan.FromSeconds(1))
-                            .Synchronize()
+                            .Finally(() => this.IsScanning = false)
+                            //.Synchronize()
                             .SubOnMainThread(
                                 results =>
                                 {
@@ -89,30 +89,24 @@ namespace Samples.BluetoothLE
                                         }
                                     }
                                     if (list.Any())
+                                    {
                                         this.Peripherals.AddRange(list);
+                                        this.RaisePropertyChanged(nameof(this.Peripherals));
+                                    }
                                 },
                                 ex => dialogs.Alert(ex.ToString(), "ERROR")
                             )
                             .DisposeWith(this.DeactivateWith);
-
-                        this.IsScanning = true;
                     }
                 }
             );
         }
 
 
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            this.IsScanning = false;
-        }
-
-
         public ICommand ScanToggle { get; }
         public ICommand ToggleAdapterState { get; }
         public bool CanControlAdapterState { get; }
-        public ObservableList<PeripheralItemViewModel> Peripherals { get; } = new ObservableList<PeripheralItemViewModel>();
+        public List<PeripheralItemViewModel> Peripherals { get; } = new List<PeripheralItemViewModel>();
         [Reactive] public PeripheralItemViewModel SelectedPeripheral { get; set; }
         [Reactive] public bool IsScanning { get; private set; }
     }

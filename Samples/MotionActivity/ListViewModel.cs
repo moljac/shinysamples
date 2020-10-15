@@ -30,7 +30,7 @@ namespace Samples.MotionActivity
                     return;
                 }
 
-                var result = await this.activityManager.RequestPermission();
+                var result = await this.activityManager.RequestAccess();
                 if (result != Shiny.AccessState.Available)
                 {
                     await dialogs.Alert("Motion Activity is not available - " + result);
