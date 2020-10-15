@@ -7,7 +7,7 @@ using ReactiveUI;
 using Shiny;
 using Shiny.TripTracker;
 using Samples.Infrastructure;
-
+using Humanizer;
 
 namespace Samples.TripTracker
 {
@@ -27,23 +27,30 @@ namespace Samples.TripTracker
 
             return trips.Select(x =>
             {
-                var km = Math.Round(Distance.FromMeters(x.TotalDistanceMeters).TotalKilometers, 1);
+                
                 var text = String.Empty;
+                var details = String.Empty;
 
                 if (x.DateFinished == null)
                 {
-                    text = $"UNFINISHED: {x.DateStarted.LocalDateTime:g}";
+                    text = $"{x.Type.ToString().ToUpper()} In-Progress";
+                    details = x.DateStarted.LocalDateTime.ToString("g");
                 }
                 else
                 {
-                    var format = x.DateStarted.Date == x.DateFinished.Value.Date ? "t" : "g";
-                    text = $"FINISHED: {x.DateStarted.LocalDateTime:g} - {x.DateFinished.Value.LocalDateTime.ToString(format)}";
+                    text = $"{x.Type.ToString().ToUpper()} Finished at {x.DateFinished.Value.LocalDateTime:g}";
+
+                    var time = (x.DateFinished - x.DateStarted).Value.Humanize();
+                    var avgSpeed = Math.Round(Distance.FromMeters(x.AverageSpeedMetersPerHour).TotalKilometers, 0);
+                    var km = Math.Round(Distance.FromMeters(x.TotalDistanceMeters).TotalKilometers, 1);
+
+                    details = $"Distance: {km} km - Time Taken: {time} - Avg. Speed (km/h): {avgSpeed}";
                 }
 
                 return new CommandItem
                 {
                     Text = text,
-                    Detail = $"Distance: {km} km",
+                    Detail = details,
                     PrimaryCommand = ReactiveCommand.CreateFromTask(async () =>
                     {
                         var email = await this.Dialogs.Input("Do you wish to email this trip?  If so, enter and ok it!");

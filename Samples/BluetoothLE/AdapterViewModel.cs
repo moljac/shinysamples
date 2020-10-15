@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -60,7 +61,6 @@ namespace Samples.BluetoothLE
                     {
                         this.IsScanning = true;
                         this.Peripherals.Clear();
-                        this.RaisePropertyChanged(nameof(this.Peripherals));
 
                         bleManager
                             .Scan()
@@ -88,8 +88,9 @@ namespace Samples.BluetoothLE
                                     }
                                     if (list.Any())
                                     {
-                                        list.AddRange(this.Peripherals);
-                                        this.Peripherals = list;
+                                        // XF is not able to deal with an observablelist/addrange properly
+                                        foreach (var item in list)
+                                            this.Peripherals.Add(item);
                                     }
                                 },
                                 ex => dialogs.Alert(ex.ToString(), "ERROR")
@@ -104,7 +105,7 @@ namespace Samples.BluetoothLE
         public ICommand ScanToggle { get; }
         public ICommand ToggleAdapterState { get; }
         public bool CanControlAdapterState { get; }
-        [Reactive] public List<PeripheralItemViewModel> Peripherals { get; private set; }
+        public ObservableCollection<PeripheralItemViewModel> Peripherals { get; } = new ObservableCollection<PeripheralItemViewModel>();
         [Reactive] public PeripheralItemViewModel SelectedPeripheral { get; set; }
         [Reactive] public bool IsScanning { get; private set; }
     }

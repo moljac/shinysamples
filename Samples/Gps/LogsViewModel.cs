@@ -11,6 +11,7 @@ using Shiny.Locations;
 using Samples.Models;
 using Samples.Infrastructure;
 using Prism.Navigation;
+using ReactiveUI.Fody.Helpers;
 
 
 namespace Samples.Gps
@@ -27,6 +28,10 @@ namespace Samples.Gps
         {
             this.conn = conn;
             this.manager = manager;
+
+            this.WhenAnyValue(x => x.SelectedDate)
+                .Skip(1)
+                .Subscribe(_ => this.Load.Execute(null));
         }
 
 
@@ -35,6 +40,7 @@ namespace Samples.Gps
             base.Initialize(parameters);
             this.manager
                 .WhenReading()
+                .Where(x => x.Timestamp.Date == DateTime.Now.Date)
                 .Select(x => new CommandItem
                 {
                     Text = $"{x.Timestamp.ToLocalTime()}",
@@ -58,15 +64,21 @@ namespace Samples.Gps
                 .DisposeWith(this.DestroyWith);
         }
 
+
+        [Reactive] public DateTime SelectedDate { get; set; } = DateTime.Now;
         protected override Task ClearLogs() => this.conn.DeleteAllAsync<GpsEvent>();
 
 
         protected override async Task<IEnumerable<CommandItem>> LoadLogs()
         {
-            var list = await this.conn
-                .GpsEvents
-                .OrderByDescending(x => x.Date)
-                .ToListAsync();
+            var start = this.SelectedDate.Date;
+            var end = new DateTime(start.Year, start.Month, start.Day, 23, 59, 59);
+
+            var list = await this.conn.QueryAsync<GpsEvent>(
+                "SELECT * FROM GpsEvent WHERE Date BETWEEN :1 AND :2 ORDER BY Date DESC",
+                start,
+                end
+            );
 
             return list.Select(x => new CommandItem
             {
