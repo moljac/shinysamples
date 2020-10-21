@@ -4,7 +4,9 @@ using Shiny;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 using ReactiveUI;
-
+using Shiny.Settings;
+using System.Windows.Input;
+using Samples.Infrastructure;
 
 namespace Samples.Settings
 {
@@ -13,10 +15,21 @@ namespace Samples.Settings
         readonly IAppSettings appSettings;
 
 
-        public BasicViewModel(IAppSettings appSettings)
-            => this.appSettings = appSettings;
+        public BasicViewModel(IAppSettings appSettings,
+                              ISettings settings,
+                              IDialogs dialogs)
+        {
+            this.appSettings = appSettings;
+            this.OpenAppSettings = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var result = await settings.OpenAppSettings();
+                if (!result)
+                    await dialogs.Alert("Could not open appsettings");
+            });
+        }
 
 
+        public ICommand OpenAppSettings { get; }
         [Reactive] public bool IsChecked { get; set; }
         [Reactive] public string YourText { get; set; }
         [Reactive] public DateTime? LastUpdated { get; private set; }
