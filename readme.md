@@ -4,6 +4,18 @@ Please note that this is always built against the dev version of Shiny libraries
 
 Use Samples.sln if you want to build the project.  The -Debug.sln is for testing with the raw source code which requires special setup.
 
+These samples make use of:
+* Prism
+* ReactiveUI & RX Principles
+* Heavy use of dependency injection
+
+If you don't like any of these or you find them "complex" - Shiny is probably not for you.
+
+If you are looking to just use one part of Shiny, such as notifications, this probably isn't for you.  Shiny brings:
+* Handles all of the cruft like Permissions, main thread traversal, and app restarts
+* Your infrastructure to the background
+* Gives a clean & testable API surface for your code
+
 ## Builds
 
 OS|Status
