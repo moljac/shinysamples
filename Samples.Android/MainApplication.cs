@@ -11,7 +11,7 @@ using Android.Runtime;
 namespace Samples.Droid
 {
     [Application]
-    public class MainApplication : ShinyAndroidApplication<SampleStartup>
+    public class MainApplication : Application
     {
         public MainApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
         {
@@ -21,6 +21,7 @@ namespace Samples.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+            //Shiny.ShinyHost.Init(new AndroidPlatform(), new SampleStartup());
             Xamarin.Essentials.Platform.Init(this);
         }
     }

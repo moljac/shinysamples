@@ -3,7 +3,6 @@ using Samples.Settings;
 using Samples.ShinyDelegates;
 using Samples.Infrastructure;
 using Samples.Jobs;
-using Samples.AppState;
 using Samples.HttpTransfers;
 using Samples.Beacons;
 using Samples.BluetoothLE;
@@ -32,7 +31,7 @@ namespace Samples
 
             //services.UseTestMotionActivity(Shiny.Locations.MotionActivityType.Automotive);
 
-            //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);B
+            //services.UseAppCenterLogging(Constants.AppCenterTokens, true, false);
             services.UseSqliteLogging(true, true);
             //services.UseSqliteSettings();
             //services.UseSqliteStorage();
@@ -47,7 +46,6 @@ namespace Samples
             // startup tasks
             services.AddSingleton<GlobalExceptionHandler>();
             services.AddSingleton<JobLoggerTask>();
-            services.AddAppState<AppStateDelegate>();
 
             // register all of the shiny stuff you want to use
             services.UseJobForegroundService(TimeSpan.FromSeconds(30));

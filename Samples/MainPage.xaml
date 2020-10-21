@@ -48,7 +48,6 @@
                     </TableSection>
                     <TableSection Title="Core">
                         <TextCell Text="Jobs" Command="{Binding Navigate}" CommandParameter="Nav/Jobs" />
-                        <TextCell Text="App State" Command="{Binding Navigate}" CommandParameter="Nav/AppState" />
                         <TextCell Text="IO" Command="{Binding Navigate}" CommandParameter="Nav/IO" />
                         <TextCell Text="Environment" Command="{Binding Navigate}" CommandParameter="Nav/Environment" />
                         <TextCell Text="Settings" Command="{Binding Navigate}" CommandParameter="Nav/Settings" />

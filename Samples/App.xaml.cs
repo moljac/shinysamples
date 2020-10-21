@@ -76,7 +76,6 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Sensors.CompassPage>("Compass");
 
             containerRegistry.RegisterForNavigation<IO.MainPage>("IO");
-            containerRegistry.RegisterForNavigation<AppState.LogPage>("AppState");
             containerRegistry.RegisterForNavigation<Logging.LoggingPage>("Logs");
             containerRegistry.RegisterForNavigation<AccessPage>("Access");
             containerRegistry.RegisterForNavigation<EnvironmentPage>("Environment");
