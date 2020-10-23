@@ -37,7 +37,6 @@
                         <TextCell Text="Push" Command="{Binding Navigate}" CommandParameter="Nav/Push" />
                     </TableSection>
                     <TableSection Title="Other">
-                        <TextCell Text="VPN" Command="{Binding Navigate}" CommandParameter="Nav/Vpn" />
                         <TextCell Text="HTTP Transfers" Command="{Binding Navigate}" CommandParameter="Nav/HttpTransfers" />
                         <TextCell Text="NFC" Command="{Binding Navigate}" CommandParameter="Nav/Nfc" />
                         <TextCell Text="Speech Recognition" Command="{Binding Navigate}" CommandParameter="Nav/SpeechRecognition"  />

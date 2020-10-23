@@ -39,8 +39,7 @@ namespace Samples.BluetoothLE
                     else
                     {
                         var poweredOn = bleManager.Status == AccessState.Available;
-                        if (!bleManager.TrySetAdapterState(!poweredOn))
-                            await dialogs.Alert("Cannot change bluetooth adapter state");
+                        await bleManager.TrySetAdapterState(!poweredOn);
                     }
                 }
             );

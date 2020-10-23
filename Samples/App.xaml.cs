@@ -80,7 +80,6 @@ namespace Samples
             containerRegistry.RegisterForNavigation<AccessPage>("Access");
             containerRegistry.RegisterForNavigation<EnvironmentPage>("Environment");
             containerRegistry.RegisterForNavigation<Settings.MainPage>("Settings");
-            containerRegistry.RegisterForNavigation<Vpn.MainPage>("Vpn");
 
             containerRegistry.RegisterForNavigation<LocationSync.MainPage>("LocationSync");
             containerRegistry.RegisterForNavigation<MediaSync.MainPage>("MediaSync");
