@@ -2,7 +2,6 @@
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
 using Prism.AppModel;
 using Prism.Navigation;
 using ReactiveUI;
@@ -12,7 +11,6 @@ using ReactiveUI.Fody.Helpers;
 namespace Samples
 {
     public abstract class ViewModel : ReactiveObject,
-                                      IAutoInitialize,
                                       IInitialize,
                                       IInitializeAsync,
                                       INavigatedAware,
