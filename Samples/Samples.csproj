@@ -34,8 +34,8 @@
         <PackageReference Include="Shiny.Push.FirebaseMessaging" />
         <PackageReference Include="Shiny.Sensors" />
         <PackageReference Include="Shiny.SpeechRecognition" />
+        <PackageReference Include="Shiny.Testing" />
         <PackageReference Include="Shiny.TripTracker" />
-        <PackageReference Include="Shiny.Vpn" />
         <PackageReference Include="sqlite-net-pcl" />
         <PackageReference Include="Xamarin.Essentials" />
         <PackageReference Include="Xamarin.Forms" />

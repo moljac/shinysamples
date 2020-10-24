@@ -48,6 +48,7 @@ namespace Samples.Droid
         // 2. Don't require customization on them (meaning you haven't implemented them yourself)
         // 3. Your activity class is marked as partial
 
+
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);

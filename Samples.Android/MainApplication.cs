@@ -21,7 +21,7 @@ namespace Samples.Droid
         public override void OnCreate()
         {
             base.OnCreate();
-            //Shiny.ShinyHost.Init(new AndroidPlatform(), new SampleStartup());
+            this.ShinyOnCreate(new SampleStartup());
             Xamarin.Essentials.Platform.Init(this);
         }
     }
