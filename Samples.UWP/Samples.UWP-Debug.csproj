@@ -183,10 +183,6 @@
       <Project>{b0b472d8-f9bc-4984-b485-93f460d6f5b6}</Project>
       <Name>Shiny.BluetoothLE.Hosting.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting.Hubs\Shiny.BluetoothLE.Hosting.Hubs.csproj">
-      <Project>{5639d592-e23f-4670-8bad-b2347f6f4d9e}</Project>
-      <Name>Shiny.BluetoothLE.Hosting.Hubs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting\Shiny.BluetoothLE.Hosting.csproj">
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
       <Name>Shiny.BluetoothLE.Hosting</Name>
@@ -218,10 +214,6 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj">
       <Project>{8d242035-644c-4939-b2d5-be9ee77467dc}</Project>
       <Name>Shiny.Locations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj">
-      <Project>{2c501957-afff-4e63-b1a0-b1d4db964083}</Project>
-      <Name>Shiny.MediaSync</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Net.Http\Shiny.Net.Http.csproj">
       <Project>{bcc73e34-b4c5-4f48-b84b-7c17dc489e89}</Project>

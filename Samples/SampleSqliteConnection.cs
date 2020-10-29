@@ -12,7 +12,6 @@ namespace Samples
         public SampleSqliteConnection(IFileSystem fileSystem) : base(Path.Combine(fileSystem.AppData.FullName, "sample.db"))
         {
             var conn = this.GetConnection();
-            conn.CreateTable<AppStateEvent>();
             conn.CreateTable<BeaconEvent>();
             conn.CreateTable<GeofenceEvent>();
             conn.CreateTable<JobLog>();
@@ -22,11 +21,9 @@ namespace Samples
             conn.CreateTable<LocationSyncEvent>();
             conn.CreateTable<NotificationEvent>();
             conn.CreateTable<PushEvent>();
-            conn.CreateTable<MediaSyncEvent>();
         }
 
 
-        public AsyncTableQuery<AppStateEvent> AppStateEvents => this.Table<AppStateEvent>();
         public AsyncTableQuery<BeaconEvent> BeaconEvents => this.Table<BeaconEvent>();
         public AsyncTableQuery<BleEvent> BleEvents => this.Table<BleEvent>();
         public AsyncTableQuery<GeofenceEvent> GeofenceEvents => this.Table<GeofenceEvent>();
@@ -36,6 +33,5 @@ namespace Samples
         public AsyncTableQuery<LocationSyncEvent> LocationSyncEvents => this.Table<LocationSyncEvent>();
         public AsyncTableQuery<NotificationEvent> NotificationEvents => this.Table<NotificationEvent>();
         public AsyncTableQuery<PushEvent> PushEvents => this.Table<PushEvent>();
-        public AsyncTableQuery<MediaSyncEvent> MediaSyncEvents => this.Table<MediaSyncEvent>();
     }
 }

@@ -228,10 +228,6 @@
       <Project>{c412ef3c-2ab0-415d-acf9-a8f554178875}</Project>
       <Name>Shiny.Core.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.MediaSync\Shiny.MediaSync.csproj">
-      <Project>{2c501957-afff-4e63-b1a0-b1d4db964083}</Project>
-      <Name>Shiny.MediaSync</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>
@@ -327,10 +323,6 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting.Abstractions\Shiny.BluetoothLE.Hosting.Abstractions.csproj">
       <Project>{B0B472D8-F9BC-4984-B485-93F460D6F5B6}</Project>
       <Name>Shiny.BluetoothLE.Hosting.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Advertising\Shiny.Beacons.Advertising.csproj">
-      <Project>{8F5708DF-4CC5-4D6B-9FDC-B42BC1DAD5E5}</Project>
-      <Name>Shiny.Beacons.Advertising</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj">
       <Project>{1C8055AA-E6C5-4A6D-9C0B-CF3B36819553}</Project>

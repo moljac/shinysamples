@@ -11,7 +11,6 @@ using Samples.Gps;
 using Samples.Notifications;
 using Samples.Push;
 using Samples.DataSync;
-using Samples.MediaSync;
 using Samples.TripTracker;
 using Microsoft.Extensions.DependencyInjection;
 using Shiny;
@@ -50,7 +49,6 @@ namespace Samples
             // register all of the shiny stuff you want to use
             services.UseJobForegroundService(TimeSpan.FromSeconds(30));
             services.UseHttpTransfers<HttpTransferDelegate>();
-            services.UseBeaconAdvertising();
             services.UseBeaconRanging();
             services.UseBeaconMonitoring<BeaconDelegate>();
             services.UseBleClient<BleClientDelegate>();
@@ -95,7 +93,6 @@ namespace Samples
             services.UseGeofencingSync<LocationSyncDelegates>();
             services.UseGpsSync<LocationSyncDelegates>();
             services.UseTripTracker<SampleTripTrackerDelegate>();
-            services.UseMediaSync<SampleMediaSyncDelegate>();
             services.UseDataSync<SampleDataSyncDelegate>(true);
         }
     }

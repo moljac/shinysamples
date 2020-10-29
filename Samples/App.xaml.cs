@@ -82,7 +82,6 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Settings.MainPage>("Settings");
 
             containerRegistry.RegisterForNavigation<LocationSync.MainPage>("LocationSync");
-            containerRegistry.RegisterForNavigation<MediaSync.MainPage>("MediaSync");
             containerRegistry.RegisterForNavigation<TripTracker.MainPage>("TripTracker");
             containerRegistry.RegisterForNavigation<DataSync.MainPage>("DataSync");
         }
