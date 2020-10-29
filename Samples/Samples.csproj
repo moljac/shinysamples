@@ -17,7 +17,6 @@
         <PackageReference Include="Prism.DryIoc.Forms" />
         <PackageReference Include="ReactiveUI.Fody" />
         <PackageReference Include="Shiny.Beacons" />
-        <PackageReference Include="Shiny.Beacons.Advertising" />
         <PackageReference Include="Shiny.BluetoothLE" />
         <PackageReference Include="Shiny.BluetoothLE.Hosting" />
         <PackageReference Include="Shiny.DataSync" />
@@ -25,7 +24,6 @@
         <PackageReference Include="Shiny.Locations" />
         <PackageReference Include="Shiny.Locations.Sync" />
         <PackageReference Include="Shiny.Logging.AppCenter" />
-        <PackageReference Include="Shiny.MediaSync" />
         <PackageReference Include="Shiny.Net.Http" />
         <PackageReference Include="Shiny.Nfc" />
         <PackageReference Include="Shiny.Notifications" />

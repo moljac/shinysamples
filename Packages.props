@@ -1,14 +1,13 @@
 <Project>
 
     <PropertyGroup>
-        <LatestShinyBuild>2.0.0.2334-preview</LatestShinyBuild>
+        <LatestShinyBuild>2.0.0.2348-preview</LatestShinyBuild>
         <XamarinFormsVersion>4.8.0.1560</XamarinFormsVersion>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Update="Shiny.Core" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.Beacons" Version="$(LatestShinyBuild)" />
-        <PackageReference Update="Shiny.Beacons.Advertising" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.BluetoothLE" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.BluetoothLE.Hosting" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.DataSync" Version="$(LatestShinyBuild)" />
@@ -16,7 +15,6 @@
         <PackageReference Update="Shiny.Locations" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.Locations.Sync" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.Logging.AppCenter" Version="$(LatestShinyBuild)" />
-        <PackageReference Update="Shiny.MediaSync" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.Net.Http" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.Nfc" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.Notifications" Version="$(LatestShinyBuild)" />
