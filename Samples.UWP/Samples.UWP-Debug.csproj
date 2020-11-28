@@ -191,10 +191,6 @@
       <Project>{b2ec69d7-c76f-4ffc-b2fb-2806e4cfc368}</Project>
       <Name>Shiny.BluetoothLE</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj">
-      <Project>{c412ef3c-2ab0-415d-acf9-a8f554178875}</Project>
-      <Name>Shiny.Core.Abstractions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj">
       <Project>{f704315d-7f4f-4090-b635-7fe634565187}</Project>
       <Name>Shiny.Core</Name>
@@ -266,6 +262,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj">
       <Project>{4190e58c-a512-4e97-b212-295c21d4dcd1}</Project>
       <Name>Shiny.TripTracker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny\Shiny.csproj">
+      <Project>{f77163d2-d631-495f-99e8-a8754641ab93}</Project>
+      <Name>Shiny</Name>
     </ProjectReference>
     <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj">
       <Project>{df24c99f-71d9-4576-8e3e-f3bf1e83464b}</Project>

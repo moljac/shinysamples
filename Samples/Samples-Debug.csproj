@@ -23,14 +23,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Advertising\Shiny.Beacons.Advertising.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Beacons.Abstractions\Shiny.Beacons.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Beacons\Shiny.Beacons.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Abstractions\Shiny.BluetoothLE.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Common\Shiny.BluetoothLE.Common.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting.Abstractions\Shiny.BluetoothLE.Hosting.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting\Shiny.BluetoothLE.Hosting.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.DataSync\Shiny.DataSync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.Sqlite\Shiny.Integrations.Sqlite.csproj" />
@@ -50,6 +49,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition.Abstractions\Shiny.SpeechRecognition.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.SpeechRecognition\Shiny.SpeechRecognition.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny\Shiny.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Testing\Shiny.Testing.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
@@ -60,4 +60,5 @@
         <EmbeddedResource Include="Resources\fa-regular-400.ttf" />
         <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
     </ItemGroup>
+
 </Project>

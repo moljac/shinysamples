@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Shiny.IO;
 using Samples.Models;
 using SQLite;
 
@@ -9,7 +8,7 @@ namespace Samples
 {
     public class SampleSqliteConnection : SQLiteAsyncConnection
     {
-        public SampleSqliteConnection(IFileSystem fileSystem) : base(Path.Combine(fileSystem.AppData.FullName, "sample.db"))
+        public SampleSqliteConnection(IPlatform platform) : base(Path.Combine(platform.AppData.FullName, "sample.db"))
         {
             var conn = this.GetConnection();
             conn.CreateTable<BeaconEvent>();

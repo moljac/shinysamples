@@ -5,23 +5,22 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Samples.SqliteGenerator;
-using Shiny.IO;
 
 
 namespace Samples.HttpTransfers
 {
     public class ManageUploadsViewModel : ViewModel
     {
-        readonly IFileSystem fileSystem;
+        readonly IPlatform platform;
 
 
-        public ManageUploadsViewModel(IFileSystem fileSystem, IDialogs dialogs)
+        public ManageUploadsViewModel(IPlatform platform, IDialogs dialogs)
         {
-            this.fileSystem = fileSystem;
+            this.platform = platform;
 
             this.Delete = ReactiveCommand.CreateFromTask<string>(async file =>
             {
-                var path = Path.Combine(this.fileSystem.AppData.FullName, file);
+                var path = Path.Combine(this.platform.AppData.FullName, file);
                 if (!File.Exists(path))
                 {
                     await dialogs.Snackbar($"{file} does not exist");
@@ -61,7 +60,7 @@ namespace Samples.HttpTransfers
 
         Task GenerateRandom() => Task.Run(() =>
         {
-            var path = Path.Combine(this.fileSystem.AppData.FullName, "upload.random");
+            var path = Path.Combine(this.platform.AppData.FullName, "upload.random");
             var byteSize = this.SizeInMegabytes * 1024 * 1024;
             var data = new byte[8192];
             var rng = new Random();
@@ -80,7 +79,7 @@ namespace Samples.HttpTransfers
 
         async Task GenerateDatabase()
         {
-            var path = Path.Combine(this.fileSystem.AppData.FullName, "upload.db");
+            var path = Path.Combine(this.platform.AppData.FullName, "upload.db");
             await Generator.CreateSqlite(path, 50000);
         }
     }

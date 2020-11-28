@@ -16,8 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shiny;
 using Shiny.Notifications;
 using Shiny.Logging;
-using Shiny.Testing;
-//[assembly:Shiny.Generators.GenerateStaticClasses]
+
 
 namespace Samples
 {

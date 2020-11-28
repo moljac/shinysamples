@@ -9,16 +9,16 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Samples
 {
-    public class EnvironmentViewModel : ViewModel
+    public class PlatformViewModel : ViewModel
     {
-        readonly IEnvironment environment;
+        readonly IPlatform platform;
 
 
-        public EnvironmentViewModel(IEnvironment environment,
-                                    IConnectivity connectivity,
-                                    IPowerManager powerManager)
+        public PlatformViewModel(IPlatform platform,
+                                 IConnectivity connectivity,
+                                 IPowerManager powerManager)
         {
-            this.environment = environment;
+            this.platform = platform;
 
             connectivity
                 .WhenAnyValue(x => x.Reach)
@@ -55,13 +55,16 @@ namespace Samples
         }
 
 
-        public string AppIdentifier => this.environment.AppIdentifier;
-        public string AppVersion => this.environment.AppVersion;
-        public string AppBuild => this.environment.AppBuild;
-        public string Name => this.environment.MachineName;
-        public string OS => this.environment.OperatingSystem;
-        public string OSVersion => this.environment.OperatingSystemVersion;
-        public string Device => $"{this.environment.Manufacturer} {this.environment.Model}";
+        public string AppIdentifier => this.platform.AppIdentifier;
+        public string AppVersion => this.platform.AppVersion;
+        public string AppBuild => this.platform.AppBuild;
+        public string Name => this.platform.MachineName;
+        public string OS => this.platform.OperatingSystem;
+        public string OSVersion => this.platform.OperatingSystemVersion;
+        public string Device => $"{this.platform.Manufacturer} {this.platform.Model}";
+        public string AppData => this.platform.AppData.FullName;
+        public string Cache => this.platform.Cache.FullName;
+        public string Public => this.platform.Public.FullName;
 
         public bool IsEnergySavingEnabled { [ObservableAsProperty] get; }
         public string NetworkReach { [ObservableAsProperty] get; }

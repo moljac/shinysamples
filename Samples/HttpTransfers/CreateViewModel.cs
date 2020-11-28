@@ -8,7 +8,6 @@ using Prism.Navigation;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Shiny;
-using Shiny.IO;
 using Shiny.Net.Http;
 using Samples.Settings;
 using Samples.Infrastructure;
@@ -18,16 +17,16 @@ namespace Samples.HttpTransfers
 {
     public class CreateViewModel : ViewModel
     {
-        readonly IFileSystem fileSystem;
+        readonly IPlatform platform;
 
 
         public CreateViewModel(INavigationService navigationService,
                                IHttpTransferManager httpTransfers,
                                IDialogs dialogs,
-                               IFileSystem fileSystem,
+                               IPlatform platform,
                                AppSettings appSettings)
         {
-            this.fileSystem = fileSystem;
+            this.platform = platform;
             this.Url = appSettings.LastTransferUrl;
 
             this.WhenAnyValue(x => x.IsUpload)
@@ -49,7 +48,7 @@ namespace Samples.HttpTransfers
 
             this.SelectUpload = ReactiveCommand.CreateFromTask(async () =>
             {
-                var files = fileSystem.AppData.GetFiles("upload.*", SearchOption.TopDirectoryOnly);
+                var files = platform.AppData.GetFiles("upload.*", SearchOption.TopDirectoryOnly);
                 if (!files.Any())
                 {
                     await dialogs.Alert("There are not files to upload.  Use 'Manage Uploads' below to create them");
@@ -66,7 +65,7 @@ namespace Samples.HttpTransfers
             this.Save = ReactiveCommand.CreateFromTask(
                 async () =>
                 {
-                    var path = Path.Combine(this.fileSystem.AppData.FullName, this.FileName);
+                    var path = Path.Combine(this.platform.AppData.FullName, this.FileName);
                     var request = new HttpTransferRequest(this.Url, path, this.IsUpload)
                     {
                         UseMeteredConnection = this.UseMeteredConnection

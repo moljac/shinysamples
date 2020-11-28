@@ -2,11 +2,11 @@
 using Xamarin.Forms;
 
 
-namespace Samples.IO
+namespace Samples
 {
-    public partial class FileManagerPage : ContentPage
+    public partial class PlatformPage : ContentPage
     {
-        public FileManagerPage()
+        public PlatformPage()
         {
             this.InitializeComponent();
         }

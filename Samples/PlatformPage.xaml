@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:samples="clr-namespace:Samples"
-             x:Class="Samples.EnvironmentPage"
-             x:DataType="samples:EnvironmentViewModel"
+             x:Class="Samples.PlatformPage"
+             x:DataType="samples:PlatformViewModel"
              Title="Environment">
 
     <ContentPage.Content>
@@ -31,6 +31,12 @@
                 <TextCell Text="Cellular Carrier" Detail="{Binding CellularCarrier}" />
                 <TextCell Text="Reach" Detail="{Binding NetworkReach}" />
                 <TextCell Text="Access" Detail="{Binding NetworkAccess}" />
+            </TableSection>
+
+            <TableSection Title="File Paths">
+                <TextCell Text="App Data" Detail="{Binding AppData}" />
+                <TextCell Text="Public" Detail="{Binding Public}" />
+                <TextCell Text="Cache" Detail="{Binding Cache}" />
             </TableSection>
         </TableView>
     </ContentPage.Content>

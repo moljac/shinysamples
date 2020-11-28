@@ -224,10 +224,6 @@
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
       <Name>Shiny.BluetoothLE.Hosting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Core.Abstractions\Shiny.Core.Abstractions.csproj">
-      <Project>{c412ef3c-2ab0-415d-acf9-a8f554178875}</Project>
-      <Name>Shiny.Core.Abstractions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>
@@ -235,6 +231,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{E01AA1CD-070D-4CE2-82D8-4C7002A9AE0F}</Project>
       <Name>Shiny.Push</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny\Shiny.csproj">
+      <Project>{f77163d2-d631-495f-99e8-a8754641ab93}</Project>
+      <Name>Shiny</Name>
     </ProjectReference>
     <ProjectReference Include="..\Samples\Samples-Debug.csproj">
       <Project>{82F5E401-C438-46B0-BC7C-733D3E017AD5}</Project>
