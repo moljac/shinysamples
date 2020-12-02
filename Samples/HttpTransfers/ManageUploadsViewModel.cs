@@ -5,6 +5,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Samples.Infrastructure;
 using Samples.SqliteGenerator;
+using Shiny;
 
 
 namespace Samples.HttpTransfers
