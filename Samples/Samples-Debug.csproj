@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Samples</AssemblyName>
         <RootNamespace>Samples</RootNamespace>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>9.0</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
@@ -32,6 +32,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.DataSync\Shiny.DataSync.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.Sqlite\Shiny.Integrations.Sqlite.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Abstractions\Shiny.Locations.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Sync\Shiny.Locations.Sync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj" />

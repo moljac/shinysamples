@@ -82,7 +82,7 @@ namespace Samples.Logging
                     var s = $"{title}{Environment.NewLine}{exception}{Environment.NewLine}";
                     var parameters = getParameters();
 
-                    if (!parameters.IsEmpty())
+                    if (!parameters.Any())
                         foreach (var p in parameters)
                             s += $"{Environment.NewLine}{p.Key}: {p.Value}";
 

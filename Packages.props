@@ -6,7 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Update="Shiny.Core" Version="$(LatestShinyBuild)" />
+        <PackageReference Update="Shiny" Version="$(LatestShinyBuild)" />
+        <!--<PackageReference Update="Shiny.Core" Version="$(LatestShinyBuild)" />-->
         <PackageReference Update="Shiny.Beacons" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.BluetoothLE" Version="$(LatestShinyBuild)" />
         <PackageReference Update="Shiny.BluetoothLE.Hosting" Version="$(LatestShinyBuild)" />

@@ -47,7 +47,7 @@ namespace Samples.Jobs
                         RequiredInternetAccess = (InternetAccess)Enum.Parse(typeof(InternetAccess), this.RequiredInternetAccess)
                     };
                     job.SetParameter("SecondsToRun", this.SecondsToRun);
-                    await this.jobManager.Schedule(job);
+                    await this.jobManager.Register(job);
                     await navigator.GoBack();
                 },
                 valObs

@@ -62,24 +62,24 @@ namespace Samples
             services.UseGps<GpsDelegate>();
 
             //services.UseNotifications(true);
-            services.UseNotifications<NotificationDelegate>(
-                true,
-                new NotificationCategory(
-                    "Test",
-                    new NotificationAction("Reply", "Reply", NotificationActionType.TextReply),
-                    new NotificationAction("Yes", "Yes", NotificationActionType.None),
-                    new NotificationAction("No", "No", NotificationActionType.Destructive)
-                ),
-                new NotificationCategory(
-                    "ChatName",
-                    new NotificationAction("Answer", "Answer", NotificationActionType.TextReply)
-                ),
-                new NotificationCategory(
-                    "ChatAnswer",
-                    new NotificationAction("yes", "Yes", NotificationActionType.None),
-                    new NotificationAction("no", "No", NotificationActionType.Destructive)
-                )
-            );
+            //services.UseNotifications<NotificationDelegate>(
+            //    true,
+            //    new NotificationCategory(
+            //        "Test",
+            //        new NotificationAction("Reply", "Reply", NotificationActionType.TextReply),
+            //        new NotificationAction("Yes", "Yes", NotificationActionType.None),
+            //        new NotificationAction("No", "No", NotificationActionType.Destructive)
+            //    ),
+            //    new NotificationCategory(
+            //        "ChatName",
+            //        new NotificationAction("Answer", "Answer", NotificationActionType.TextReply)
+            //    ),
+            //    new NotificationCategory(
+            //        "ChatAnswer",
+            //        new NotificationAction("yes", "Yes", NotificationActionType.None),
+            //        new NotificationAction("no", "No", NotificationActionType.Destructive)
+            //    )
+            //);
 
             //services.UsePushNotifications<PushDelegate>();
             //services.UseFirebaseMessaging<PushDelegate>();

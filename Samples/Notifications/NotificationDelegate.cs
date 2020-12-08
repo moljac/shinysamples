@@ -50,34 +50,34 @@ namespace Samples.Notifications
 
         async Task DoChat(NotificationResponse response)
         {
-            var cat = response.Notification.Category;
-            if (!cat?.StartsWith("Chat") ?? false)
-                return;
+            //var cat = response.Notification.Category;
+            //if (!cat?.StartsWith("Chat") ?? false)
+            //    return;
 
-            cat = cat.Replace("Chat", String.Empty).ToLower();
-            switch (cat)
-            {
-                case "name":
-                    var name = "Shy Person";
-                    if (!response.Text.IsEmpty())
-                        name = response.Text.Trim();
+            //cat = cat.Replace("Chat", String.Empty).ToLower();
+            //switch (cat)
+            //{
+            //    case "name":
+            //        var name = "Shy Person";
+            //        if (!response.Text.IsEmpty())
+            //            name = response.Text.Trim();
 
-                    await notifications.Send("Shiny Chat", $"Hi {name}, do you like me?", "ChatAnswer");
-                    break;
+            //        await notifications.Send("Shiny Chat", $"Hi {name}, do you like me?", "ChatAnswer");
+            //        break;
 
-                case "answer":
-                    switch (response.ActionIdentifier.ToLower())
-                    {
-                        case "yes":
-                            await this.notifications.Send("Shiny Chat", "YAY!!");
-                            break;
+            //    case "answer":
+            //        switch (response.ActionIdentifier.ToLower())
+            //        {
+            //            case "yes":
+            //                await this.notifications.Send("Shiny Chat", "YAY!!");
+            //                break;
 
-                        case "no":
-                            await this.notifications.Send("Shiny Chat", "Go away then!");
-                            break;
-                    }
-                    break;
-            }
+            //            case "no":
+            //                await this.notifications.Send("Shiny Chat", "Go away then!");
+            //                break;
+            //        }
+            //        break;
+            //}
         }
 
 
