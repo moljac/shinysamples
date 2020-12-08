@@ -14,7 +14,7 @@ namespace Samples.Notifications
         readonly INotificationManager notifications;
 
 
-        public NotificationDelegate(SampleSqliteConnection conn, 
+        public NotificationDelegate(SampleSqliteConnection conn,
                                     INotificationManager notifications,
                                     IMessageBus messageBus)
         {
@@ -25,7 +25,7 @@ namespace Samples.Notifications
 
 
         public async Task OnEntry(NotificationResponse response)
-        {            
+        {
             await this.Store(new NotificationEvent
             {
                 NotificationId = response.Notification.Id,
@@ -46,7 +46,7 @@ namespace Samples.Notifications
             IsEntry = false,
             Timestamp = DateTime.Now
         });
-        
+
 
         async Task DoChat(NotificationResponse response)
         {
@@ -61,7 +61,7 @@ namespace Samples.Notifications
                     var name = "Shy Person";
                     if (!response.Text.IsEmpty())
                         name = response.Text.Trim();
-                    
+
                     await notifications.Send("Shiny Chat", $"Hi {name}, do you like me?", "ChatAnswer");
                     break;
 

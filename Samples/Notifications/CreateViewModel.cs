@@ -77,8 +77,8 @@ namespace Samples.Notifications
 
             this.StartChat = ReactiveCommand.CreateFromTask(() =>
                 notificationManager.Send(
-                    "Shiny Chat", 
-                    "Hi, What's your name?", 
+                    "Shiny Chat",
+                    "Hi, What's your name?",
                     "ChatName",
                     DateTime.Now.AddSeconds(10)
                 )
@@ -93,9 +93,9 @@ namespace Samples.Notifications
                 Title = title,
                 Message = message,
                 BadgeCount = this.BadgeCount,
-                ScheduleDate = scheduleDate,
-                Category = this.UseActions ? "Test" : null,
-                Sound = this.GetSound()
+                ScheduleDate = scheduleDate
+                //Category = this.UseActions ? "Test" : null,
+                //Sound = this.GetSound()
             };
             if (Int32.TryParse(this.Identifier, out int id))
             {
@@ -107,16 +107,16 @@ namespace Samples.Notifications
                     { nameof(this.Payload), this.Payload }
                 };
             }
-            if (!this.AndroidChannel.IsEmpty())
-            {
-                notification.Android.ChannelId = this.AndroidChannel;
-                notification.Android.Channel = this.AndroidChannel;
-            }
-            if (this.UseAndroidHighPriority)
-            {
-                notification.Android.Priority = 9;
-                notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
-            }
+            //if (!this.AndroidChannel.IsEmpty())
+            //{
+            //    notification.Android.ChannelId = this.AndroidChannel;
+            //    notification.Android.Channel = this.AndroidChannel;
+            //}
+            //if (this.UseAndroidHighPriority)
+            //{
+            //    notification.Android.Priority = 9;
+            //    notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
+            //}
             notification.Android.Vibrate = this.UseAndroidVibrate;
             notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
 
@@ -125,16 +125,16 @@ namespace Samples.Notifications
         }
 
 
-        NotificationSound GetSound()
-        {
-            switch (this.SelectedSoundType)
-            {
-                case "Default"  : return NotificationSound.Default;
-                //case "Priority" : return NotificationSound.Default;
-                case "Custom"   : return NotificationSound.FromCustom("notification.mp3");
-                default         : return NotificationSound.None;
-            }
-        }
+        //NotificationSound GetSound()
+        //{
+        //    switch (this.SelectedSoundType)
+        //    {
+        //        case "Default"  : return NotificationSound.Default;
+        //        //case "Priority" : return NotificationSound.Default;
+        //        case "Custom"   : return NotificationSound.FromCustom("notification.mp3");
+        //        default         : return NotificationSound.None;
+        //    }
+        //}
 
         public ICommand PermissionCheck { get; }
         public ICommand Send { get; }

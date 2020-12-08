@@ -32,7 +32,6 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE\Shiny.BluetoothLE.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.DataSync\Shiny.DataSync.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Integrations.Sqlite\Shiny.Integrations.Sqlite.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Abstractions\Shiny.Locations.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations.Sync\Shiny.Locations.Sync.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Locations\Shiny.Locations.csproj" />
@@ -43,6 +42,7 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.Notifications.Abstractions\Shiny.Notifications.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Notifications\Shiny.Notifications.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj" />
+        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors.Abstractions\Shiny.Sensors.Abstractions.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny.Sensors\Shiny.Sensors.csproj" />
@@ -51,8 +51,6 @@
         <ProjectReference Include="..\..\shiny\src\Shiny.TripTracker\Shiny.TripTracker.csproj" />
         <ProjectReference Include="..\..\shiny\src\Shiny\Shiny.csproj" />
         <ProjectReference Include="..\Samples.SqliteGenerator\Samples.SqliteGenerator.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Testing\Shiny.Testing.csproj" />
-        <ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
     </ItemGroup>
 
     <ItemGroup>
