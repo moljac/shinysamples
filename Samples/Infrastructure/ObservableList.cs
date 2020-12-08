@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 
-namespace Shiny
+namespace Samples
 {
     public class ObservableList<T> : ObservableCollection<T>
     {

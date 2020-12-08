@@ -46,7 +46,7 @@ namespace Samples
             services.AddSingleton<JobLoggerTask>();
 
             // register all of the shiny stuff you want to use
-            services.UseJobForegroundService(TimeSpan.FromSeconds(30));
+            //services.UseJobForegroundService(TimeSpan.FromSeconds(30));
             services.UseHttpTransfers<HttpTransferDelegate>();
             services.UseBeaconRanging();
             services.UseBeaconMonitoring<BeaconDelegate>();
