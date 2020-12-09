@@ -13,6 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples-Debug", "Samples\Sa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{662FBBF3-E4EF-4D94-9222-B1C020C98918}"
 	ProjectSection(SolutionItems) = preProject
+		..\shiny\.github\workflows\build.yml = ..\shiny\.github\workflows\build.yml
 		..\shiny\src\Directory.Build.props = ..\shiny\src\Directory.Build.props
 		..\shiny\src\Directory.Build.targets = ..\shiny\src\Directory.Build.targets
 		..\shiny\global.json = ..\shiny\global.json

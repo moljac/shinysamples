@@ -70,6 +70,7 @@ namespace Samples
             containerRegistry.RegisterForNavigation<Jobs.CreatePage>("CreateJob");
 
             containerRegistry.RegisterForNavigation<Notifications.MainPage>("Notifications");
+            containerRegistry.RegisterForNavigation<Notifications.ChannelCreatePage>("ChannelCreate");
             containerRegistry.RegisterForNavigation<Speech.MainPage>("SpeechRecognition");
 
             containerRegistry.RegisterForNavigation<Sensors.MainPage>("Sensors");
