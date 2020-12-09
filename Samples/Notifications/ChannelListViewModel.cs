@@ -11,7 +11,7 @@ namespace Samples.Notifications
     {
         public ChannelListViewModel(INavigationService navigator, INotificationManager manager, IDialogs dialogs)
         {
-
+            this.Create = navigator.NavigateCommand("ChannelCreate");
         }
 
 

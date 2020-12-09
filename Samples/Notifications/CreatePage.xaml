@@ -7,49 +7,58 @@
              x:DataType="notifications:CreateViewModel"
              Title="Create">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Button Text="Request Permissions"
+            <ScrollView Grid.Row="0">
+                <StackLayout>
+
+                    <Button Text="Request Permissions"
                         Command="{Binding PermissionCheck}"
                         IsVisible="{Binding IsAndroid, Converter={StaticResource Not}}"/>
 
-                <ui:MaterialTextField Text="{Binding Identifier}"
+                    <ui:MaterialTextField Text="{Binding Identifier}"
                                       Placeholder="ID (Leave blank for auto/default)"
                                       InputType="Numeric" />
 
-                <ui:MaterialTextField Text="{Binding NotificationTitle}"
+                    <ui:MaterialTextField Text="{Binding NotificationTitle}"
                                       Placeholder="Title" />
 
-                <ui:MaterialTextField Text="{Binding NotificationMessage}"
+                    <ui:MaterialTextField Text="{Binding NotificationMessage}"
                                       Placeholder="Message" />
 
-                <ui:MaterialTextField Text="{Binding Payload}"
+                    <ui:MaterialTextField Text="{Binding Payload}"
                                       Placeholder="Payload" />
 
-                <ui:MaterialTextField Text="{Binding BadgeCount}"
+                    <ui:MaterialTextField Text="{Binding BadgeCount}"
                                       Placeholder="Badge Count"
                                       InputType="Numeric" />
 
-                <ui:MaterialDateField Date="{Binding SelectedDate}"
+                    <ui:MaterialDateField Date="{Binding SelectedDate}"
                                       Placeholder="Date" />
 
-                <ui:MaterialTimePicker Time="{Binding SelectedTime}" />
+                    <ui:MaterialTimePicker Time="{Binding SelectedTime}" />
 
-                <ContentView IsVisible="{Binding IsAndroid}">
-                    <StackLayout>
-                        <ui:MaterialCheckbox Text="Android Big Text"
+                    <ContentView IsVisible="{Binding IsAndroid}">
+                        <StackLayout>
+                            <ui:MaterialCheckbox Text="Android Big Text"
                                              IsSelected="{Binding UseAndroidBigTextStyle}" />
 
-                        <ui:MaterialCheckbox Text="Android Vibrate"
+                            <ui:MaterialCheckbox Text="Android Vibrate"
                                              IsSelected="{Binding UseAndroidVibrate}" />
-                    </StackLayout>
-                </ContentView>
+                        </StackLayout>
+                    </ContentView>
+                </StackLayout>
+            </ScrollView>
 
+            <StackLayout Grid.Row="1">
                 <Button Text="Send" Command="{Binding Send}" />
                 <Button Text="Send Test Now" Command="{Binding SendNow}" />
                 <Button Text="Start A Chat" Command="{Binding StartChat}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

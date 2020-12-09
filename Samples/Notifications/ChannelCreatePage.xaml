@@ -1,12 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Samples.Notifications.ChannelCreatePage">
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             x:Class="Samples.Notifications.ChannelCreatePage"
+             Title="Create Channel">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0">
+                <StackLayout>
+                    <ui:MaterialTextField Text="{Binding Identifier}"
+                                          Placeholder="Identifier" />
+
+                    <ui:MaterialTextField Text="{Binding Description}"
+                                          Placeholder="Description" />
+
+<!--TODO: sound, importance-->
+                    <ui:MaterialCheckbox IsSelected="{Binding UseAction1}" />
+                    <ui:MaterialTextField Text="{Binding Action1Identifier}" Placeholder="Identifier" />
+
+                    <ui:MaterialTextField Text="{Binding Action1Title}" Placeholder="Title" />
+
+                    <!--<ui:MaterialTextField Text="{Binding Action1Type}" Placeholder="Identifier" />-->
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="1">
+                <Button Text="Create"
+                        Command="{Binding Create}" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
