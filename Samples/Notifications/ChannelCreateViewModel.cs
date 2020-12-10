@@ -15,12 +15,7 @@ namespace Samples.Notifications
         {
             this.Create = ReactiveCommand.CreateFromTask
             (
-                () => manager.CreateChannel(new Channel
-                {
-                    Identifier = this.Identifier,
-                    Description = this.Description,
-                    Importance = ChannelImportance.Normal
-                }),
+                () => manager.CreateChannel(this.ToChannel()),
                 this.WhenAny(
                     x => x.Identifier,
                     x => !x.GetValue().IsEmpty()
@@ -45,5 +40,18 @@ namespace Samples.Notifications
         [Reactive] public string Action2Identifier { get; set; }
         [Reactive] public string Action2Title { get; set; }
         [Reactive] public int Action2ActionType { get; set; }
+
+
+        Channel ToChannel()
+        {
+            var channel = new Channel
+            {
+                Identifier = this.Identifier,
+                Description = this.Description,
+                Importance = ChannelImportance.Normal
+            };
+
+            return channel;
+        }
     }
 }
