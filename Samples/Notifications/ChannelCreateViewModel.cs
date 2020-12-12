@@ -47,8 +47,8 @@ namespace Samples.Notifications
             var channel = new Channel
             {
                 Identifier = this.Identifier,
-                Description = this.Description,
-                Importance = ChannelImportance.Normal
+                Description = this.Description
+                //Importance = ChannelImportance.Normal
             };
 
             return channel;

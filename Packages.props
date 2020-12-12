@@ -1,7 +1,7 @@
 <Project>
 
     <PropertyGroup>
-        <LatestShinyBuild>2.0.0.2348-preview</LatestShinyBuild>
+        <LatestShinyBuild>2.0.0.2373-preview</LatestShinyBuild>
         <XamarinFormsVersion>4.8.0.1687</XamarinFormsVersion>
     </PropertyGroup>
 

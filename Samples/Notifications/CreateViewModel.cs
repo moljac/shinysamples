@@ -117,7 +117,7 @@ namespace Samples.Notifications
             //    notification.Android.Priority = 9;
             //    notification.Android.NotificationImportance = AndroidNotificationImportance.Max;
             //}
-            notification.Android.Vibrate = this.UseAndroidVibrate;
+            //notification.Android.Vibrate = this.UseAndroidVibrate;
             notification.Android.UseBigTextStyle = this.UseAndroidBigTextStyle;
 
             await notificationManager.Send(notification);
