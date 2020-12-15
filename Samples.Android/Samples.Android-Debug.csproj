@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MainApplication.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\..\shiny\src\Shiny.BluetoothLE.Hosting\Shiny.BluetoothLE.Hosting.csproj">
       <Project>{e821e505-beaf-4d41-80f2-8ee78403ab54}</Project>
       <Name>Shiny.BluetoothLE.Hosting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shiny\src\Shiny.Generators\Shiny.Generators.csproj">
+      <Project>{1c37144b-ccde-4b7d-8f7c-90d79a485d6a}</Project>
+      <Name>Shiny.Generators</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Nfc\Shiny.Nfc.csproj">
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
@@ -201,7 +206,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSamplesAndroidDebugHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSamplesAndroidDebugHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

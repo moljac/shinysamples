@@ -13,8 +13,8 @@
         <CollectionView ItemsSource="{Binding Channels}">
 
             <CollectionView.EmptyView>
-                <Label Text="No GPS Events"
-                               Style="{StaticResource NoDataLabel}" />
+                <Label Text="No Notification Channels"
+                       Style="{StaticResource NoDataLabel}" />
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>

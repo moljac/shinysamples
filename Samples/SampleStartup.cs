@@ -61,7 +61,7 @@ namespace Samples
             //services.UseGpsDirectGeofencing<LocationDelegates>();
             services.UseGps<GpsDelegate>();
 
-            //services.UseNotifications(true);
+            services.UseNotifications();
             //services.UseNotifications<NotificationDelegate>(
             //    true,
             //    new NotificationCategory(
