@@ -21,7 +21,9 @@
                 <DataTemplate x:DataType="samples:CommandItem">
                     <samples:CommandCell Text="{Binding Text}"
                                          Detail="{Binding Detail}"
-                                         PrimaryCommand="{Binding PrimaryCommand}" />
+                                         PrimaryCommand="{Binding PrimaryCommand}"
+                                         SecondaryCommand="{Binding SecondaryCommand}"
+                                         SecondaryCommandText="Delete" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

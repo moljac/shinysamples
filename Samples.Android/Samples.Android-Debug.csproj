@@ -114,10 +114,6 @@
       <Project>{FAD08342-4889-48C6-983C-4943D2C8F4C4}</Project>
       <Name>Shiny.Nfc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shiny\src\Shiny.Push.Abstractions\Shiny.Push.Abstractions.csproj">
-      <Project>{f2249781-6d49-4a5f-92c9-6af5ac1f4af4}</Project>
-      <Name>Shiny.Push.Abstractions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj">
       <Project>{e01aa1cd-070d-4ce2-82d8-4c7002a9ae0f}</Project>
       <Name>Shiny.Push</Name>
@@ -206,7 +202,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSamplesAndroidDebugHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionSamplesAndroidDebugHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
