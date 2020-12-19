@@ -25,6 +25,7 @@ namespace Samples.Notifications
 
 
         public ICommand Create { get; }
+        public ICommand PickActionType { get; }
 
         [Reactive] public string Identifier { get; set; }
         [Reactive] public string Description { get; set; }
@@ -33,7 +34,7 @@ namespace Samples.Notifications
 
         [Reactive] public bool UseAction1 { get; set; }
         [Reactive] public string Action1Identifier { get; set; }
-        [Reactive] public string Action1Title { get; set; }
+        [Reactive] public string Action1Description { get; set; }
         [Reactive] public int Action1ActionType { get; set; }
 
         [Reactive] public bool UseAction2 { get; set; }

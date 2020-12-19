@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              x:Class="Samples.Notifications.ChannelCreatePage"
              Title="Create Channel">
     <ContentPage.Content>
@@ -11,23 +10,39 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ScrollView Grid.Row="0">
-                <StackLayout>
-                    <ui:MaterialTextField Text="{Binding Identifier}"
-                                          Placeholder="Identifier" />
+            <TableView Grid.Row="0">
+                <TableRoot>
+                    <TableSection Title="Channel Info">
+                        <EntryCell Label="Identifier" Text="{Binding Identifier}" />
+                        <EntryCell Label="Description" Text="{Binding Description}" />
+                        <!--Sound, Importance-->
+                    </TableSection>
 
-                    <ui:MaterialTextField Text="{Binding Description}"
-                                          Placeholder="Description" />
+                    <TableSection Title="Action 1">
+                        <SwitchCell Text="Use"
+                                    On="{Binding UseAction1}" />
+                        <EntryCell Label="Identifier"
+                                   Text="{Binding Action1Identifier}"
+                                   IsEnabled="{Binding UseAction1}" />
+                        <TextCell Text="Action Type"
+                                  Command="{Binding PickAction}"
+                                  CommandParameter="1"
+                                  IsEnabled="{Binding UseAction1}" />
+                    </TableSection>
 
-<!--TODO: sound, importance-->
-                    <ui:MaterialCheckbox IsSelected="{Binding UseAction1}" />
-                    <ui:MaterialTextField Text="{Binding Action1Identifier}" Placeholder="Identifier" />
-
-                    <ui:MaterialTextField Text="{Binding Action1Title}" Placeholder="Title" />
-
-                    <!--<ui:MaterialTextField Text="{Binding Action1Type}" Placeholder="Identifier" />-->
-                </StackLayout>
-            </ScrollView>
+                    <TableSection>
+                        <SwitchCell Text="Use"
+                                    On="{Binding UseAction2}" />
+                        <EntryCell Label="Identifier"
+                                   Text="{Binding Action2Identifier}"
+                                   IsEnabled="{Binding UseAction2}" />
+                        <TextCell Text="Action Type"
+                                  Command="{Binding PickAction}"
+                                  CommandParameter="2"
+                                  IsEnabled="{Binding UseAction2}" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
 
             <StackLayout Grid.Row="1">
                 <Button Text="Create"
