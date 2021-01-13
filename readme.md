@@ -1,4 +1,6 @@
-﻿## Shiny Samples
+# THESE SAMPLES ARE NOW OLD AND HAVE BEEN MOVED DIRECTLY INTO THE MAIN SHINY REPOSITORY FOR V2
+
+## Shiny Samples
 
 Please note that this is always built against the dev version of Shiny libraries, thus some features may not be available yet on nuget.
 
